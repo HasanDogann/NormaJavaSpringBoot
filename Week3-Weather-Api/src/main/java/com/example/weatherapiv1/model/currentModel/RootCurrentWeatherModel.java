@@ -9,16 +9,16 @@ import java.util.ArrayList;
 @JsonPropertyOrder({ "coord", "weather","base","main","visibility","wind","clouds","dt","sys","timezone","id","name","cod"})
 @Getter
 @Setter
-public class RootNow {
-    public CoordNow coord;
-    public ArrayList<WeatherNow> weather;
+public class RootCurrentWeatherModel {
+    public CoordinateCurrentWeatherModel coord;
+    public ArrayList<WeatherCurrentWeatherModel> weather;
     public String base;
-    public MainNow main;
+    public MainCurrentWeatherModel main;
     public int visibility;
-    public WindNow wind;
-    public CloudsNow clouds;
+    public WindCurrentWeatherModel wind;
+    public CloudsCurrentWeatherModel clouds;
     public int dt;
-    public SysNow sys;
+    public SunCurrentWeatherModel sys;
     public int timezone;
     public int id;
     public String name;

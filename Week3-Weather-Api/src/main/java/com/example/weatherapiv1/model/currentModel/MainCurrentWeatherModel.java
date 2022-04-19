@@ -7,7 +7,7 @@ import lombok.Setter;
 @JsonPropertyOrder({ "temp", "feels_like","temp_min","temp_max","pressure","humudity"})
 @Getter
 @Setter
-public class MainNow {
+public class MainCurrentWeatherModel {
     public double temp;
     public double feels_like;
     public double temp_min;

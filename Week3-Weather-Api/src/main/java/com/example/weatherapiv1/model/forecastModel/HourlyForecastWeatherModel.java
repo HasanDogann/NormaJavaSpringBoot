@@ -5,13 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
-@JsonPropertyOrder({ "dt", "sunrise","sunset","temp","feels_like", "pressure","humidity","dew_point","uvi", "clouds","visibility","wind_speed","wind_deg","weather"   })
+
+@JsonPropertyOrder({ "dt","temp","feels_like", "pressure","humidity","dew_point","uvi", "clouds","visibility","wind_speed","wind_deg","wind_gust","weather","pop"})
 @Getter
 @Setter
-public class CurrentModel {
+public class HourlyForecastWeatherModel {
     public int dt;
-    public int sunrise;
-    public int sunset;
     public double temp;
     public double feels_like;
     public int pressure;
@@ -22,5 +21,7 @@ public class CurrentModel {
     public int visibility;
     public double wind_speed;
     public int wind_deg;
-    public ArrayList<WeatherModel> weather;
+    public double wind_gust;
+    public ArrayList<WeatherForecastWeatherModel> weather;
+    public int pop;
 }

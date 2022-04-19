@@ -8,7 +8,7 @@ import lombok.Setter;
 @JsonPropertyOrder({ "dt", "precipitation"})
 @Getter
 @Setter
-public class MinutelyModel {
+public class MinutelyForecastWeatherModel {
     public int dt;
     public int precipitation;
 

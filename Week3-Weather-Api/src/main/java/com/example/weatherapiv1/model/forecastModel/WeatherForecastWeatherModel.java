@@ -8,7 +8,7 @@ import lombok.Setter;
 @JsonPropertyOrder({ "id", "main","description","icon" })
 @Getter
 @Setter
-public class WeatherModel {
+public class WeatherForecastWeatherModel {
     
     public int id;
     public String main;

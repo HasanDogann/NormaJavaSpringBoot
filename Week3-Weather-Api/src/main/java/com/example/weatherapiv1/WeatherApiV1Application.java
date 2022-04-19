@@ -11,8 +11,5 @@ public class WeatherApiV1Application {
     public static void main(String[] args) {
         SpringApplication.run(WeatherApiV1Application.class, args);
     }
-    @Bean
-    public RestTemplate getRestTemplate(){
-        return new RestTemplate();
-    }
+
 }
