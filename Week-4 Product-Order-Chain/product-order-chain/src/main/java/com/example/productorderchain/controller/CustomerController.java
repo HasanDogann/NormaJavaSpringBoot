@@ -17,8 +17,8 @@ import java.util.Collection;
 @RequestMapping("api/customers")
 public class CustomerController {
 
-    @Qualifier("customerReqQ")
     private final Validator<CreateCustomerRequestDTO> createCustomerValidator;
+
     @Qualifier("customerIDQ")
     private final Validator<Long> customerIdValidator;
 

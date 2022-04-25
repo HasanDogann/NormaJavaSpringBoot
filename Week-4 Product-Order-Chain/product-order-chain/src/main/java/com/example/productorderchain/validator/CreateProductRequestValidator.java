@@ -9,7 +9,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.Objects;
 
-@Component("productReqQ")
+@Component
 public class CreateProductRequestValidator implements Validator<CreateProductRequestDTO> {
 
     @Override

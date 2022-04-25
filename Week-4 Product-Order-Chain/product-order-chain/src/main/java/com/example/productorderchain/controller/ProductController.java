@@ -17,11 +17,11 @@ import java.util.Collection;
 @RequestMapping("api/products")
 public class ProductController {
 
-    @Qualifier("productReqQ")
     private final Validator<CreateProductRequestDTO> createProductValidator;
 
     @Qualifier("productIDQ")
     private final Validator<Long> productIdValidator;
+
     private final ProductService productService;
 
     public ProductController(Validator<CreateProductRequestDTO> createProductValidator, @Qualifier("productIDQ") Validator<Long> productIdValidator, ProductService productService) {

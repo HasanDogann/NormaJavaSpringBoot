@@ -8,7 +8,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.Objects;
 
-@Component("customerReqQ")
+@Component
 public class CreateCustomerRequestValidator implements Validator<CreateCustomerRequestDTO> {
 
     @Override
