@@ -6,6 +6,7 @@ import com.example.productorderchain.dto.process.CreateProductRequestDTO;
 import com.example.productorderchain.dto.process.GetProductsResponseDTO;
 import com.example.productorderchain.service.ProductService;
 import com.example.productorderchain.validator.Validator;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
