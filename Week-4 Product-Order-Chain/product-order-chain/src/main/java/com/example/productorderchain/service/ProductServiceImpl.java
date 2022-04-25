@@ -1,6 +1,9 @@
 package com.example.productorderchain.service;
 
 import com.example.productorderchain.converter.ProductConverter;
+import com.example.productorderchain.core.utilities.Result;
+import com.example.productorderchain.core.utilities.SuccessDataResult;
+import com.example.productorderchain.core.utilities.SuccessResult;
 import com.example.productorderchain.dto.process.CreateProductRequestDTO;
 import com.example.productorderchain.dto.process.GetProductsResponseDTO;
 import com.example.productorderchain.exception.BaseException;
@@ -21,34 +24,37 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public void createProduct(CreateProductRequestDTO productDTO) {
+    public Result createProduct(CreateProductRequestDTO productDTO) {
     Product product = productConverter.toProduct(productDTO);
     productRepository.save(product);
-
+    return new SuccessResult("Product "+product.getName()+" is added successfuly");
     }
 
     @Override
-    public CreateProductRequestDTO getProduct(Long id) throws BaseException {
+    public SuccessDataResult<CreateProductRequestDTO> getProduct(Long id) throws BaseException {
         Product product = productRepository
                 .findById(id)
                 .orElseThrow(() -> new BusinessServiceOperationException.CustomerNotFoundException("Product not found"));
-        return productConverter.toCreateProductRequest(product);
+        if (product.isDeleted()) {
+            throw new BusinessServiceOperationException.CustomerAlreadyDeletedException("Product was deleted");
+        }
+        return new SuccessDataResult<>( productConverter.toCreateProductRequest(product),"Product is listed successfully");
     }
 
     @Override
-    public Collection<GetProductsResponseDTO> getAllProducts() {
+    public SuccessDataResult<Collection<GetProductsResponseDTO>> getAllProducts() {
 
-        return productRepository
+        return new SuccessDataResult<>( productRepository
                 .findAllCustomersByDeleteStatusByJPQL(false)
                 .stream()
                 .map(productConverter::toGetProductsResponse)
-                .toList();
+                .toList(),"Products are listed successfully");
 
 
     }
 
     @Override
-    public void deleteProduct(Long id, boolean hardDelete) throws BaseException {
+    public Result deleteProduct(Long id, boolean hardDelete) throws BaseException {
         Product product = productRepository
                 .findById(id)
                 .orElseThrow(() -> new BusinessServiceOperationException.ProductNotFoundException("Product is not found"));
@@ -57,10 +63,11 @@ public class ProductServiceImpl implements ProductService {
         }
         if (hardDelete) {
             productRepository.delete(product);
-            return;
+            return new SuccessResult("Product "+product.getName()+" is deleted with HardDelete successfully");
         }
         product.setDeleted(true);
         productRepository.save(product);
+        return new SuccessResult("Product "+product.getName()+" is deleted with SoftDelete successfully");
     }
 
     }

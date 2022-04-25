@@ -1,5 +1,8 @@
 package com.example.productorderchain.service;
 
+import com.example.productorderchain.core.utilities.Result;
+import com.example.productorderchain.core.utilities.SuccessDataResult;
+import com.example.productorderchain.core.utilities.SuccessResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.example.productorderchain.converter.CustomerConverter;
@@ -22,30 +25,34 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
 
     @Override
-    public void create(CreateCustomerRequestDTO createCustomerRequestDTO) {
+    public Result create(CreateCustomerRequestDTO createCustomerRequestDTO) {
         Customer customer = customerConverter.toCustomer(createCustomerRequestDTO);
         customerRepository.save(customer);
+        return new SuccessResult("Customer "+customer.getUsername()+" is added successfully.");
     }
 
     @Override
-    public CreateCustomerRequestDTO getCustomer(Long id) throws BaseException {
+    public SuccessDataResult<CreateCustomerRequestDTO> getCustomer(Long id) throws BaseException {
         Customer customer = customerRepository
                 .findById(id)
                 .orElseThrow(() -> new BusinessServiceOperationException.CustomerNotFoundException("Customer not found"));
-        return customerConverter.toCreateCustomerRequest(customer);
+        if (customer.isDeleted()) {
+            throw new BusinessServiceOperationException.CustomerAlreadyDeletedException("Customer was deleted");
+        }
+        return new SuccessDataResult<>(customerConverter.toCreateCustomerRequest(customer),"Customer is listed successfully");
     }
 
     @Override
-    public Collection<GetCustomersResponseDTO> getCustomers() {
-        return customerRepository
+    public SuccessDataResult<Collection<GetCustomersResponseDTO>> getCustomers() {
+        return new SuccessDataResult<>(customerRepository
                 .findAllCustomersByDeleteStatusByJPQL(false)
                 .stream()
                 .map(customerConverter::toGetCustomersResponse)
-                .toList();
+                .toList(),"Customers are listed successfully");
     }
 
     @Override
-    public void delete(Long id, boolean hardDelete) throws BaseException {
+    public Result delete(Long id, boolean hardDelete) throws BaseException {
         Customer customer = customerRepository
                 .findById(id)
                 .orElseThrow(() -> new BusinessServiceOperationException.CustomerNotFoundException("Customer not found"));
@@ -54,9 +61,10 @@ public class CustomerServiceImpl implements CustomerService {
         }
         if (hardDelete) {
             customerRepository.delete(customer);
-            return;
+            return new SuccessResult("Customer "+customer.getUsername()+" is deleted with HardDelete successfully");
         }
         customer.setDeleted(true);
         customerRepository.save(customer);
+        return new SuccessResult("Customer "+customer.getUsername()+" is deleted with SoftDelete successfully");
     }
 }

@@ -1,5 +1,7 @@
 package com.example.productorderchain.controller;
 
+import com.example.productorderchain.core.utilities.Result;
+import com.example.productorderchain.core.utilities.SuccessDataResult;
 import com.example.productorderchain.dto.process.CreateProductRequestDTO;
 import com.example.productorderchain.dto.process.GetProductsResponseDTO;
 import com.example.productorderchain.service.ProductService;
@@ -32,17 +34,17 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<?> createProduct(@RequestBody CreateProductRequestDTO createProductRequestDTO) {
         createProductValidator.validate(createProductRequestDTO);
-        productService.createProduct(createProductRequestDTO);
-        return ResponseEntity.ok().build();
+        Result result= productService.createProduct(createProductRequestDTO);
+        return ResponseEntity.ok().body(result.getMessage());
     }
 
     @GetMapping
-    public ResponseEntity<Collection<GetProductsResponseDTO>> getProducts() {
+    public ResponseEntity<SuccessDataResult<Collection<GetProductsResponseDTO>>> getProducts() {
         return ResponseEntity.ok(productService.getAllProducts());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CreateProductRequestDTO> getProduct(@PathVariable Long id) {
+    public ResponseEntity<SuccessDataResult<CreateProductRequestDTO>> getProduct(@PathVariable Long id) {
         productIdValidator.validate(id);
         return ResponseEntity.ok(productService.getProduct(id));
     }
@@ -51,8 +53,8 @@ public class ProductController {
     public ResponseEntity<?> delete(@PathVariable Long id,
                                     @RequestParam(name = "hardDelete", required = false) boolean hardDelete) {
         productIdValidator.validate(id);
-        productService.deleteProduct(id,hardDelete);
-        return ResponseEntity.ok().build();
+        Result result = productService.deleteProduct(id,hardDelete);
+        return ResponseEntity.ok().body(result.getMessage());
     }
 
 

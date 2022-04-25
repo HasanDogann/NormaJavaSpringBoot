@@ -1,5 +1,7 @@
 package com.example.productorderchain.service;
 
+import com.example.productorderchain.core.utilities.Result;
+import com.example.productorderchain.core.utilities.SuccessDataResult;
 import com.example.productorderchain.dto.process.CreateCustomerRequestDTO;
 import com.example.productorderchain.dto.process.GetCustomersResponseDTO;
 import com.example.productorderchain.exception.BaseException;
@@ -7,11 +9,11 @@ import com.example.productorderchain.exception.BaseException;
 import java.util.Collection;
 
 public interface CustomerService {
-    void create(CreateCustomerRequestDTO customerDTO);
+    Result create(CreateCustomerRequestDTO customerDTO);
 
-    CreateCustomerRequestDTO getCustomer(Long id) throws BaseException;
+    SuccessDataResult<CreateCustomerRequestDTO> getCustomer(Long id) throws BaseException;
 
-    Collection<GetCustomersResponseDTO> getCustomers();
+   SuccessDataResult<Collection<GetCustomersResponseDTO>> getCustomers();
 
-    void delete(Long id, boolean hardDelete) throws BaseException;
+    Result delete(Long id, boolean hardDelete) throws BaseException;
 }

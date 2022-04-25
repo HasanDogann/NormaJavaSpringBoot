@@ -1,5 +1,7 @@
 package com.example.productorderchain.controller;
 
+import com.example.productorderchain.core.utilities.Result;
+import com.example.productorderchain.core.utilities.SuccessDataResult;
 import com.example.productorderchain.dto.process.CreateCustomerRequestDTO;
 import com.example.productorderchain.dto.process.GetCustomersResponseDTO;
 import com.example.productorderchain.service.CustomerService;
@@ -33,17 +35,17 @@ public class CustomerController {
     @PostMapping
     public ResponseEntity<?> create(@RequestBody CreateCustomerRequestDTO createCustomerRequestDTO) {
         createCustomerValidator.validate(createCustomerRequestDTO);
-        customerService.create(createCustomerRequestDTO);
-        return ResponseEntity.ok().build();
+       Result result= customerService.create(createCustomerRequestDTO);
+        return ResponseEntity.ok().body(result.getMessage());
     }
 
     @GetMapping
-    public ResponseEntity<Collection<GetCustomersResponseDTO>> getCustomers() {
+    public ResponseEntity<SuccessDataResult<Collection<GetCustomersResponseDTO>>> getCustomers() {
         return ResponseEntity.ok(customerService.getCustomers());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CreateCustomerRequestDTO> getCustomer(@PathVariable Long id) {
+    public ResponseEntity<SuccessDataResult<CreateCustomerRequestDTO>> getCustomer(@PathVariable Long id) {
         customerIdValidator.validate(id);
         return ResponseEntity.ok(customerService.getCustomer(id));
     }
@@ -52,8 +54,8 @@ public class CustomerController {
     public ResponseEntity<?> delete(@PathVariable Long id,
                                     @RequestParam(name = "hardDelete", required = false) boolean hardDelete) {
         customerIdValidator.validate(id);
-        customerService.delete(id,hardDelete);
-        return ResponseEntity.ok().build();
+        Result result = customerService.delete(id,hardDelete);
+        return ResponseEntity.ok().body(result.getMessage());
     }
 
 
