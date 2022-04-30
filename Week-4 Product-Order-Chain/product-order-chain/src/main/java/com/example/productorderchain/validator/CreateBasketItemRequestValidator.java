@@ -21,13 +21,7 @@ public class CreateBasketItemRequestValidator implements Validator<CreateBasketI
         if (Objects.isNull(createBasketItemRequestDTO.quantity())) {
             throw new ValidationOperationException.CustomerNotValidException("BasketItem quantity can not be null or empty");
         }
-        if (Objects.isNull(createBasketItemRequestDTO.price())) {
-            throw new ValidationOperationException.CustomerNotValidException("BasketItem price can not be null or empty");
 
-        }
-        if (Objects.isNull(createBasketItemRequestDTO.discountPrice())) {
-            throw new ValidationOperationException.CustomerNotValidException("BasketItem disc. price can not be null or empty");
-        }
         if (Objects.isNull(createBasketItemRequestDTO.taxPrice())) {
             throw new ValidationOperationException.CustomerNotValidException("BasketItem tax price can not be null or empty");
 

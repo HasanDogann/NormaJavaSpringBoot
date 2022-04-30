@@ -9,8 +9,9 @@ import java.util.UUID;
 public record GetProductsResponseDTO (Long id,
                                       String name,
                                      BigDecimal price,
+                                     BigDecimal discountRate,
                                      UUID barcode,
                                      String image,
                                      String brandName,
-                                     String categoryName,BigDecimal discountRate){
+                                     String categoryName){
 }

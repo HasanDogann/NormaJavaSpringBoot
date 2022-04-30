@@ -1,10 +1,9 @@
 package com.example.productorderchain.dto.process;
 
-import com.example.productorderchain.dto.model.BasketItemDTO;
+import com.example.productorderchain.model.BasketItem;
+import java.util.Set;
 
 
-
-public record CreateBasketRequestDTO(BasketItemDTO basketItemDTO,
-                                     Long productId,
+public record CreateBasketRequestDTO(Set<BasketItem> basketItemSet,
                                      Long basketID) {
 }

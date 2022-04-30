@@ -34,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public SuccessDataResult<GetProductsResponseDTO> getProduct(Long id) throws BaseException {
+    public GetProductsResponseDTO getProduct(Long id) throws BaseException {
         //Burada customerAlready kısmı değişecek
         Product product = productRepository
                 .findById(id)
@@ -42,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
         if (product.isDeleted()) {
             throw new BusinessServiceOperationException.CustomerAlreadyDeletedException("Product was deleted");
         }
-        return new SuccessDataResult<>( productConverter.toGetProductsResponse(product),"Product is listed successfully");
+        return  (productConverter.toGetProductsResponse(product));
     }
 
     @Override

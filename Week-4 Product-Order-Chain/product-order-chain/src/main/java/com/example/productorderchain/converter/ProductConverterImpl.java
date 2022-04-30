@@ -40,7 +40,8 @@ public class ProductConverterImpl implements ProductConverter {
                 product.getBarcode(),
                 product.getImage(),
                 product.getBrand().getId(),
-                product.getCategory().getId());
+                product.getCategory().getId(),
+                product.getDiscountRate());
 
 
     }
@@ -51,18 +52,20 @@ public class ProductConverterImpl implements ProductConverter {
                 product.getId(),
                 product.getName(),
                 product.getPrice(),
+                product.getDiscountRate(),
                 product.getBarcode(),
                 product.getImage(),
                 product.getBrand().getName(),
-                product.getCategory().getName(),
-                product.getDiscountRate());
+                product.getCategory().getName());
 
     }
 
 
     private BrandDTO convertBrandDto(Brand brand) {
+
         return new BrandDTO(brand.getName(),brand.getBrandCountry());
     }
+
     private CategoryDTO convertCategoryDto(Category category) {
         return new CategoryDTO(category.getName(), category.getCategoryField());
     }

@@ -45,7 +45,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SuccessDataResult<GetProductsResponseDTO>> getProduct(@PathVariable Long id) {
+    public ResponseEntity<GetProductsResponseDTO> getProduct(@PathVariable Long id) {
         productIdValidator.validate(id);
         return ResponseEntity.ok(productService.getProduct(id));
     }

@@ -39,4 +39,14 @@ public class BasketItem extends BaseModel {
                         divide(BigDecimal.valueOf(100), RoundingMode.FLOOR));
         return price;
     }
+    public BigDecimal totalBasketItemPriceDiscount(){
+        this.discountPrice=product.getPrice().subtract((product.getPrice().multiply(product.getDiscountRate()).divide(BigDecimal.valueOf(100))));
+        return discountPrice;
+    }
+    public BigDecimal totalBasketItemTaxPrice(){
+        return taxPrice;
+    }
+    public BigDecimal totalBasketItemShippingPrice(){
+        return shippingPrice;
+    }
 }

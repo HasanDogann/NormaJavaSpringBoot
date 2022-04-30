@@ -15,9 +15,6 @@ import java.util.Set;
 @Setter
 public class Basket extends BaseModel {
 
-    @Column(nullable = false)
-    private BigDecimal price;
-
     private BigDecimal discountPrice = BigDecimal.ZERO;
     private BigDecimal taxPrice = BigDecimal.ZERO;
     private BigDecimal shippingPrice = BigDecimal.ZERO;

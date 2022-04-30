@@ -10,7 +10,7 @@ import java.util.Collection;
 public interface BasketService {
     Result addBasketItem(CreateBasketRequestDTO basketItemRequestDTO);
 
-    SuccessDataResult<GetBasketResponseDTO> getBasketItem(Long id) throws BaseException;
+    GetBasketResponseDTO getBasketItem(Long id) throws BaseException;
 
     SuccessDataResult<Collection<GetBasketResponseDTO>> getAllBasketItems();
 

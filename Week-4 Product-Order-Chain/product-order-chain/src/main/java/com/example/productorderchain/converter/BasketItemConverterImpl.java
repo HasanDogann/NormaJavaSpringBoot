@@ -21,8 +21,8 @@ public class BasketItemConverterImpl implements BasketItemConverter {
     public BasketItem toBasketItem(CreateBasketItemRequestDTO basketItemDTO) {
         BasketItem basketItem = new BasketItem();
         basketItem.setQuantity(basketItemDTO.quantity());
-        basketItem.setPrice(basketItemDTO.price());
-        basketItem.setDiscountPrice(basketItemDTO.discountPrice());
+        basketItem.setPrice(productService.getProduct(basketItemDTO.productID()).price());
+        basketItem.setDiscountPrice(productService.getProduct(basketItemDTO.productID()).discountRate());
         basketItem.setTaxPrice(basketItemDTO.taxPrice());
         basketItem.setShippingPrice(basketItemDTO.shippingPrice());
         basketItem.setProduct(basketItem.getProduct());
@@ -33,12 +33,10 @@ public class BasketItemConverterImpl implements BasketItemConverter {
     @Override
     public CreateBasketItemRequestDTO toCreateBasketItemRequest(BasketItem basketItem) {
 
-        return new CreateBasketItemRequestDTO(basketItem.getQuantity(),
-                basketItem.getPrice(),
-                basketItem.getDiscountPrice(),
+        return new CreateBasketItemRequestDTO( basketItem.getProduct().getId(),
+                basketItem.getQuantity(),
                 basketItem.getTaxPrice(),
                 basketItem.getShippingPrice(),
-                basketItem.getProduct().getId(),
                 basketItem.getBasket().getId());
 
     }
