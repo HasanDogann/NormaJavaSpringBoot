@@ -10,6 +10,7 @@ public record CreateProductRequestDTO(String name,
         BigDecimal price,
         UUID barcode,
         String image,
-        BrandDTO brand,
-        CategoryDTO category) {
+        Long brandID,
+        Long categoryID) {
+
 }

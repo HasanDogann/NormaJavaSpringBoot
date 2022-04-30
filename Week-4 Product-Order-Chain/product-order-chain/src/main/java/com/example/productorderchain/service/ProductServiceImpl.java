@@ -21,6 +21,9 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductConverter productConverter;
     private final ProductRepository  productRepository;
+    private final BrandService brandService;
+    private final CategoryService categoryService;
+
 
 
     @Override
@@ -31,21 +34,22 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public SuccessDataResult<CreateProductRequestDTO> getProduct(Long id) throws BaseException {
+    public SuccessDataResult<GetProductsResponseDTO> getProduct(Long id) throws BaseException {
+        //Burada customerAlready kısmı değişecek
         Product product = productRepository
                 .findById(id)
                 .orElseThrow(() -> new BusinessServiceOperationException.CustomerNotFoundException("Product not found"));
         if (product.isDeleted()) {
             throw new BusinessServiceOperationException.CustomerAlreadyDeletedException("Product was deleted");
         }
-        return new SuccessDataResult<>( productConverter.toCreateProductRequest(product),"Product is listed successfully");
+        return new SuccessDataResult<>( productConverter.toGetProductsResponse(product),"Product is listed successfully");
     }
 
     @Override
     public SuccessDataResult<Collection<GetProductsResponseDTO>> getAllProducts() {
 
         return new SuccessDataResult<>( productRepository
-                .findAllCustomersByDeleteStatusByJPQL(false)
+                .findAllProductsByDeleteStatusByJPQL(false)
                 .stream()
                 .map(productConverter::toGetProductsResponse)
                 .toList(),"Products are listed successfully");

@@ -40,18 +40,18 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<SuccessDataResult<Collection<GetProductsResponseDTO>>> getProducts() {
+    public ResponseEntity<SuccessDataResult<Collection<GetProductsResponseDTO>>> getAllProducts() {
         return ResponseEntity.ok(productService.getAllProducts());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SuccessDataResult<CreateProductRequestDTO>> getProduct(@PathVariable Long id) {
+    public ResponseEntity<SuccessDataResult<GetProductsResponseDTO>> getProduct(@PathVariable Long id) {
         productIdValidator.validate(id);
         return ResponseEntity.ok(productService.getProduct(id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id,
+    public ResponseEntity<?> deleteProduct(@PathVariable Long id,
                                     @RequestParam(name = "hardDelete", required = false) boolean hardDelete) {
         productIdValidator.validate(id);
         Result result = productService.deleteProduct(id,hardDelete);

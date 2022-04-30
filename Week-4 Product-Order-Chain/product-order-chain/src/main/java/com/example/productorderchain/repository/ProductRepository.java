@@ -13,7 +13,7 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     Collection<Product> findAllByIsDeleted(boolean deleted);
 
     @Query("SELECT p FROM Product p WHERE p.isDeleted = ?1")
-    Collection<Product> findAllCustomersByDeleteStatusByJPQL(boolean status);
+    Collection<Product> findAllProductsByDeleteStatusByJPQL(boolean status);
 
 
 }

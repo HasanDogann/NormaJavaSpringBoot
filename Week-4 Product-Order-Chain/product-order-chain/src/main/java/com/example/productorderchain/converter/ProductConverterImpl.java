@@ -1,15 +1,23 @@
 package com.example.productorderchain.converter;
 
+import com.example.productorderchain.core.utilities.SuccessDataResult;
 import com.example.productorderchain.dto.model.BrandDTO;
 import com.example.productorderchain.dto.model.CategoryDTO;
-import com.example.productorderchain.dto.process.CreateProductRequestDTO;
-import com.example.productorderchain.dto.process.GetProductsResponseDTO;
+import com.example.productorderchain.dto.process.*;
 import com.example.productorderchain.model.*;
+import com.example.productorderchain.service.BrandService;
+import com.example.productorderchain.service.CategoryService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 
 @Component
+@RequiredArgsConstructor
 public class ProductConverterImpl implements ProductConverter {
+    private  final BrandService brandService;
+    private final BrandConverter brandConverter;
+    private  final CategoryConverter categoryConverter;
+    private final CategoryService categoryService;
     @Override
     public Product toProduct(CreateProductRequestDTO createProductRequestDTO) {
         Product product = new Product();
@@ -18,14 +26,8 @@ public class ProductConverterImpl implements ProductConverter {
         product.setBarcode(createProductRequestDTO.barcode());
         product.setImage(createProductRequestDTO.image());
 
-        Brand brand = new Brand();
-        brand.setName(createProductRequestDTO.brand().name());
-        brand.setBrandCountry(createProductRequestDTO.brand().brandCountry());
-        product.setBrand(brand);
-
-        Category category = new Category();
-        category.setName(createProductRequestDTO.category().name());
-        product.setCategory(category);
+        product.setBrand(brandConverter.toBrandfromResponse(brandService.getBrand(createProductRequestDTO.brandID())));
+        product.setCategory(categoryConverter.toCategoryfromResponse(categoryService.getCategory(createProductRequestDTO.categoryID())));
 
         return product;
     }
@@ -37,19 +39,24 @@ public class ProductConverterImpl implements ProductConverter {
                 product.getPrice(),
                 product.getBarcode(),
                 product.getImage(),
-                convertBrandDto(product.getBrand()),
-                convertCategoryDto(product.getCategory()));
+                product.getBrand().getId(),
+                product.getCategory().getId());
 
 
     }
 
     @Override
     public GetProductsResponseDTO toGetProductsResponse(Product product) {
-        return new GetProductsResponseDTO(product.getId(),product.getName(), product.getPrice(),
+        return new GetProductsResponseDTO(
+                product.getId(),
+                product.getName(),
+                product.getPrice(),
                 product.getBarcode(),
                 product.getImage(),
-                convertBrandDto(product.getBrand()),
-                convertCategoryDto(product.getCategory()));
+                product.getBrand().getName(),
+                product.getCategory().getName(),
+                product.getDiscountRate());
+
     }
 
 
@@ -57,7 +64,7 @@ public class ProductConverterImpl implements ProductConverter {
         return new BrandDTO(brand.getName(),brand.getBrandCountry());
     }
     private CategoryDTO convertCategoryDto(Category category) {
-        return new CategoryDTO(category.getName());
+        return new CategoryDTO(category.getName(), category.getCategoryField());
     }
 
 }

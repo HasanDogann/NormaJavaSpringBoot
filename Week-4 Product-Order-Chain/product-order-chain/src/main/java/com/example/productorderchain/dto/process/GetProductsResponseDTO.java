@@ -11,6 +11,6 @@ public record GetProductsResponseDTO (Long id,
                                      BigDecimal price,
                                      UUID barcode,
                                      String image,
-                                     BrandDTO brand,
-                                     CategoryDTO category){
+                                     String brandName,
+                                     String categoryName,BigDecimal discountRate){
 }

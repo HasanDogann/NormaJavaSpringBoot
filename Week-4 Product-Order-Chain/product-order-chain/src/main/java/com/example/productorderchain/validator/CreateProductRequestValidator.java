@@ -1,6 +1,5 @@
 package com.example.productorderchain.validator;
 
-import com.example.productorderchain.dto.process.CreateCustomerRequestDTO;
 import com.example.productorderchain.dto.process.CreateProductRequestDTO;
 import com.example.productorderchain.exception.BaseValidationException;
 import com.example.productorderchain.exception.ValidationOperationException;
@@ -30,11 +29,11 @@ public class CreateProductRequestValidator implements Validator<CreateProductReq
         if (Objects.isNull(productDTO.image())) {
             throw new ValidationOperationException.CustomerNotValidException("Image field can not be null or empty");
         }
-        if (Objects.isNull(productDTO.brand())) {
-            throw new ValidationOperationException.CustomerNotValidException("Brand can not be null or empty");
+        if (Objects.isNull(productDTO.brandID())) {
+            throw new ValidationOperationException.CustomerNotValidException("BrandID can not be null or empty");
         }
-        if (Objects.isNull(productDTO.category())) {
-            throw new ValidationOperationException.CustomerNotValidException("Category can not be null or empty");
+        if (Objects.isNull(productDTO.categoryID())) {
+            throw new ValidationOperationException.CustomerNotValidException("CategoryID can not be null or empty");
         }}
 
 

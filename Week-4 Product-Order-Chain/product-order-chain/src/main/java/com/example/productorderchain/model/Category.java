@@ -16,4 +16,6 @@ public class Category extends BaseModel {
     private Category parent;
 
     private String name;
+
+    private String categoryField;
 }

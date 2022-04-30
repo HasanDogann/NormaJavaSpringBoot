@@ -17,6 +17,7 @@ public class Customer extends BaseExtendedModel {
     @Enumerated(EnumType.STRING)
     private Gender gender;
     private String password;
+    private double discountCoupon=0;
 
     @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private CustomerAddress customerAddress;

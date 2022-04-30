@@ -13,7 +13,7 @@ public interface ProductService {
 
     Result createProduct(CreateProductRequestDTO productDTO);
 
-    SuccessDataResult<CreateProductRequestDTO> getProduct(Long id) throws BaseException;
+    SuccessDataResult<GetProductsResponseDTO> getProduct(Long id) throws BaseException;
 
     SuccessDataResult<Collection<GetProductsResponseDTO>> getAllProducts();
 
