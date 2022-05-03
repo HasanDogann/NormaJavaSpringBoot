@@ -1,11 +1,9 @@
 package com.example.productorderchain.validator;
 
-import com.example.productorderchain.dto.process.CreateBasketItemRequestDTO;
-import com.example.productorderchain.dto.process.CreateBrandRequestDTO;
+import com.example.productorderchain.dto.process.create.CreateBasketItemRequestDTO;
 import com.example.productorderchain.exception.BaseValidationException;
 import com.example.productorderchain.exception.ValidationOperationException;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import java.util.Objects;
 

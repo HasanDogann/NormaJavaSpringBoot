@@ -2,12 +2,10 @@ package com.example.productorderchain.controller;
 
 import com.example.productorderchain.core.utilities.Result;
 import com.example.productorderchain.core.utilities.SuccessDataResult;
-import com.example.productorderchain.dto.process.CreateBasketItemRequestDTO;
-import com.example.productorderchain.dto.process.CreateBasketRequestDTO;
-import com.example.productorderchain.dto.process.GetBasketItemResponseDTO;
-import com.example.productorderchain.dto.process.GetBasketResponseDTO;
-import com.example.productorderchain.service.BasketItemService;
-import com.example.productorderchain.service.BasketService;
+import com.example.productorderchain.dto.process.create.CreateBasketRequestDTO;
+import com.example.productorderchain.dto.process.get.GetBasketResponseDTO;
+import com.example.productorderchain.model.Basket;
+import com.example.productorderchain.service.abstracts.BasketService;
 import com.example.productorderchain.validator.Validator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -34,28 +32,28 @@ public class BasketController {
 
 
     @PostMapping
-    public ResponseEntity<?> createProduct(@RequestBody CreateBasketRequestDTO createBasketRequestDTO) {
+    public ResponseEntity<?> createBasket(@RequestBody CreateBasketRequestDTO createBasketRequestDTO) {
         createBasketValidator.validate(createBasketRequestDTO);
-        Result result= basketService.addBasketItem(createBasketRequestDTO);
+        Result result= basketService.addBasket(createBasketRequestDTO);
         return ResponseEntity.ok().body(result.getMessage());
     }
 
     @GetMapping
-    public ResponseEntity<SuccessDataResult<Collection<GetBasketResponseDTO>>> getAllProducts() {
-        return ResponseEntity.ok(basketService.getAllBasketItems());
+    public ResponseEntity<SuccessDataResult<Collection<GetBasketResponseDTO>>> getAllBaskets() {
+        return ResponseEntity.ok(basketService.getAllBaskets());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SuccessDataResult<GetBasketResponseDTO>> getProduct(@PathVariable Long id) {
+    public ResponseEntity<SuccessDataResult<Basket>> getBasket(@PathVariable Long id) {
         basketIdValidator.validate(id);
-        return ResponseEntity.ok(new SuccessDataResult<>(basketService.getBasketItem(id),"Basket is listed"));
+        return ResponseEntity.ok(new SuccessDataResult<>(basketService.getBasket(id),"Basket is listed"));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteProduct(@PathVariable Long id,
+    public ResponseEntity<?> deleteBasket(@PathVariable Long id,
                                            @RequestParam(name = "hardDelete", required = false) boolean hardDelete) {
         basketIdValidator.validate(id);
-        Result result = basketService.deleteBasketItem(id,hardDelete);
+        Result result = basketService.deleteBasket(id,hardDelete);
         return ResponseEntity.ok().body(result.getMessage());
     }
 

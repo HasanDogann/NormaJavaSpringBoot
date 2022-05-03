@@ -1,22 +1,27 @@
 package com.example.productorderchain.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class BasketItem extends BaseModel {
 
-    @ManyToOne(optional = false,fetch = FetchType.LAZY)
+    @JoinColumn(name = "basket_id")
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY,optional = false,targetEntity = Basket.class)
     private Basket basket;
 
     @ManyToOne(optional = false)

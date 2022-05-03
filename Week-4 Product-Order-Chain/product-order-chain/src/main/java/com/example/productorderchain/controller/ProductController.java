@@ -2,11 +2,11 @@ package com.example.productorderchain.controller;
 
 import com.example.productorderchain.core.utilities.Result;
 import com.example.productorderchain.core.utilities.SuccessDataResult;
-import com.example.productorderchain.dto.process.CreateProductRequestDTO;
-import com.example.productorderchain.dto.process.GetProductsResponseDTO;
-import com.example.productorderchain.service.ProductService;
+import com.example.productorderchain.dto.process.create.CreateProductRequestDTO;
+import com.example.productorderchain.dto.process.get.GetProductsResponseDTO;
+import com.example.productorderchain.model.Product;
+import com.example.productorderchain.service.abstracts.ProductService;
 import com.example.productorderchain.validator.Validator;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -45,7 +45,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GetProductsResponseDTO> getProduct(@PathVariable Long id) {
+    public ResponseEntity<Product> getProduct(@PathVariable Long id) {
         productIdValidator.validate(id);
         return ResponseEntity.ok(productService.getProduct(id));
     }

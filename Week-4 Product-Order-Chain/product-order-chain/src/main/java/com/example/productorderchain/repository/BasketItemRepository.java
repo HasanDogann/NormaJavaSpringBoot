@@ -9,6 +9,9 @@ import java.util.Collection;
 
 public interface BasketItemRepository extends JpaRepository<BasketItem,Long> {
 
+
+    Collection<BasketItem> findAllByIsDeleted(boolean deleted);
+
     @Query("SELECT b FROM BasketItem b WHERE b.isDeleted = ?1")
     Collection<BasketItem> findAllProductsByDeleteStatusByJPQL(boolean status);
 }

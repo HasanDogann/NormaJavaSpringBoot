@@ -1,7 +1,7 @@
 package com.example.productorderchain.validator;
 
 
-import com.example.productorderchain.dto.process.CreateBasketRequestDTO;
+import com.example.productorderchain.dto.process.create.CreateBasketRequestDTO;
 import com.example.productorderchain.exception.BaseValidationException;
 import com.example.productorderchain.exception.ValidationOperationException;
 import org.springframework.stereotype.Component;
@@ -16,9 +16,6 @@ public class CreateBasketRequestValidator implements Validator<CreateBasketReque
 
         if (Objects.isNull(createBasketRequestDTO)) {
             throw new ValidationOperationException.CustomerNotValidException("BasketItem can not be null or empty");
-        }
-        if (Objects.isNull(createBasketRequestDTO.basketItemSet())) {
-            throw new ValidationOperationException.CustomerNotValidException("Basket must has basket items, it can not be null or empty");
         }
 
         if (Objects.isNull(createBasketRequestDTO.basketID())) {

@@ -2,11 +2,10 @@ package com.example.productorderchain.controller;
 
 import com.example.productorderchain.core.utilities.Result;
 import com.example.productorderchain.core.utilities.SuccessDataResult;
-import com.example.productorderchain.dto.process.CreateCustomerRequestDTO;
-import com.example.productorderchain.dto.process.GetCustomersResponseDTO;
-import com.example.productorderchain.service.CustomerService;
+import com.example.productorderchain.dto.process.create.CreateCustomerRequestDTO;
+import com.example.productorderchain.dto.process.get.GetCustomersResponseDTO;
+import com.example.productorderchain.service.abstracts.CustomerService;
 import com.example.productorderchain.validator.Validator;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

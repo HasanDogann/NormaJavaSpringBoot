@@ -2,9 +2,9 @@ package com.example.productorderchain.controller;
 
 import com.example.productorderchain.core.utilities.Result;
 import com.example.productorderchain.core.utilities.SuccessDataResult;
-import com.example.productorderchain.dto.process.CreateBrandRequestDTO;
-import com.example.productorderchain.dto.process.GetBrandsResponseDTO;
-import com.example.productorderchain.service.BrandService;
+import com.example.productorderchain.dto.process.create.CreateBrandRequestDTO;
+import com.example.productorderchain.dto.process.get.GetBrandsResponseDTO;
+import com.example.productorderchain.service.abstracts.BrandService;
 import com.example.productorderchain.validator.Validator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;

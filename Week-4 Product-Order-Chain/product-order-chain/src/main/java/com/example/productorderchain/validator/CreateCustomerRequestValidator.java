@@ -1,6 +1,6 @@
 package com.example.productorderchain.validator;
 
-import com.example.productorderchain.dto.process.CreateCustomerRequestDTO;
+import com.example.productorderchain.dto.process.create.CreateCustomerRequestDTO;
 import com.example.productorderchain.exception.BaseValidationException;
 import com.example.productorderchain.exception.ValidationOperationException;
 import org.springframework.stereotype.Component;
