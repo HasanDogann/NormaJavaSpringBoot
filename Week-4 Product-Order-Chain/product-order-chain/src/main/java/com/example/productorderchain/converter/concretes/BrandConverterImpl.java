@@ -25,12 +25,6 @@ public class BrandConverterImpl implements BrandConverter {
     }
 
     @Override
-    public CreateBrandRequestDTO toCreateBrandRequest(Brand brand) {
-
-        return new CreateBrandRequestDTO(brand.getName(), brand.getBrandCountry());
-    }
-
-    @Override
     public GetBrandsResponseDTO toGetBrandsResponse(Brand brand) {
 
         return new GetBrandsResponseDTO(brand.getName(), brand.getBrandCountry());

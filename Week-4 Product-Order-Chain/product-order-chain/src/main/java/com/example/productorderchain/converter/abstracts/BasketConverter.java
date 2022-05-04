@@ -8,7 +8,6 @@ public interface BasketConverter {
 
     Basket toBasket(CreateBasketRequestDTO createBasketRequestDTO);
 
-    CreateBasketRequestDTO toCreateBasketRequestDTO(Basket basket);
 
     GetBasketResponseDTO toGetBasketResponseDTO(Basket basket);
 }

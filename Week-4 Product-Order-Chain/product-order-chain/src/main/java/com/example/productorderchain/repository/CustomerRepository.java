@@ -10,7 +10,6 @@ import java.util.Collection;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
-    Collection<Customer> findAllByIsDeleted(boolean deleted);
 
     @Query("SELECT c FROM Customer c WHERE c.isDeleted = ?1")
     Collection<Customer> findAllCustomersByDeleteStatusByJPQL(boolean status);

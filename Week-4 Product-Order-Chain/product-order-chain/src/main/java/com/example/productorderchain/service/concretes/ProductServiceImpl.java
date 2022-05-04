@@ -8,6 +8,7 @@ import com.example.productorderchain.dto.process.create.CreateProductRequestDTO;
 import com.example.productorderchain.dto.process.get.GetProductsResponseDTO;
 import com.example.productorderchain.exception.BaseException;
 import com.example.productorderchain.exception.BusinessServiceOperationException;
+import com.example.productorderchain.exception.ValidationOperationException;
 import com.example.productorderchain.model.Product;
 import com.example.productorderchain.repository.ProductRepository;
 import com.example.productorderchain.service.abstracts.BrandService;
@@ -35,12 +36,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProduct(Long id) throws BaseException {
-        //Burada customerAlready kısmı değişecek
         Product product = productRepository
                 .findById(id)
-                .orElseThrow(() -> new BusinessServiceOperationException.CustomerNotFoundException("Product not found"));
+                .orElseThrow(() -> new ValidationOperationException.ProductNotValidException("Product not found"));
         if (product.isDeleted()) {
-            throw new BusinessServiceOperationException.CustomerAlreadyDeletedException("Product was deleted");
+            throw new BusinessServiceOperationException.ProductAlreadyDeletedException("Product was deleted");
         }
         return  product;
     }

@@ -9,9 +9,6 @@ public interface BrandConverter {
 
     Brand toBrandfromResponse(GetBrandsResponseDTO getBrandsResponseDTO);
 
-    CreateBrandRequestDTO toCreateBrandRequest(Brand brand);
-
-
 
     GetBrandsResponseDTO toGetBrandsResponse(Brand brand);
 }

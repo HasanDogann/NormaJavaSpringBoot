@@ -8,7 +8,6 @@ public interface BasketItemConverter {
 
     BasketItem toBasketItem(CreateBasketItemRequestDTO basketItemDTO);
 
-    CreateBasketItemRequestDTO toCreateBasketItemRequest(BasketItem basketItem);
 
     GetBasketItemResponseDTO toGetBasketItemResponse(BasketItem basketItem);
 }

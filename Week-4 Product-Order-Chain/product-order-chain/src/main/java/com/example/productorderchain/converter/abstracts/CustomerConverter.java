@@ -8,7 +8,5 @@ public interface CustomerConverter {
 
     Customer toCustomer(CreateCustomerRequestDTO createCustomerRequestDTO);
 
-    CreateCustomerRequestDTO toCreateCustomerRequest(Customer customer);
-
     GetCustomersResponseDTO toGetCustomersResponse(Customer customer);
 }

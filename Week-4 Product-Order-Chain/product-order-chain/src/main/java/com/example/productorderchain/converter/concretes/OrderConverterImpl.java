@@ -3,8 +3,6 @@ package com.example.productorderchain.converter.concretes;
 import com.example.productorderchain.converter.abstracts.OrderConverter;
 import com.example.productorderchain.dto.process.create.CreateOrderRequestDTO;
 import com.example.productorderchain.dto.process.get.GetOrderResponseDTO;
-import com.example.productorderchain.model.Basket;
-import com.example.productorderchain.model.Customer;
 import com.example.productorderchain.model.Order;
 import com.example.productorderchain.model.OrderStatus;
 import com.example.productorderchain.service.abstracts.BasketService;
@@ -15,7 +13,6 @@ import org.springframework.stereotype.Component;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 
 @Component
@@ -44,11 +41,6 @@ public class OrderConverterImpl implements OrderConverter {
         order.setOrderStatus(OrderStatus.PROCESSING);
 
         return order;
-    }
-
-    @Override
-    public CreateOrderRequestDTO toCreateOrderRequest(Order order) {
-        return null;
     }
 
     @Override

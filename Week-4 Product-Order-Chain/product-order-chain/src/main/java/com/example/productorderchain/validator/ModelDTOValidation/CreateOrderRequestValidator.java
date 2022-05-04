@@ -1,13 +1,14 @@
-package com.example.productorderchain.validator;
+package com.example.productorderchain.validator.ModelDTOValidation;
 
 import com.example.productorderchain.dto.process.create.CreateOrderRequestDTO;
 import com.example.productorderchain.exception.BaseValidationException;
 import com.example.productorderchain.exception.ValidationOperationException;
+import com.example.productorderchain.validator.Validator;
 import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 @Component
-public class CreateOrderRequestValidator implements Validator<CreateOrderRequestDTO>{
+public class CreateOrderRequestValidator implements Validator<CreateOrderRequestDTO> {
 
 
     public void validate(CreateOrderRequestDTO createOrderRequestDTO) throws BaseValidationException {

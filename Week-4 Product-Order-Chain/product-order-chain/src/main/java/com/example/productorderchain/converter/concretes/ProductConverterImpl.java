@@ -3,8 +3,6 @@ package com.example.productorderchain.converter.concretes;
 import com.example.productorderchain.converter.abstracts.BrandConverter;
 import com.example.productorderchain.converter.abstracts.CategoryConverter;
 import com.example.productorderchain.converter.abstracts.ProductConverter;
-import com.example.productorderchain.dto.model.BrandDTO;
-import com.example.productorderchain.dto.model.CategoryDTO;
 import com.example.productorderchain.dto.process.create.CreateProductRequestDTO;
 import com.example.productorderchain.dto.process.get.GetProductsResponseDTO;
 import com.example.productorderchain.model.*;
@@ -35,19 +33,6 @@ public class ProductConverterImpl implements ProductConverter {
         return product;
     }
 
-    @Override
-    public CreateProductRequestDTO toCreateProductRequest(Product product) {
-
-        return new CreateProductRequestDTO(product.getName(),
-                product.getPrice(),
-                product.getBarcode(),
-                product.getImage(),
-                product.getBrand().getId(),
-                product.getCategory().getId(),
-                product.getDiscountRate());
-
-
-    }
 
     @Override
     public GetProductsResponseDTO toGetProductsResponse(Product product) {
@@ -63,14 +48,5 @@ public class ProductConverterImpl implements ProductConverter {
 
     }
 
-
-    private BrandDTO convertBrandDto(Brand brand) {
-
-        return new BrandDTO(brand.getName(),brand.getBrandCountry());
-    }
-
-    private CategoryDTO convertCategoryDto(Category category) {
-        return new CategoryDTO(category.getName(), category.getCategoryField());
-    }
 
 }

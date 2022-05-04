@@ -1,7 +1,8 @@
-package com.example.productorderchain.validator;
+package com.example.productorderchain.validator.IDValidation;
 
 import com.example.productorderchain.exception.BaseValidationException;
 import com.example.productorderchain.exception.ValidationOperationException;
+import com.example.productorderchain.validator.Validator;
 import org.springframework.stereotype.Component;
 
 @Component("categoryIDQ")

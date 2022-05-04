@@ -1,15 +1,18 @@
-package com.example.productorderchain.validator;
+package com.example.productorderchain.validator.IDValidation;
 
 import com.example.productorderchain.exception.BaseValidationException;
 import com.example.productorderchain.exception.ValidationOperationException;
+import com.example.productorderchain.validator.Validator;
 import org.springframework.stereotype.Component;
 
-@Component("basketItemIDQ")
-public class BasketItemIDValidator implements Validator<Long> {
+@Component("basketIDQ")
+public class BasketIDValidator implements Validator<Long> {
         @Override
         public void validate(Long id) throws BaseValidationException {
             if (id < 0) {
-                throw new ValidationOperationException.ProductIDNotValidException("BasketItem ID should be greater than zero.");
+                throw new ValidationOperationException.ProductIDNotValidException("Basket ID should be greater than zero.");
             }
         }
     }
+
+

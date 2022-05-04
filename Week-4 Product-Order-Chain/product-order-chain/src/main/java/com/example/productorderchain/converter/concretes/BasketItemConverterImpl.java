@@ -1,16 +1,13 @@
 package com.example.productorderchain.converter.concretes;
 
 import com.example.productorderchain.converter.abstracts.BasketItemConverter;
-import com.example.productorderchain.converter.abstracts.ProductConverter;
 import com.example.productorderchain.dto.process.create.CreateBasketItemRequestDTO;
 import com.example.productorderchain.dto.process.get.GetBasketItemResponseDTO;
-import com.example.productorderchain.model.Basket;
 import com.example.productorderchain.model.BasketItem;
 import com.example.productorderchain.service.abstracts.BasketService;
 import com.example.productorderchain.service.abstracts.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.math.BigDecimal;
 
 @Component
@@ -49,16 +46,6 @@ public class BasketItemConverterImpl implements BasketItemConverter {
         return basketItem;
     }
 
-    @Override
-    public CreateBasketItemRequestDTO toCreateBasketItemRequest(BasketItem basketItem) {
-
-        return new CreateBasketItemRequestDTO( basketItem.getProduct().getId(),
-                basketItem.getQuantity(),
-                basketItem.getTaxPrice(),
-                basketItem.getShippingPrice(),
-                basketItem.getBasket().getId());
-
-    }
 
     @Override
     public GetBasketItemResponseDTO toGetBasketItemResponse(BasketItem basketItem) {

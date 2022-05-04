@@ -9,7 +9,6 @@ public interface CategoryConverter {
 
     Category toCategoryfromResponse(GetCategoriesResponseDTO getCategoriesResponseDTO);
 
-    CreateCategoryRequestDTO toCreateCategoryRequest(Category category);
 
     GetCategoriesResponseDTO toGetCategoriesResponse(Category category);
 }

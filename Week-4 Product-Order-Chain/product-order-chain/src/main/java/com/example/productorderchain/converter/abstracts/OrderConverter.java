@@ -8,8 +8,6 @@ public interface OrderConverter {
 
     Order toOrder(CreateOrderRequestDTO createOrderRequestDTO);
 
-    CreateOrderRequestDTO toCreateOrderRequest(Order order);
-
     GetOrderResponseDTO toGetOrderResponse(Order order);
 
 

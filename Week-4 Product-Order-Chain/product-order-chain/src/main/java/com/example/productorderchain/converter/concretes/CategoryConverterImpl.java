@@ -27,11 +27,6 @@ public class CategoryConverterImpl implements CategoryConverter {
     }
 
     @Override
-    public CreateCategoryRequestDTO toCreateCategoryRequest(Category category) {
-        return new CreateCategoryRequestDTO(category.getName(), category.getCategoryField());
-    }
-
-    @Override
     public GetCategoriesResponseDTO toGetCategoriesResponse(Category category) {
         return new GetCategoriesResponseDTO(category.getName(), category.getCategoryField());
     }

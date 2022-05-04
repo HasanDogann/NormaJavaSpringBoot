@@ -7,13 +7,11 @@ import com.example.productorderchain.dto.process.create.CreateOrderRequestDTO;
 import com.example.productorderchain.dto.process.get.GetOrderResponseDTO;
 import com.example.productorderchain.exception.BaseException;
 import com.example.productorderchain.exception.BusinessServiceOperationException;
-import com.example.productorderchain.model.Customer;
 import com.example.productorderchain.model.Order;
 import com.example.productorderchain.repository.OrderRepository;
 import com.example.productorderchain.service.abstracts.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Collection;
 

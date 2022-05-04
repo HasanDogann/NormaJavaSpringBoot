@@ -4,7 +4,6 @@ import com.example.productorderchain.model.CustomerAddress;
 import com.example.productorderchain.model.OrderStatus;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 public record GetOrderResponseDTO(Long orderNumber,
                                   BigDecimal orderTotalPrice,

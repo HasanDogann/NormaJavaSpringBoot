@@ -5,10 +5,9 @@ import com.example.productorderchain.core.utilities.Result;
 import com.example.productorderchain.core.utilities.SuccessDataResult;
 import com.example.productorderchain.dto.process.create.CreateOrderRequestDTO;
 import com.example.productorderchain.dto.process.get.GetOrderResponseDTO;
-import com.example.productorderchain.model.Basket;
 import com.example.productorderchain.model.Order;
 import com.example.productorderchain.service.abstracts.OrderService;
-import com.example.productorderchain.validator.OrderIDValidator;
+import com.example.productorderchain.validator.IDValidation.OrderIDValidator;
 import com.example.productorderchain.validator.Validator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -43,12 +42,12 @@ public class OrderController {
     @GetMapping
     SuccessDataResult<Collection<GetOrderResponseDTO>> getAllOrders(){
         orderService.getAllOrders();
-        return new SuccessDataResult<Collection<GetOrderResponseDTO>>(orderService.getAllOrders(),"Orders are listed successfully");
+        return new SuccessDataResult<>(orderService.getAllOrders(),"Orders are listed successfully");
     }
     @GetMapping("/{id}")
     public ResponseEntity<SuccessDataResult<Order>> getOrder(@PathVariable Long id) {
         orderIDValidator.validate(id);
-        return ResponseEntity.ok(new SuccessDataResult<Order>(orderService.getOrder(id),"Order is listed"));
+        return ResponseEntity.ok(new SuccessDataResult<>(orderService.getOrder(id),"Order is listed"));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<?> cancelOrder(@PathVariable Long id,

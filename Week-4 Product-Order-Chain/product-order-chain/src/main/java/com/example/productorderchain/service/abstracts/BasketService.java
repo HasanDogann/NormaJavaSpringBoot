@@ -1,7 +1,6 @@
 package com.example.productorderchain.service.abstracts;
 
 import com.example.productorderchain.core.utilities.Result;
-import com.example.productorderchain.core.utilities.SuccessDataResult;
 import com.example.productorderchain.dto.process.create.CreateBasketRequestDTO;
 import com.example.productorderchain.dto.process.get.GetBasketResponseDTO;
 import com.example.productorderchain.exception.BaseException;

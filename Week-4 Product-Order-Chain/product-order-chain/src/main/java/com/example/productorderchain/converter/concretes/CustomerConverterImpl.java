@@ -39,16 +39,6 @@ class CustomerConverterImpl implements CustomerConverter {
         return customer;
     }
 
-    @Override
-    public CreateCustomerRequestDTO toCreateCustomerRequest(Customer customer) {
-        return new CreateCustomerRequestDTO(customer.getUsername(),
-                customer.getEmail(),
-                customer.getIdentity(),
-                customer.getGender(),
-                customer.getPassword(),
-                convertCustomerAddressDto(customer.getCustomerAddress()));
-
-    }
 
     @Override
     public GetCustomersResponseDTO toGetCustomersResponse(Customer customer) {

@@ -1,9 +1,10 @@
-package com.example.productorderchain.validator;
+package com.example.productorderchain.validator.ModelDTOValidation;
 
 
 import com.example.productorderchain.dto.process.create.CreateBasketRequestDTO;
 import com.example.productorderchain.exception.BaseValidationException;
 import com.example.productorderchain.exception.ValidationOperationException;
+import com.example.productorderchain.validator.Validator;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;

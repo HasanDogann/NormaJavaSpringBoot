@@ -1,8 +1,5 @@
 package com.example.productorderchain.dto.process.get;
 
-import com.example.productorderchain.dto.model.BrandDTO;
-import com.example.productorderchain.dto.model.CategoryDTO;
-
 import java.math.BigDecimal;
 import java.util.UUID;
 

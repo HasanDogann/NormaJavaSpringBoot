@@ -1,7 +1,6 @@
 package com.example.productorderchain.repository;
 
 import com.example.productorderchain.model.Brand;
-import com.example.productorderchain.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
