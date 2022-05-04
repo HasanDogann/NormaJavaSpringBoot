@@ -34,9 +34,9 @@ private final BasketConverter basketConverter;
 
     @Override
     public Basket getBasket(Long id) throws BaseException {
-        Basket basket = basketRepository.findById(id).orElseThrow(() -> new BusinessServiceOperationException.CustomerNotFoundException("Basket is not found"));
+        Basket basket = basketRepository.findById(id).orElseThrow(() -> new BusinessServiceOperationException.BasketNotFoundException("Basket is not found"));
         if (basket.isDeleted()) {
-            throw new BusinessServiceOperationException.CustomerAlreadyDeletedException("Basket was deleted");
+            throw new BusinessServiceOperationException.BasketAlreadyDeletedException("Basket was deleted");
         }
 
       return basket;
@@ -55,9 +55,9 @@ private final BasketConverter basketConverter;
     public Result deleteBasket(Long id, boolean hardDelete) throws BaseException {
         Basket basket = basketRepository
                 .findById(id)
-                .orElseThrow(() -> new BusinessServiceOperationException.ProductNotFoundException("Basket is not found"));
+                .orElseThrow(() -> new BusinessServiceOperationException.BasketNotFoundException("Basket is not found"));
         if (basket.isDeleted()) {
-            throw new BusinessServiceOperationException.ProductAlreadyDeletedException("Basket is already deleted");
+            throw new BusinessServiceOperationException.BasketAlreadyDeletedException("Basket is already deleted");
         }
         if (hardDelete) {
             basketRepository.delete(basket);

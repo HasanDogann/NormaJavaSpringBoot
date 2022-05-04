@@ -20,4 +20,7 @@ public class CustomerAddress extends BaseModel {
     @OneToOne
     private Customer customer;
 
+    @OneToOne
+    private Order order;
+
 }

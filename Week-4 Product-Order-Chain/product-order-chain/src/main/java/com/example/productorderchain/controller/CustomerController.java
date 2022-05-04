@@ -4,6 +4,7 @@ import com.example.productorderchain.core.utilities.Result;
 import com.example.productorderchain.core.utilities.SuccessDataResult;
 import com.example.productorderchain.dto.process.create.CreateCustomerRequestDTO;
 import com.example.productorderchain.dto.process.get.GetCustomersResponseDTO;
+import com.example.productorderchain.model.Customer;
 import com.example.productorderchain.service.abstracts.CustomerService;
 import com.example.productorderchain.validator.Validator;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -45,7 +46,7 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SuccessDataResult<CreateCustomerRequestDTO>> getCustomer(@PathVariable Long id) {
+    public ResponseEntity<Customer> getCustomer(@PathVariable Long id) {
         customerIdValidator.validate(id);
         return ResponseEntity.ok(customerService.getCustomer(id));
     }

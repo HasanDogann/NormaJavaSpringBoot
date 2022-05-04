@@ -1,10 +1,12 @@
 package com.example.productorderchain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,5 +23,9 @@ public class Customer extends BaseExtendedModel {
 
     @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private CustomerAddress customerAddress;
+
+    @OneToMany(mappedBy = "customer", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Order> orders;
 
 }

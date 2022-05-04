@@ -33,14 +33,14 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public SuccessDataResult<CreateCustomerRequestDTO> getCustomer(Long id) throws BaseException {
+    public Customer getCustomer(Long id) throws BaseException {
         Customer customer = customerRepository
                 .findById(id)
                 .orElseThrow(() -> new BusinessServiceOperationException.CustomerNotFoundException("Customer not found"));
         if (customer.isDeleted()) {
             throw new BusinessServiceOperationException.CustomerAlreadyDeletedException("Customer was deleted");
         }
-        return new SuccessDataResult<>(customerConverter.toCreateCustomerRequest(customer),"Customer is listed successfully");
+        return customer;
     }
 
     @Override

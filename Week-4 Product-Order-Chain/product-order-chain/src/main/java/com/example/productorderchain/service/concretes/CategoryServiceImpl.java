@@ -36,9 +36,9 @@ public class CategoryServiceImpl implements CategoryService {
     public GetCategoriesResponseDTO getCategory(Long id) throws BaseException {
         Category category = categoryRepository
                 .findById(id)
-                .orElseThrow(() -> new BusinessServiceOperationException.CustomerNotFoundException("Category is not found"));
+                .orElseThrow(() -> new BusinessServiceOperationException.CategoryNotFoundException("Category is not found"));
         if (category.isDeleted()) {
-            throw new BusinessServiceOperationException.CustomerAlreadyDeletedException("Category was deleted");
+            throw new BusinessServiceOperationException.CategoryAlreadyDeletedException("Category was deleted");
         }
         return categoryConverter.toGetCategoriesResponse(category);
     }
@@ -54,9 +54,9 @@ public class CategoryServiceImpl implements CategoryService {
     public Result deleteCategory(Long id, boolean hardDelete) throws BaseException {
         Category category = categoryRepository
                 .findById(id)
-                .orElseThrow(() -> new BusinessServiceOperationException.ProductNotFoundException("Category is not found"));
+                .orElseThrow(() -> new BusinessServiceOperationException.CategoryNotFoundException("Category is not found"));
         if (category.isDeleted()) {
-            throw new BusinessServiceOperationException.ProductAlreadyDeletedException("Category is already deleted");
+            throw new BusinessServiceOperationException.CategoryAlreadyDeletedException("Category was already deleted");
         }
         if (hardDelete) {
             categoryRepository.delete(category);

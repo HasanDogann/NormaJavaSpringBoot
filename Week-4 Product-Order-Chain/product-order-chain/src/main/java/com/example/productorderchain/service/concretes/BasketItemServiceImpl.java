@@ -36,9 +36,9 @@ public class BasketItemServiceImpl implements BasketItemService {
     public SuccessDataResult<GetBasketItemResponseDTO> getBasketItem(Long id) throws BaseException {
         BasketItem basketItem=basketItemRepository
                 .findById(id)
-                .orElseThrow(() -> new BusinessServiceOperationException.CustomerNotFoundException("BasketItem is not found"));
+                .orElseThrow(() -> new BusinessServiceOperationException.BasketItemNotFoundException("BasketItem is not found"));
         if (basketItem.isDeleted()) {
-            throw new BusinessServiceOperationException.CustomerAlreadyDeletedException("BasketItem was deleted");
+            throw new BusinessServiceOperationException.BasketItemAlreadyDeletedException("BasketItem was deleted");
         }
         return new SuccessDataResult<>( basketItemConverter.toGetBasketItemResponse(basketItem),"BasketItem is listed successfully");
     }
@@ -58,9 +58,9 @@ public class BasketItemServiceImpl implements BasketItemService {
     public Result deleteBasketItem(Long id, boolean hardDelete) throws BaseException {
         BasketItem basketItem=basketItemRepository
                 .findById(id)
-                .orElseThrow(() -> new BusinessServiceOperationException.ProductNotFoundException("BasketItem is not found"));
+                .orElseThrow(() -> new BusinessServiceOperationException.BasketItemNotFoundException("BasketItem is not found"));
         if (basketItem.isDeleted()) {
-            throw new BusinessServiceOperationException.ProductAlreadyDeletedException("BasketItem is already deleted");
+            throw new BusinessServiceOperationException.BasketItemAlreadyDeletedException("BasketItem is already deleted");
         }
         if (hardDelete) {
             basketService.deleteBasketItemAllPricesFromBasket(id,basketItem);

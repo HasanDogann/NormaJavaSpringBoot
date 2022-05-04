@@ -35,9 +35,9 @@ public class BrandServiceImpl implements BrandService {
     public GetBrandsResponseDTO getBrand(Long id) throws BaseException {
         Brand brand = brandRepository
                 .findById(id)
-                .orElseThrow(() -> new BusinessServiceOperationException.CustomerNotFoundException("Brand not found"));
+                .orElseThrow(() -> new BusinessServiceOperationException.BrandNotFoundException("Brand not found"));
         if (brand.isDeleted()) {
-            throw new BusinessServiceOperationException.CustomerAlreadyDeletedException("Brand was deleted");
+            throw new BusinessServiceOperationException.BrandAlreadyDeletedException("Brand was deleted");
         }
         return brandConverter.toGetBrandsResponse(brand);
     }
@@ -53,9 +53,9 @@ public class BrandServiceImpl implements BrandService {
     public Result deleteBrand(Long id, boolean hardDelete) throws BaseException {
        Brand brand = brandRepository
                 .findById(id)
-                .orElseThrow(() -> new BusinessServiceOperationException.ProductNotFoundException("Brand is not found"));
+                .orElseThrow(() -> new BusinessServiceOperationException.BrandNotFoundException("Brand is not found"));
         if (brand.isDeleted()) {
-            throw new BusinessServiceOperationException.ProductAlreadyDeletedException("Brand is already deleted");
+            throw new BusinessServiceOperationException.BrandAlreadyDeletedException("Brand is already deleted");
         }
         if (hardDelete) {
             brandRepository.delete(brand);

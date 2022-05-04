@@ -1,12 +1,10 @@
 package com.example.productorderchain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,5 +24,7 @@ public class Basket extends BaseModel {
     @OneToMany(mappedBy = "basket")
     private Set<BasketItem> items = new HashSet<>();
 
-
+    @JsonIgnore
+    @OneToOne
+    private Order order;
 }
