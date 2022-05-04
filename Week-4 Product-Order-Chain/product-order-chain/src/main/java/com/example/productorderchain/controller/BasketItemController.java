@@ -53,9 +53,8 @@ public class BasketItemController {
     public ResponseEntity<?> deleteBasketItem(@PathVariable Long id,
                                            @RequestParam(name = "hardDelete", required = false) boolean hardDelete) {
         basketItemIdValidator.validate(id);
-        Result result = basketItemService.deleteBasketItem(id,hardDelete);
         basketItemService.deleteBasketItem(id,hardDelete);
-        return ResponseEntity.ok().body(result.getMessage());
+        return ResponseEntity.ok().body(new Result(true,"BasketItem Deleted Successfully"));
     }
 
 

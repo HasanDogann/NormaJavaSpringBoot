@@ -63,8 +63,9 @@ public class BasketItemServiceImpl implements BasketItemService {
             throw new BusinessServiceOperationException.ProductAlreadyDeletedException("BasketItem is already deleted");
         }
         if (hardDelete) {
-            basketItemRepository.deleteById(basketItem.getId());
             basketService.deleteBasketItemAllPricesFromBasket(id,basketItem);
+            basketItemRepository.deleteByIdWithJPQL(id);
+
             return new SuccessResult("BasketItem "+basketItem.getProduct().getName()+" is deleted with HardDelete successfully");
         }
         basketItem.setDeleted(true);

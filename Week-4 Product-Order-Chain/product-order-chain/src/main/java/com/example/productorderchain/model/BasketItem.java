@@ -21,10 +21,10 @@ public class BasketItem extends BaseModel {
 
     @JoinColumn(name = "basket_id")
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY,optional = false,targetEntity = Basket.class)
+    @ManyToOne(fetch = FetchType.LAZY,optional = false,cascade=CascadeType.PERSIST)
     private Basket basket;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,fetch = FetchType.LAZY,cascade=CascadeType.PERSIST)
     private Product product;
 
     @Column(nullable = false)

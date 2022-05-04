@@ -39,7 +39,7 @@ public class BasketController {
     }
 
     @GetMapping
-    public ResponseEntity<SuccessDataResult<Collection<GetBasketResponseDTO>>> getAllBaskets() {
+    public ResponseEntity<Collection<GetBasketResponseDTO>> getAllBaskets() {
         return ResponseEntity.ok(basketService.getAllBaskets());
     }
 

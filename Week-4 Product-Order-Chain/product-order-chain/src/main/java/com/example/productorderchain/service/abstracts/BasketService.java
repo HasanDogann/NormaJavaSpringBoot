@@ -16,7 +16,7 @@ public interface BasketService {
 
     Basket getBasket(Long id) throws BaseException;
 
-    SuccessDataResult<Collection<GetBasketResponseDTO>> getAllBaskets();
+    Collection<GetBasketResponseDTO> getAllBaskets();
 
     Result deleteBasket(Long id, boolean hardDelete) throws BaseException;
 
