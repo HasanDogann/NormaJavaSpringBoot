@@ -26,11 +26,10 @@ private final BasketConverter basketConverter;
 
     @Override
     public Result addBasket(CreateBasketRequestDTO createBasketRequestDTO) {
-       //burada kaldım
       Basket basket= basketConverter.toBasket(createBasketRequestDTO);
       basketRepository.save(basket);
 
-        return new SuccessResult("Basket item is added successfully");
+      return new SuccessResult("Basket item is added successfully");
     }
 
     @Override
@@ -39,6 +38,7 @@ private final BasketConverter basketConverter;
         if (basket.isDeleted()) {
             throw new BusinessServiceOperationException.CustomerAlreadyDeletedException("Basket was deleted");
         }
+
       return basket;
     }
 
@@ -49,7 +49,6 @@ private final BasketConverter basketConverter;
                 .stream()
                 .map(basketConverter::toGetBasketResponseDTO)
                 .toList();
-
     }
 
     @Override
@@ -73,10 +72,7 @@ private final BasketConverter basketConverter;
     public BigDecimal calcBasketTotalPrice(Long id,BasketItem basketItem){
         Basket b = getBasket(basketItem.getBasket().getId());
         BigDecimal oldPrice = b.getTotalPrice();
-        System.out.println("old basket price is : "+oldPrice );
-        b.setTotalPrice(oldPrice.add(basketItem.getPrice())
-        );
-        System.out.println("new total basket price is "+b.getTotalPrice());
+        b.setTotalPrice(oldPrice.add(basketItem.getPrice()));
         return b.getTotalPrice();
     }
 
@@ -84,9 +80,7 @@ private final BasketConverter basketConverter;
     public BigDecimal calcBasketTotalTaxPrice(Long id, BasketItem basketItem) {
         Basket b = getBasket(id);
         BigDecimal oldTaxPrice = b.getTaxPrice();
-        System.out.println("Basket of oldTaxPrice "+b.getTaxPrice());
         b.setTaxPrice(oldTaxPrice.add(basketItem.getTaxPrice()));
-        System.out.println("Basket of NewTaxPrice"+b.getTaxPrice());
 
         return b.getTaxPrice();
     }
@@ -96,9 +90,8 @@ private final BasketConverter basketConverter;
 
         Basket b = getBasket(id);
         BigDecimal oldDiscPrice = b.getDiscountPrice();
-        System.out.println("Basket of oldDiscPrice "+b.getDiscountPrice());
         b.setDiscountPrice(oldDiscPrice.add(basketItem.getDiscountPrice()));
-        System.out.println("Basket of NewDiscPrice "+b.getDiscountPrice());
+
         return b.getDiscountPrice();
     }
 
@@ -106,10 +99,7 @@ private final BasketConverter basketConverter;
     public BigDecimal calcBasketTotalShipmentPrice(Long id, BasketItem basketItem) {
         Basket b = getBasket(id);
         BigDecimal oldShipPrice = b.getShippingPrice();
-        System.out.println("Basket of oldShipPrice "+b.getShippingPrice());
         b.setShippingPrice(oldShipPrice.add(basketItem.getShippingPrice()));
-        System.out.println("basket item added with ship price is : "+basketItem.getShippingPrice());
-        System.out.println("Basket of NewShipPrice "+b.getShippingPrice());
 
         return b.getShippingPrice();
 
@@ -118,22 +108,15 @@ private final BasketConverter basketConverter;
     public  void deleteBasketItemAllPricesFromBasket(Long id,BasketItem basketItem){
         Basket b = getBasket(basketItem.getBasket().getId());
         BigDecimal oldPrice = getBasket(basketItem.getBasket().getId()).getTotalPrice();
-        System.out.println("old price"+oldPrice);
         BigDecimal oldDiscountPrice = getBasket(basketItem.getBasket().getId()).getDiscountPrice();
-        System.out.println("oldDİsc"+oldDiscountPrice);
         BigDecimal oldTaxPrice = getBasket(basketItem.getBasket().getId()).getTaxPrice();
-        System.out.println("oldTax"+oldTaxPrice);
         BigDecimal oldShipPrice = getBasket(basketItem.getBasket().getId()).getShippingPrice();
-        System.out.println("oldShip"+oldShipPrice);
+
 
         b.setTotalPrice(oldPrice.subtract(basketItem.getPrice()));
-        System.out.println("new price"+b.getTotalPrice());
         b.setDiscountPrice(oldDiscountPrice.subtract(basketItem.getDiscountPrice()));
-        System.out.println("new disc."+b.getDiscountPrice());
         b.setTaxPrice(oldTaxPrice.subtract(basketItem.getTaxPrice()));
-        System.out.println("new tax"+b.getTaxPrice());
-        b.setShippingPrice(oldShipPrice.subtract(basketItem.getTaxPrice()));
-        System.out.println("new ship"+b.getShippingPrice());
+        b.setShippingPrice(oldShipPrice.subtract(basketItem.getShippingPrice()));
 
     }
 

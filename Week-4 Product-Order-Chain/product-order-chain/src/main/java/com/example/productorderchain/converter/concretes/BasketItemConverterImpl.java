@@ -31,30 +31,16 @@ public class BasketItemConverterImpl implements BasketItemConverter {
         basketItem.setDiscountPrice(((productService.getProduct(createBasketItemRequestDTO.productID()).getDiscountRate())
                 .multiply(productService.getProduct(createBasketItemRequestDTO.productID()).getPrice()))
                 .divide(BigDecimal.valueOf(100)));
-        System.out.println("created basket item with Discprice "+basketItem.getDiscountPrice());
+
         basketItem.setQuantity(createBasketItemRequestDTO.quantity());
-        System.out.println("basket ıtem quantity is created "+basketItem.getQuantity());
         basketItem.setShippingPrice(createBasketItemRequestDTO.shippingPrice());
-        System.out.println("created basket item with Shipprice "+basketItem.getShippingPrice());
         basketItem.setTaxPrice(createBasketItemRequestDTO.taxPrice());
-        System.out.println("created basket item with Taxprice "+basketItem.getTaxPrice());
 
         basketItem.setPrice((productService.getProduct(createBasketItemRequestDTO.productID()).getPrice().multiply(basketItem.getQuantity()))
                 .add(basketItem.getTaxPrice())
                 .add(basketItem.getShippingPrice())
                 .subtract(basketItem.getDiscountPrice()));
-
-        System.out.println("created basket item with price"+basketItem.getPrice());
-
-
-
-/*
-        BigDecimal oldShipPrice = basketService.getBasket(createBasketItemRequestDTO.BasketID()).getShippingPrice();
-        BigDecimal oldTaxPrice = basketService.getBasket(createBasketItemRequestDTO.BasketID()).getTaxPrice();
-        basketService.getBasket(createBasketItemRequestDTO.BasketID()).setShippingPrice(oldShipPrice.add(createBasketItemRequestDTO.shippingPrice()));
-        basketService.getBasket(createBasketItemRequestDTO.BasketID()).setTaxPrice(oldTaxPrice.add(createBasketItemRequestDTO.taxPrice()));*/
-
-
+        //Basket is updated after adding new Basket Item
         basketService.calcBasketTotalPrice(createBasketItemRequestDTO.BasketID(), basketItem);
         basketService.calcBasketTotalDiscountPrice(createBasketItemRequestDTO.BasketID(), basketItem);
         basketService.calcBasketTotalTaxPrice(createBasketItemRequestDTO.BasketID(), basketItem);
