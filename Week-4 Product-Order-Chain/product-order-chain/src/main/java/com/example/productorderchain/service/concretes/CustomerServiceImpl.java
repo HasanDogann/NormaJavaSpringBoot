@@ -15,6 +15,7 @@ import com.example.productorderchain.model.Customer;
 import com.example.productorderchain.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 @Service
@@ -67,5 +68,15 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setDeleted(true);
         customerRepository.save(customer);
         return new SuccessResult("Customer "+customer.getUsername()+" is deleted with SoftDelete successfully");
+    }
+
+
+    //This method helps to adding a coupon to customer with customerID and amount of couponPrice
+    @Override
+    public Result addCoupon(Long customerId, BigDecimal couponPrice) {
+        Customer customer=getCustomer(customerId);
+        customer.setDiscountCoupon(couponPrice);
+        customerRepository.save(customer);
+        return new Result(true,"Coupon is defined to Customer: "+customer.getUsername());
     }
 }

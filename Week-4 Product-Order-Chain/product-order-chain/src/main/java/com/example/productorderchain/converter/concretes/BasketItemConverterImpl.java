@@ -9,6 +9,7 @@ import com.example.productorderchain.service.abstracts.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Component
 @RequiredArgsConstructor
@@ -27,7 +28,7 @@ public class BasketItemConverterImpl implements BasketItemConverter {
 
         basketItem.setDiscountPrice(((productService.getProduct(createBasketItemRequestDTO.productID()).getDiscountRate())
                 .multiply(productService.getProduct(createBasketItemRequestDTO.productID()).getPrice()))
-                .divide(BigDecimal.valueOf(100)));
+                .divide(BigDecimal.valueOf(100), RoundingMode.FLOOR));
 
         basketItem.setQuantity(createBasketItemRequestDTO.quantity());
         basketItem.setShippingPrice(createBasketItemRequestDTO.shippingPrice());
@@ -37,7 +38,8 @@ public class BasketItemConverterImpl implements BasketItemConverter {
                 .add(basketItem.getTaxPrice())
                 .add(basketItem.getShippingPrice())
                 .subtract(basketItem.getDiscountPrice()));
-        //Basket is updated after adding new Basket Item
+
+        //Basket's prices are updated after adding new Basket Item
         basketService.calcBasketTotalPrice(createBasketItemRequestDTO.BasketID(), basketItem);
         basketService.calcBasketTotalDiscountPrice(createBasketItemRequestDTO.BasketID(), basketItem);
         basketService.calcBasketTotalTaxPrice(createBasketItemRequestDTO.BasketID(), basketItem);

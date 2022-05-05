@@ -23,6 +23,8 @@ public class BasketConverterImpl implements BasketConverter {
         basket.setDiscountPrice(BigDecimal.ZERO);
         basket.setTaxPrice(BigDecimal.ZERO);
         basket.setShippingPrice(BigDecimal.ZERO);
+        basket.setItems(null);
+        basket.setOrder(null);
 
         return basket;
     }

@@ -16,6 +16,8 @@ public class BrandConverterImpl implements BrandConverter {
 
         return brand;
     }
+
+    //Using for Product Create Service
     public Brand toBrandfromResponse(GetBrandsResponseDTO getBrandsResponseDTO) {
         Brand brand = new Brand();
         brand.setName(getBrandsResponseDTO.name());

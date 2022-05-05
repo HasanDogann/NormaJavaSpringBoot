@@ -7,12 +7,16 @@ import com.example.productorderchain.dto.process.create.CreateOrderRequestDTO;
 import com.example.productorderchain.dto.process.get.GetOrderResponseDTO;
 import com.example.productorderchain.exception.BaseException;
 import com.example.productorderchain.exception.BusinessServiceOperationException;
+import com.example.productorderchain.model.Customer;
 import com.example.productorderchain.model.Order;
+import com.example.productorderchain.repository.CustomerRepository;
 import com.example.productorderchain.repository.OrderRepository;
+import com.example.productorderchain.service.abstracts.CustomerService;
 import com.example.productorderchain.service.abstracts.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 @Service
@@ -22,14 +26,18 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderConverter orderConverter;
+    private final CustomerService customerService;
+    private final CustomerRepository customerRepository;
 
 
     @Override
     public Result createOrder(CreateOrderRequestDTO createOrderRequestDTO) {
         Order order = orderConverter.toOrder(createOrderRequestDTO);
         orderRepository.save(order);
-
-        return new Result(true,"Order is created successfully");
+        Customer c =customerService.getCustomer(createOrderRequestDTO.customerId());
+        c.setDiscountCoupon(BigDecimal.ZERO);
+        customerRepository.save(c);
+        return new Result(true,"Order "+order.getOrderNumber()+" is created successfully");
     }
 
     @Override

@@ -69,6 +69,8 @@ private final BasketConverter basketConverter;
     }
 
 
+    //Calculate Basket total price after adding new Basket Item
+    @Override
     public BigDecimal calcBasketTotalPrice(Long id,BasketItem basketItem){
         Basket b = getBasket(basketItem.getBasket().getId());
         BigDecimal oldPrice = b.getTotalPrice();
@@ -76,6 +78,7 @@ private final BasketConverter basketConverter;
         return b.getTotalPrice();
     }
 
+    //Calculate Basket total *tax* price after adding new Basket Item
     @Override
     public BigDecimal calcBasketTotalTaxPrice(Long id, BasketItem basketItem) {
         Basket b = getBasket(id);
@@ -85,6 +88,7 @@ private final BasketConverter basketConverter;
         return b.getTaxPrice();
     }
 
+    //Calculate Basket total *discount* price after adding new Basket Item
     @Override
     public BigDecimal calcBasketTotalDiscountPrice(Long id, BasketItem basketItem) {
 
@@ -95,6 +99,7 @@ private final BasketConverter basketConverter;
         return b.getDiscountPrice();
     }
 
+    //Calculate Basket total *shipment* price after adding new Basket Item
     @Override
     public BigDecimal calcBasketTotalShipmentPrice(Long id, BasketItem basketItem) {
         Basket b = getBasket(id);
@@ -105,6 +110,8 @@ private final BasketConverter basketConverter;
 
     }
 
+    //Update all prices of a basket after a basket item is deleted in it
+    @Override
     public  void deleteBasketItemAllPricesFromBasket(Long id,BasketItem basketItem){
         Basket b = getBasket(basketItem.getBasket().getId());
         BigDecimal oldPrice = getBasket(basketItem.getBasket().getId()).getTotalPrice();

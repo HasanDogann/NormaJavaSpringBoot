@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 
@@ -57,6 +58,15 @@ public class CustomerController {
         customerIdValidator.validate(id);
         Result result = customerService.delete(id,hardDelete);
         return ResponseEntity.ok().body(result.getMessage());
+    }
+
+    @PatchMapping("/{customerId}")
+    public ResponseEntity<?> addCoupon(@PathVariable Long customerId,
+                                       @RequestParam(name="coupon") BigDecimal couponPrice){
+        customerIdValidator.validate(customerId);
+       Result result= customerService.addCoupon(customerId,couponPrice);
+       return ResponseEntity.ok().body(result.getMessage());
+
     }
 
 

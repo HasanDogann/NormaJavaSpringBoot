@@ -25,7 +25,8 @@ public class Order extends BaseModel{
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private CustomerAddress customerBillingAddress;
 
-    private String paymentMethod;
+    @Enumerated(EnumType.STRING)
+    private PaymentMethod paymentMethod;
     private String paymentInfo;
 
     private String orderDate;

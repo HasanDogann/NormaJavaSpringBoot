@@ -34,7 +34,6 @@ public class OrderController {
     @PostMapping
     ResponseEntity<?> createOrder(@RequestBody CreateOrderRequestDTO createOrderRequestDTO){
         createOrderRequestDTOValidator.validate(createOrderRequestDTO);
-        orderService.createOrder(createOrderRequestDTO);
         Result result = orderService.createOrder(createOrderRequestDTO);
         return ResponseEntity.ok().body(result.getMessage());
     }

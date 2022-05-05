@@ -46,6 +46,7 @@ class CustomerConverterImpl implements CustomerConverter {
                 customer.getUsername(),
                 customer.getEmail(),
                 customer.getGender(),
+                customer.getDiscountCoupon(),
                 convertCustomerAddressDto(customer.getCustomerAddress()));
 
     }
