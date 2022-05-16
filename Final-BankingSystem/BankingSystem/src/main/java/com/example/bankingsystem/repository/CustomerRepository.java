@@ -8,7 +8,13 @@ import java.util.Collection;
 
 public interface CustomerRepository extends JpaRepository<Customer,Long> {
 
+    void removeCustomerById(Long id);
+
+
     @Query("SELECT c FROM Customer c WHERE c.isDeleted = ?1")
     Collection<Customer> findAllCustomersByDeleteStatusByJPQL(boolean status);
 
+
+    Customer getById(Long id);
 }
+

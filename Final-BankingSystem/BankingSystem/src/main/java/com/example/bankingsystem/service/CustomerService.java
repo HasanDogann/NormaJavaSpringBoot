@@ -1,4 +1,4 @@
-package com.example.bankingsystem.service.abstracts;
+package com.example.bankingsystem.service;
 
 import com.example.bankingsystem.core.utilities.Result;
 import com.example.bankingsystem.dto.request.CustomerCreateRequestDTO;
@@ -14,4 +14,6 @@ public interface CustomerService {
     Customer getCustomer(Long id);
 
     Collection<CustomerGetResponseDTO> getAllCustomers();
+
+    String deleteCustomer(Long id,boolean isHardDelete);
 }

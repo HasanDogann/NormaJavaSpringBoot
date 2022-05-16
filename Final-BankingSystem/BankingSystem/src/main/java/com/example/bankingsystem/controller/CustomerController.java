@@ -6,7 +6,7 @@ import com.example.bankingsystem.core.utilities.SuccessDataResult;
 import com.example.bankingsystem.dto.request.CustomerCreateRequestDTO;
 import com.example.bankingsystem.dto.response.CustomerGetResponseDTO;
 import com.example.bankingsystem.entity.Customer;
-import com.example.bankingsystem.service.abstracts.CustomerService;
+import com.example.bankingsystem.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,31 +15,39 @@ import java.util.Collection;
 
 
 @RestController
-@RequestMapping(value = "api")
+@RequestMapping(value = "api/customers")
 @RequiredArgsConstructor
 public class CustomerController {
 
     private final CustomerService customerService;
-    private final CustomerConverter customerConverter;
 
 
 
     @PostMapping
-    public ResponseEntity<Result> addCustomer(@RequestBody CustomerCreateRequestDTO customerCreateRequestDTO){
+    public Result addCustomer(@RequestBody CustomerCreateRequestDTO customerCreateRequestDTO){
         customerService.addCustomer(customerCreateRequestDTO);
-        return ResponseEntity.ok().body(new Result(true,"Customer is created successfully"));
+        return new Result(true,"Customer is created successfully");
     }
 
 
-    @GetMapping("/getCustomer")
-    public ResponseEntity<SuccessDataResult<CustomerGetResponseDTO>> getCustomer(@RequestParam(value = "customerId") Long id){
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getCustomer(@PathVariable Long id){
         Customer customer = customerService.getCustomer(id);
-       return ResponseEntity.ok().body(new SuccessDataResult<>(customerConverter.toCustomerResponse(customer),"Customer is listed successfully"));
+       return ResponseEntity.ok().body(customer);
     }
 
     @GetMapping
-    public ResponseEntity<SuccessDataResult<Collection<CustomerGetResponseDTO>>> getAllCustomers(){
-
-        return  ResponseEntity.ok().body(new SuccessDataResult<>(customerService.getAllCustomers(),"Customers are listed successfully"));
+    public ResponseEntity<?> getAllCustomers(){
+        Collection<CustomerGetResponseDTO> customers= customerService.getAllCustomers();
+        return ResponseEntity.ok().body(customers);
     }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteCustomer(@PathVariable Long id,
+                                            @RequestParam(name = "hardDelete", required = false) boolean isHardDelete){
+        customerService.deleteCustomer(id,isHardDelete);
+        return ResponseEntity.ok().body("Customer is deleted successfully");
+    }
+
 }

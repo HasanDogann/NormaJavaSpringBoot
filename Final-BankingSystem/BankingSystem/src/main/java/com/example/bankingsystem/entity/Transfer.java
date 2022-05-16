@@ -19,7 +19,7 @@ public class Transfer extends BaseModel{
 
     private BigDecimal transferNo;
     private BigDecimal transferAmount;
-    @Enumerated
+    @Enumerated(value = EnumType.STRING)
     private TransferType transferType;
 
 

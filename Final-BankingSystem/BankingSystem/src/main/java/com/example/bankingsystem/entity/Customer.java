@@ -28,13 +28,10 @@ public class Customer extends BaseModel{
     private Set<Account> accountList;
 
     @OneToMany(mappedBy = "customer",orphanRemoval = true,cascade = CascadeType.ALL)
-    @JsonIgnore
     private Set<Card> cardList;
 
 
-    @OneToMany(mappedBy = "customer",orphanRemoval = true,cascade = CascadeType.ALL)
-    @JsonIgnore
-    private Set<Transfer> transfersList;
+
 
 
 

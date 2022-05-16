@@ -1,19 +1,22 @@
 package com.example.bankingsystem.core.utilities;
 
-public class SuccessDataResult<T> extends com.example.bankingsystem.core.utilities.DataResult {
+public class SuccessDataResult<T> {
+
+    private final Result result;
+    private final T data;
 
 
-    public SuccessDataResult(T data, String message) {
-        super(data, true,message);
+
+
+    public SuccessDataResult(Result result, T data){
+        this.result = result;
+        this.data=data;
     }
 
-    public SuccessDataResult(T data){
-        super(data,true);
+    public SuccessDataResult( T data){
+
+        this.data = data;
+        result = null;
     }
-    public SuccessDataResult(String message) {
-      super(null,true,message);
-    }
-    public SuccessDataResult(){
-        super(null,true);
-    }
+
 }

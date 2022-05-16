@@ -23,7 +23,7 @@ public class Card extends BaseModel{
     private BigDecimal cardDebt;
     private BigDecimal cardBalance;
 
-    @Enumerated
+    @Enumerated(value = EnumType.STRING)
     private CardType cardType;
 
     @ManyToOne(cascade = CascadeType.PERSIST)

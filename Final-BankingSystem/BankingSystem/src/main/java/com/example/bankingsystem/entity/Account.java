@@ -24,9 +24,9 @@ public class Account extends BaseModel{
     private BigDecimal balance;
 
 
-    @Enumerated
+    @Enumerated(value = EnumType.STRING)
     private AccountType accountType;
-    @Enumerated
+    @Enumerated(value = EnumType.STRING)
     private BalanceType balanceType;
 
 
