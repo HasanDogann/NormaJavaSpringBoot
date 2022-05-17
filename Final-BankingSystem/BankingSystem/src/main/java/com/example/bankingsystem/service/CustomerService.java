@@ -9,7 +9,7 @@ import java.util.Collection;
 
 public interface CustomerService {
 
-    Result addCustomer(CustomerCreateRequestDTO customerCreateRequestDTO);
+    void addCustomer(CustomerCreateRequestDTO customerCreateRequestDTO);
 
     Customer getCustomer(Long id);
 

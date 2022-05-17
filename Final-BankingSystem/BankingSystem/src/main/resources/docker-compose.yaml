@@ -7,16 +7,22 @@ services:
     image: postgres
     restart: always
     ports:
-      - 5432:5432
+      - "5432:5432"
+    volumes:
+      - postgresqlvol:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: 123456hd
       POSTGRES_DB: accounts
 
-  adminer:
+  admin:
     image: adminer
     restart: always
+    depends_on:
+      - db
     ports:
-      - 8088:8088
+      - "8080:8080"
 
-
+volumes:
+  postgresqlvol:
+    driver: local
 

@@ -10,10 +10,8 @@ import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
 import com.example.bankingsystem.repository.CustomerRepository;
 import com.example.bankingsystem.service.CustomerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,10 +21,11 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerConverter customerConverter;
 
     @Override
-    public Result addCustomer(CustomerCreateRequestDTO customerCreateRequestDTO) {
+    public void addCustomer(CustomerCreateRequestDTO customerCreateRequestDTO) {
        Customer customer = customerConverter.toCustomer(customerCreateRequestDTO);
        customerRepository.save(customer);
-       return new Result(true,"Customer added successfully.");
+       //return new Result(true,"Customer is added successfully.");
+
     }
 
 
