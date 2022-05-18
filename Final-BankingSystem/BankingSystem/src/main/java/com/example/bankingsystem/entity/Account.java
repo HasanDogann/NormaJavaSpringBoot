@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -21,8 +22,8 @@ public class Account extends BaseModel{
 
     private String IBAN;
     private Long accountNumber;
-    private BigDecimal balance;
-
+    private BigDecimal balance=BigDecimal.ZERO;
+    private String creationDate;
 
     @Enumerated(value = EnumType.STRING)
     private AccountType accountType;
@@ -41,11 +42,13 @@ public class Account extends BaseModel{
     @JsonIgnore
     private Set<Card> cardList;
 
+/*
 
     @OneToMany(mappedBy = "account",orphanRemoval = true,cascade = CascadeType.ALL)
     @JsonIgnore
-    private Set<Transfer> transfersList;
+    private Set<Transaction> transfersList;
 
+*/
 
 
 }

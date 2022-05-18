@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -25,13 +26,16 @@ public class Customer extends BaseModel{
 
     @OneToMany(mappedBy = "customer",orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonIgnore
-    private Set<Account> accountList;
+    private Set<Account> accountList=new HashSet<>();
 
     @OneToMany(mappedBy = "customer",orphanRemoval = true,cascade = CascadeType.ALL)
     private Set<Card> cardList;
 
 
+    public void addAccountToCustomer(Set<Account> accountList2){
+        accountList.addAll(accountList2);
 
+    }
 
 
 

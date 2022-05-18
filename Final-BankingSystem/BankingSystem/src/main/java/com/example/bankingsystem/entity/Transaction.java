@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Transfer extends BaseModel{
+public class Transaction extends BaseModel{
 
     private BigDecimal transferNo;
     private BigDecimal transferAmount;
@@ -23,7 +23,8 @@ public class Transfer extends BaseModel{
     private TransferType transferType;
 
 
-    @ManyToOne( cascade = CascadeType.PERSIST)
+
+  /*  @ManyToOne( cascade = CascadeType.PERSIST)
     @JsonIgnore
     @JoinColumn(name = "customer_id")
     private Customer customer;
@@ -34,7 +35,7 @@ public class Transfer extends BaseModel{
     @JoinColumn(name = "account_id")
     private Account account;
 
-
+*/
 
 
 
