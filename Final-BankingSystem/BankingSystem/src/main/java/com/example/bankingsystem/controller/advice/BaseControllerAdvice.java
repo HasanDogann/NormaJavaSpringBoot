@@ -35,7 +35,7 @@ public class BaseControllerAdvice {
         return ResponseEntity.badRequest().body(new EndpointError(jsonProcessingException.getMessage().toUpperCase(Locale.ROOT)));
     }
 
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<?> onConstraintViolationExceptionHandle(ConstraintViolationException exception) {
         return ResponseEntity.badRequest().body(exception.getMessage());

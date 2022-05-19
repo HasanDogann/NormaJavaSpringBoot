@@ -33,7 +33,7 @@ public class CustomerConverterImpl implements CustomerConverter {
         customer.setSurname(customerCreateRequestDTO.customerSurname());
         customer.setEMail(customerCreateRequestDTO.customerEmail());
         customer.setPhone(customerCreateRequestDTO.customerPhone());
-
+        customer.setPassword(customerCreateRequestDTO.password());
         //Taking customer address when creating customer
         CustomerAddress customerAddress = new CustomerAddress();
         customerAddress.setCountry(customerCreateRequestDTO.customerAddress().country());

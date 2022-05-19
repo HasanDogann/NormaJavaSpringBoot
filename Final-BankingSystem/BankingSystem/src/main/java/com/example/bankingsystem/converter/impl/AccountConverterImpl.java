@@ -5,10 +5,7 @@ import com.example.bankingsystem.dto.request.AccountCreateRequestDTO;
 import com.example.bankingsystem.dto.response.AccountGetResponseDTO;
 import com.example.bankingsystem.entity.Account;
 import com.example.bankingsystem.entity.Customer;
-import com.example.bankingsystem.entity.enums.AccountType;
-import com.example.bankingsystem.entity.enums.BalanceType;
 import com.example.bankingsystem.repository.CustomerRepository;
-import com.example.bankingsystem.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -9,6 +9,7 @@ import com.example.bankingsystem.entity.Customer;
 import com.example.bankingsystem.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -17,6 +18,7 @@ import java.util.Collection;
 @RestController
 @RequestMapping(value = "api/customers")
 @RequiredArgsConstructor
+@Validated
 public class CustomerController {
 
     private final CustomerService customerService;

@@ -20,14 +20,16 @@ import java.util.Set;
 public class Customer extends BaseModel {
 
     @NotNull
-    String name;
+    private String name;
     @NotNull
-    String surname;
+    private String surname;
     @NotNull
     @Column(unique = true)
-    String eMail;
+    private String eMail;
     @NotNull
-    String phone;
+    private String password;
+    @NotNull
+    private String phone;
 
     @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private CustomerAddress customerAddress;

@@ -7,6 +7,7 @@ import com.example.bankingsystem.entity.Account;
 import com.example.bankingsystem.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -14,6 +15,7 @@ import java.util.Collection;
 @RestController
 @RequestMapping("/api/v2/accounts")
 @RequiredArgsConstructor
+@Validated
 public class AccountController {
     private final AccountService accountService;
     private final AccountConverter accountConverter;

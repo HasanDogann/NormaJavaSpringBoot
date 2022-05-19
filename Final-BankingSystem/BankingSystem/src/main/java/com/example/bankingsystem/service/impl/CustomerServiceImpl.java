@@ -7,12 +7,14 @@ import com.example.bankingsystem.dto.response.CustomerGetResponseDTO;
 import com.example.bankingsystem.entity.Account;
 import com.example.bankingsystem.entity.Customer;
 import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedException;
+import com.example.bankingsystem.exception.ServiceOperationCanNotAddException;
 import com.example.bankingsystem.exception.ServiceOperationCanNotDeleteException;
 import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
 import com.example.bankingsystem.repository.CustomerRepository;
 import com.example.bankingsystem.service.AccountService;
 import com.example.bankingsystem.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -28,18 +30,21 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerConverter customerConverter;
     private final AccountService accountService;
 
-    public CustomerServiceImpl(CustomerRepository customerRepository, CustomerConverter customerConverter,@Lazy AccountService accountService) {
+    public CustomerServiceImpl(CustomerRepository customerRepository, CustomerConverter customerConverter, @Lazy AccountService accountService) {
         this.customerRepository = customerRepository;
         this.customerConverter = customerConverter;
         this.accountService = accountService;
     }
 
     @Override
-    public void addCustomer(CustomerCreateRequestDTO customerCreateRequestDTO) {
-        Customer customer = customerConverter.toCustomer(customerCreateRequestDTO);
-        customerRepository.save(customer);
-
-
+    public void addCustomer(CustomerCreateRequestDTO customerCreateRequestDTO) throws ConstraintViolationException {
+        Customer c = customerRepository.findCustomerByEMailAddress(customerCreateRequestDTO.customerEmail());
+        if (Objects.isNull(c)) {
+            Customer customer = customerConverter.toCustomer(customerCreateRequestDTO);
+            customerRepository.save(customer);
+        } else {
+            throw new ServiceOperationCanNotAddException.CustomerIsAlreadyCreatedException("A customer is already using this e mail");
+        }
     }
 
 
@@ -51,6 +56,16 @@ public class CustomerServiceImpl implements CustomerService {
                         new ServiceOperationNotFoundException.CustomerNotFoundException("Customer can not found!"));
         if (customer.isDeleted()) {
             throw new ServiceOperationAlreadyDeletedException.CustomerAlreadyDeletedException("Customer is already deleted");
+        }
+        return customer;
+    }
+
+    @Override
+    public Customer getCustomerByEmail(String email) {
+        Customer customer = customerRepository
+                .findCustomerByEMailAddress(email);
+        if (Objects.isNull(customer)) {
+            return null;
         }
         return customer;
     }
@@ -69,9 +84,9 @@ public class CustomerServiceImpl implements CustomerService {
     public String deleteCustomer(Long id, boolean hardDelete) {
         Customer customer = customerRepository.getById(id);
 
-        Collection<Account> accountCollection = accountService.getAllAccountOneCustomer(id).stream().filter(i->(i.getBalance().compareTo(BigDecimal.ZERO) > 0)).toList();
-        log.info(String.valueOf(accountCollection.stream().count()));
-        if( accountCollection.size() ==0) {
+        Collection<Account> accountCollection = accountService.getAllAccountOneCustomer(id).stream().filter(i -> (i.getBalance().compareTo(BigDecimal.ZERO) > 0)).toList();
+
+        if (accountCollection.isEmpty()) {
 
             if (customer.isDeleted()) {
                 throw new ServiceOperationAlreadyDeletedException.CustomerAlreadyDeletedException("Customer is already deleted");
@@ -85,7 +100,7 @@ public class CustomerServiceImpl implements CustomerService {
             customerRepository.save(customer);
             return "Customer is deleted successfully";
         }
-         throw new ServiceOperationCanNotDeleteException.CustomerBalanceNotZero("Customer has account that balance of it has money");
+        throw new ServiceOperationCanNotDeleteException.CustomerBalanceNotZero("Customer has account that balance of it has money");
     }
 
     @Override
