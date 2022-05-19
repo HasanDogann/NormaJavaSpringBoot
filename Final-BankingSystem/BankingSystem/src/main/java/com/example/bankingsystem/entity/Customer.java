@@ -1,6 +1,7 @@
 package com.example.bankingsystem.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,12 +15,13 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name = "customers")
+//@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Customer extends BaseModel{
 
     String name;
     String surname;
-    String Email;
-    String Phone;
+    String eMail;
+    String phone;
 
     @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private CustomerAddress customerAddress;

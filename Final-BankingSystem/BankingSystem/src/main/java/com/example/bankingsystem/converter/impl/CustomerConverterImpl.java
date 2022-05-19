@@ -31,7 +31,7 @@ public class CustomerConverterImpl implements CustomerConverter {
         Customer customer = new Customer();
         customer.setName(customerCreateRequestDTO.customerName());
         customer.setSurname(customerCreateRequestDTO.customerSurname());
-        customer.setEmail(customerCreateRequestDTO.customerEmail());
+        customer.setEMail(customerCreateRequestDTO.customerEmail());
         customer.setPhone(customerCreateRequestDTO.customerPhone());
 
         //Taking customer address when creating customer
@@ -42,7 +42,7 @@ public class CustomerConverterImpl implements CustomerConverter {
         customerAddress.setDescription(customerCreateRequestDTO.customerAddress().description());
         customer.setCustomerAddress(customerAddress);
 
-        //When creating new Customer  we implement it with a base term deposit account
+        //When you are creating new Customer , implements it with a base term deposit account
         Account account = new Account();
         Long a = new Random().nextLong(1000_000_00, 9999_999_99);
         account.setAccountNumber(a);
@@ -54,6 +54,8 @@ public class CustomerConverterImpl implements CustomerConverter {
         Date date = new Date(System.currentTimeMillis());
         account.setCreationDate(formatter.format(date));
         account.setCustomer(customer);
+
+        //adding account to Customer
         customer.addAccountToCustomer(Set.of(account));
 
 
@@ -63,7 +65,7 @@ public class CustomerConverterImpl implements CustomerConverter {
     @Override
     public CustomerGetResponseDTO toCustomerResponse(Customer customer) {
 
-        return new CustomerGetResponseDTO(customer.getName(), customer.getSurname(), customer.getId(), customer.getEmail(), customer.getPhone(), customer.getAccountList(), customer.getCardList());
+        return new CustomerGetResponseDTO(customer.getName(), customer.getSurname(), customer.getId(), customer.getEMail(), customer.getPhone(), customer.getAccountList(), customer.getCardList());
     }
 
     @Override
@@ -71,7 +73,7 @@ public class CustomerConverterImpl implements CustomerConverter {
         Customer customer = customerRepository.getById(customerUpdateRequestDTO.id());
         customer.setName(customerUpdateRequestDTO.customerName());
         customer.setSurname(customerUpdateRequestDTO.customerSurname());
-        customer.setEmail(customerUpdateRequestDTO.customerEmail());
+        customer.setEMail(customerUpdateRequestDTO.customerEmail());
         customer.setPhone(customerUpdateRequestDTO.customerPhone());
         return customer;
     }

@@ -20,7 +20,7 @@ public class AccountController {
 
 
 
-    @GetMapping(path = "/getCustomerWithIban")
+    @GetMapping(path = "/getAccountWithCustomerIban")
     public ResponseEntity<?> getAccountByIban(@RequestParam String Iban) {
         Account account = accountService.getAccount(Iban);
         AccountGetResponseDTO accountGetResponseDTO = accountConverter.convertAccountToResponseDto(account);
@@ -46,5 +46,10 @@ public class AccountController {
         return ResponseEntity.ok().body("Account is added successfully");
     }
 
+    @GetMapping("/getAllAccountofCustomer")
+    public ResponseEntity<?> getAllAccountsofCustomer(@RequestParam Long id) {
+        Collection<Account> accountList = accountService.getAllAccountsofOneCustomer(id);
+        return ResponseEntity.ok().body(accountList);
+    }
 
 }

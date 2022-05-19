@@ -7,6 +7,7 @@ import com.example.bankingsystem.entity.Account;
 import com.example.bankingsystem.entity.Customer;
 import com.example.bankingsystem.entity.enums.AccountType;
 import com.example.bankingsystem.entity.enums.BalanceType;
+import com.example.bankingsystem.repository.CustomerRepository;
 import com.example.bankingsystem.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -19,7 +20,7 @@ import java.util.Random;
 @Component
 @RequiredArgsConstructor
 public class AccountConverterImpl implements AccountConverter {
-    private final CustomerService customerService;
+    private final CustomerRepository customerRepository;
 
     @Override
     public Account convertToAccount(AccountCreateRequestDTO accountCreateRequestDTO) {
@@ -33,7 +34,7 @@ public class AccountConverterImpl implements AccountConverter {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
         Date date = new Date(System.currentTimeMillis());
         account.setCreationDate(formatter.format(date));
-        Customer customer = customerService.getCustomer(accountCreateRequestDTO.customerId());
+        Customer customer = customerRepository.getById(accountCreateRequestDTO.customerId());
         account.setCustomer(customer);
 
         return account;

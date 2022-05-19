@@ -8,6 +8,7 @@ import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedExcepti
 import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
 import com.example.bankingsystem.repository.AccountRepository;
 import com.example.bankingsystem.service.AccountService;
+import com.example.bankingsystem.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ public class AccountServiceImpl implements AccountService {
 
     private final AccountRepository accountRepository;
     private final AccountConverter accountConverter;
+    private final CustomerService customerService;
 
     @Override
     public void addAccount(AccountCreateRequestDTO accountCreateRequestDTO) {
@@ -50,5 +52,12 @@ public class AccountServiceImpl implements AccountService {
             throw new ServiceOperationAlreadyDeletedException.AccountAlreadyDeletedException("Account was deleted");
         }
         return account;
+    }
+
+    @Override
+    public Collection<Account> getAllAccountsofOneCustomer(Long id) {
+
+        return accountRepository.findAccountByCustomer(customerService.getCustomer(id)
+        ).stream().toList();
     }
 }
