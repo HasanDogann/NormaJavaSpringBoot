@@ -19,4 +19,5 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
 
    Collection<Account> findAccountByCustomer(Customer customer);
 
+   void removeAccountById(Long id);
 }

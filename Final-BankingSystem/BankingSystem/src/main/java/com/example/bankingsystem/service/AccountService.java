@@ -3,7 +3,6 @@ package com.example.bankingsystem.service;
 import com.example.bankingsystem.dto.request.AccountCreateRequestDTO;
 import com.example.bankingsystem.dto.response.AccountGetResponseDTO;
 import com.example.bankingsystem.entity.Account;
-import com.example.bankingsystem.entity.Customer;
 
 import java.util.Collection;
 
@@ -17,5 +16,7 @@ public interface AccountService {
 
     Account getAccount(String IbanNo);
 
-    Collection<Account> getAllAccountsofOneCustomer(Long id);
+    Collection<Account> getAllAccountOneCustomer(Long id);
+
+    String deleteAccount(Long id,boolean isHardDelete);
 }

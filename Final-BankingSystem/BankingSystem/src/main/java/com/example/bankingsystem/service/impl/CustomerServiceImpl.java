@@ -7,7 +7,7 @@ import com.example.bankingsystem.dto.response.CustomerGetResponseDTO;
 import com.example.bankingsystem.entity.Account;
 import com.example.bankingsystem.entity.Customer;
 import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedException;
-import com.example.bankingsystem.exception.ServiceOperationNotDeleteException;
+import com.example.bankingsystem.exception.ServiceOperationCanNotDeleteException;
 import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
 import com.example.bankingsystem.repository.CustomerRepository;
 import com.example.bankingsystem.service.AccountService;
@@ -58,7 +58,8 @@ public class CustomerServiceImpl implements CustomerService {
     public Collection<CustomerGetResponseDTO> getAllCustomers() {
         return customerRepository.findAllCustomersByDeleteStatusByJPQL(false)
                 .stream()
-                .map(customerConverter::toCustomerResponse).toList();
+                .map(customerConverter::toCustomerResponse)
+                .toList();
 
     }
 
@@ -67,7 +68,7 @@ public class CustomerServiceImpl implements CustomerService {
     public String deleteCustomer(Long id, boolean hardDelete) {
         Customer customer = customerRepository.getById(id);
 
-        Collection<Account> accountCollection = accountService.getAllAccountsofOneCustomer(id).stream().filter(i->(i.getBalance().compareTo(BigDecimal.ZERO) > 0)).toList();
+        Collection<Account> accountCollection = accountService.getAllAccountOneCustomer(id).stream().filter(i->(i.getBalance().compareTo(BigDecimal.ZERO) > 0)).toList();
         if(Objects.isNull(accountCollection)) {
 
             if (customer.isDeleted()) {
@@ -82,7 +83,7 @@ public class CustomerServiceImpl implements CustomerService {
             customerRepository.save(customer);
             return "Customer is deleted successfully";
         }
-         throw new ServiceOperationNotDeleteException.CustomerBalanceNotZero("Customer has account that balance of it has money");
+         throw new ServiceOperationCanNotDeleteException.CustomerBalanceNotZero("Customer has account that balance of it has money");
     }
 
     @Override

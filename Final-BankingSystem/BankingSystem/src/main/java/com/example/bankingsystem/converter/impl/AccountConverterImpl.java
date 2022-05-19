@@ -27,10 +27,9 @@ public class AccountConverterImpl implements AccountConverter {
         Account account = new Account();
         account.setAccountType(accountCreateRequestDTO.accountType());
         account.setBalanceType(accountCreateRequestDTO.balanceType());
-        Long a = new Random().nextLong(1000_000_00, 9999_999_99);
-        account.setAccountNumber(a);
-        account.setIBAN("TR" + new BigDecimal(new Random().nextLong(1000_000_00, 9999_999_99)) + a);
-        account.setBalance(account.getBalance());
+        Long accountNo = new Random().nextLong(1000_000_00, 9999_999_99);
+        account.setAccountNumber(accountNo);
+        account.setIBAN("TR" + new BigDecimal(new Random().nextLong(1000_000_00, 9999_999_99)) + accountNo);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
         Date date = new Date(System.currentTimeMillis());
         account.setCreationDate(formatter.format(date));
@@ -50,7 +49,9 @@ public class AccountConverterImpl implements AccountConverter {
                 account.getIBAN(),
                 account.getAccountNumber(),
                 account.getAccountType(),
-                account.getCreationDate()
+                account.getCreationDate(),
+                account.isDeleted(),
+                account.getId()
         );
     }
 

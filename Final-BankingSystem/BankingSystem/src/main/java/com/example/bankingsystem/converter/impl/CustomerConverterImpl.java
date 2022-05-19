@@ -42,14 +42,13 @@ public class CustomerConverterImpl implements CustomerConverter {
         customerAddress.setDescription(customerCreateRequestDTO.customerAddress().description());
         customer.setCustomerAddress(customerAddress);
 
-        //When you are creating new Customer , implements it with a base term deposit account
+        //When you are creating new Customer you take the account type and balance type from customer
         Account account = new Account();
+        account.setAccountType(customerCreateRequestDTO.accountOptionsDTO().accountType());
+        account.setBalanceType(customerCreateRequestDTO.accountOptionsDTO().balanceType());
         Long a = new Random().nextLong(1000_000_00, 9999_999_99);
         account.setAccountNumber(a);
         account.setIBAN("TR" + new BigDecimal(new Random().nextLong(1000_000_00, 9999_999_99)) + a);
-        account.setAccountType(AccountType.TERM_DEPOSIT);
-        account.setBalance(BigDecimal.ZERO);
-        account.setBalanceType(BalanceType.TL);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
         Date date = new Date(System.currentTimeMillis());
         account.setCreationDate(formatter.format(date));

@@ -48,8 +48,15 @@ public class AccountController {
 
     @GetMapping("/getAllAccountofCustomer")
     public ResponseEntity<?> getAllAccountsofCustomer(@RequestParam Long id) {
-        Collection<Account> accountList = accountService.getAllAccountsofOneCustomer(id);
+        Collection<Account> accountList = accountService.getAllAccountOneCustomer(id);
         return ResponseEntity.ok().body(accountList);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteAccount(@PathVariable Long id,
+                                           @RequestParam(required = false) boolean isHardDelete){
+    String deleteResult = accountService.deleteAccount(id,isHardDelete);
+    return ResponseEntity.ok().body(deleteResult);
+
+    }
 }

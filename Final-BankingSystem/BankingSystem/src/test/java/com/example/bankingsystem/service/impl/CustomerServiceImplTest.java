@@ -1,13 +1,14 @@
 package com.example.bankingsystem.service.impl;
 
-import com.example.bankingsystem.converter.CustomerConverter;
+import com.example.bankingsystem.dto.model.AccountOptionsDTO;
 import com.example.bankingsystem.dto.model.CustomerAddressDTO;
 import com.example.bankingsystem.dto.request.CustomerCreateRequestDTO;
 import com.example.bankingsystem.entity.Account;
 import com.example.bankingsystem.entity.Customer;
 import com.example.bankingsystem.entity.CustomerAddress;
+import com.example.bankingsystem.entity.enums.AccountType;
+import com.example.bankingsystem.entity.enums.BalanceType;
 import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedException;
-import com.example.bankingsystem.exception.ServiceOperationNotDeleteException;
 import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
 import com.example.bankingsystem.repository.AccountRepository;
 import com.example.bankingsystem.repository.CustomerRepository;
@@ -20,11 +21,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.transaction.Transactional;
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Stream;
 
 @SpringBootTest
 @Slf4j
@@ -67,6 +65,7 @@ class CustomerServiceImplTest {
 
         customerService.addCustomer(new CustomerCreateRequestDTO(customer.getName()
                 , customer.getSurname(), customer.getEMail(), customer.getPhone(),
+                new AccountOptionsDTO(AccountType.DEPOT,BalanceType.DOLLAR),
                 new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
                         customer.getCustomerAddress().getCity(), customer.getCustomerAddress().getPostalCode(),
                         customer.getCustomerAddress().getDescription())));
@@ -84,12 +83,13 @@ class CustomerServiceImplTest {
         customer.setPhone("155155155");
         customer.setCustomerAddress(new CustomerAddress("TR", "Ankara", "06000", "Central", customer));
 
+
         customerService.addCustomer(new CustomerCreateRequestDTO(customer.getName()
                 , customer.getSurname(), customer.getEMail(), customer.getPhone(),
+                new AccountOptionsDTO(AccountType.DEPOT,BalanceType.DOLLAR),
                 new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
                         customer.getCustomerAddress().getCity(), customer.getCustomerAddress().getPostalCode(),
                         customer.getCustomerAddress().getDescription())));
-
 
         Assertions.assertThrows(ServiceOperationNotFoundException.CustomerNotFoundException.class, () -> {
             customerService.getCustomer(5L);
@@ -109,8 +109,10 @@ class CustomerServiceImplTest {
         customer.setCustomerAddress(new CustomerAddress("TR", "Ankara", "06000", "Central", customer));
 
 
+
         customerService.addCustomer(new CustomerCreateRequestDTO(customer.getName()
                 , customer.getSurname(), customer.getEMail(), customer.getPhone(),
+                new AccountOptionsDTO(AccountType.DEPOT,BalanceType.DOLLAR),
                 new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
                         customer.getCustomerAddress().getCity(), customer.getCustomerAddress().getPostalCode(),
                         customer.getCustomerAddress().getDescription())));
@@ -155,6 +157,7 @@ class CustomerServiceImplTest {
 
         customerService.addCustomer(new CustomerCreateRequestDTO(customer.getName()
                 , customer.getSurname(), customer.getEMail(), customer.getPhone(),
+                new AccountOptionsDTO(AccountType.DEPOT,BalanceType.DOLLAR),
                 new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
                         customer.getCustomerAddress().getCity(), customer.getCustomerAddress().getPostalCode(),
                         customer.getCustomerAddress().getDescription())));

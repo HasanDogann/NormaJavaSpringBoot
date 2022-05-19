@@ -12,7 +12,9 @@ public record AccountGetResponseDTO(String customerName,
                                     String ibanNo,
                                     Long accountNo,
                                     AccountType accountType,
-                                    String createDate
+                                    String createDate,
+                                    Boolean isDelete,
+                                    Long accountId
 
 ) {
 }
