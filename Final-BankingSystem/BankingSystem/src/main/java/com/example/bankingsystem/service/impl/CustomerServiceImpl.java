@@ -12,6 +12,7 @@ import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
 import com.example.bankingsystem.repository.CustomerRepository;
 import com.example.bankingsystem.service.AccountService;
 import com.example.bankingsystem.service.CustomerService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Service
-
+@Slf4j
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
@@ -69,7 +70,8 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = customerRepository.getById(id);
 
         Collection<Account> accountCollection = accountService.getAllAccountOneCustomer(id).stream().filter(i->(i.getBalance().compareTo(BigDecimal.ZERO) > 0)).toList();
-        if(Objects.isNull(accountCollection)) {
+        log.info(String.valueOf(accountCollection.stream().count()));
+        if( accountCollection.size() ==0) {
 
             if (customer.isDeleted()) {
                 throw new ServiceOperationAlreadyDeletedException.CustomerAlreadyDeletedException("Customer is already deleted");

@@ -19,8 +19,7 @@ public class AccountController {
     private final AccountConverter accountConverter;
 
 
-
-    @GetMapping(path = "/getAccountWithCustomerIban")
+    @GetMapping(path = "/getAccountByCustomerIban")
     public ResponseEntity<?> getAccountByIban(@RequestParam String Iban) {
         Account account = accountService.getAccount(Iban);
         AccountGetResponseDTO accountGetResponseDTO = accountConverter.convertAccountToResponseDto(account);
@@ -41,22 +40,23 @@ public class AccountController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addAccount(@RequestBody AccountCreateRequestDTO accountCreateRequestDTO){
+    public ResponseEntity<?> addAccount(@RequestBody AccountCreateRequestDTO accountCreateRequestDTO) {
         accountService.addAccount(accountCreateRequestDTO);
         return ResponseEntity.ok().body("Account is added successfully");
     }
 
-    @GetMapping("/getAllAccountofCustomer")
-    public ResponseEntity<?> getAllAccountsofCustomer(@RequestParam Long id) {
+    @GetMapping("/getAllAccountOneCustomer")
+    public ResponseEntity<?> getAllAccountOneCustomer(@RequestParam Long id) {
         Collection<Account> accountList = accountService.getAllAccountOneCustomer(id);
         return ResponseEntity.ok().body(accountList);
     }
 
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteAccount(@PathVariable Long id,
-                                           @RequestParam(required = false) boolean isHardDelete){
-    String deleteResult = accountService.deleteAccount(id,isHardDelete);
-    return ResponseEntity.ok().body(deleteResult);
+                                           @RequestParam(required = false) boolean isHardDelete) {
+        String deleteResult = accountService.deleteAccount(id, isHardDelete);
+        return ResponseEntity.ok().body(deleteResult);
 
     }
 }

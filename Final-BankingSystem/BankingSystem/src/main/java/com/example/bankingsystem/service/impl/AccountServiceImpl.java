@@ -4,6 +4,7 @@ import com.example.bankingsystem.converter.AccountConverter;
 import com.example.bankingsystem.dto.request.AccountCreateRequestDTO;
 import com.example.bankingsystem.dto.response.AccountGetResponseDTO;
 import com.example.bankingsystem.entity.Account;
+import com.example.bankingsystem.entity.Customer;
 import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedException;
 import com.example.bankingsystem.exception.ServiceOperationCanNotDeleteException;
 import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Service
@@ -62,8 +64,11 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Collection<Account> getAllAccountOneCustomer(Long id) {
 
-        return accountRepository.findAccountByCustomer(customerService.getCustomer(id)
-        ).stream().filter(accounts->accounts.isDeleted()==false).toList();
+        return accountRepository.
+                findAccountByCustomer(customerService.getCustomer(id))
+                .stream()
+                .filter(accounts-> !accounts.isDeleted())
+                .toList();
     }
 
     @Override
@@ -74,14 +79,18 @@ public class AccountServiceImpl implements AccountService {
         BigDecimal balance = account.getBalance();
         if (!balance.equals(BigDecimal.ZERO)) {
 
+            Customer customer = customerService.getCustomer(account.getCustomer().getId());
             if (account.isDeleted()) {
                 throw new ServiceOperationAlreadyDeletedException.AccountAlreadyDeletedException("Account is already deleted");
             }
             if (isHardDelete) {
+
+                customer.removeAccountFromCustomer(Set.of(account));
                 accountRepository.removeAccountById(id);
                 return "Account is hard deleted  successfully";
             }
 
+            customer.removeAccountFromCustomer(Set.of(account));
             account.setDeleted(true);
             accountRepository.save(account);
             return "Account is soft deleted successfully";

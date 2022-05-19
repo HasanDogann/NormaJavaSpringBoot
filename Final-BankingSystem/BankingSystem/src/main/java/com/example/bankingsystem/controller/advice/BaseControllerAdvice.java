@@ -5,6 +5,7 @@ import com.example.bankingsystem.exception.BaseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -34,6 +35,11 @@ public class BaseControllerAdvice {
         return ResponseEntity.badRequest().body(new EndpointError(jsonProcessingException.getMessage().toUpperCase(Locale.ROOT)));
     }
 
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<?> onConstraintViolationExceptionHandle(ConstraintViolationException exception) {
+        return ResponseEntity.badRequest().body(exception.getMessage());
+    }
 
     public static record EndpointError(String errorMessage) {
     }

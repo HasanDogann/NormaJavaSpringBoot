@@ -2,6 +2,7 @@ package com.example.bankingsystem.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,29 +17,48 @@ import java.util.Set;
 @Setter
 @Table(name = "customers")
 //@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-public class Customer extends BaseModel{
+public class Customer extends BaseModel {
 
+    @NotNull
     String name;
+    @NotNull
     String surname;
+    @NotNull
+    @Column(unique = true)
     String eMail;
+    @NotNull
     String phone;
 
     @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private CustomerAddress customerAddress;
 
-    @OneToMany(mappedBy = "customer",orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonIgnore
-    private Set<Account> accountList=new HashSet<>();
+    private Set<Account> accountList = new HashSet<>();
 
-    @OneToMany(mappedBy = "customer",orphanRemoval = true,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", orphanRemoval = true, cascade = CascadeType.ALL)
     private Set<Card> cardList;
 
 
-    public void addAccountToCustomer(Set<Account> accountList2){
+    public void addAccountToCustomer(Set<Account> accountList2) {
         accountList.addAll(accountList2);
 
     }
 
+    public void removeAccountFromCustomer(Set<Account> accountList3) {
+        accountList.removeAll(accountList3);
+
+    }
+
+    public void addCardToCustomer(Set<Card> cardList1) {
+        cardList.addAll(cardList1);
+
+    }
+
+    public void removeCardFromCustomer(Set<Card> cardList2) {
+        cardList.removeAll(cardList2);
+
+    }
 
 
 }

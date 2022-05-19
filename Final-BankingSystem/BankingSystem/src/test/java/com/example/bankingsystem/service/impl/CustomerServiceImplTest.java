@@ -9,6 +9,7 @@ import com.example.bankingsystem.entity.CustomerAddress;
 import com.example.bankingsystem.entity.enums.AccountType;
 import com.example.bankingsystem.entity.enums.BalanceType;
 import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedException;
+import com.example.bankingsystem.exception.ServiceOperationCanNotDeleteException;
 import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
 import com.example.bankingsystem.repository.AccountRepository;
 import com.example.bankingsystem.repository.CustomerRepository;
@@ -143,7 +144,7 @@ class CustomerServiceImplTest {
         customer.setId(100L);
         customer.setEMail("abc@hotmail.com");
         customer.setPhone("155155155");
-        Account account= accountService.getAccount(5L);
+        Account account= accountService.getAccount(18L);
        Assertions.assertNotNull(account);
        account.setBalance(BigDecimal.valueOf(6000));
        accountRepository.save(account);
@@ -165,11 +166,11 @@ class CustomerServiceImplTest {
         Assertions.assertNotNull(customerRepository.getById(customer.getId()));
 
 
-/*
-        Assertions.assertThrows(ServiceOperationNotDeleteException.CustomerBalanceNotZero.class,()->
+
+        Assertions.assertThrows(ServiceOperationCanNotDeleteException.CustomerBalanceNotZero.class,()->
         {
             customerService.deleteCustomer(customer.getId(),false);
-        });*/
+        });
 
 
     }
