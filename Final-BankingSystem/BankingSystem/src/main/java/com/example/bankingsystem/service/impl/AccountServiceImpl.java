@@ -63,7 +63,7 @@ public class AccountServiceImpl implements AccountService {
     public Collection<Account> getAllAccountOneCustomer(Long id) {
 
         return accountRepository.findAccountByCustomer(customerService.getCustomer(id)
-        ).stream().filter(i->i.isDeleted()==false).toList();
+        ).stream().filter(accounts->accounts.isDeleted()==false).toList();
     }
 
     @Override
