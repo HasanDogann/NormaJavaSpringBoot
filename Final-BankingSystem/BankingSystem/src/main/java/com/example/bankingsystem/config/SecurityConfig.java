@@ -3,12 +3,10 @@ package com.example.bankingsystem.config;
 import com.example.bankingsystem.security.JwtAuthenticationEntryPoint;
 import com.example.bankingsystem.security.JwtAuthenticationFilter;
 import com.example.bankingsystem.service.impl.UserDetailsServiceImpl;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.filter.CorsFilter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -62,7 +60,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        authenticationManagerBuilder.
+                userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder());
 
     }
 

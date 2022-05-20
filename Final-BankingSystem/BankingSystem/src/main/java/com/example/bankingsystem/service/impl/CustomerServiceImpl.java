@@ -3,6 +3,7 @@ package com.example.bankingsystem.service.impl;
 import com.example.bankingsystem.converter.CustomerConverter;
 import com.example.bankingsystem.dto.request.CustomerCreateRequestDTO;
 import com.example.bankingsystem.dto.request.CustomerUpdateRequestDTO;
+import com.example.bankingsystem.dto.request.UserRegisterRequest;
 import com.example.bankingsystem.dto.response.CustomerGetResponseDTO;
 import com.example.bankingsystem.entity.Account;
 import com.example.bankingsystem.entity.Customer;
@@ -41,6 +42,17 @@ public class CustomerServiceImpl implements CustomerService {
         Customer c = customerRepository.findCustomerByEMailAddress(customerCreateRequestDTO.customerEmail());
         if (Objects.isNull(c)) {
             Customer customer = customerConverter.toCustomer(customerCreateRequestDTO);
+            customerRepository.save(customer);
+        } else {
+            throw new ServiceOperationCanNotAddException.CustomerIsAlreadyCreatedException("A customer is already using this e mail");
+        }
+    }
+
+    @Override
+    public void addCustomer(UserRegisterRequest userRegisterRequest) {
+        Customer c = customerRepository.findCustomerByEMailAddress(userRegisterRequest.email());
+        if (Objects.isNull(c)) {
+            Customer customer = customerConverter.toCustomer(userRegisterRequest);
             customerRepository.save(customer);
         } else {
             throw new ServiceOperationCanNotAddException.CustomerIsAlreadyCreatedException("A customer is already using this e mail");
@@ -108,6 +120,13 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = customerConverter.toCustomerFromUpdateRequest(customerUpdateRequestDTO);
         customerRepository.save(customer);
 
+    }
+
+    @Override
+    public void updateCustomerPassword(Long id,String password) {
+        Customer customer = getCustomer(id);
+        customer.setPassword(password);
+        customerRepository.save(customer);
     }
 
 

@@ -45,19 +45,11 @@ public class JsonWTokenProvider {
                     .parseClaimsJws(token);
             return !isTokenExpired(token);
         }
-        catch (SignatureException e){
-            return false;
-        }
-        catch (MalformedJwtException e){
-            return false;
-        }
-        catch (ExpiredJwtException e){
-            return false;
-        }
-        catch (UnsupportedJwtException e){
-            return false;
-        }
-        catch (IllegalArgumentException e){
+        catch (SignatureException
+                | MalformedJwtException
+                | UnsupportedJwtException
+                | ExpiredJwtException
+                | IllegalArgumentException e){
             return false;
         }
 

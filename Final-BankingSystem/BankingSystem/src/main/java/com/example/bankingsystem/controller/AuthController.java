@@ -1,15 +1,13 @@
 package com.example.bankingsystem.controller;
 
-import com.example.bankingsystem.dto.model.AccountOptionsDTO;
-import com.example.bankingsystem.dto.model.CustomerAddressDTO;
-import com.example.bankingsystem.dto.request.CustomerCreateRequestDTO;
-import com.example.bankingsystem.dto.request.UserRequest;
+import com.example.bankingsystem.dto.request.UserLoginRequest;
+import com.example.bankingsystem.dto.request.UserRegisterRequest;
 import com.example.bankingsystem.entity.Customer;
-import com.example.bankingsystem.entity.enums.AccountType;
-import com.example.bankingsystem.entity.enums.BalanceType;
 import com.example.bankingsystem.security.JsonWTokenProvider;
+import com.example.bankingsystem.service.CustomerLoginService;
 import com.example.bankingsystem.service.CustomerService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
+@Slf4j
 public class AuthController {
 
 
@@ -37,33 +36,24 @@ public class AuthController {
     private final JsonWTokenProvider jsonWTokenProvider;
     private final CustomerService customerService;
     private final PasswordEncoder passwordEncoder;
+    private final CustomerLoginService customerLoginService;
 
     @PostMapping("/login")
-    public String login(@RequestBody UserRequest loginRequest){
+    public String login(@RequestBody UserLoginRequest loginRequest) {
 
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginRequest.email(),loginRequest.password());
-        Authentication authentication = authenticationManager.authenticate(authenticationToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        return "Bearer "+jsonWTokenProvider.generateJWToken(authentication);
-
-
+     return customerLoginService.login(loginRequest);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody UserRequest userRequest){
-      Customer customer = customerService.getCustomerByEmail(userRequest.email());
-      if(customer!=null){
-          return new ResponseEntity<>("Email is already in use", HttpStatus.BAD_REQUEST);
-      }
-      else{
-      Customer customer1 = new Customer();
-      customer1.setEMail(userRequest.email());
-      customer1.setPassword(passwordEncoder.encode(userRequest.password()));
-
-        customerService.addCustomer(userRequest.customerCreateRequestDTO());
-      return new ResponseEntity<>("User is registered successfully",HttpStatus.CREATED);
-    }}
-
+    public ResponseEntity<String> register(@RequestBody UserRegisterRequest userRegisterRequest) {
+        Customer customer = customerService.getCustomerByEmail(userRegisterRequest.email());
+        if (customer != null) {
+            return new ResponseEntity<>("Email is already in use", HttpStatus.BAD_REQUEST);
+        } else {
+            customerLoginService.register(userRegisterRequest);
+            return new ResponseEntity<>("User is registered successfully", HttpStatus.CREATED);
+        }
+    }
 
 
 }
