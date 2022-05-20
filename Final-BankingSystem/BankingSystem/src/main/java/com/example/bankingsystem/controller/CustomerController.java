@@ -7,6 +7,7 @@ import com.example.bankingsystem.dto.request.CustomerUpdateRequestDTO;
 import com.example.bankingsystem.dto.response.CustomerGetResponseDTO;
 import com.example.bankingsystem.entity.Customer;
 import com.example.bankingsystem.service.CustomerService;
+import io.swagger.annotations.Authorization;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -16,7 +17,7 @@ import java.util.Collection;
 
 
 @RestController
-@RequestMapping(value = "api/customers")
+@RequestMapping(value = "api/v2/customers")
 @RequiredArgsConstructor
 @Validated
 public class CustomerController {

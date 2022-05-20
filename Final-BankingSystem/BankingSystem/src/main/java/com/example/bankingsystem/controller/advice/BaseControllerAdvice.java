@@ -19,7 +19,7 @@ public class BaseControllerAdvice {
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BaseException.class)
-    public ResponseEntity<?> onBaseExceptionHandled(BaseException baseException) {
+    public ResponseEntity<?> onBaseExceptiodonHandled(BaseException baseException) {
         return ResponseEntity.badRequest().body(new EndpointError(baseException.getMessage()));
     }
 

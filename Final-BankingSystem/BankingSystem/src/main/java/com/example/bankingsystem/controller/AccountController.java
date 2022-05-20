@@ -21,14 +21,14 @@ public class AccountController {
     private final AccountConverter accountConverter;
 
 
-    @GetMapping(path = "/getAccountByCustomerIban")
+    @GetMapping("/getAccountByCustomerIban")
     public ResponseEntity<?> getAccountByIban(@RequestParam String Iban) {
         Account account = accountService.getAccount(Iban);
         AccountGetResponseDTO accountGetResponseDTO = accountConverter.convertAccountToResponseDto(account);
         return ResponseEntity.ok().body(accountGetResponseDTO);
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getAccount(@PathVariable Long id) {
         Account account = accountService.getAccount(id);
         AccountGetResponseDTO accountGetResponseDTO = accountConverter.convertAccountToResponseDto(account);

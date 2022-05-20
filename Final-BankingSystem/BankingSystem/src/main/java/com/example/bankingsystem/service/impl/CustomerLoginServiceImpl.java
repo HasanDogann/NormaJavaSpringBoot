@@ -41,7 +41,7 @@ public class CustomerLoginServiceImpl implements CustomerLoginService {
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken
                         (loginRequest.email(),loginRequest.password());
-        log.info(authenticationToken.toString()+"auth token");
+        log.info(authenticationToken+"auth token");
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
         log.info(authentication.toString()+"auth");
         SecurityContextHolder.getContext().setAuthentication(authentication);
