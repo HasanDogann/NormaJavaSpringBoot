@@ -8,9 +8,11 @@ import com.example.bankingsystem.model.entity.Customer;
 import com.example.bankingsystem.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.Collection;
 
 
@@ -39,6 +41,7 @@ public class CustomerController {
        return ResponseEntity.ok().body(customerGetResponseDTO);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public ResponseEntity<?> getAllCustomers(){
         Collection<CustomerGetResponseDTO> customers= customerService.getAllCustomers();

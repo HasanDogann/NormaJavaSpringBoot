@@ -11,7 +11,7 @@ import java.util.Collection;
 public interface CustomerService {
 
     void addCustomer(CustomerCreateRequestDTO customerCreateRequestDTO);
-    void addCustomer(UserRegisterRequest userRegisterRequest);
+ //   void addCustomer(UserRegisterRequest userRegisterRequest);
 
     Customer getCustomer(Long id);
 
@@ -22,5 +22,5 @@ public interface CustomerService {
     String deleteCustomer(Long id,boolean isHardDelete);
 
     void updateCustomer(CustomerUpdateRequestDTO customerUpdateRequestDTO);
-    void updateCustomerPassword(Long id ,String password);
+
 }

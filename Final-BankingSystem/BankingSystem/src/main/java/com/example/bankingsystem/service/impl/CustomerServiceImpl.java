@@ -8,7 +8,7 @@ import com.example.bankingsystem.model.dto.response.CustomerGetResponseDTO;
 import com.example.bankingsystem.model.entity.Account;
 import com.example.bankingsystem.model.entity.Customer;
 import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedException;
-import com.example.bankingsystem.exception.ServiceOperationCanNotAddException;
+import com.example.bankingsystem.exception.ServiceOperationCanNotCreateException;
 import com.example.bankingsystem.exception.ServiceOperationCanNotDeleteException;
 import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
 import com.example.bankingsystem.repository.CustomerRepository;
@@ -44,21 +44,21 @@ public class CustomerServiceImpl implements CustomerService {
             Customer customer = customerConverter.toCustomer(customerCreateRequestDTO);
             customerRepository.save(customer);
         } else {
-            throw new ServiceOperationCanNotAddException.CustomerIsAlreadyCreatedException("A customer is already using this e mail");
+            throw new ServiceOperationCanNotCreateException.CustomerIsAlreadyCreatedException("A customer is already using this e mail");
         }
     }
 
-    @Override
-    public void addCustomer(UserRegisterRequest userRegisterRequest) {
-        Customer c = customerRepository.findCustomerByEMailAddress(userRegisterRequest.email());
+  /*  @Override
+    public void addCustomer(CustomerCreateRequestDTO customerCreateRequestDTO) {
+        Customer c = customerRepository.findCustomerByEMailAddress(customerCreateRequestDTO.customerEmail());
         if (Objects.isNull(c)) {
-            Customer customer = customerConverter.toCustomer(userRegisterRequest);
+            Customer customer = customerConverter.toCustomer(customerCreateRequestDTO);
             customerRepository.save(customer);
         } else {
-            throw new ServiceOperationCanNotAddException.CustomerIsAlreadyCreatedException("A customer is already using this e mail");
+            throw new ServiceOperationCanNotCreateException.CustomerIsAlreadyCreatedException("A customer is already using this e mail");
         }
     }
-
+*/
 
     @Override
     public Customer getCustomer(Long id) {
@@ -122,12 +122,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     }
 
-    @Override
-    public void updateCustomerPassword(Long id,String password) {
-        Customer customer = getCustomer(id);
-        customer.setPassword(password);
-        customerRepository.save(customer);
-    }
 
 
 }

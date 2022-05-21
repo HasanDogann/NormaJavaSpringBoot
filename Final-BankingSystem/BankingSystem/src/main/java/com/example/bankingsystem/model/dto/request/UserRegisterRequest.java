@@ -6,6 +6,5 @@ package com.example.bankingsystem.model.dto.request;
  * @Date 20.05.2022
  */
 public record UserRegisterRequest(String email,
-                                  String password,
-                                  CustomerCreateRequestDTO customerCreateRequestDTO) {
+                                  String password) {
 }

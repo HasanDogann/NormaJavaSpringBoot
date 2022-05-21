@@ -9,7 +9,7 @@ import com.example.bankingsystem.model.entity.Customer;
 public interface CustomerConverter {
     Customer toCustomer(CustomerCreateRequestDTO customerCreateRequestDTO);
 
-    Customer toCustomer(UserRegisterRequest userRegisterRequest);
+    //Customer toCustomer(UserRegisterRequest userRegisterRequest);
 
     CustomerGetResponseDTO toCustomerResponse(Customer customer);
 

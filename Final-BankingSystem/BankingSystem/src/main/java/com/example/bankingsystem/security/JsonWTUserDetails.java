@@ -1,6 +1,7 @@
 package com.example.bankingsystem.security;
 
 import com.example.bankingsystem.model.entity.Customer;
+import com.example.bankingsystem.model.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -33,10 +34,10 @@ public class JsonWTUserDetails implements UserDetails {
         this.authorities = authorities;
     }
 
-    public static JsonWTUserDetails create(Customer customer){
+    public static JsonWTUserDetails create(User user){
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority("customer"));
-        return new JsonWTUserDetails(customer.getId(),customer.getEMail(), customer.getPassword(),
+        grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
+        return new JsonWTUserDetails(user.getId(),user.getMail(), user.getPassword(),
                 grantedAuthorities);
     }
 

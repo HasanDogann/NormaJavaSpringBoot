@@ -1,5 +1,6 @@
 package com.example.bankingsystem.service;
 
+import com.example.bankingsystem.model.dto.request.UserCreateDTO;
 import com.example.bankingsystem.model.dto.request.UserLoginRequest;
 import com.example.bankingsystem.model.dto.request.UserRegisterRequest;
 
@@ -8,8 +9,8 @@ import com.example.bankingsystem.model.dto.request.UserRegisterRequest;
  * @Project IntelliJ IDEA
  * @Date 20.05.2022
  */
-public interface CustomerLoginService {
+public interface SigningService {
 
     public String login(UserLoginRequest loginRequest);
-    public String register(UserRegisterRequest userRegisterRequest);
+    public String register(UserCreateDTO userCreateDTO);
 }

@@ -35,13 +35,14 @@ public class CustomerConverterImpl implements CustomerConverter {
         customer.setSurname(customerCreateRequestDTO.customerSurname());
         customer.setEMail(customerCreateRequestDTO.customerEmail());
         customer.setPhone(customerCreateRequestDTO.customerPhone());
-        customer.setPassword(customerCreateRequestDTO.password());
+
         //Taking customer address when creating customer
         CustomerAddress customerAddress = new CustomerAddress();
         customerAddress.setCountry(customerCreateRequestDTO.customerAddress().country());
         customerAddress.setCity(customerCreateRequestDTO.customerAddress().city());
         customerAddress.setPostalCode(customerCreateRequestDTO.customerAddress().postalCode());
         customerAddress.setDescription(customerCreateRequestDTO.customerAddress().description());
+        customerAddress.setCustomer(customer);
         customer.setCustomerAddress(customerAddress);
 
         //When you are creating new Customer you take the account type and balance type from customer
@@ -63,7 +64,7 @@ public class CustomerConverterImpl implements CustomerConverter {
         return customer;
     }
 
-    @Override
+   /* @Override
     public Customer toCustomer(UserRegisterRequest userRegisterRequest) {
         Customer customer = new Customer();
         customer.setName(userRegisterRequest.customerCreateRequestDTO().customerName());
@@ -97,7 +98,7 @@ public class CustomerConverterImpl implements CustomerConverter {
 
 
         return customer;
-    }
+    }*/
 
     @Override
     public CustomerGetResponseDTO toCustomerResponse(Customer customer) {

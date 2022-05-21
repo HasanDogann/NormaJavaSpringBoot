@@ -111,9 +111,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/auth/**")
                 .permitAll()
-                        .anyRequest().permitAll();
+                .anyRequest().permitAll();
                 //serviceler hazır olunca burada requestlerden auth. iste
-                //.anyRequest().authenticated();
+               // .anyRequest().authenticated();
 
         httpSecurity.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 

@@ -67,7 +67,7 @@ public class AccountServiceImpl implements AccountService {
         return accountRepository.
                 findAccountByCustomer(customerService.getCustomer(id))
                 .stream()
-                .filter(accounts-> !accounts.isDeleted())
+                .filter(accounts -> !accounts.isDeleted())
                 .toList();
     }
 
@@ -75,7 +75,7 @@ public class AccountServiceImpl implements AccountService {
     @Transactional
     public String deleteAccount(Long id, boolean isHardDelete) {
         Account account = accountRepository.findById(id)
-                .orElseThrow(()->new ServiceOperationNotFoundException.AccountNotFoundException("Account is not found"));
+                .orElseThrow(() -> new ServiceOperationNotFoundException.AccountNotFoundException("Account is not found"));
         BigDecimal balance = account.getBalance();
         if (!balance.equals(BigDecimal.ZERO)) {
 

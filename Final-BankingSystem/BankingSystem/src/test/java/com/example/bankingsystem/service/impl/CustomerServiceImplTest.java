@@ -62,12 +62,10 @@ class CustomerServiceImplTest {
         customer.setId(100L);
         customer.setEMail("abc@hotmail.com");
         customer.setPhone("155155155");
-        customer.setPassword("hd1234");
         customer.setCustomerAddress(new CustomerAddress("TR", "Ankara", "06000", "Central", customer));
 
         customerService.addCustomer(new CustomerCreateRequestDTO(customer.getName()
                 , customer.getSurname(), customer.getEMail(), customer.getPhone(),
-                customer.getPassword(),
                 new AccountOptionsDTO(AccountType.DEPOT,BalanceType.DOLLAR),
                 new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
                         customer.getCustomerAddress().getCity(), customer.getCustomerAddress().getPostalCode(),
@@ -84,13 +82,11 @@ class CustomerServiceImplTest {
         customer.setId(100L);
         customer.setEMail("abc@hotmail.com");
         customer.setPhone("155155155");
-        customer.setPassword("hd1234");
         customer.setCustomerAddress(new CustomerAddress("TR", "Ankara", "06000", "Central", customer));
 
 
         customerService.addCustomer(new CustomerCreateRequestDTO(customer.getName()
                 , customer.getSurname(), customer.getEMail(), customer.getPhone(),
-                customer.getPassword(),
                 new AccountOptionsDTO(AccountType.DEPOT,BalanceType.DOLLAR),
                 new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
                         customer.getCustomerAddress().getCity(), customer.getCustomerAddress().getPostalCode(),
@@ -111,14 +107,12 @@ class CustomerServiceImplTest {
         customer.setId(100L);
         customer.setEMail("abc@hotmail.com");
         customer.setPhone("155155155");
-        customer.setPassword("hd1234");
         customer.setCustomerAddress(new CustomerAddress("TR", "Ankara", "06000", "Central", customer));
 
 
 
         customerService.addCustomer(new CustomerCreateRequestDTO(customer.getName()
                 , customer.getSurname(), customer.getEMail(), customer.getPhone(),
-                customer.getPassword(),
                 new AccountOptionsDTO(AccountType.DEPOT,BalanceType.DOLLAR),
                 new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
                         customer.getCustomerAddress().getCity(), customer.getCustomerAddress().getPostalCode(),
@@ -148,7 +142,6 @@ class CustomerServiceImplTest {
         customer.setName("Customer Test name");
         customer.setSurname("Customer test surname");
         customer.setId(100L);
-        customer.setPassword("hd1234");
         customer.setEMail("abc@hotmail.com");
         customer.setPhone("155155155");
         Account account= accountService.getAccount(18L);
@@ -165,7 +158,6 @@ class CustomerServiceImplTest {
 
         customerService.addCustomer(new CustomerCreateRequestDTO(customer.getName()
                 , customer.getSurname(), customer.getEMail(), customer.getPhone(),
-                customer.getPassword(),
                 new AccountOptionsDTO(AccountType.DEPOT,BalanceType.DOLLAR),
                 new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
                         customer.getCustomerAddress().getCity(), customer.getCustomerAddress().getPostalCode(),

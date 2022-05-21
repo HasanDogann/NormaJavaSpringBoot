@@ -24,4 +24,10 @@ public final class ServiceOperationNotFoundException extends BaseException {
             super(message);
         }
     }
+    public static class UserNotFoundException extends BaseException {
+
+        public UserNotFoundException(String message) {
+            super(message);
+        }
+    }
 }

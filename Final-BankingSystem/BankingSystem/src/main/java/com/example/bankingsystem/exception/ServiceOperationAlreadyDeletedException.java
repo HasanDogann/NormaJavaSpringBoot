@@ -25,6 +25,12 @@ public final class ServiceOperationAlreadyDeletedException extends BaseException
             super(message);
         }
     }
+    public static class UserAlreadyDeletedException extends BaseException{
+
+        public UserAlreadyDeletedException(String message) {
+            super(message);
+        }
+    }
 
 
 
