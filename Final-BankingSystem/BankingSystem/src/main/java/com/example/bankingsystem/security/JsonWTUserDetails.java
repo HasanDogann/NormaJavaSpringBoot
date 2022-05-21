@@ -1,6 +1,6 @@
 package com.example.bankingsystem.security;
 
-import com.example.bankingsystem.entity.Customer;
+import com.example.bankingsystem.model.entity.Customer;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;

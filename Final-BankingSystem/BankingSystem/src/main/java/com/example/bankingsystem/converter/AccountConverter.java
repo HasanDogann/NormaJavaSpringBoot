@@ -1,8 +1,8 @@
 package com.example.bankingsystem.converter;
 
-import com.example.bankingsystem.dto.request.AccountCreateRequestDTO;
-import com.example.bankingsystem.dto.response.AccountGetResponseDTO;
-import com.example.bankingsystem.entity.Account;
+import com.example.bankingsystem.model.dto.request.AccountCreateRequestDTO;
+import com.example.bankingsystem.model.dto.response.AccountGetResponseDTO;
+import com.example.bankingsystem.model.entity.Account;
 
 public interface AccountConverter {
 

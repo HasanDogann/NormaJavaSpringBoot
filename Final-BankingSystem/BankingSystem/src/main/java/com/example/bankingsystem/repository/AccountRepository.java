@@ -1,11 +1,9 @@
 package com.example.bankingsystem.repository;
 
-import com.example.bankingsystem.dto.response.AccountGetResponseDTO;
-import com.example.bankingsystem.entity.Account;
-import com.example.bankingsystem.entity.Customer;
+import com.example.bankingsystem.model.entity.Account;
+import com.example.bankingsystem.model.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.math.BigDecimal;
 import java.util.Collection;
 
 public interface AccountRepository extends JpaRepository<Account,Long> {

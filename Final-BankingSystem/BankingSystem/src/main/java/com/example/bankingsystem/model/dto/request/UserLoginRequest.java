@@ -1,4 +1,4 @@
-package com.example.bankingsystem.dto.request;
+package com.example.bankingsystem.model.dto.request;
 
 /**
  * @author Hasan DOĞAN

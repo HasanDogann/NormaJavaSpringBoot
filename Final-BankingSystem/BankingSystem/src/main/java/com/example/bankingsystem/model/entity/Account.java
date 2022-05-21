@@ -1,7 +1,8 @@
-package com.example.bankingsystem.entity;
+package com.example.bankingsystem.model.entity;
 
-import com.example.bankingsystem.entity.enums.AccountType;
-import com.example.bankingsystem.entity.enums.BalanceType;
+import com.example.bankingsystem.model.entity.base.BaseModel;
+import com.example.bankingsystem.model.entity.enums.AccountType;
+import com.example.bankingsystem.model.entity.enums.BalanceType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +17,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Account extends BaseModel{
+public class Account extends BaseModel {
 
 
     private String IBAN;

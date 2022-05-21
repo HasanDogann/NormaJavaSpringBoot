@@ -1,13 +1,11 @@
 package com.example.bankingsystem.controller;
 
 import com.example.bankingsystem.converter.CustomerConverter;
-import com.example.bankingsystem.core.utilities.Result;
-import com.example.bankingsystem.dto.request.CustomerCreateRequestDTO;
-import com.example.bankingsystem.dto.request.CustomerUpdateRequestDTO;
-import com.example.bankingsystem.dto.response.CustomerGetResponseDTO;
-import com.example.bankingsystem.entity.Customer;
+import com.example.bankingsystem.model.dto.request.CustomerCreateRequestDTO;
+import com.example.bankingsystem.model.dto.request.CustomerUpdateRequestDTO;
+import com.example.bankingsystem.model.dto.response.CustomerGetResponseDTO;
+import com.example.bankingsystem.model.entity.Customer;
 import com.example.bankingsystem.service.CustomerService;
-import io.swagger.annotations.Authorization;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

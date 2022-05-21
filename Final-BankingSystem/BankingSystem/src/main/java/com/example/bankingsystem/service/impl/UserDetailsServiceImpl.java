@@ -1,6 +1,6 @@
 package com.example.bankingsystem.service.impl;
 
-import com.example.bankingsystem.entity.Customer;
+import com.example.bankingsystem.model.entity.Customer;
 import com.example.bankingsystem.repository.CustomerRepository;
 import com.example.bankingsystem.security.JsonWTUserDetails;
 import lombok.RequiredArgsConstructor;

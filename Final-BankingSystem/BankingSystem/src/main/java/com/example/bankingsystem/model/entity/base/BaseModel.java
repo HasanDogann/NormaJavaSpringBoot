@@ -1,4 +1,4 @@
-package com.example.bankingsystem.entity;
+package com.example.bankingsystem.model.entity.base;
 
 import lombok.Getter;
 import lombok.Setter;

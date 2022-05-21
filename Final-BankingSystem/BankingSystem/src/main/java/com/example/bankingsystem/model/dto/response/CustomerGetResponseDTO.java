@@ -1,4 +1,4 @@
-package com.example.bankingsystem.dto.response;
+package com.example.bankingsystem.model.dto.response;
 
 import java.util.Set;
 

@@ -1,7 +1,7 @@
 package com.example.bankingsystem.service;
 
-import com.example.bankingsystem.dto.request.UserLoginRequest;
-import com.example.bankingsystem.dto.request.UserRegisterRequest;
+import com.example.bankingsystem.model.dto.request.UserLoginRequest;
+import com.example.bankingsystem.model.dto.request.UserRegisterRequest;
 
 /**
  * @author Hasan DOĞAN

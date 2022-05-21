@@ -1,8 +1,8 @@
-package com.example.bankingsystem.entity;
+package com.example.bankingsystem.model.entity;
 
 
-import com.example.bankingsystem.entity.enums.TransferType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.bankingsystem.model.entity.base.BaseModel;
+import com.example.bankingsystem.model.entity.enums.TransferType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Transaction extends BaseModel{
+public class Transaction extends BaseModel {
 
     private BigDecimal transferNo;
     private BigDecimal transferAmount;

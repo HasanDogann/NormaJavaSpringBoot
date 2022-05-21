@@ -1,13 +1,13 @@
-package com.example.bankingsystem.entity;
+package com.example.bankingsystem.model.entity;
 
 
-import com.example.bankingsystem.entity.enums.CardType;
+import com.example.bankingsystem.model.entity.base.BaseModel;
+import com.example.bankingsystem.model.entity.enums.CardType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.apache.catalina.util.CustomObjectInputStream;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Card extends BaseModel{
+public class Card extends BaseModel {
 
     private BigDecimal cardNo;
     private BigDecimal cardDebt;

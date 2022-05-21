@@ -1,6 +1,7 @@
-package com.example.bankingsystem.entity;
+package com.example.bankingsystem.model.entity;
 
 
+import com.example.bankingsystem.model.entity.base.BaseModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import javax.persistence.OneToOne;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerAddress extends BaseModel{
+public class CustomerAddress extends BaseModel {
 
 
 

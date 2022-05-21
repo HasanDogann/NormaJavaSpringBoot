@@ -1,15 +1,13 @@
 package com.example.bankingsystem.converter.impl;
 
 import com.example.bankingsystem.converter.CustomerConverter;
-import com.example.bankingsystem.dto.request.CustomerCreateRequestDTO;
-import com.example.bankingsystem.dto.request.CustomerUpdateRequestDTO;
-import com.example.bankingsystem.dto.request.UserRegisterRequest;
-import com.example.bankingsystem.dto.response.CustomerGetResponseDTO;
-import com.example.bankingsystem.entity.Account;
-import com.example.bankingsystem.entity.Customer;
-import com.example.bankingsystem.entity.CustomerAddress;
-import com.example.bankingsystem.entity.enums.AccountType;
-import com.example.bankingsystem.entity.enums.BalanceType;
+import com.example.bankingsystem.model.dto.request.CustomerCreateRequestDTO;
+import com.example.bankingsystem.model.dto.request.CustomerUpdateRequestDTO;
+import com.example.bankingsystem.model.dto.request.UserRegisterRequest;
+import com.example.bankingsystem.model.dto.response.CustomerGetResponseDTO;
+import com.example.bankingsystem.model.entity.Account;
+import com.example.bankingsystem.model.entity.Customer;
+import com.example.bankingsystem.model.entity.CustomerAddress;
 import com.example.bankingsystem.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +17,6 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 

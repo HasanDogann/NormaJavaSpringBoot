@@ -1,8 +1,7 @@
-package com.example.bankingsystem.dto.response;
+package com.example.bankingsystem.model.dto.response;
 
-import com.example.bankingsystem.entity.Account;
-import com.example.bankingsystem.entity.enums.AccountType;
-import com.example.bankingsystem.entity.enums.BalanceType;
+import com.example.bankingsystem.model.entity.enums.AccountType;
+import com.example.bankingsystem.model.entity.enums.BalanceType;
 
 import java.math.BigDecimal;
 

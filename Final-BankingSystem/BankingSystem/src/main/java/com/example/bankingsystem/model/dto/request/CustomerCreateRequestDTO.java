@@ -1,7 +1,7 @@
-package com.example.bankingsystem.dto.request;
+package com.example.bankingsystem.model.dto.request;
 
-import com.example.bankingsystem.dto.model.AccountOptionsDTO;
-import com.example.bankingsystem.dto.model.CustomerAddressDTO;
+import com.example.bankingsystem.model.dto.model.AccountOptionsDTO;
+import com.example.bankingsystem.model.dto.model.CustomerAddressDTO;
 
 public record CustomerCreateRequestDTO(String customerName,
                                        String customerSurname,

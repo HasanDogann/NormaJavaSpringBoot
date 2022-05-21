@@ -1,9 +1,9 @@
 package com.example.bankingsystem.controller;
 
 import com.example.bankingsystem.converter.AccountConverter;
-import com.example.bankingsystem.dto.request.AccountCreateRequestDTO;
-import com.example.bankingsystem.dto.response.AccountGetResponseDTO;
-import com.example.bankingsystem.entity.Account;
+import com.example.bankingsystem.model.dto.request.AccountCreateRequestDTO;
+import com.example.bankingsystem.model.dto.response.AccountGetResponseDTO;
+import com.example.bankingsystem.model.entity.Account;
 import com.example.bankingsystem.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
