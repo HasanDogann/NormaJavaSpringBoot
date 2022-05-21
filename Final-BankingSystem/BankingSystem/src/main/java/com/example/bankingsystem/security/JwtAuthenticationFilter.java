@@ -60,6 +60,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (StringUtils.hasText(bearer) && bearer.startsWith("Bearer "))
             return bearer.substring("Bearer".length() + 1);
 
-        return null;
+        return "Request has wrong token";
     }
 }

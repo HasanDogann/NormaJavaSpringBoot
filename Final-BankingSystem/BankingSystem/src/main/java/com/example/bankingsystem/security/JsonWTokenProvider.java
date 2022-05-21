@@ -1,6 +1,7 @@
 package com.example.bankingsystem.security;
 
 import io.jsonwebtoken.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import java.util.Date;
  */
 
 @Component
+@Slf4j
 public class JsonWTokenProvider {
 
     @Value("${application.secret.key}")
@@ -39,17 +41,16 @@ public class JsonWTokenProvider {
     }
 
 
-    boolean validateToken(String token){
-        try{
+    boolean validateToken(String token) {
+        try {
             Jwts.parser().setSigningKey(SECRET_KEY)
                     .parseClaimsJws(token);
             return !isTokenExpired(token);
-        }
-        catch (SignatureException
+        } catch (SignatureException
                 | MalformedJwtException
                 | UnsupportedJwtException
                 | ExpiredJwtException
-                | IllegalArgumentException e){
+                | IllegalArgumentException e) {
             return false;
         }
 
@@ -57,8 +58,8 @@ public class JsonWTokenProvider {
 
     private boolean isTokenExpired(String token) {
         Date expiration =
-        Jwts.parser().setSigningKey(SECRET_KEY)
-                .parseClaimsJws(token).getBody().getExpiration();
+                Jwts.parser().setSigningKey(SECRET_KEY)
+                        .parseClaimsJws(token).getBody().getExpiration();
 
         return expiration.before(new Date());
 
