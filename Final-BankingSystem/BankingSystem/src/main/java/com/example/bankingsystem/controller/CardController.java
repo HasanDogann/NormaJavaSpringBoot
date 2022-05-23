@@ -58,7 +58,7 @@ public class CardController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteAccount(@PathVariable Long id,
+    public ResponseEntity<?> deleteCard(@PathVariable Long id,
                                            @RequestParam(required = false) boolean isHardDelete) {
         String deleteResult = cardService.deleteCard(id, isHardDelete);
         return ResponseEntity.ok().body(deleteResult);

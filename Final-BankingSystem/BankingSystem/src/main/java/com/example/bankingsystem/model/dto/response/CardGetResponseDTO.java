@@ -12,6 +12,7 @@ public record CardGetResponseDTO(String cardNo,
                                  BigDecimal cardBalance,
                                  String customerName,
                                  String customerSurname,
+                                 BigDecimal cardLimit,
                                  Long customerID,
                                  Long accountID,
                                  Long cardID) {

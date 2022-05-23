@@ -46,7 +46,7 @@ public class CardConverterImpl implements CardConverter {
     public CardGetResponseDTO toCardResponseFromCard(Card card) {
         return new CardGetResponseDTO(card.getCardNo(), card.getCardDebt(),
                 card.getCardBalance(), card.getCustomer().getName(),
-                card.getCustomer().getSurname(), card.getCustomer().getId(),
+                card.getCustomer().getSurname(),card.getCardLimit(), card.getCustomer().getId(),
                 card.getAccount().getId(), card.getId());
     }
 }
