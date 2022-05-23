@@ -11,6 +11,8 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     @Override
     Account getById(Long id);
 
+    Account findAccountByBankBranchCode(Integer code);
+
    Collection<Account> findAccountsByIsDeleted(boolean isDeletedOne);
 
    Account findAccountByIBAN(String IbanNo);

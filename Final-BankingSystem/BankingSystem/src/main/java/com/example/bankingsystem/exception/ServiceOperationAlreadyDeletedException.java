@@ -18,6 +18,12 @@ public final class ServiceOperationAlreadyDeletedException extends BaseException
             super(message);
         }
     }
+    public static class CardAlreadyDeletedException extends BaseException{
+
+        public CardAlreadyDeletedException(String message) {
+            super(message);
+        }
+    }
 
     public static class TransferAlreadyDeletedException extends BaseException{
 

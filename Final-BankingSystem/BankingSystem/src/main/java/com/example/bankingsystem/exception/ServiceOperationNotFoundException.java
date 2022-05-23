@@ -30,4 +30,10 @@ public final class ServiceOperationNotFoundException extends BaseException {
             super(message);
         }
     }
+    public static class CardNotFoundException extends BaseException {
+
+        public CardNotFoundException(String message) {
+            super(message);
+        }
+    }
 }

@@ -49,15 +49,6 @@ public class Customer extends BaseModel {
 
     }
 
-    public void addCardToCustomer(Set<Card> cardList1) {
-        cardList.addAll(cardList1);
-
-    }
-
-    public void removeCardFromCustomer(Set<Card> cardList2) {
-        cardList.removeAll(cardList2);
-
-    }
 
 
 }

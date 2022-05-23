@@ -48,17 +48,6 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
-  /*  @Override
-    public void addCustomer(CustomerCreateRequestDTO customerCreateRequestDTO) {
-        Customer c = customerRepository.findCustomerByEMailAddress(customerCreateRequestDTO.customerEmail());
-        if (Objects.isNull(c)) {
-            Customer customer = customerConverter.toCustomer(customerCreateRequestDTO);
-            customerRepository.save(customer);
-        } else {
-            throw new ServiceOperationCanNotCreateException.CustomerIsAlreadyCreatedException("A customer is already using this e mail");
-        }
-    }
-*/
 
     @Override
     public Customer getCustomer(Long id) {

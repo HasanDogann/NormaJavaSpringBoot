@@ -5,5 +5,6 @@ import com.example.bankingsystem.model.entity.enums.BalanceType;
 
 public record AccountCreateRequestDTO(AccountType accountType,
                                       BalanceType balanceType,
+                                      Integer branchCode,
                                       Long customerId) {
 }

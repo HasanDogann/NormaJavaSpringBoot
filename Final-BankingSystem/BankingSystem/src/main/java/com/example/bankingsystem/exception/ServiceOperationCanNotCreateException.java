@@ -24,6 +24,13 @@ public final class ServiceOperationCanNotCreateException extends BaseException{
         }
 
     }
+    public static class AccountIsAlreadyCreatedException extends BaseException{
+        public AccountIsAlreadyCreatedException(String message){
+            super(message);
+        }
+
+    }
+
 
 
 

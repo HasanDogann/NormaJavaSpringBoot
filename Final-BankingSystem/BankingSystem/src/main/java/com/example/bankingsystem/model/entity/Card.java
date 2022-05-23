@@ -19,9 +19,15 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class Card extends BaseModel {
 
-    private BigDecimal cardNo;
-    private BigDecimal cardDebt;
-    private BigDecimal cardBalance;
+    private String cardNo;
+
+    private BigDecimal cardBalance=BigDecimal.ZERO;
+
+    private BigDecimal cardLimit=BigDecimal.ZERO;
+
+    private BigDecimal cardDebt=BigDecimal.ZERO;
+
+    private boolean isBlocked=false;
 
     @Enumerated(value = EnumType.STRING)
     private CardType cardType;
