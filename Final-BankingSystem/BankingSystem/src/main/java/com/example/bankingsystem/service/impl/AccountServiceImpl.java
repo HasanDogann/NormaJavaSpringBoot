@@ -5,6 +5,7 @@ import com.example.bankingsystem.exception.ServiceOperationCanNotCreateException
 import com.example.bankingsystem.model.dto.request.AccountCreateRequestDTO;
 import com.example.bankingsystem.model.dto.response.AccountGetResponseDTO;
 import com.example.bankingsystem.model.entity.Account;
+import com.example.bankingsystem.model.entity.Card;
 import com.example.bankingsystem.model.entity.Customer;
 import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedException;
 import com.example.bankingsystem.exception.ServiceOperationCanNotDeleteException;
@@ -12,6 +13,7 @@ import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
 import com.example.bankingsystem.model.entity.enums.AccountType;
 import com.example.bankingsystem.repository.AccountRepository;
 import com.example.bankingsystem.service.AccountService;
+import com.example.bankingsystem.service.CardService;
 import com.example.bankingsystem.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -52,8 +54,7 @@ public class AccountServiceImpl implements AccountService {
         else if (hasAnotherCheckingAccount && accountType.equals(AccountType.DEPOSIT_ACCOUNT)) {
             Account account = accountConverter.convertToAccount(accountCreateRequestDTO);
             accountRepository.save(account);
-        }
-        else if (hasAnotherDepositAccount && accountType.equals(AccountType.CHECKING_ACCOUNT)) {
+        } else if (hasAnotherDepositAccount && accountType.equals(AccountType.CHECKING_ACCOUNT)) {
             Account account = accountConverter.convertToAccount(accountCreateRequestDTO);
             accountRepository.save(account);
         }
@@ -100,27 +101,37 @@ public class AccountServiceImpl implements AccountService {
     public String deleteAccount(Long id, boolean isHardDelete) {
         Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new ServiceOperationNotFoundException.AccountNotFoundException("Account is not found"));
-        BigDecimal balance = account.getBalance();
-        if (!balance.equals(BigDecimal.ZERO)) {
 
-            Customer customer = customerService.getCustomer(account.getCustomer().getId());
-            if (account.isDeleted()) {
-                throw new ServiceOperationAlreadyDeletedException.AccountAlreadyDeletedException("Account is already deleted");
-            }
-            if (isHardDelete) {
-
-                customer.removeAccountFromCustomer(Set.of(account));
-                accountRepository.removeAccountById(id);
-                return "Account is hard deleted  successfully";
-            }
-
-            customer.removeAccountFromCustomer(Set.of(account));
-            account.setDeleted(true);
-            accountRepository.save(account);
-            return "Account is soft deleted successfully";
+        if (account.isDeleted()) {
+            throw new ServiceOperationAlreadyDeletedException.AccountAlreadyDeletedException("Account was deleted softly");
         }
+
+        BigDecimal balance = account.getBalance();
+
+
+        if ((balance.compareTo(BigDecimal.ZERO) == 0)) {
+            Collection<Card> cardDebtCollection = getCardsBalance(account);
+            Collection<Card> cardBalanceCollection = getCardsDebt(account);
+            if (cardDebtCollection.isEmpty() && cardBalanceCollection.isEmpty()) {
+                Customer customer = customerService.getCustomer(account.getCustomer().getId());
+                if (account.isDeleted()) {
+                    throw new ServiceOperationAlreadyDeletedException.AccountAlreadyDeletedException("Account is already deleted");
+                }
+                if (isHardDelete) {
+                    customer.removeAccountFromCustomer(Set.of(account));
+                    accountRepository.removeAccountById(id);
+                    return "Account is hard deleted  successfully";
+                }
+                customer.removeAccountFromCustomer(Set.of(account));
+                account.setDeleted(true);
+                accountRepository.save(account);
+                return "Account is soft deleted successfully";
+            }
+            throw new ServiceOperationCanNotDeleteException.AccountCardBalanceorDebtNotZero("Account can not delete because one of card of this account has debt or balance");
+        }
+
         log.info(account.getBalance().toString());
-        throw new ServiceOperationCanNotDeleteException.AccountBalanceNotZero("Account balance is not 0 so you can not delete this account.And balance is {balance}");
+        throw new ServiceOperationCanNotDeleteException.AccountBalanceNotZero("Account balance is not 0 so you can not delete this account");
 
     }
 
@@ -130,6 +141,16 @@ public class AccountServiceImpl implements AccountService {
                 .stream()
                 .filter(i -> i.getAccountType().equals(accountType))
                 .map(Account::getBankBranchCode).anyMatch(i -> i.equals(accountCreateRequestDTO.branchCode()));
+    }
+
+    public Collection<Card> getCardsBalance(Account account) {
+        return account
+                .getCardList().stream().filter(c -> c.getCardBalance().compareTo(BigDecimal.ZERO) > 0).toList();
+    }
+
+    public Collection<Card> getCardsDebt(Account account) {
+        return account
+                .getCardList().stream().filter(c -> c.getCardDebt().compareTo(BigDecimal.ZERO) > 0).toList();
     }
 
 

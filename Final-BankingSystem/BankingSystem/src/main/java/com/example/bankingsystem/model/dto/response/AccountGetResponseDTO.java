@@ -4,6 +4,7 @@ import com.example.bankingsystem.model.entity.enums.AccountType;
 import com.example.bankingsystem.model.entity.enums.BalanceType;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 public record AccountGetResponseDTO(String customerName,
                                     BigDecimal balance,
@@ -13,7 +14,8 @@ public record AccountGetResponseDTO(String customerName,
                                     AccountType accountType,
                                     String createDate,
                                     Boolean isDelete,
-                                    Long accountId
+                                    Long accountId,
+                                    Set cardList
 
 ) {
 }

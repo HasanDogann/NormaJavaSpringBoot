@@ -79,6 +79,7 @@ public class InitialCustomerCreator {
         Card bankCard2 = new Card();
         bankCard2.setCardNo(ConstantUtils.getRandomCardNo());
         bankCard2.setCardType(CardType.BANK_CARD);
+        bankCard2.setCardBalance(BigDecimal.TEN);
         bankCard2.setCardLimit(BigDecimal.valueOf(3500));
         bankCard2.setAccount(account2);
         bankCard2.setCustomer(customer);

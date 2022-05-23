@@ -44,7 +44,8 @@ public class AccountConverterImpl implements AccountConverter {
                 account.getAccountType(),
                 account.getCreationDate(),
                 account.isDeleted(),
-                account.getId()
+                account.getId(),
+                account.getCardList()
         );
     }
 
