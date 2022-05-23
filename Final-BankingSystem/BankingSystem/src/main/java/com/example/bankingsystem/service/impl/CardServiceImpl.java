@@ -28,7 +28,13 @@ public class CardServiceImpl implements CardService {
 
     private final CardRepository cardRepository;
     private final CardConverter cardConverter;
-    private final AccountService accountService;
+
+
+    //Card borç öğrenme E.P i
+    //Transfer servisinden ödeme seçeneklerinden bankamatikten ve hesaptan ödeme
+    //Transfer factory,transfer çeşidine göre TRY ye çevirme
+    //Facade tasarımı
+    //Token control and authority options
 
     @Override
     public void addCard(CardCreateRequestDTO cardCreateRequestDTO) {
