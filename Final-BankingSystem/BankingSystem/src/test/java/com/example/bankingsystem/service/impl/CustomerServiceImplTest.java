@@ -7,7 +7,7 @@ import com.example.bankingsystem.model.entity.Account;
 import com.example.bankingsystem.model.entity.Customer;
 import com.example.bankingsystem.model.entity.CustomerAddress;
 import com.example.bankingsystem.model.entity.enums.AccountType;
-import com.example.bankingsystem.model.entity.enums.BalanceType;
+import com.example.bankingsystem.model.entity.enums.BalanceCurrencyType;
 import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedException;
 import com.example.bankingsystem.exception.ServiceOperationCanNotDeleteException;
 import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
@@ -67,7 +67,7 @@ class CustomerServiceImplTest {
         customerService.addCustomer(new CustomerCreateRequestDTO(customer.getName()
                 , customer.getSurname(), customer.getEMail(), customer.getPhone(),
 
-                new AccountOptionsDTO(AccountType.DEPOSIT_ACCOUNT,BalanceType.USD),
+                new AccountOptionsDTO(AccountType.DEPOSIT_ACCOUNT, BalanceCurrencyType.USD),
                 new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
                         customer.getCustomerAddress().getCity(), customer.getCustomerAddress().getPostalCode(),
                         customer.getCustomerAddress().getDescription())));
@@ -88,7 +88,7 @@ class CustomerServiceImplTest {
 
         customerService.addCustomer(new CustomerCreateRequestDTO(customer.getName()
                 , customer.getSurname(), customer.getEMail(), customer.getPhone(),
-                new AccountOptionsDTO(AccountType.DEPOSIT_ACCOUNT,BalanceType.USD),
+                new AccountOptionsDTO(AccountType.DEPOSIT_ACCOUNT, BalanceCurrencyType.USD),
                 new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
                         customer.getCustomerAddress().getCity(), customer.getCustomerAddress().getPostalCode(),
                         customer.getCustomerAddress().getDescription())));
@@ -114,7 +114,7 @@ class CustomerServiceImplTest {
 
         customerService.addCustomer(new CustomerCreateRequestDTO(customer.getName()
                 , customer.getSurname(), customer.getEMail(), customer.getPhone(),
-                new AccountOptionsDTO(AccountType.DEPOSIT_ACCOUNT,BalanceType.USD),
+                new AccountOptionsDTO(AccountType.DEPOSIT_ACCOUNT, BalanceCurrencyType.USD),
                 new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
                         customer.getCustomerAddress().getCity(), customer.getCustomerAddress().getPostalCode(),
                         customer.getCustomerAddress().getDescription())));
@@ -159,7 +159,7 @@ class CustomerServiceImplTest {
 
         customerService.addCustomer(new CustomerCreateRequestDTO(customer.getName()
                 , customer.getSurname(), customer.getEMail(), customer.getPhone(),
-                new AccountOptionsDTO(AccountType.DEPOSIT_ACCOUNT,BalanceType.USD),
+                new AccountOptionsDTO(AccountType.DEPOSIT_ACCOUNT, BalanceCurrencyType.USD),
                 new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
                         customer.getCustomerAddress().getCity(), customer.getCustomerAddress().getPostalCode(),
                         customer.getCustomerAddress().getDescription())));

@@ -2,6 +2,8 @@ package com.example.bankingsystem.controller;
 
 import com.example.bankingsystem.converter.CardConverter;
 import com.example.bankingsystem.model.dto.request.CardCreateRequestDTO;
+import com.example.bankingsystem.model.dto.request.CardPaymentRequestDTO;
+import com.example.bankingsystem.model.dto.response.CardBalanceResponseDTO;
 import com.example.bankingsystem.model.dto.response.CardGetResponseDTO;
 import com.example.bankingsystem.model.entity.Card;
 import com.example.bankingsystem.service.CardService;
@@ -10,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 /**
@@ -48,6 +51,11 @@ public class CardController {
         cardService.addCard(cardCreateRequestDTO);
         return ResponseEntity.ok().body("Card is added successfully");
     }
+    @PostMapping("/payment")
+    public ResponseEntity<?> payCardDebt(@RequestBody CardPaymentRequestDTO cardPaymentRequestDTO){
+        cardService.payCardDebt(cardPaymentRequestDTO);
+        return ResponseEntity.ok().body("Card payment is completed successfully");
+    }
 
     @GetMapping("/getAllAccountOneCustomer")
     public ResponseEntity<?> getAllCardOneAccount(@RequestParam Long id) {
@@ -63,5 +71,13 @@ public class CardController {
         String deleteResult = cardService.deleteCard(id, isHardDelete);
         return ResponseEntity.ok().body(deleteResult);
 
+    }
+
+    @GetMapping("/balance/{cardNo}")
+    public ResponseEntity<?> getBalanceByCardNo(@PathVariable String cardNo){
+        CardBalanceResponseDTO cardBalanceResponseDTO =
+                cardConverter.toCardBalanceResponseFromCard(cardService
+                .getCardBalance(cardNo));
+        return ResponseEntity.ok().body(cardBalanceResponseDTO);
     }
 }

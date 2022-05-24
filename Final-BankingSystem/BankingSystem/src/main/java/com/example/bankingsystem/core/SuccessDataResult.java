@@ -1,4 +1,4 @@
-package com.example.bankingsystem.core.utilities;
+package com.example.bankingsystem.core;
 
 public class SuccessDataResult<T> {
 

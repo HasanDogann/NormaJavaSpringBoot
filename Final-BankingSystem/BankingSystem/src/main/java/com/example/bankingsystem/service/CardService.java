@@ -2,6 +2,7 @@ package com.example.bankingsystem.service;
 
 import com.example.bankingsystem.model.dto.request.AccountCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.CardCreateRequestDTO;
+import com.example.bankingsystem.model.dto.request.CardPaymentRequestDTO;
 import com.example.bankingsystem.model.dto.response.AccountGetResponseDTO;
 import com.example.bankingsystem.model.entity.Account;
 import com.example.bankingsystem.model.entity.Card;
@@ -21,10 +22,13 @@ public interface CardService {
 
     Collection<Card> getAllCards();
 
+    Card getCardBalance(String cardNo);
 
     Collection<Card> getAllCardByAccountNumber(Long id);
 
     String deleteCard(Long id,boolean isHardDelete);
+
+    void payCardDebt(CardPaymentRequestDTO cardPaymentRequestDTO);
 
 
 }

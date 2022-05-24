@@ -1,13 +1,13 @@
 package com.example.bankingsystem.converter.impl;
 
 import com.example.bankingsystem.converter.CardConverter;
-import com.example.bankingsystem.core.utilities.constants.ConstantUtils;
+import com.example.bankingsystem.core.constants.ConstantUtils;
 import com.example.bankingsystem.model.dto.request.CardCreateRequestDTO;
+import com.example.bankingsystem.model.dto.response.CardBalanceResponseDTO;
 import com.example.bankingsystem.model.dto.response.CardGetResponseDTO;
 import com.example.bankingsystem.model.entity.Account;
 import com.example.bankingsystem.model.entity.Card;
 import com.example.bankingsystem.model.entity.Customer;
-import com.example.bankingsystem.model.entity.enums.CardType;
 import com.example.bankingsystem.repository.AccountRepository;
 import com.example.bankingsystem.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
@@ -46,7 +46,18 @@ public class CardConverterImpl implements CardConverter {
     public CardGetResponseDTO toCardResponseFromCard(Card card) {
         return new CardGetResponseDTO(card.getCardNo(), card.getCardDebt(),
                 card.getCardBalance(), card.getCustomer().getName(),
-                card.getCustomer().getSurname(),card.getCardLimit(), card.getCustomer().getId(),
+                card.getCustomer().getSurname(), card.getCardLimit(),
+                card.getCardType(),card.getCustomer().getId(),
                 card.getAccount().getId(), card.getId());
+    }
+
+    @Override
+    public CardBalanceResponseDTO toCardBalanceResponseFromCard(Card card) {
+        return new CardBalanceResponseDTO(
+                card.getCardNo(), card.getCustomer().getName(),
+                card.getCustomer().getSurname(), card.getCardType(),
+                card.getCardDebt(),
+                card.getCardBalance()
+        );
     }
 }

@@ -1,6 +1,7 @@
 package com.example.bankingsystem.converter;
 
 import com.example.bankingsystem.model.dto.request.CardCreateRequestDTO;
+import com.example.bankingsystem.model.dto.response.CardBalanceResponseDTO;
 import com.example.bankingsystem.model.dto.response.CardGetResponseDTO;
 import com.example.bankingsystem.model.entity.Card;
 
@@ -15,4 +16,5 @@ public interface CardConverter {
 
     CardGetResponseDTO toCardResponseFromCard(Card card);
 
+    CardBalanceResponseDTO toCardBalanceResponseFromCard(Card card);
 }

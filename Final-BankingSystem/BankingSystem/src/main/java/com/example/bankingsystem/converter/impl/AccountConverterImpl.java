@@ -1,7 +1,7 @@
 package com.example.bankingsystem.converter.impl;
 
 import com.example.bankingsystem.converter.AccountConverter;
-import com.example.bankingsystem.core.utilities.constants.ConstantUtils;
+import com.example.bankingsystem.core.constants.ConstantUtils;
 import com.example.bankingsystem.model.dto.request.AccountCreateRequestDTO;
 import com.example.bankingsystem.model.dto.response.AccountGetResponseDTO;
 import com.example.bankingsystem.model.entity.Account;
@@ -20,7 +20,7 @@ public class AccountConverterImpl implements AccountConverter {
     public Account convertToAccount(AccountCreateRequestDTO accountCreateRequestDTO) {
         Account account = new Account();
         account.setAccountType(accountCreateRequestDTO.accountType());
-        account.setBalanceType(accountCreateRequestDTO.balanceType());
+        account.setBalanceCurrencyType(accountCreateRequestDTO.balanceCurrencyType());
         account.setAccountNumber(ConstantUtils.getRandomAccountNumber());
         account.setBankBranchCode(accountCreateRequestDTO.branchCode());
         account.setIBAN(ConstantUtils.getRandomIban(account.getBankBranchCode())+""+account.getAccountNumber()+""+ConstantUtils.getRandomExtraAccountNo());
@@ -38,7 +38,7 @@ public class AccountConverterImpl implements AccountConverter {
 
         return new AccountGetResponseDTO(account.getCustomer().getName(),
                 account.getBalance(),
-                account.getBalanceType(),
+                account.getBalanceCurrencyType(),
                 account.getIBAN(),
                 account.getAccountNumber(),
                 account.getAccountType(),

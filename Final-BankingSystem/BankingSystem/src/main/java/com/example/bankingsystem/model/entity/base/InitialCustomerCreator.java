@@ -1,5 +1,5 @@
 package com.example.bankingsystem.model.entity.base;
-import com.example.bankingsystem.core.utilities.constants.ConstantUtils;
+import com.example.bankingsystem.core.constants.ConstantUtils;
 import com.example.bankingsystem.model.entity.Account;
 import com.example.bankingsystem.model.entity.Card;
 import com.example.bankingsystem.model.entity.Customer;
@@ -7,7 +7,7 @@ import com.example.bankingsystem.model.entity.CustomerAddress;
 
 import com.example.bankingsystem.model.entity.enums.AccountStatus;
 import com.example.bankingsystem.model.entity.enums.AccountType;
-import com.example.bankingsystem.model.entity.enums.BalanceType;
+import com.example.bankingsystem.model.entity.enums.BalanceCurrencyType;
 import com.example.bankingsystem.model.entity.enums.CardType;
 import com.example.bankingsystem.repository.AccountRepository;
 import com.example.bankingsystem.repository.CustomerRepository;
@@ -43,9 +43,10 @@ public class InitialCustomerCreator {
         //Adding account infos
         Account account = new Account();
         account.setAccountType(AccountType.CHECKING_ACCOUNT);
-        account.setBalanceType(BalanceType.TRY);
+        account.setBalanceCurrencyType(BalanceCurrencyType.TRY);
         account.setAccountNumber(ConstantUtils.getRandomAccountNumber());
         account.setBankBranchCode(9999);
+        account.setBalance(BigDecimal.valueOf(750));
         account.setIBAN(ConstantUtils.getRandomIban(account.getBankBranchCode())+""+account.getAccountNumber()+""+ConstantUtils.getRandomExtraAccountNo());
         account.setCreationDate(ConstantUtils.getCurrentDate());
         account.setAccountStatus(AccountStatus.ACTIVE);
@@ -53,9 +54,10 @@ public class InitialCustomerCreator {
         //Adding account infos
         Account account2 = new Account();
         account2.setAccountType(AccountType.DEPOSIT_ACCOUNT);
-        account2.setBalanceType(BalanceType.EUR);
+        account2.setBalanceCurrencyType(BalanceCurrencyType.EUR);
         account2.setAccountNumber(ConstantUtils.getRandomAccountNumber());
         account2.setBankBranchCode(9998);
+        account2.setBalance(BigDecimal.valueOf(750));
         account2.setIBAN(ConstantUtils.getRandomIban(account.getBankBranchCode())+""+account.getAccountNumber()+""+ConstantUtils.getRandomExtraAccountNo());
         account2.setCreationDate(ConstantUtils.getCurrentDate());
         account2.setAccountStatus(AccountStatus.ACTIVE);
@@ -66,6 +68,7 @@ public class InitialCustomerCreator {
         creditCard.setCardNo(ConstantUtils.getRandomCardNo());
         creditCard.setCardType(CardType.CREDIT_CARD);
         creditCard.setCardLimit(BigDecimal.valueOf(5000));
+        creditCard.setCardDebt(BigDecimal.valueOf(1000));
         creditCard.setAccount(account);
         creditCard.setCustomer(customer);
         //Adding bank card infos

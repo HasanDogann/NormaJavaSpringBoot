@@ -17,11 +17,13 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class Transaction extends BaseModel {
 
-    private BigDecimal transferNo;
+    private String senderIBAN;
+    private String receiverIBAN;
     private BigDecimal transferAmount;
     @Enumerated(value = EnumType.STRING)
     private TransferType transferType;
 
+    private String transferDate;
 
 
   /*  @ManyToOne( cascade = CascadeType.PERSIST)

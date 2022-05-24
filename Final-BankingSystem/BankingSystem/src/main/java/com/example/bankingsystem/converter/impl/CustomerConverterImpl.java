@@ -1,7 +1,7 @@
 package com.example.bankingsystem.converter.impl;
 
 import com.example.bankingsystem.converter.CustomerConverter;
-import com.example.bankingsystem.core.utilities.constants.ConstantUtils;
+import com.example.bankingsystem.core.constants.ConstantUtils;
 import com.example.bankingsystem.model.dto.request.CustomerCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.CustomerUpdateRequestDTO;
 import com.example.bankingsystem.model.dto.response.CustomerGetResponseDTO;
@@ -10,7 +10,7 @@ import com.example.bankingsystem.model.entity.Customer;
 import com.example.bankingsystem.model.entity.CustomerAddress;
 import com.example.bankingsystem.model.entity.enums.AccountStatus;
 import com.example.bankingsystem.model.entity.enums.AccountType;
-import com.example.bankingsystem.model.entity.enums.BalanceType;
+import com.example.bankingsystem.model.entity.enums.BalanceCurrencyType;
 import com.example.bankingsystem.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -47,7 +47,7 @@ public class CustomerConverterImpl implements CustomerConverter {
         //Customer's account infos
         Account account = new Account();
         account.setAccountType(AccountType.CHECKING_ACCOUNT);
-        account.setBalanceType(BalanceType.TRY);
+        account.setBalanceCurrencyType(BalanceCurrencyType.TRY);
         account.setAccountNumber(ConstantUtils.getRandomAccountNumber());
         account.setIBAN(ConstantUtils.getRandomIban(account.getBankBranchCode()));
         account.setCreationDate(ConstantUtils.getCurrentDate());

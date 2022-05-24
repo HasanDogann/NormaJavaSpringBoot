@@ -1,6 +1,6 @@
-package com.example.bankingsystem.core.utilities;
+package com.example.bankingsystem.core;
 
-public class SuccessResult extends com.example.bankingsystem.core.utilities.Result {
+public class SuccessResult extends Result {
     public SuccessResult(){
         super(true);
     }

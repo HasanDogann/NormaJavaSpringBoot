@@ -1,4 +1,4 @@
-package com.example.bankingsystem.core.utilities.constants;
+package com.example.bankingsystem.core.constants;
 
 import org.springframework.stereotype.Component;
 

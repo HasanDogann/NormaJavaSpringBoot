@@ -3,7 +3,7 @@ package com.example.bankingsystem.model.entity;
 import com.example.bankingsystem.model.entity.base.BaseModel;
 import com.example.bankingsystem.model.entity.enums.AccountStatus;
 import com.example.bankingsystem.model.entity.enums.AccountType;
-import com.example.bankingsystem.model.entity.enums.BalanceType;
+import com.example.bankingsystem.model.entity.enums.BalanceCurrencyType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -42,7 +42,7 @@ public class Account extends BaseModel {
     @Enumerated(value = EnumType.STRING)
     private AccountType accountType;
     @Enumerated(value = EnumType.STRING)
-    private BalanceType balanceType;
+    private BalanceCurrencyType balanceCurrencyType;
     @Enumerated(value = EnumType.STRING)
     private AccountStatus accountStatus;
 

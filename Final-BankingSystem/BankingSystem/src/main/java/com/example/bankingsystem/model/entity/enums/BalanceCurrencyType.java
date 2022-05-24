@@ -1,6 +1,6 @@
 package com.example.bankingsystem.model.entity.enums;
 
-public enum BalanceType {
+public enum BalanceCurrencyType {
 
     USD, EUR, TRY
 }

@@ -5,33 +5,32 @@ package com.example.bankingsystem.exception;
  * @Project IntelliJ IDEA
  * @Date 19.05.2022
  */
-public final class ServiceOperationCanNotCreateException extends BaseException{
+public final class ServiceOperationCanNotCreateException extends BaseException {
 
-        private ServiceOperationCanNotCreateException(String message){
-            super(message);
-        }
-
-        public static class CustomerIsAlreadyCreatedException extends BaseException{
-            public CustomerIsAlreadyCreatedException(String message){
-                super(message);
-            }
-
-        }
-
-    public static class UserIsAlreadyCreatedException extends BaseException{
-        public UserIsAlreadyCreatedException(String message){
-            super(message);
-        }
-
+    private ServiceOperationCanNotCreateException(String message) {
+        super(message);
     }
-    public static class AccountIsAlreadyCreatedException extends BaseException{
-        public AccountIsAlreadyCreatedException(String message){
+
+    public static class CustomerIsAlreadyCreatedException extends BaseException {
+        public CustomerIsAlreadyCreatedException(String message) {
             super(message);
         }
 
     }
 
+    public static class UserIsAlreadyCreatedException extends BaseException {
+        public UserIsAlreadyCreatedException(String message) {
+            super(message);
+        }
 
+    }
+
+    public static class AccountIsAlreadyCreatedException extends BaseException {
+        public AccountIsAlreadyCreatedException(String message) {
+            super(message);
+        }
+
+    }
 
 
 }

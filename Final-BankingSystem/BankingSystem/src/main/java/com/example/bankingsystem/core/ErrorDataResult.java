@@ -1,6 +1,6 @@
-package com.example.bankingsystem.core.utilities;
+package com.example.bankingsystem.core;
 
-public class ErrorDataResult<T> extends com.example.bankingsystem.core.utilities.DataResult {
+public class ErrorDataResult<T> extends DataResult {
     public ErrorDataResult(T data, String message) {
         super(data, false,message);
     }

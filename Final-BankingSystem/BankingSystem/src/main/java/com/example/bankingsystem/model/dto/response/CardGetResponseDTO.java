@@ -1,5 +1,7 @@
 package com.example.bankingsystem.model.dto.response;
 
+import com.example.bankingsystem.model.entity.enums.CardType;
+
 import java.math.BigDecimal;
 
 /**
@@ -13,6 +15,7 @@ public record CardGetResponseDTO(String cardNo,
                                  String customerName,
                                  String customerSurname,
                                  BigDecimal cardLimit,
+                                 CardType cardType,
                                  Long customerID,
                                  Long accountID,
                                  Long cardID) {
