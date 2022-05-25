@@ -25,6 +25,7 @@ public interface CardService {
     Card getCardBalance(String cardNo);
 
     Collection<Card> getAllCardByAccountNumber(Long id);
+    Collection<Card> getAllCardByCustomerId(Long id);
 
     String deleteCard(Long id,boolean isHardDelete);
 

@@ -38,7 +38,7 @@ public class CardConverterImpl implements CardConverter {
         card.setAccount(account);
         card.setCustomer(customer);
         account.addCardToAccount(Set.of(card));
-
+        customer.addAccountToCustomer(Set.of(account));
         return card;
     }
 

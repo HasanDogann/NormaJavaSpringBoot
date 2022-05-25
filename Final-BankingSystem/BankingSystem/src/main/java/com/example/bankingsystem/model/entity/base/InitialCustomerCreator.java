@@ -63,6 +63,19 @@ public class InitialCustomerCreator {
         account2.setAccountStatus(AccountStatus.ACTIVE);
         account2.setCustomer(customer);
 
+        //Adding Market Account
+        Account account3 = new Account();
+        account3.setAccountType(AccountType.CHECKING_ACCOUNT);
+        account3.setBalanceCurrencyType(BalanceCurrencyType.TRY);
+        account3.setAccountNumber(ConstantUtils.getRandomAccountNumber());
+        account3.setBankBranchCode(9997);
+        account3.setBalance(BigDecimal.valueOf(1000));
+        account3.setIBAN("MarketAccountIBAN");
+       // account3.setIBAN(ConstantUtils.getRandomIban(account.getBankBranchCode())+""+account.getAccountNumber()+""+ConstantUtils.getRandomExtraAccountNo());
+        account3.setCreationDate(ConstantUtils.getCurrentDate());
+        account3.setAccountStatus(AccountStatus.ACTIVE);
+        account3.setCustomer(customer);
+
         //Adding credit card infos
         Card creditCard = new Card();
         creditCard.setCardNo(ConstantUtils.getRandomCardNo());
@@ -91,6 +104,7 @@ public class InitialCustomerCreator {
         //adding account to Customer's account list
         customer.addAccountToCustomer(Set.of(account));
         customer.addAccountToCustomer(Set.of(account2));
+        customer.addAccountToCustomer(Set.of(account3));
         //Adding card to Account's card list
         account.addCardToAccount(Set.of(creditCard));
         account.addCardToAccount(Set.of(bankCard));

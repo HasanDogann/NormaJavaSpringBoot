@@ -12,10 +12,12 @@ import com.example.bankingsystem.model.dto.request.CardCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.CardPaymentRequestDTO;
 import com.example.bankingsystem.model.entity.Account;
 import com.example.bankingsystem.model.entity.Card;
+import com.example.bankingsystem.model.entity.Customer;
 import com.example.bankingsystem.model.entity.enums.PaymentType;
 import com.example.bankingsystem.repository.CardRepository;
 import com.example.bankingsystem.service.AccountService;
 import com.example.bankingsystem.service.CardService;
+import com.example.bankingsystem.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,15 +34,15 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class CardServiceImpl implements CardService {
 
+    private final CustomerService customerService;
     private final CardRepository cardRepository;
     private final CardConverter cardConverter;
     private  PaymentStrategy paymentStrategy;
-    private final CardPaymentConverter cardPaymentConverter;
     private final AccountService accountService;
 
 
-    //Transfer strategyleri ve transaction converter tamamlanacak
-    //Transfer çeşidi IBAN olanlarda currency göre TRY ye çevirme
+   //DONE //Transfer strategyleri ve transaction converter tamamlanacak
+   //DONE //Transfer çeşidi IBAN olanlarda currency göre TRY ye çevirme
     //Facade tasarımı
     //Token control and authority options
     //Unit Testler Yazılacak
@@ -100,6 +102,16 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    public Collection<Card> getAllCardByCustomerId(Long id) {
+        Customer customer = customerService.getCustomer(id);
+        Collection<Card> cardCollection = cardRepository.getAllByCustomerId(customer.getId());
+        if(Objects.isNull(cardCollection) ){
+            throw new ServiceOperationNotFoundException.CardNotFoundException("There is no card on this customer");
+        }
+        return cardCollection;
+    }
+
+    @Override
     public String deleteCard(Long id, boolean isHardDelete) {
         Card card = cardRepository.findById(id)
                 .orElseThrow(() -> new ServiceOperationNotFoundException.CardNotFoundException("Card is not found!"));
@@ -126,10 +138,10 @@ public class CardServiceImpl implements CardService {
     @Override
     public void payCardDebt(CardPaymentRequestDTO cardPaymentRequestDTO) {
         if(cardPaymentRequestDTO.paymentType().equals(PaymentType.BY_ACCOUNT)){
-            paymentStrategy = new CreditCardPaymentByAccount(cardPaymentConverter);
+            paymentStrategy = new CreditCardPaymentByAccount(cardRepository);
         }
         else if(cardPaymentRequestDTO.paymentType().equals(PaymentType.BY_ATM)){
-            paymentStrategy = new CreditCardPaymentByATM(cardPaymentConverter);
+            paymentStrategy = new CreditCardPaymentByATM(cardRepository);
         }
 
         paymentStrategy.pay(cardPaymentRequestDTO);

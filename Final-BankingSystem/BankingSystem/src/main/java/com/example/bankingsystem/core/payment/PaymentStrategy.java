@@ -1,6 +1,7 @@
 package com.example.bankingsystem.core.payment;
 
 import com.example.bankingsystem.model.dto.request.CardPaymentRequestDTO;
+import com.example.bankingsystem.model.entity.Card;
 
 import java.math.BigDecimal;
 
@@ -11,5 +12,5 @@ import java.math.BigDecimal;
  */
 public interface PaymentStrategy {
 
-    void pay(CardPaymentRequestDTO cardPaymentRequestDTO);
+    Card pay(CardPaymentRequestDTO cardPaymentRequestDTO);
 }

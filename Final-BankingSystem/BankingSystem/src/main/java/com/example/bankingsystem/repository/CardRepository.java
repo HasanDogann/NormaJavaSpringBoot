@@ -4,6 +4,7 @@ import com.example.bankingsystem.model.entity.Card;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 
 public interface CardRepository extends JpaRepository<Card,Long> {
 
@@ -11,5 +12,7 @@ public interface CardRepository extends JpaRepository<Card,Long> {
     Card getById(Long id);
 
     Card getCardByCardNo(String cardNo);
+
+    Collection<Card> getAllByCustomerId(Long id);
 
 }

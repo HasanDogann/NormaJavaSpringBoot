@@ -39,7 +39,7 @@ public class TransactionServiceImpl implements TransactionService {
         if (transferType.equals(TransferType.IBAN)) {
             transferStrategy = new MoneyTransferByIban(accountService,restTemplate);
         } else if (transferType.equals(TransferType.PURCHASE)) {
-            transferStrategy = new MoneyTransferByPurchase();
+            transferStrategy = new MoneyTransferByPurchase(accountService,restTemplate);
         }
 
         Transaction transaction =transferStrategy.pay(transactionRequestDTO);
