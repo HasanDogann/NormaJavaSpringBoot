@@ -1,9 +1,7 @@
-package com.example.bankingsystem.core.transfer;
+package com.example.bankingsystem.service.transfer;
 
 import com.example.bankingsystem.model.dto.request.TransactionRequestDTO;
 import com.example.bankingsystem.model.entity.Transaction;
-
-import java.math.BigDecimal;
 
 /**
  * @author Hasan DOĞAN

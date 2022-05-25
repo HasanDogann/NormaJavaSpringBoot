@@ -1,12 +1,11 @@
 package com.example.bankingsystem.service.impl;
 
-import com.example.bankingsystem.core.transfer.TransferStrategy;
-import com.example.bankingsystem.core.transfer.strategies.MoneyTransferByIban;
-import com.example.bankingsystem.core.transfer.strategies.MoneyTransferByPurchase;
+import com.example.bankingsystem.service.transfer.TransferStrategy;
+import com.example.bankingsystem.service.transfer.strategies.MoneyTransferByIban;
+import com.example.bankingsystem.service.transfer.strategies.MoneyTransferByPurchase;
 import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedException;
 import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
 import com.example.bankingsystem.model.dto.request.TransactionRequestDTO;
-import com.example.bankingsystem.model.entity.Account;
 import com.example.bankingsystem.model.entity.Transaction;
 import com.example.bankingsystem.model.entity.enums.TransferType;
 import com.example.bankingsystem.repository.TransactionRepository;

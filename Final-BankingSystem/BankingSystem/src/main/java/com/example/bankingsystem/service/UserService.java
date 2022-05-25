@@ -1,7 +1,6 @@
 package com.example.bankingsystem.service;
 
-import com.example.bankingsystem.model.dto.request.UserCreateDTO;
-import com.example.bankingsystem.model.dto.response.CustomerGetResponseDTO;
+import com.example.bankingsystem.model.dto.request.UserCreateRequestDTO;
 import com.example.bankingsystem.model.entity.User;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,7 @@ import java.util.Collection;
 public interface UserService  {
 
 
-    void addUser(UserCreateDTO userCreateDTO);
+    void addUser(UserCreateRequestDTO userCreateRequestDTO);
 
     User getUser(Long id);
 

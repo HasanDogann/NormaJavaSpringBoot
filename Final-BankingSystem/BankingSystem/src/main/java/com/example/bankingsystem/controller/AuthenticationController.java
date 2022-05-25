@@ -1,6 +1,6 @@
 package com.example.bankingsystem.controller;
 
-import com.example.bankingsystem.model.dto.request.UserCreateDTO;
+import com.example.bankingsystem.model.dto.request.UserCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.UserLoginRequest;
 import com.example.bankingsystem.model.entity.User;
 import com.example.bankingsystem.service.SigningService;
@@ -38,18 +38,18 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody UserCreateDTO userCreateDTO) {
-        User user = userService.getUserByEmail(userCreateDTO.mail());
-        String mailCheck = customerService.getCustomer(userCreateDTO.customerId()).getEMail();
+    public ResponseEntity<String> register(@RequestBody UserCreateRequestDTO userCreateRequestDTO) {
+        User user = userService.getUserByEmail(userCreateRequestDTO.mail());
+        String mailCheck = customerService.getCustomer(userCreateRequestDTO.customerId()).getEMail();
         if (user != null) {
             return new ResponseEntity<>("Email is already in use with another Customer", HttpStatus.BAD_REQUEST);
         }
-        else if(!userCreateDTO.mail()
+        else if(!userCreateRequestDTO.mail()
                 .equals(mailCheck)){
             return new ResponseEntity<>("Given email doesn't match with Customer email",HttpStatus.BAD_REQUEST);
         }
         else {
-            signingService.register(userCreateDTO);
+            signingService.register(userCreateRequestDTO);
             return new ResponseEntity<>("User is registered successfully", HttpStatus.CREATED);
         }
     }

@@ -7,6 +7,7 @@ public record CustomerCreateRequestDTO(String customerName,
                                        String customerSurname,
                                        String customerEmail,
                                        String customerPhone,
+                                       Integer branchCode,
                                        CustomerAddressDTO customerAddress
                                        ) {
 }

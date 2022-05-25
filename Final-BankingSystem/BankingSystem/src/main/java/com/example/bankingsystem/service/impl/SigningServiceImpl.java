@@ -1,12 +1,13 @@
 package com.example.bankingsystem.service.impl;
 
-import com.example.bankingsystem.model.dto.request.UserCreateDTO;
+import com.example.bankingsystem.exception.SignOperationException;
+import com.example.bankingsystem.model.dto.request.UserCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.UserLoginRequest;
 import com.example.bankingsystem.model.entity.Customer;
 import com.example.bankingsystem.model.entity.User;
 import com.example.bankingsystem.security.JsonWTokenProvider;
-import com.example.bankingsystem.service.SigningService;
 import com.example.bankingsystem.service.CustomerService;
+import com.example.bankingsystem.service.SigningService;
 import com.example.bankingsystem.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 /**
  * @author Hasan DOĞAN
@@ -34,10 +37,12 @@ public class SigningServiceImpl implements SigningService {
     private final UserService userService;
 
 
-
-    //Burada kaldım login kontrolleri yapılacak
     @Override
     public String login(UserLoginRequest loginRequest) {
+        Customer customer = customerService.getCustomerByEmail(loginRequest.email());
+        if (Objects.isNull(customer)) {
+            throw new SignOperationException.LoginBadCredentialsException("Email is not registered");
+        }
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken
                         (loginRequest.email(), loginRequest.password());
@@ -50,18 +55,18 @@ public class SigningServiceImpl implements SigningService {
     }
 
     @Override
-    public String register(UserCreateDTO userCreateDTO) {
+    public String register(UserCreateRequestDTO userCreateRequestDTO) {
         //1000.ci register olan web userına 1000 TL bakiye eklenecek
-        Customer customer = customerService.getCustomer(userCreateDTO.customerId());
-        if(userCreateDTO.mail().equals(customer.getEMail())){
+        Customer customer = customerService.getCustomer(userCreateRequestDTO.customerId());
+        if (userCreateRequestDTO.mail().equals(customer.getEMail())) {
             User user = new User();
-        user.setMail(customer.getEMail());
-        user.setPassword(passwordEncoder.encode(userCreateDTO.password()));
-        user.setRole(userCreateDTO.role());
-        user.setCustomer(customerService.getCustomer(userCreateDTO.customerId()));
-        userService.addUser(new UserCreateDTO(user.getMail(), user.getPassword(), user.getRole(), user.getCustomer().getId()));
-        return null;
+            user.setMail(customer.getEMail());
+            user.setPassword(passwordEncoder.encode(userCreateRequestDTO.password()));
+            user.setRole(userCreateRequestDTO.role());
+            user.setCustomer(customerService.getCustomer(userCreateRequestDTO.customerId()));
+            userService.addUser(new UserCreateRequestDTO(user.getMail(), user.getPassword(), user.getRole(), user.getCustomer().getId()));
+            return null;
         }
-        return "Wrong!";
+        return "Wrong email!";
     }
 }

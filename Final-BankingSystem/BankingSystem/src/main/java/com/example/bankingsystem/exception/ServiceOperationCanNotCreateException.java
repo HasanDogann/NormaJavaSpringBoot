@@ -31,6 +31,14 @@ public final class ServiceOperationCanNotCreateException extends BaseException {
         }
 
     }
+    public static class UserCanNotCreatException extends BaseException {
+        public UserCanNotCreatException(String message) {
+            super(message);
+        }
+
+    }
+
+
 
 
 }

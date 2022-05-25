@@ -4,8 +4,7 @@ import com.example.bankingsystem.converter.UserConverter;
 import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedException;
 import com.example.bankingsystem.exception.ServiceOperationCanNotCreateException;
 import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
-import com.example.bankingsystem.model.dto.request.UserCreateDTO;
-import com.example.bankingsystem.model.entity.Customer;
+import com.example.bankingsystem.model.dto.request.UserCreateRequestDTO;
 import com.example.bankingsystem.model.entity.User;
 import com.example.bankingsystem.repository.UserRepository;
 import com.example.bankingsystem.service.UserService;
@@ -28,10 +27,10 @@ public class UserServiceImpl implements UserService {
     private final UserConverter userConverter;
 
     @Override
-    public void addUser(UserCreateDTO userCreateDTO) {
-        User u = userRepository.findUserByEMailAddress(userCreateDTO.mail());
+    public void addUser(UserCreateRequestDTO userCreateRequestDTO) {
+        User u = userRepository.findUserByEMailAddress(userCreateRequestDTO.mail());
         if (Objects.isNull(u)) {
-            User user = userConverter.toUser(userCreateDTO);
+            User user = userConverter.toUser(userCreateRequestDTO);
             userRepository.save(user);
         } else
             throw new ServiceOperationCanNotCreateException.UserIsAlreadyCreatedException("Email is already taken for a user ");

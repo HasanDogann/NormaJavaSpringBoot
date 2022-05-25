@@ -1,7 +1,8 @@
 package com.example.bankingsystem.converter.impl;
 
 import com.example.bankingsystem.converter.UserConverter;
-import com.example.bankingsystem.model.dto.request.UserCreateDTO;
+import com.example.bankingsystem.exception.ServiceOperationCanNotCreateException;
+import com.example.bankingsystem.model.dto.request.UserCreateRequestDTO;
 import com.example.bankingsystem.model.dto.response.UserResponseDTO;
 import com.example.bankingsystem.model.entity.Customer;
 import com.example.bankingsystem.model.entity.User;
@@ -21,12 +22,15 @@ public class UserConverterImpl implements UserConverter {
     private final CustomerService customerService;
 
     @Override
-    public User toUser(UserCreateDTO userCreateDTO) {
+    public User toUser(UserCreateRequestDTO userCreateRequestDTO) {
         User user= new User();
-        Customer customer = customerService.getCustomer(userCreateDTO.customerId());
+        Customer customer = customerService.getCustomer(userCreateRequestDTO.customerId());
+        if(!userCreateRequestDTO.mail().equals(customer.getEMail())){
+            throw new ServiceOperationCanNotCreateException.UserCanNotCreatException("Customer email is wrong!");
+        }
         user.setMail(customer.getEMail());
-        user.setPassword(userCreateDTO.password());
-        user.setRole(userCreateDTO.role());
+        user.setPassword(userCreateRequestDTO.password());
+        user.setRole(userCreateRequestDTO.role());
         user.setCustomer(customer);
         return user;
     }

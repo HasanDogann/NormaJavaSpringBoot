@@ -97,7 +97,7 @@ public class CustomerServiceImpl implements CustomerService {
                 .stream().filter(i -> i.getCardDebt().compareTo(BigDecimal.ZERO) > 0).toList();
         Collection<Card> cardBalanceCollection = cardService.getAllCardByCustomerId(id)
                 .stream().filter(i -> i.getCardBalance().compareTo(BigDecimal.ZERO) > 0).toList();
-        
+
         if (accountCollection.isEmpty()) {
             if (cardBalanceCollection.isEmpty() && cardDebtCollection.isEmpty()) {
                 if (customer.isDeleted()) {

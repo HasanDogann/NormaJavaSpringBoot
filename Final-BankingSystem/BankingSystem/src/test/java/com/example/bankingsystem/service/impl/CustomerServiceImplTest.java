@@ -66,7 +66,7 @@ class CustomerServiceImplTest {
 
         customerService.addCustomer(new CustomerCreateRequestDTO(customer.getName()
                 , customer.getSurname(), customer.getEMail(), customer.getPhone(),
-                new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
+                1000,new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
                         customer.getCustomerAddress().getCity(), customer.getCustomerAddress().getPostalCode(),
                         customer.getCustomerAddress().getDescription())));
 
@@ -86,7 +86,7 @@ class CustomerServiceImplTest {
 
         customerService.addCustomer(new CustomerCreateRequestDTO(customer.getName()
                 , customer.getSurname(), customer.getEMail(), customer.getPhone(),
-                new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
+                1000, new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
                         customer.getCustomerAddress().getCity(), customer.getCustomerAddress().getPostalCode(),
                         customer.getCustomerAddress().getDescription())));
 
@@ -111,7 +111,7 @@ class CustomerServiceImplTest {
 
         customerService.addCustomer(new CustomerCreateRequestDTO(customer.getName()
                 , customer.getSurname(), customer.getEMail(), customer.getPhone(),
-                new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
+                1000, new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
                         customer.getCustomerAddress().getCity(), customer.getCustomerAddress().getPostalCode(),
                         customer.getCustomerAddress().getDescription())));
 
@@ -155,7 +155,7 @@ class CustomerServiceImplTest {
 
         customerService.addCustomer(new CustomerCreateRequestDTO(customer.getName()
                 , customer.getSurname(), customer.getEMail(), customer.getPhone(),
-                new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
+                1000, new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
                         customer.getCustomerAddress().getCity(), customer.getCustomerAddress().getPostalCode(),
                         customer.getCustomerAddress().getDescription())));
 

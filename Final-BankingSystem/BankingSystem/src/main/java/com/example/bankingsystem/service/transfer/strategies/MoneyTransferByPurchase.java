@@ -1,7 +1,7 @@
-package com.example.bankingsystem.core.transfer.strategies;
+package com.example.bankingsystem.service.transfer.strategies;
 
 import com.example.bankingsystem.core.constants.ConstantUtils;
-import com.example.bankingsystem.core.transfer.TransferStrategy;
+import com.example.bankingsystem.service.transfer.TransferStrategy;
 import com.example.bankingsystem.model.dto.request.TransactionRequestDTO;
 import com.example.bankingsystem.model.entity.Account;
 import com.example.bankingsystem.model.entity.Transaction;

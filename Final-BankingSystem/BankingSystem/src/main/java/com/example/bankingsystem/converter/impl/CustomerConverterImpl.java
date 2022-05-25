@@ -49,6 +49,7 @@ public class CustomerConverterImpl implements CustomerConverter {
         account.setAccountType(AccountType.CHECKING_ACCOUNT);
         account.setBalanceCurrencyType(BalanceCurrencyType.TRY);
         account.setAccountNumber(ConstantUtils.getRandomAccountNumber());
+        account.setBankBranchCode(customerCreateRequestDTO.branchCode());
         account.setIBAN(ConstantUtils.getRandomIban(account.getBankBranchCode())+""+account.getAccountNumber()+""+ConstantUtils.getRandomExtraAccountNo());
         account.setCreationDate(ConstantUtils.getCurrentDate());
         account.setAccountStatus(AccountStatus.ACTIVE);

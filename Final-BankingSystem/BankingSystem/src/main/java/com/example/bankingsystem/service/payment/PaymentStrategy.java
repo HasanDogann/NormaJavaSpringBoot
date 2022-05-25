@@ -1,9 +1,7 @@
-package com.example.bankingsystem.core.payment;
+package com.example.bankingsystem.service.payment;
 
 import com.example.bankingsystem.model.dto.request.CardPaymentRequestDTO;
 import com.example.bankingsystem.model.entity.Card;
-
-import java.math.BigDecimal;
 
 /**
  * @author Hasan DOĞAN

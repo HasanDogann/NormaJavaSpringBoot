@@ -22,8 +22,8 @@ public class AccountController {
 
 
     @GetMapping("/getAccountByCustomerIban")
-    public ResponseEntity<?> getAccountByIban(@RequestParam String Iban) {
-        Account account = accountService.getAccount(Iban);
+    public ResponseEntity<?> getAccountByIban(@RequestParam String IBAN) {
+        Account account = accountService.getAccount(IBAN);
         AccountGetResponseDTO accountGetResponseDTO = accountConverter.convertAccountToResponseDto(account);
         return ResponseEntity.ok().body(accountGetResponseDTO);
     }

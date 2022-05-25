@@ -1,11 +1,8 @@
 package com.example.bankingsystem.controller;
 
 import com.example.bankingsystem.converter.UserConverter;
-import com.example.bankingsystem.model.dto.request.AccountCreateRequestDTO;
-import com.example.bankingsystem.model.dto.request.UserCreateDTO;
-import com.example.bankingsystem.model.dto.response.AccountGetResponseDTO;
+import com.example.bankingsystem.model.dto.request.UserCreateRequestDTO;
 import com.example.bankingsystem.model.dto.response.UserResponseDTO;
-import com.example.bankingsystem.model.entity.User;
 import com.example.bankingsystem.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -36,12 +33,12 @@ private final UserConverter userConverter;
         return ResponseEntity.ok().body(users);
     }
 
-    @PostMapping
-    public ResponseEntity<?> addUser(@RequestBody UserCreateDTO userCreateDTO) {
-        userService.addUser(userCreateDTO);
+    /*@PostMapping
+    public ResponseEntity<?> addUser(@RequestBody UserCreateRequestDTO userCreateRequestDTO) {
+        userService.addUser(userCreateRequestDTO);
         return ResponseEntity.ok().body("User is added successfully");
     }
-
+*/
 
 
 }

@@ -1,10 +1,9 @@
 package com.example.bankingsystem.service.impl;
 
 import com.example.bankingsystem.converter.CardConverter;
-import com.example.bankingsystem.converter.CardPaymentConverter;
-import com.example.bankingsystem.core.payment.PaymentStrategy;
-import com.example.bankingsystem.core.payment.strategies.CreditCardPaymentByATM;
-import com.example.bankingsystem.core.payment.strategies.CreditCardPaymentByAccount;
+import com.example.bankingsystem.service.payment.PaymentStrategy;
+import com.example.bankingsystem.service.payment.strategies.CreditCardPaymentByATM;
+import com.example.bankingsystem.service.payment.strategies.CreditCardPaymentByAccount;
 import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedException;
 import com.example.bankingsystem.exception.ServiceOperationBlockedException;
 import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
@@ -41,11 +40,6 @@ public class CardServiceImpl implements CardService {
     private final AccountService accountService;
 
 
-   //DONE //Transfer strategyleri ve transaction converter tamamlanacak
-   //DONE //Transfer çeşidi IBAN olanlarda currency göre TRY ye çevirme
-    //Facade tasarımı
-    //Token control and authority options
-    //Unit Testler Yazılacak
 
     @Override
     public void addCard(CardCreateRequestDTO cardCreateRequestDTO) {

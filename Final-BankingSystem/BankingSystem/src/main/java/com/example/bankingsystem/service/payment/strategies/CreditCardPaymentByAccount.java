@@ -1,6 +1,6 @@
-package com.example.bankingsystem.core.payment.strategies;
+package com.example.bankingsystem.service.payment.strategies;
 
-import com.example.bankingsystem.core.payment.PaymentStrategy;
+import com.example.bankingsystem.service.payment.PaymentStrategy;
 import com.example.bankingsystem.exception.TransferOperationException;
 import com.example.bankingsystem.model.dto.request.CardPaymentRequestDTO;
 import com.example.bankingsystem.model.entity.Account;

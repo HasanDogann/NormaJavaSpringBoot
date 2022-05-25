@@ -23,7 +23,7 @@ public class AccountConverterImpl implements AccountConverter {
         account.setBalanceCurrencyType(accountCreateRequestDTO.balanceCurrencyType());
         account.setAccountNumber(ConstantUtils.getRandomAccountNumber());
         account.setBankBranchCode(accountCreateRequestDTO.branchCode());
-        account.setIBAN(ConstantUtils.getRandomIban(account.getBankBranchCode())+""+account.getAccountNumber()+""+ConstantUtils.getRandomExtraAccountNo());
+        account.setIBAN(ConstantUtils.getRandomIban(account.getBankBranchCode()) + "" + account.getAccountNumber() + "" + ConstantUtils.getRandomExtraAccountNo());
         account.setCreationDate(ConstantUtils.getCurrentDate());
         account.setAccountStatus(AccountStatus.ACTIVE);
         Customer customer = customerRepository.getById(accountCreateRequestDTO.customerId());
@@ -36,7 +36,7 @@ public class AccountConverterImpl implements AccountConverter {
     public AccountGetResponseDTO convertAccountToResponseDto(Account account) {
 
 
-        return new AccountGetResponseDTO(account.getCustomer().getName(),
+        return new AccountGetResponseDTO(account.getId(), account.getCustomer().getName(),
                 account.getBalance(),
                 account.getBalanceCurrencyType(),
                 account.getIBAN(),
@@ -44,7 +44,6 @@ public class AccountConverterImpl implements AccountConverter {
                 account.getAccountType(),
                 account.getCreationDate(),
                 account.isDeleted(),
-                account.getId(),
                 account.getCardList()
         );
     }

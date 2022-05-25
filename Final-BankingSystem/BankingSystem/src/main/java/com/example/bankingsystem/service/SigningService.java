@@ -1,8 +1,7 @@
 package com.example.bankingsystem.service;
 
-import com.example.bankingsystem.model.dto.request.UserCreateDTO;
+import com.example.bankingsystem.model.dto.request.UserCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.UserLoginRequest;
-import com.example.bankingsystem.model.dto.request.UserRegisterRequest;
 
 /**
  * @author Hasan DOĞAN
@@ -12,5 +11,5 @@ import com.example.bankingsystem.model.dto.request.UserRegisterRequest;
 public interface SigningService {
 
     public String login(UserLoginRequest loginRequest);
-    public String register(UserCreateDTO userCreateDTO);
+    public String register(UserCreateRequestDTO userCreateRequestDTO);
 }
