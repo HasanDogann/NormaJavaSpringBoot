@@ -19,6 +19,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Objects;
@@ -82,6 +83,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
+    @Transactional
     public String deleteCustomer(Long id, boolean hardDelete) {
         Customer customer = customerRepository.getById(id);
 

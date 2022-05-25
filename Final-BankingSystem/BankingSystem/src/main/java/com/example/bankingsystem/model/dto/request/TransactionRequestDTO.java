@@ -11,6 +11,5 @@ import java.math.BigDecimal;
  * @Date 24.05.2022
  */
 public record TransactionRequestDTO(BigDecimal amount, String senderIban, String receiverIban,
-                                    TransferType transferType,
-                                    TransferCurrencyType transferCurrencyType) {
+                                    TransferType transferType) {
 }

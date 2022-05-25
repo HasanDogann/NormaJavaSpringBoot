@@ -15,6 +15,11 @@ public final class TransferOperationException extends BaseException {
             super(message);
         }
     }
+    public static class TransferCanNotProceedException extends BaseException {
+        public TransferCanNotProceedException(String message) {
+            super(message);
+        }
+    }
 }
 
 

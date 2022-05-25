@@ -7,7 +7,6 @@ public record CustomerCreateRequestDTO(String customerName,
                                        String customerSurname,
                                        String customerEmail,
                                        String customerPhone,
-                                       AccountOptionsDTO accountOptionsDTO,
                                        CustomerAddressDTO customerAddress
                                        ) {
 }

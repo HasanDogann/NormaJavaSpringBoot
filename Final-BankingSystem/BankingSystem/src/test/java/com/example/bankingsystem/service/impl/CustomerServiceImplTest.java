@@ -66,8 +66,6 @@ class CustomerServiceImplTest {
 
         customerService.addCustomer(new CustomerCreateRequestDTO(customer.getName()
                 , customer.getSurname(), customer.getEMail(), customer.getPhone(),
-
-                new AccountOptionsDTO(AccountType.DEPOSIT_ACCOUNT, BalanceCurrencyType.USD),
                 new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
                         customer.getCustomerAddress().getCity(), customer.getCustomerAddress().getPostalCode(),
                         customer.getCustomerAddress().getDescription())));
@@ -88,7 +86,6 @@ class CustomerServiceImplTest {
 
         customerService.addCustomer(new CustomerCreateRequestDTO(customer.getName()
                 , customer.getSurname(), customer.getEMail(), customer.getPhone(),
-                new AccountOptionsDTO(AccountType.DEPOSIT_ACCOUNT, BalanceCurrencyType.USD),
                 new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
                         customer.getCustomerAddress().getCity(), customer.getCustomerAddress().getPostalCode(),
                         customer.getCustomerAddress().getDescription())));
@@ -114,7 +111,6 @@ class CustomerServiceImplTest {
 
         customerService.addCustomer(new CustomerCreateRequestDTO(customer.getName()
                 , customer.getSurname(), customer.getEMail(), customer.getPhone(),
-                new AccountOptionsDTO(AccountType.DEPOSIT_ACCOUNT, BalanceCurrencyType.USD),
                 new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
                         customer.getCustomerAddress().getCity(), customer.getCustomerAddress().getPostalCode(),
                         customer.getCustomerAddress().getDescription())));
@@ -159,7 +155,6 @@ class CustomerServiceImplTest {
 
         customerService.addCustomer(new CustomerCreateRequestDTO(customer.getName()
                 , customer.getSurname(), customer.getEMail(), customer.getPhone(),
-                new AccountOptionsDTO(AccountType.DEPOSIT_ACCOUNT, BalanceCurrencyType.USD),
                 new CustomerAddressDTO(customer.getCustomerAddress().getCountry(),
                         customer.getCustomerAddress().getCity(), customer.getCustomerAddress().getPostalCode(),
                         customer.getCustomerAddress().getDescription())));

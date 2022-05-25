@@ -2,6 +2,7 @@ package com.example.bankingsystem.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -17,6 +18,11 @@ public class BankingConfig {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.example.bankingsystem"))//ana paket ismimiz
                 .build();
+    }
+
+    @Bean
+    public RestTemplate restTemplate(){
+        return new RestTemplate();
     }
 
 }

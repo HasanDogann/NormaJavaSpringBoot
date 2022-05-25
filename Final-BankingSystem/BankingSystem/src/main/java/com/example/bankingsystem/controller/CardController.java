@@ -57,7 +57,7 @@ public class CardController {
         return ResponseEntity.ok().body("Card payment is completed successfully");
     }
 
-    @GetMapping("/getAllAccountOneCustomer")
+    @GetMapping("/getAllCardOneAccount")
     public ResponseEntity<?> getAllCardOneAccount(@RequestParam Long id) {
         Collection<CardGetResponseDTO> cardCollection = cardService.getAllCardByAccountNumber(id)
                 .stream().map(cardConverter::toCardResponseFromCard).toList();

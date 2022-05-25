@@ -35,12 +35,12 @@ private final UserConverter userConverter;
                 .map(userConverter::toUserResponseFromUser).toList();
         return ResponseEntity.ok().body(users);
     }
-/*
+
     @PostMapping
     public ResponseEntity<?> addUser(@RequestBody UserCreateDTO userCreateDTO) {
         userService.addUser(userCreateDTO);
         return ResponseEntity.ok().body("User is added successfully");
-    }*/
+    }
 
 
 

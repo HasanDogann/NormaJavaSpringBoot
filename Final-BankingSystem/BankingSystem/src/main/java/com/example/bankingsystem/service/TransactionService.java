@@ -1,5 +1,8 @@
 package com.example.bankingsystem.service;
 
+import com.example.bankingsystem.model.dto.request.TransactionRequestDTO;
+import com.example.bankingsystem.model.entity.Transaction;
+
 /**
  * @author Hasan DOĞAN
  * @Project IntelliJ IDEA
@@ -7,7 +10,9 @@ package com.example.bankingsystem.service;
  */
 public interface TransactionService {
 
-    void payCardDebt();
+    void moneyTransfer(TransactionRequestDTO transactionRequestDTO);
+
+    Transaction getTransaction(Long id);
 
 
 }

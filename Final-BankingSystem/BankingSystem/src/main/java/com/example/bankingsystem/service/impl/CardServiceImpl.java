@@ -10,9 +10,11 @@ import com.example.bankingsystem.exception.ServiceOperationBlockedException;
 import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
 import com.example.bankingsystem.model.dto.request.CardCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.CardPaymentRequestDTO;
+import com.example.bankingsystem.model.entity.Account;
 import com.example.bankingsystem.model.entity.Card;
 import com.example.bankingsystem.model.entity.enums.PaymentType;
 import com.example.bankingsystem.repository.CardRepository;
+import com.example.bankingsystem.service.AccountService;
 import com.example.bankingsystem.service.CardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -34,12 +36,14 @@ public class CardServiceImpl implements CardService {
     private final CardConverter cardConverter;
     private  PaymentStrategy paymentStrategy;
     private final CardPaymentConverter cardPaymentConverter;
+    private final AccountService accountService;
 
 
     //Transfer strategyleri ve transaction converter tamamlanacak
     //Transfer çeşidi IBAN olanlarda currency göre TRY ye çevirme
     //Facade tasarımı
     //Token control and authority options
+    //Unit Testler Yazılacak
 
     @Override
     public void addCard(CardCreateRequestDTO cardCreateRequestDTO) {
@@ -84,13 +88,15 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public Collection<Card> getAllCardByAccountNumber(Long id) {
-
-        return cardRepository.findAll()
+        Account account = accountService.getAccount(id);
+       Collection<Card>  cardCollection = cardRepository.findAll()
                 .stream()
-                .filter(i -> i.getAccount().getId().equals(id))
+                .filter(a-> a.getAccount().getId().equals(id))
                 .toList();
-
-
+        if(Objects.isNull(cardCollection) || cardCollection.isEmpty()){
+            throw new ServiceOperationNotFoundException.CardNotFoundException("There is no card at this account");
+        }
+            return cardCollection;
     }
 
     @Override

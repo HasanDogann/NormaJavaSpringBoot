@@ -1,8 +1,6 @@
 package com.example.bankingsystem.converter;
 
-import com.example.bankingsystem.model.dto.request.CardPaymentRequestDTO;
 import com.example.bankingsystem.model.dto.request.TransactionRequestDTO;
-import com.example.bankingsystem.model.entity.Card;
 import com.example.bankingsystem.model.entity.Transaction;
 
 /**
@@ -13,8 +11,7 @@ import com.example.bankingsystem.model.entity.Transaction;
 public interface TransactionConverter {
 
 
-    Transaction toTransaction(TransactionRequestDTO transactionRequestDTO);
+    Transaction toTransactionByIBAN(TransactionRequestDTO transactionRequestDTO);
 
-
-
+    Transaction toTransactionByPurchase(TransactionRequestDTO transactionRequestDTO);
 }
