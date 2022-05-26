@@ -1,19 +1,17 @@
 package com.example.bankingsystem.service.impl;
 
 import com.example.bankingsystem.converter.AccountConverter;
+import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedException;
 import com.example.bankingsystem.exception.ServiceOperationCanNotCreateException;
+import com.example.bankingsystem.exception.ServiceOperationCanNotDeleteException;
+import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
 import com.example.bankingsystem.model.dto.request.AccountCreateRequestDTO;
-import com.example.bankingsystem.model.dto.response.AccountGetResponseDTO;
 import com.example.bankingsystem.model.entity.Account;
 import com.example.bankingsystem.model.entity.Card;
 import com.example.bankingsystem.model.entity.Customer;
-import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedException;
-import com.example.bankingsystem.exception.ServiceOperationCanNotDeleteException;
-import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
 import com.example.bankingsystem.model.entity.enums.AccountType;
 import com.example.bankingsystem.repository.AccountRepository;
 import com.example.bankingsystem.service.AccountService;
-import com.example.bankingsystem.service.CardService;
 import com.example.bankingsystem.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,16 +33,18 @@ public class AccountServiceImpl implements AccountService {
     private final CustomerService customerService;
 
     @Override
-    public void addAccount(AccountCreateRequestDTO accountCreateRequestDTO) {
+    public Account addAccount(AccountCreateRequestDTO accountCreateRequestDTO) {
         Customer tempCustomer = customerService.getCustomer(accountCreateRequestDTO.customerId());
         AccountType accountType = accountCreateRequestDTO.accountType();
 
-        boolean hasAnotherCheckingAccount = hasAnotherAccount(AccountType.CHECKING_ACCOUNT, accountCreateRequestDTO, tempCustomer);
-        boolean hasAnotherDepositAccount = hasAnotherAccount(AccountType.DEPOSIT_ACCOUNT, accountCreateRequestDTO, tempCustomer);
+        boolean hasAnotherCheckingAccount = hasAnotherAccountOnSameBranch(AccountType.CHECKING_ACCOUNT, accountCreateRequestDTO, tempCustomer);
+        boolean hasAnotherDepositAccount = hasAnotherAccountOnSameBranch(AccountType.DEPOSIT_ACCOUNT, accountCreateRequestDTO, tempCustomer);
 
         if (!hasAnotherCheckingAccount && !hasAnotherDepositAccount) {
             Account account = accountConverter.convertToAccount(accountCreateRequestDTO);
             accountRepository.save(account);
+            return account;
+
         } else if (hasAnotherCheckingAccount && accountType.equals(AccountType.CHECKING_ACCOUNT)) {
             throw new ServiceOperationCanNotCreateException.AccountIsAlreadyCreatedException("Customer already has a Checking Account at this branch. ");
 
@@ -54,10 +54,13 @@ public class AccountServiceImpl implements AccountService {
         else if (hasAnotherCheckingAccount && accountType.equals(AccountType.DEPOSIT_ACCOUNT)) {
             Account account = accountConverter.convertToAccount(accountCreateRequestDTO);
             accountRepository.save(account);
-        } else if (hasAnotherDepositAccount && accountType.equals(AccountType.CHECKING_ACCOUNT)) {
+            return account;
+        }
             Account account = accountConverter.convertToAccount(accountCreateRequestDTO);
             accountRepository.save(account);
-        }
+            return account;
+
+
     }
 
     @Override
@@ -72,14 +75,16 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Collection<AccountGetResponseDTO> getAllAccounts() {
-        return accountRepository.findAccountsByIsDeleted(false).stream().map(accountConverter::convertAccountToResponseDto).toList();
+    public Collection<Account> getAllAccounts() {
+        return accountRepository.findAccountsByIsDeleted(false).stream().toList();
     }
 
     @Override
-    public Account getAccount(String ibanNo) {
-        Account account = accountRepository.findAccountByIBAN(ibanNo);
-
+    public Account getAccountByIBAN(String iban) {
+        Account account = accountRepository.findAccountByIBAN(iban);
+        if(Objects.isNull(account)){
+            throw new ServiceOperationNotFoundException.AccountNotFoundException("There is no account with this IBAN");
+        }
         if (account.isDeleted()) {
             throw new ServiceOperationAlreadyDeletedException.AccountAlreadyDeletedException("Account was deleted");
         }
@@ -122,7 +127,6 @@ public class AccountServiceImpl implements AccountService {
                     accountRepository.removeAccountById(id);
                     return "Account is hard deleted  successfully";
                 }
-                customer.removeAccountFromCustomer(Set.of(account));
                 account.setDeleted(true);
                 accountRepository.save(account);
                 return "Account is soft deleted successfully";
@@ -136,7 +140,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
 
-    public boolean hasAnotherAccount(AccountType accountType, AccountCreateRequestDTO accountCreateRequestDTO, Customer customer) {
+    public boolean hasAnotherAccountOnSameBranch(AccountType accountType, AccountCreateRequestDTO accountCreateRequestDTO, Customer customer) {
         return customer.getAccountList()
                 .stream()
                 .filter(i -> i.getAccountType().equals(accountType))

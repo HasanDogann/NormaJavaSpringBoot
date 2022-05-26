@@ -26,8 +26,8 @@ import java.util.Objects;
 
 /**
  * @author Hasan DOĞAN
- * @Project IntelliJ IDEA
- * @Date 24.05.2022
+ *  IntelliJ IDEA
+ *  24.05.2022
  */
 @Component
 @RequiredArgsConstructor
@@ -44,8 +44,8 @@ public class MoneyTransferByIban implements TransferStrategy {
     @Transactional
     public Transaction pay(TransactionRequestDTO transactionRequestDTO) {
 
-        Account sender = accountService.getAccount(transactionRequestDTO.senderIban());
-        Account receiver = accountService.getAccount(transactionRequestDTO.receiverIban());
+        Account sender = accountService.getAccountByIBAN(transactionRequestDTO.senderIban());
+        Account receiver = accountService.getAccountByIBAN(transactionRequestDTO.receiverIban());
 
         if (sender.getBalance().compareTo(transactionRequestDTO.amount()) < 0) {
             throw new TransferOperationException.TransferCanNotProceedException("Sender account doesn't have enough money to send this amount!");
@@ -71,8 +71,8 @@ public class MoneyTransferByIban implements TransferStrategy {
 
     private Transaction sendingMoneyFromForeignToTRYAccount(TransactionRequestDTO transactionRequestDTO) {
         Transaction transaction = new Transaction();
-        Account sender = accountService.getAccount(transactionRequestDTO.senderIban());
-        Account receiver = accountService.getAccount(transactionRequestDTO.receiverIban());
+        Account sender = accountService.getAccountByIBAN(transactionRequestDTO.senderIban());
+        Account receiver = accountService.getAccountByIBAN(transactionRequestDTO.receiverIban());
 
         headers.add("apikey", API_KEY);
         HttpEntity<String> httpEntity = new HttpEntity<>(headers);
@@ -97,8 +97,8 @@ public class MoneyTransferByIban implements TransferStrategy {
     private Transaction sendingMoneyFromTRYtoForeignAccount(TransactionRequestDTO transactionRequestDTO) {
 
         Transaction transaction = new Transaction();
-        Account sender = accountService.getAccount(transactionRequestDTO.senderIban());
-        Account receiver = accountService.getAccount(transactionRequestDTO.receiverIban());
+        Account sender = accountService.getAccountByIBAN(transactionRequestDTO.senderIban());
+        Account receiver = accountService.getAccountByIBAN(transactionRequestDTO.receiverIban());
 
         headers.add("apikey", API_KEY);
         HttpEntity<String> httpEntity = new HttpEntity<>(headers);
@@ -122,8 +122,8 @@ public class MoneyTransferByIban implements TransferStrategy {
 
 
         Transaction transaction = new Transaction();
-        Account sender = accountService.getAccount(transactionRequestDTO.senderIban());
-        Account receiver = accountService.getAccount(transactionRequestDTO.receiverIban());
+        Account sender = accountService.getAccountByIBAN(transactionRequestDTO.senderIban());
+        Account receiver = accountService.getAccountByIBAN(transactionRequestDTO.receiverIban());
 
         transaction.setTransferAmount(transactionRequestDTO.amount());
         transaction.setSenderIBAN(transactionRequestDTO.senderIban());

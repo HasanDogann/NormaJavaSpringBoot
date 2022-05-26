@@ -88,7 +88,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");
+        //React denerken Pattern eklendi
+        config.addAllowedOriginPattern("*");
         config.addAllowedHeader("*");
         config.setAllowedMethods(List.of("OPTIONS", "HEAD", "GET", "POST",
                 "PUT", "DELETE", "PATCH"));

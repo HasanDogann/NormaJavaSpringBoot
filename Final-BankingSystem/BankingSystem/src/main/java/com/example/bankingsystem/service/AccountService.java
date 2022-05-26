@@ -8,13 +8,13 @@ import java.util.Collection;
 
 public interface AccountService {
 
-    void addAccount(AccountCreateRequestDTO accountCreateRequestDTO);
+    Account addAccount(AccountCreateRequestDTO accountCreateRequestDTO);
 
     Account getAccount(Long id);
 
-    Collection<AccountGetResponseDTO> getAllAccounts();
+    Collection<Account> getAllAccounts();
 
-    Account getAccount(String IbanNo);
+    Account getAccountByIBAN(String IBAN);
 
     Collection<Account> getAllAccountOneCustomer(Long id);
 

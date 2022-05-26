@@ -1,13 +1,10 @@
 package com.example.bankingsystem.service.impl;
 
-import com.example.bankingsystem.model.dto.model.AccountOptionsDTO;
 import com.example.bankingsystem.model.dto.model.CustomerAddressDTO;
 import com.example.bankingsystem.model.dto.request.CustomerCreateRequestDTO;
 import com.example.bankingsystem.model.entity.Account;
 import com.example.bankingsystem.model.entity.Customer;
 import com.example.bankingsystem.model.entity.CustomerAddress;
-import com.example.bankingsystem.model.entity.enums.AccountType;
-import com.example.bankingsystem.model.entity.enums.BalanceCurrencyType;
 import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedException;
 import com.example.bankingsystem.exception.ServiceOperationCanNotDeleteException;
 import com.example.bankingsystem.exception.ServiceOperationNotFoundException;

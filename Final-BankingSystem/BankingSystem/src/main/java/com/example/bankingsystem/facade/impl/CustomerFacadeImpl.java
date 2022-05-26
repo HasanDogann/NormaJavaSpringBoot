@@ -1,6 +1,7 @@
-package com.example.bankingsystem.facade;
+package com.example.bankingsystem.facade.impl;
 
 import com.example.bankingsystem.converter.CustomerConverter;
+import com.example.bankingsystem.facade.CustomerFacade;
 import com.example.bankingsystem.model.dto.request.CustomerCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.CustomerUpdateRequestDTO;
 import com.example.bankingsystem.model.dto.response.CustomerGetResponseDTO;

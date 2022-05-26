@@ -40,8 +40,8 @@ public class MoneyTransferByPurchase implements TransferStrategy {
     public Transaction pay(TransactionRequestDTO transactionRequestDTO) {
 
         Transaction transaction = new Transaction();
-        Account sender = accountService.getAccount(transactionRequestDTO.senderIban());
-        Account receiver = accountService.getAccount(transactionRequestDTO.receiverIban());
+        Account sender = accountService.getAccountByIBAN(transactionRequestDTO.senderIban());
+        Account receiver = accountService.getAccountByIBAN(transactionRequestDTO.receiverIban());
 
         //IF CUSTOMER's CREDIT CARD CURRENCY TYPE IS DIFFERENT FROM TL
         if (!sender.getBalanceCurrencyType().equals(BalanceCurrencyType.TRY)) {
