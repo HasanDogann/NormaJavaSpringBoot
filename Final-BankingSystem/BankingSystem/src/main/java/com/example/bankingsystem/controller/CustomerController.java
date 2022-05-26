@@ -1,19 +1,13 @@
 package com.example.bankingsystem.controller;
 
-import com.example.bankingsystem.converter.CustomerConverter;
+import com.example.bankingsystem.facade.CustomerFacade;
 import com.example.bankingsystem.model.dto.request.CustomerCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.CustomerUpdateRequestDTO;
-import com.example.bankingsystem.model.dto.response.CustomerGetResponseDTO;
-import com.example.bankingsystem.model.entity.Customer;
-import com.example.bankingsystem.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.security.RolesAllowed;
-import java.util.Collection;
 
 
 @RestController
@@ -22,43 +16,35 @@ import java.util.Collection;
 @Validated
 public class CustomerController {
 
-    private final CustomerService customerService;
-    private final CustomerConverter customerConverter;
-
-
+    private final CustomerFacade customerFacade;
 
     @PostMapping
-    public ResponseEntity<?> addCustomer(@RequestBody CustomerCreateRequestDTO customerCreateRequestDTO){
-        customerService.addCustomer(customerCreateRequestDTO);
-        return ResponseEntity.ok().body("Customer is created successfully");
+    public ResponseEntity<?> addCustomer(@RequestBody CustomerCreateRequestDTO customerCreateRequestDTO) {
+        return customerFacade.addCustomer(customerCreateRequestDTO);
     }
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getCustomer(@PathVariable Long id){
-        Customer customer = customerService.getCustomer(id);
-        CustomerGetResponseDTO customerGetResponseDTO = customerConverter.toCustomerResponse(customer);
-       return ResponseEntity.ok().body(customerGetResponseDTO);
+    public ResponseEntity<?> getCustomer(@PathVariable Long id) {
+        return ResponseEntity.ok().body(customerFacade.getCustomer(id));
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
-    public ResponseEntity<?> getAllCustomers(){
-        Collection<CustomerGetResponseDTO> customers= customerService.getAllCustomers();
-        return ResponseEntity.ok().body(customers);
+    public ResponseEntity<?> getAllCustomers() {
+        return customerFacade.getAllCustomers();
     }
 
     @PutMapping(path = "/update")
-    public ResponseEntity<?> updateCustomer(@RequestBody CustomerUpdateRequestDTO customerUpdateRequestDTO){
-        customerService.updateCustomer(customerUpdateRequestDTO);
-        return ResponseEntity.ok().body("Customer is updated successfully");
+    public ResponseEntity<?> updateCustomer(@RequestBody CustomerUpdateRequestDTO customerUpdateRequestDTO) {
+        return customerFacade.updateCustomer(customerUpdateRequestDTO);
+
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCustomer(@PathVariable Long id,
-                                            @RequestParam(name = "hardDelete", required = false) boolean isHardDelete){
-        customerService.deleteCustomer(id,isHardDelete);
-        return ResponseEntity.ok().body("Customer is deleted successfully");
+                                            @RequestParam(name = "hardDelete", required = false) boolean isHardDelete) {
+        return customerFacade.deleteCustomer(id, isHardDelete);
     }
 
 }

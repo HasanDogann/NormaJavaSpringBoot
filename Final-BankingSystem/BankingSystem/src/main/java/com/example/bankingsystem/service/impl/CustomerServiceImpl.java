@@ -77,12 +77,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Collection<CustomerGetResponseDTO> getAllCustomers() {
+    public Collection<Customer> getAllCustomers() {
         return customerRepository.findAllCustomersByDeleteStatusByJPQL(false)
                 .stream()
-                .map(customerConverter::toCustomerResponse)
                 .toList();
-
     }
 
 
@@ -90,31 +88,25 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public String deleteCustomer(Long id, boolean hardDelete) {
 
-        Customer customer = customerRepository.getById(id);
+        Customer customer = getCustomer(id);
 
-        Collection<Account> accountCollection = accountService.getAllAccountOneCustomer(id).stream().filter(i -> (i.getBalance().compareTo(BigDecimal.ZERO) > 0)).toList();
-        Collection<Card> cardDebtCollection = cardService.getAllCardByCustomerId(id)
-                .stream().filter(i -> i.getCardDebt().compareTo(BigDecimal.ZERO) > 0).toList();
-        Collection<Card> cardBalanceCollection = cardService.getAllCardByCustomerId(id)
-                .stream().filter(i -> i.getCardBalance().compareTo(BigDecimal.ZERO) > 0).toList();
-
-        if (accountCollection.isEmpty()) {
-            if (cardBalanceCollection.isEmpty() && cardDebtCollection.isEmpty()) {
+        if (!hasBalanceOnAccount(id)) {
+            if (!hasBalanceOrDebtOnCard(id)) {
                 if (customer.isDeleted()) {
                     throw new ServiceOperationAlreadyDeletedException.CustomerAlreadyDeletedException("Customer is already deleted");
                 }
                 if (hardDelete) {
                     customerRepository.removeCustomerById(id);
-                    return "Customer is deleted successfully";
+                    return "Customer is deleted hard and successfully.";
                 }
 
                 customer.setDeleted(true);
                 customerRepository.save(customer);
-                return "Customer is deleted successfully";
+                return "Customer is deleted soft and successfully";
             }
             throw new ServiceOperationCanNotDeleteException.CustomerBalanceNotZero("Customer has at least one card which has a debt or balance! ");
         }
-        throw new ServiceOperationCanNotDeleteException.CustomerBalanceNotZero("Customer has account that balance of it has money");
+        throw new ServiceOperationCanNotDeleteException.CustomerBalanceNotZero("Customer has at least one account which has a balance!");
     }
 
     @Override
@@ -123,6 +115,19 @@ public class CustomerServiceImpl implements CustomerService {
         customerRepository.save(customer);
 
     }
+
+        private boolean hasBalanceOrDebtOnCard(Long id){
+            Collection<Card> cardDebtCollection = cardService.getAllCardByCustomerId(id)
+                    .stream().filter(i -> i.getCardDebt().compareTo(BigDecimal.ZERO) > 0).toList();
+            Collection<Card> cardBalanceCollection = cardService.getAllCardByCustomerId(id)
+                    .stream().filter(i -> i.getCardBalance().compareTo(BigDecimal.ZERO) > 0).toList();
+            return !(cardBalanceCollection.isEmpty() && cardDebtCollection.isEmpty());
+        }
+
+        private boolean hasBalanceOnAccount(Long id){
+            Collection<Account> accountCollection = accountService.getAllAccountOneCustomer(id).stream().filter(i -> (i.getBalance().compareTo(BigDecimal.ZERO) > 0)).toList();
+            return !accountCollection.isEmpty();
+        }
 
 
 }

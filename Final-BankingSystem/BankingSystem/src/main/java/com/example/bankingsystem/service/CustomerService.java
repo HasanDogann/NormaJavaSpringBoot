@@ -17,7 +17,7 @@ public interface CustomerService {
 
     Customer getCustomerByEmail(String email);
 
-    Collection<CustomerGetResponseDTO> getAllCustomers();
+    Collection<Customer> getAllCustomers();
 
     String deleteCustomer(Long id,boolean isHardDelete);
 
