@@ -46,7 +46,7 @@ public class InitialCustomerCreator {
         account.setBalanceCurrencyType(BalanceCurrencyType.TRY);
         account.setAccountNumber(ConstantUtils.getRandomAccountNumber());
         account.setBankBranchCode(9999);
-        account.setBalance(BigDecimal.valueOf(750));
+        account.setBalance(BigDecimal.valueOf(1250));
         account.setIBAN(ConstantUtils.getRandomIban(account.getBankBranchCode())+""+account.getAccountNumber()+""+ConstantUtils.getRandomExtraAccountNo());
         account.setCreationDate(ConstantUtils.getCurrentDate());
         account.setAccountStatus(AccountStatus.ACTIVE);

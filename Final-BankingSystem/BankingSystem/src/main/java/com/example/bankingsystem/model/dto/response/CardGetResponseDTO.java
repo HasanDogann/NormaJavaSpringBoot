@@ -9,14 +9,14 @@ import java.math.BigDecimal;
  * @Project IntelliJ IDEA
  * @Date 23.05.2022
  */
-public record CardGetResponseDTO(String cardNo,
+public record CardGetResponseDTO(Long cardID,
+                                 String cardNo,
                                  BigDecimal cardDebt,
                                  BigDecimal cardBalance,
-                                 String customerName,
-                                 String customerSurname,
                                  BigDecimal cardLimit,
                                  CardType cardType,
+                                 String customerName,
+                                 String customerSurname,
                                  Long customerID,
-                                 Long accountID,
-                                 Long cardID) {
+                                 Long accountID) {
 }

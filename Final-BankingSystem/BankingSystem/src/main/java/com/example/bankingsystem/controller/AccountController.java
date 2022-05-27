@@ -28,29 +28,34 @@ public class AccountController {
 
     @GetMapping("/getAccountByCustomerIban")
     public ResponseEntity<?> getAccountByIban(@RequestParam String IBAN) {
+
        return accountFacade.getAccountByIBAN(IBAN);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getAccount(@PathVariable Long id) {
-       return accountFacade.getAccount(id);
+
+        return accountFacade.getAccount(id);
     }
 
     @GetMapping
     public ResponseEntity<?> getAllAccounts() {
+
         return accountFacade.getAllAccounts();
     }
 
 
     @GetMapping("/getAllAccountOneCustomer")
     public ResponseEntity<?> getAllAccountOneCustomer(@RequestParam Long id) {
-      return accountFacade.getAllAccountOneCustomer(id);
+
+        return accountFacade.getAllAccountOneCustomer(id);
     }
 
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteAccount(@PathVariable Long id,
                                            @RequestParam(required = false) boolean isHardDelete) {
+
        return accountFacade.deleteAccount(id,isHardDelete);
     }
 }

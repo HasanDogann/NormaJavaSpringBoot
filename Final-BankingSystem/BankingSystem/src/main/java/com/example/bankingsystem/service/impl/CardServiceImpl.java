@@ -1,9 +1,6 @@
 package com.example.bankingsystem.service.impl;
 
 import com.example.bankingsystem.converter.CardConverter;
-import com.example.bankingsystem.service.payment.PaymentStrategy;
-import com.example.bankingsystem.service.payment.strategies.CreditCardPaymentByATM;
-import com.example.bankingsystem.service.payment.strategies.CreditCardPaymentByAccount;
 import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedException;
 import com.example.bankingsystem.exception.ServiceOperationBlockedException;
 import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
@@ -17,6 +14,9 @@ import com.example.bankingsystem.repository.CardRepository;
 import com.example.bankingsystem.service.AccountService;
 import com.example.bankingsystem.service.CardService;
 import com.example.bankingsystem.service.CustomerService;
+import com.example.bankingsystem.service.payment.PaymentStrategy;
+import com.example.bankingsystem.service.payment.strategies.CreditCardPaymentByATM;
+import com.example.bankingsystem.service.payment.strategies.CreditCardPaymentByAccount;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -36,15 +36,15 @@ public class CardServiceImpl implements CardService {
     private final CustomerService customerService;
     private final CardRepository cardRepository;
     private final CardConverter cardConverter;
-    private  PaymentStrategy paymentStrategy;
+    private PaymentStrategy paymentStrategy;
     private final AccountService accountService;
 
 
-
     @Override
-    public void addCard(CardCreateRequestDTO cardCreateRequestDTO) {
+    public Card addCard(CardCreateRequestDTO cardCreateRequestDTO) {
         Card card = cardConverter.toCard(cardCreateRequestDTO);
         cardRepository.save(card);
+        return card;
     }
 
     @Override
@@ -85,21 +85,21 @@ public class CardServiceImpl implements CardService {
     @Override
     public Collection<Card> getAllCardByAccountNumber(Long id) {
         Account account = accountService.getAccount(id);
-       Collection<Card>  cardCollection = cardRepository.findAll()
+        Collection<Card> cardCollection = cardRepository.findAll()
                 .stream()
-                .filter(a-> a.getAccount().getId().equals(id))
+                .filter(a -> a.getAccount().getId().equals(id))
                 .toList();
-        if(Objects.isNull(cardCollection) || cardCollection.isEmpty()){
+        if (Objects.isNull(cardCollection) || cardCollection.isEmpty()) {
             throw new ServiceOperationNotFoundException.CardNotFoundException("There is no card at this account");
         }
-            return cardCollection;
+        return cardCollection;
     }
 
     @Override
     public Collection<Card> getAllCardByCustomerId(Long id) {
         Customer customer = customerService.getCustomer(id);
         Collection<Card> cardCollection = cardRepository.getAllByCustomerId(customer.getId());
-        if(Objects.isNull(cardCollection) ){
+        if (Objects.isNull(cardCollection)) {
             throw new ServiceOperationNotFoundException.CardNotFoundException("There is no card on this customer");
         }
         return cardCollection;
@@ -131,10 +131,9 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public void payCardDebt(CardPaymentRequestDTO cardPaymentRequestDTO) {
-        if(cardPaymentRequestDTO.paymentType().equals(PaymentType.BY_ACCOUNT)){
+        if (cardPaymentRequestDTO.paymentType().equals(PaymentType.BY_ACCOUNT)) {
             paymentStrategy = new CreditCardPaymentByAccount(cardRepository);
-        }
-        else if(cardPaymentRequestDTO.paymentType().equals(PaymentType.BY_ATM)){
+        } else if (cardPaymentRequestDTO.paymentType().equals(PaymentType.BY_ATM)) {
             paymentStrategy = new CreditCardPaymentByATM(cardRepository);
         }
 

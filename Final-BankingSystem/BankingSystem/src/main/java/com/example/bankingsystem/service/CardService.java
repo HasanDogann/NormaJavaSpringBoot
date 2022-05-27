@@ -16,7 +16,7 @@ import java.util.Collection;
  */
 public interface CardService {
 
-    void addCard(CardCreateRequestDTO cardCreateRequestDTO);
+    Card addCard(CardCreateRequestDTO cardCreateRequestDTO);
 
     Card getCard(Long id);
 

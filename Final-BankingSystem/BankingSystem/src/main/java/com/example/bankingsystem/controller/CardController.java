@@ -1,6 +1,7 @@
 package com.example.bankingsystem.controller;
 
 import com.example.bankingsystem.converter.CardConverter;
+import com.example.bankingsystem.facade.CardFacade;
 import com.example.bankingsystem.model.dto.request.CardCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.CardPaymentRequestDTO;
 import com.example.bankingsystem.model.dto.response.CardBalanceResponseDTO;
@@ -17,8 +18,8 @@ import java.util.Collection;
 
 /**
  * @author Hasan DOĞAN
- * @Project IntelliJ IDEA
- * @Date 23.05.2022
+ * BankingSystemApplication.java
+ * 23.05.2022
  */
 
 @RestController
@@ -27,57 +28,48 @@ import java.util.Collection;
 @Validated
 public class CardController {
 
-    private final CardService cardService;
-    private final CardConverter cardConverter;
-
+    private final CardFacade cardFacade;
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getCard(@PathVariable Long id) {
-        Card card = cardService.getCard(id);
-        CardGetResponseDTO cardGetResponseDTO = cardConverter.toCardResponseFromCard(card);
-        return ResponseEntity.ok().body(cardGetResponseDTO);
+
+        return cardFacade.getCard(id);
     }
 
     @GetMapping
     public ResponseEntity<?> getAllCards() {
-        Collection<CardGetResponseDTO> cardCollection = cardService.getAllCards()
-                .stream()
-                .map(cardConverter::toCardResponseFromCard).toList();
-        return ResponseEntity.ok().body(cardCollection);
+
+        return cardFacade.getAllCards();
     }
 
     @PostMapping
     public ResponseEntity<?> addCard(@RequestBody CardCreateRequestDTO cardCreateRequestDTO) {
-        cardService.addCard(cardCreateRequestDTO);
-        return ResponseEntity.ok().body("Card is added successfully");
+
+        return cardFacade.addCard(cardCreateRequestDTO);
     }
     @PostMapping("/payment")
     public ResponseEntity<?> payCardDebt(@RequestBody CardPaymentRequestDTO cardPaymentRequestDTO){
-        cardService.payCardDebt(cardPaymentRequestDTO);
-        return ResponseEntity.ok().body("Card payment is completed successfully");
+
+        return cardFacade.payCardDebt(cardPaymentRequestDTO);
     }
 
     @GetMapping("/getAllCardOneAccount")
     public ResponseEntity<?> getAllCardOneAccount(@RequestParam Long id) {
-        Collection<CardGetResponseDTO> cardCollection = cardService.getAllCardByAccountNumber(id)
-                .stream().map(cardConverter::toCardResponseFromCard).toList();
-        return ResponseEntity.ok().body(cardCollection);
+
+        return cardFacade.getAllCardByAccountNumber(id);
     }
 
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCard(@PathVariable Long id,
                                            @RequestParam(required = false) boolean isHardDelete) {
-        String deleteResult = cardService.deleteCard(id, isHardDelete);
-        return ResponseEntity.ok().body(deleteResult);
 
+        return cardFacade.deleteCard(id,isHardDelete);
     }
 
     @GetMapping("/balance/{cardNo}")
     public ResponseEntity<?> getBalanceByCardNo(@PathVariable String cardNo){
-        CardBalanceResponseDTO cardBalanceResponseDTO =
-                cardConverter.toCardBalanceResponseFromCard(cardService
-                .getCardBalance(cardNo));
-        return ResponseEntity.ok().body(cardBalanceResponseDTO);
+
+        return cardFacade.getCardBalance(cardNo);
     }
 }

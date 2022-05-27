@@ -44,11 +44,12 @@ public class CardConverterImpl implements CardConverter {
 
     @Override
     public CardGetResponseDTO toCardResponseFromCard(Card card) {
-        return new CardGetResponseDTO(card.getCardNo(), card.getCardDebt(),
-                card.getCardBalance(), card.getCustomer().getName(),
-                card.getCustomer().getSurname(), card.getCardLimit(),
-                card.getCardType(),card.getCustomer().getId(),
-                card.getAccount().getId(), card.getId());
+        return new CardGetResponseDTO(card.getId(), card.getCardNo(), card.getCardDebt(),
+                card.getCardBalance(), card.getCardLimit(), card.getCardType(),
+                card.getCustomer().getName(),
+                card.getCustomer().getSurname(),
+                card.getCustomer().getId(),
+                card.getAccount().getId());
     }
 
     @Override
