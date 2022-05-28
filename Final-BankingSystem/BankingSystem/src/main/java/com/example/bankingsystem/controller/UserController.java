@@ -1,14 +1,12 @@
 package com.example.bankingsystem.controller;
 
 import com.example.bankingsystem.converter.UserConverter;
+import com.example.bankingsystem.facade.UserFacade;
 import com.example.bankingsystem.model.dto.request.UserCreateRequestDTO;
-import com.example.bankingsystem.model.dto.response.UserResponseDTO;
 import com.example.bankingsystem.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collection;
 
 /**
  * @author Hasan DOĞAN
@@ -21,24 +19,27 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class UserController {
 
-private final UserService userService;
-private final UserConverter userConverter;
+    private final UserFacade userFacade;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getUser(@PathVariable Long id) {
+
+        return userFacade.getUser(id);
+    }
 
 
     @GetMapping
     public ResponseEntity<?> getAllUsers() {
 
-        Collection<UserResponseDTO> users = userService.getAllUsers().stream()
-                .map(userConverter::toUserResponseFromUser).toList();
-        return ResponseEntity.ok().body(users);
+        return userFacade.getAllUsers();
     }
 
-    /*@PostMapping
+  /*  @PostMapping
     public ResponseEntity<?> addUser(@RequestBody UserCreateRequestDTO userCreateRequestDTO) {
-        userService.addUser(userCreateRequestDTO);
-        return ResponseEntity.ok().body("User is added successfully");
-    }
-*/
 
-
+        return userFacade.addUser(userCreateRequestDTO);
+    }*/
 }
+
+
+

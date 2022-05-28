@@ -3,11 +3,13 @@ package com.example.bankingsystem.converter.impl;
 import com.example.bankingsystem.converter.UserConverter;
 import com.example.bankingsystem.exception.ServiceOperationCanNotCreateException;
 import com.example.bankingsystem.model.dto.request.UserCreateRequestDTO;
-import com.example.bankingsystem.model.dto.response.UserResponseDTO;
+import com.example.bankingsystem.model.dto.response.UserGetResponseDTO;
 import com.example.bankingsystem.model.entity.Customer;
 import com.example.bankingsystem.model.entity.User;
 import com.example.bankingsystem.service.CustomerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Component;
 public class UserConverterImpl implements UserConverter {
 
     private final CustomerService customerService;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public User toUser(UserCreateRequestDTO userCreateRequestDTO) {
@@ -36,8 +39,8 @@ public class UserConverterImpl implements UserConverter {
     }
 
     @Override
-    public UserResponseDTO toUserResponseFromUser(User user) {
-        return new UserResponseDTO(user.getId(), user.getMail(),user.getRole(),
+    public UserGetResponseDTO toUserResponseFromUser(User user) {
+        return new UserGetResponseDTO(user.getId(), user.getMail(),user.getRole(),
                 user.getCustomer().getName(),user.getCustomer().getSurname());
     }
 }

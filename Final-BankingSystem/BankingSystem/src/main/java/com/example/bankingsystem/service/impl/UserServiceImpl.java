@@ -9,6 +9,7 @@ import com.example.bankingsystem.model.entity.User;
 import com.example.bankingsystem.repository.UserRepository;
 import com.example.bankingsystem.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -25,6 +26,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserConverter userConverter;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void addUser(UserCreateRequestDTO userCreateRequestDTO) {

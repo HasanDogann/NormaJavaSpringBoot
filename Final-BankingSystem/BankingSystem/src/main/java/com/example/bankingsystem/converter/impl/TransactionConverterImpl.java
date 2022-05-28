@@ -3,6 +3,7 @@ package com.example.bankingsystem.converter.impl;
 import com.example.bankingsystem.converter.TransactionConverter;
 import com.example.bankingsystem.core.constants.ConstantUtils;
 import com.example.bankingsystem.model.dto.request.TransactionRequestDTO;
+import com.example.bankingsystem.model.dto.response.TransactionGetResponseDTO;
 import com.example.bankingsystem.model.entity.Transaction;
 import com.example.bankingsystem.model.entity.enums.TransferCurrencyType;
 import com.example.bankingsystem.model.entity.enums.TransferType;
@@ -22,15 +23,9 @@ public class TransactionConverterImpl implements TransactionConverter {
 
 
     @Override
-    public Transaction toTransactionByIBAN(TransactionRequestDTO transactionRequestDTO) {
-return  null;
-    }
+    public TransactionGetResponseDTO toTransactionResponse(Transaction transaction) {
 
-    @Override
-    public Transaction toTransactionByPurchase(TransactionRequestDTO transactionRequestDTO) {
-
-
-
-        return null;
+        return new TransactionGetResponseDTO(transaction.getSenderIBAN(), transaction.getReceiverIBAN(),
+                transaction.getTransferAmount(), transaction.getTransferType(), transaction.getTransferDate());
     }
 }
