@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService {
         User u = userRepository.findUserByEMailAddress(userCreateRequestDTO.mail());
         if (Objects.isNull(u)) {
             User user = userConverter.toUser(userCreateRequestDTO);
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
         } else
             throw new ServiceOperationCanNotCreateException.UserIsAlreadyCreatedException("Email is already taken for a user ");

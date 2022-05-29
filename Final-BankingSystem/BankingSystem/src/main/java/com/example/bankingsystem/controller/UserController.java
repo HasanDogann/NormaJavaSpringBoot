@@ -34,11 +34,11 @@ public class UserController {
         return userFacade.getAllUsers();
     }
 
-  /*  @PostMapping
+   @PostMapping
     public ResponseEntity<?> addUser(@RequestBody UserCreateRequestDTO userCreateRequestDTO) {
 
         return userFacade.addUser(userCreateRequestDTO);
-    }*/
+    }
 }
 
 

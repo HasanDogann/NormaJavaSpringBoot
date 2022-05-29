@@ -23,13 +23,13 @@ public class UserFacadeImpl implements UserFacade {
     private final UserService userService;
     private final UserConverter userConverter;
 
-   /* @Override
+    @Override
     public ResponseEntity<String> addUser(UserCreateRequestDTO userCreateRequestDTO) {
         userService.addUser(userCreateRequestDTO);
 
         return ResponseEntity.ok().body("User is created successfully");
 
-    }*/
+    }
 
 
     @Override

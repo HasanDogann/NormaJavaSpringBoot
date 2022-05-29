@@ -1,5 +1,6 @@
 package com.example.bankingsystem.controller;
 
+import com.example.bankingsystem.facade.AuthenticationFacade;
 import com.example.bankingsystem.model.dto.request.UserCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.UserLoginRequest;
 import com.example.bankingsystem.model.entity.User;
@@ -26,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class AuthenticationController {
 
-
+    private final AuthenticationFacade authenticationFacade;
     private final CustomerService customerService;
     private final SigningService signingService;
     private final UserService userService;
@@ -34,12 +35,12 @@ public class AuthenticationController {
     @PostMapping("/login")
     public String login(@RequestBody UserLoginRequest loginRequest) {
 
-     return signingService.login(loginRequest);
+     return authenticationFacade.login(loginRequest);
     }
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody UserCreateRequestDTO userCreateRequestDTO) {
-        User user = userService.getUserByEmail(userCreateRequestDTO.mail());
+        /*User user = userService.getUserByEmail(userCreateRequestDTO.mail());
         String mailCheck = customerService.getCustomer(userCreateRequestDTO.customerId()).getEMail();
         if (user != null) {
             return new ResponseEntity<>("Email is already in use with another Customer", HttpStatus.BAD_REQUEST);
@@ -51,8 +52,7 @@ public class AuthenticationController {
         else {
             signingService.register(userCreateRequestDTO);
             return new ResponseEntity<>("User is registered successfully", HttpStatus.CREATED);
-        }
+        }*/
+        return authenticationFacade.register(userCreateRequestDTO);
     }
-
-
 }

@@ -12,7 +12,7 @@ import java.util.Collection;
  */
 public interface UserFacade {
 
- //   ResponseEntity<String> addUser(UserCreateRequestDTO userCreateRequestDTO);
+    ResponseEntity<String> addUser(UserCreateRequestDTO userCreateRequestDTO);
 
     ResponseEntity<UserGetResponseDTO> getUser(Long id);
 

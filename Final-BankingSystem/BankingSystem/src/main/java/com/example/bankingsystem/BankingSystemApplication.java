@@ -18,9 +18,10 @@ public class BankingSystemApplication {
 
     // ------------------------------------
     //    // Özgün tasarım
+          // User şifresi eğer unutmuşsa yeni şifre için bir key kullanarak şifre yenileyebilir
           // 1. Kredi kartı şifresi konulup 3 kez yanlış girince bloke olabilir
           // 2. Ilk 1000 sıralamada register olan müşretimizin hesabına 50 tl hediye
-          // Logger  Her kayıt silme ve arama işleminden sonra bir logger çalışabilir
+          // Logger  Her kayıt, silme ve arama işleminden sonra bir logger çalışabilir
     //    // Unit Testler Yazılacak
     //    //
 

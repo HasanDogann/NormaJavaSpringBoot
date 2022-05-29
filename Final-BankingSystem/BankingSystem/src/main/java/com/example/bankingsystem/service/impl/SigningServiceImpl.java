@@ -3,8 +3,11 @@ package com.example.bankingsystem.service.impl;
 import com.example.bankingsystem.exception.SignOperationException;
 import com.example.bankingsystem.model.dto.request.UserCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.UserLoginRequest;
+import com.example.bankingsystem.model.entity.Account;
 import com.example.bankingsystem.model.entity.Customer;
 import com.example.bankingsystem.model.entity.User;
+import com.example.bankingsystem.repository.AccountRepository;
+import com.example.bankingsystem.repository.CustomerRepository;
 import com.example.bankingsystem.security.JsonWTokenProvider;
 import com.example.bankingsystem.service.CustomerService;
 import com.example.bankingsystem.service.SigningService;
@@ -18,7 +21,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * @author Hasan DOĞAN
@@ -35,6 +40,8 @@ public class SigningServiceImpl implements SigningService {
     private final AuthenticationManager authenticationManager;
     private final JsonWTokenProvider jsonWTokenProvider;
     private final UserService userService;
+    //private final AccountRepository accountRepository;
+    //private int userCounter=0;
 
 
     @Override
@@ -61,10 +68,17 @@ public class SigningServiceImpl implements SigningService {
         if (userCreateRequestDTO.mail().equals(customer.getEMail())) {
             User user = new User();
             user.setMail(customer.getEMail());
-            user.setPassword(passwordEncoder.encode(userCreateRequestDTO.password()));
+            user.setPassword(userCreateRequestDTO.password());
             user.setRole(userCreateRequestDTO.role());
             user.setCustomer(customerService.getCustomer(userCreateRequestDTO.customerId()));
             userService.addUser(new UserCreateRequestDTO(user.getMail(), user.getPassword(), user.getRole(), user.getCustomer().getId()));
+          /*  if(userCounter<1000){
+                Optional<Account> account =customer.getAccountList().stream().findFirst();
+                account.get().setBalance(account.get().getBalance().add(BigDecimal.valueOf(50)));
+                log.info(account.get().getBalance().toString());
+
+                userCounter+=1;
+            }*/
             return null;
         }
         return "Wrong email!";
