@@ -6,18 +6,19 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
 
-public interface AccountRepository extends JpaRepository<Account,Long> {
+public interface AccountRepository extends JpaRepository<Account, Long> {
 
     @Override
     Account getById(Long id);
 
     Account findAccountByBankBranchCode(Integer code);
 
-   Collection<Account> findAccountsByIsDeleted(boolean isDeletedOne);
 
-   Account findAccountByIBAN(String IbanNo);
+    Collection<Account> findAccountsByIsDeleted(boolean isDeletedOne);
 
-   Collection<Account> findAccountByCustomer(Customer customer);
+    Account findAccountByIBAN(String IbanNo);
 
-   void removeAccountById(Long id);
+    Collection<Account> findAccountByCustomer(Customer customer);
+
+    void removeAccountById(Long id);
 }

@@ -1,8 +1,5 @@
 package com.example.bankingsystem.service.impl;
 
-import com.example.bankingsystem.service.transfer.TransferStrategy;
-import com.example.bankingsystem.service.transfer.strategies.MoneyTransferByIban;
-import com.example.bankingsystem.service.transfer.strategies.MoneyTransferByPurchase;
 import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedException;
 import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
 import com.example.bankingsystem.model.dto.request.TransactionRequestDTO;
@@ -10,7 +7,11 @@ import com.example.bankingsystem.model.entity.Transaction;
 import com.example.bankingsystem.model.entity.enums.TransferType;
 import com.example.bankingsystem.repository.TransactionRepository;
 import com.example.bankingsystem.service.AccountService;
+import com.example.bankingsystem.service.CardService;
 import com.example.bankingsystem.service.TransactionService;
+import com.example.bankingsystem.service.transfer.TransferStrategy;
+import com.example.bankingsystem.service.transfer.strategies.MoneyTransferByIban;
+import com.example.bankingsystem.service.transfer.strategies.MoneyTransferByPurchase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -25,6 +26,7 @@ import org.springframework.web.client.RestTemplate;
 public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository transactionRepository;
+    private final CardService cardService;
     private final RestTemplate restTemplate;
     private TransferStrategy transferStrategy;
     private final AccountService accountService;
@@ -32,16 +34,15 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public void moneyTransfer(TransactionRequestDTO transactionRequestDTO) {
 
-
-        TransferType transferType=transactionRequestDTO.transferType();
+        TransferType transferType = transactionRequestDTO.transferType();
 
         if (transferType.equals(TransferType.IBAN)) {
-            transferStrategy = new MoneyTransferByIban(accountService,restTemplate);
+            transferStrategy = new MoneyTransferByIban(accountService, restTemplate);
         } else if (transferType.equals(TransferType.PURCHASE)) {
-            transferStrategy = new MoneyTransferByPurchase(accountService,restTemplate);
+            transferStrategy = new MoneyTransferByPurchase(accountService, restTemplate, cardService);
         }
 
-        Transaction transaction =transferStrategy.pay(transactionRequestDTO);
+        Transaction transaction = transferStrategy.pay(transactionRequestDTO);
         transactionRepository.save(transaction);
 
     }
