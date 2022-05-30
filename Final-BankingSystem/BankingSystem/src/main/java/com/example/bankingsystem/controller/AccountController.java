@@ -11,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 import java.util.Collection;
 
 @RestController
@@ -21,19 +24,19 @@ public class AccountController {
     private final AccountFacade accountFacade;
 
     @PostMapping
-    public ResponseEntity<?> addAccount(@RequestBody AccountCreateRequestDTO accountCreateRequestDTO) {
+    public ResponseEntity<?> addAccount(@Valid @RequestBody AccountCreateRequestDTO accountCreateRequestDTO) {
 
         return accountFacade.addAccount(accountCreateRequestDTO);
     }
 
     @GetMapping("/getAccountByCustomerIban")
-    public ResponseEntity<?> getAccountByIban(@RequestParam String IBAN) {
+    public ResponseEntity<?> getAccountByIban(@Valid @Pattern(regexp = "TR\\d{24}") @RequestParam String IBAN) {
 
        return accountFacade.getAccountByIBAN(IBAN);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getAccount(@PathVariable Long id) {
+    public ResponseEntity<?> getAccount(@Valid @Min(1) @PathVariable Long id) {
 
         return accountFacade.getAccount(id);
     }
@@ -46,15 +49,15 @@ public class AccountController {
 
 
     @GetMapping("/getAllAccountOneCustomer")
-    public ResponseEntity<?> getAllAccountOneCustomer(@RequestParam Long id) {
+    public ResponseEntity<?> getAllAccountOneCustomer(@Valid @Min(1) @RequestParam Long id) {
 
         return accountFacade.getAllAccountOneCustomer(id);
     }
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteAccount(@PathVariable Long id,
-                                           @RequestParam(required = false) boolean isHardDelete) {
+    public ResponseEntity<?> deleteAccount(@Valid @Min(1) @PathVariable Long id,
+                                           @Valid @RequestParam(required = false) boolean isHardDelete) {
 
        return accountFacade.deleteAccount(id,isHardDelete);
     }

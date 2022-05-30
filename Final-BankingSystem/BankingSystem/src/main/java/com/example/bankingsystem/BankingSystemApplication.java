@@ -3,6 +3,8 @@ package com.example.bankingsystem;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Locale;
+
 @SpringBootApplication
 public class BankingSystemApplication {
 
@@ -14,7 +16,7 @@ public class BankingSystemApplication {
     //DONE   // Transaction converter düzenle
     //DONE   // Facade tasarımı eklenecek
     //DONE   // Money Transfer ,Card Purchase and Card Debt Payment
-             // **** RestController Validation
+    //DONE   // **** RestController Validation
              // Token control and authority options
 
 

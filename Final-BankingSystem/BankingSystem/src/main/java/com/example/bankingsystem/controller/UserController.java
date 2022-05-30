@@ -6,7 +6,11 @@ import com.example.bankingsystem.model.dto.request.UserCreateRequestDTO;
 import com.example.bankingsystem.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 
 /**
  * @author Hasan DOĞAN
@@ -17,12 +21,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v2/users")
 @RequiredArgsConstructor
+@Validated
 public class UserController {
 
     private final UserFacade userFacade;
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getUser(@PathVariable Long id) {
+    public ResponseEntity<?> getUser(@PathVariable @Min(1) Long id) {
 
         return userFacade.getUser(id);
     }
@@ -35,7 +40,7 @@ public class UserController {
     }
 
    @PostMapping
-    public ResponseEntity<?> addUser(@RequestBody UserCreateRequestDTO userCreateRequestDTO) {
+    public ResponseEntity<?> addUser(@Valid @RequestBody UserCreateRequestDTO userCreateRequestDTO) {
 
         return userFacade.addUser(userCreateRequestDTO);
     }

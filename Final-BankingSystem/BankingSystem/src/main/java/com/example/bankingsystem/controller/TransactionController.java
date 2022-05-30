@@ -13,8 +13,11 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 
 
 /**
@@ -28,39 +31,24 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @RestController
-
 @RequestMapping("/api/v2/transactions")
-
+@Validated
 @RequiredArgsConstructor
-
 public class TransactionController {
-
-
 
     private final TransactionFacade transactionFacade;
 
-
-
     @PostMapping
-
-    public ResponseEntity<?> sendMoney(@RequestBody TransactionRequestDTO transactionRequestDTO){
+    public ResponseEntity<?> sendMoney(@Valid @RequestBody TransactionRequestDTO transactionRequestDTO){
 
         return transactionFacade.sendMoney(transactionRequestDTO);
-
     }
-
-
 
     @GetMapping("/{id}")
-
-    public ResponseEntity<?> getTransaction(@PathVariable Long id){
+    public ResponseEntity<?> getTransaction(@Valid @Min(1)@PathVariable Long id){
 
         return transactionFacade.getTransaction(id);
-
     }
-
-
-
 
 
 }

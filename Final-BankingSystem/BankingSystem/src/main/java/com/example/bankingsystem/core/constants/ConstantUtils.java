@@ -13,8 +13,6 @@ public final class ConstantUtils {
     private ConstantUtils() {
     }
 
-    public static final BigDecimal MAX_TRANSACTION_LIMIT = BigDecimal.valueOf(5000L);
-
     private static Random random = new Random();
 
     public static String getRandomIban(Integer branchCode) {

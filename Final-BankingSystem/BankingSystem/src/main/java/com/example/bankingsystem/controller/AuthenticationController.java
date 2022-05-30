@@ -11,10 +11,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 /**
  * @author Hasan DOĞAN
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
+@Validated
 @Slf4j
 public class AuthenticationController {
 
@@ -33,13 +37,13 @@ public class AuthenticationController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public String login(@RequestBody UserLoginRequest loginRequest) {
+    public String login(@Valid @RequestBody UserLoginRequest loginRequest) {
 
      return authenticationFacade.login(loginRequest);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody UserCreateRequestDTO userCreateRequestDTO) {
+    public ResponseEntity<String> register(@Valid @RequestBody UserCreateRequestDTO userCreateRequestDTO) {
         /*User user = userService.getUserByEmail(userCreateRequestDTO.mail());
         String mailCheck = customerService.getCustomer(userCreateRequestDTO.customerId()).getEMail();
         if (user != null) {

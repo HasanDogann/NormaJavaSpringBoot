@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,17 +26,21 @@ import java.util.Set;
 public class Account extends BaseModel {
 
 
+
     @Column(unique = true)
+    @Pattern(regexp = "TR\\d{24}")
     private String IBAN;
+    @Min(value = 10_000_000)
     @Column(length = 10)
     private Long accountNumber;
 
     private BigDecimal balance = BigDecimal.ZERO;
 
-    private BigDecimal lockedBalance = BigDecimal.ZERO;
+  //  private BigDecimal lockedBalance = BigDecimal.ZERO;
 
     private String creationDate;
-    @Column(length = 4)
+
+    @Max(9999)
     private int bankBranchCode;
 
     private boolean isDeficitAccount = false;

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,6 +23,7 @@ public class Customer extends BaseModel {
     @NotNull
     private String surname;
     @NotNull
+    @Email
     @Column(unique = true)
     private String eMail;
 

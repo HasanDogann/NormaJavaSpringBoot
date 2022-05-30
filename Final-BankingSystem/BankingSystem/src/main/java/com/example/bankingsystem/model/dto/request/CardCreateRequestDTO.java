@@ -2,6 +2,8 @@ package com.example.bankingsystem.model.dto.request;
 
 import com.example.bankingsystem.model.entity.enums.CardType;
 
+import javax.persistence.Column;
+import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 
 /**
@@ -9,7 +11,7 @@ import java.math.BigDecimal;
  * @Project IntelliJ IDEA
  * @Date 23.05.2022
  */
-public record CardCreateRequestDTO(Long accountId,
+public record CardCreateRequestDTO( @Column(nullable = false)  @Min(value = 1,message = "Account ID must be bigger than 0") Long accountId,
                                    CardType cardType,
-                                   BigDecimal limit) {
+                                    @Column(nullable = false)  @Min(value = 1,message = "Limit must be bigger than 0") BigDecimal limit) {
 }

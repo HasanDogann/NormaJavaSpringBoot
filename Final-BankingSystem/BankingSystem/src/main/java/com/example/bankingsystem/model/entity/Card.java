@@ -8,8 +8,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
 
 @Entity
@@ -19,12 +22,16 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class Card extends BaseModel {
 
+    @Pattern(regexp = "[1-9]\\d{15}")
+    @Column(nullable = false)
     private String cardNo;
 
+    @Column(nullable = false)
     private BigDecimal cardBalance=BigDecimal.ZERO;
 
+    @Column(nullable = false)
     private BigDecimal cardLimit=BigDecimal.ZERO;
-
+    @Column(nullable = false)
     private BigDecimal cardDebt=BigDecimal.ZERO;
 
     private boolean isBlocked=false;

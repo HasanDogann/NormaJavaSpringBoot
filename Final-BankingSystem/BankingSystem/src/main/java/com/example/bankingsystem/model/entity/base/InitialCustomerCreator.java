@@ -58,7 +58,7 @@ public class InitialCustomerCreator {
         account2.setAccountNumber(ConstantUtils.getRandomAccountNumber());
         account2.setBankBranchCode(9998);
         account2.setBalance(BigDecimal.valueOf(750));
-        account2.setIBAN(ConstantUtils.getRandomIban(account.getBankBranchCode())+""+account.getAccountNumber()+""+ConstantUtils.getRandomExtraAccountNo());
+        account2.setIBAN(ConstantUtils.getRandomIban(account2.getBankBranchCode())+""+account2.getAccountNumber()+""+ConstantUtils.getRandomExtraAccountNo());
         account2.setCreationDate(ConstantUtils.getCurrentDate());
         account2.setAccountStatus(AccountStatus.ACTIVE);
         account2.setCustomer(customer);
@@ -70,7 +70,7 @@ public class InitialCustomerCreator {
         account3.setAccountNumber(ConstantUtils.getRandomAccountNumber());
         account3.setBankBranchCode(9997);
         account3.setBalance(BigDecimal.valueOf(1000));
-        account3.setIBAN("MarketAccountIBAN");
+        account3.setIBAN(ConstantUtils.getRandomIban(account3.getBankBranchCode())+""+account3.getAccountNumber()+""+ConstantUtils.getRandomExtraAccountNo());
        // account3.setIBAN(ConstantUtils.getRandomIban(account.getBankBranchCode())+""+account.getAccountNumber()+""+ConstantUtils.getRandomExtraAccountNo());
         account3.setCreationDate(ConstantUtils.getCurrentDate());
         account3.setAccountStatus(AccountStatus.ACTIVE);
