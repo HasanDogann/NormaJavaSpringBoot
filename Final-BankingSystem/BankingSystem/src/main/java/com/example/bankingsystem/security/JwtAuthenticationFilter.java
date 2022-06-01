@@ -4,6 +4,7 @@ import com.example.bankingsystem.service.impl.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.NonNullApi;
@@ -26,7 +27,7 @@ import java.io.IOException;
  * @Date 20.05.2022
  */
 
-
+@Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JsonWTokenProvider jsonWTokenProvider;
@@ -42,6 +43,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             if(StringUtils.hasText(jwtToken) && jsonWTokenProvider.validateToken(jwtToken) ){
             Long id = jsonWTokenProvider.getUserIdFromJWToken(jwtToken);
             UserDetails userDetails = userDetailsService.loadUserById(id);
+            log.info(id.toString());
             if(userDetails != null ){
                UsernamePasswordAuthenticationToken authenticationToken =
                        new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());

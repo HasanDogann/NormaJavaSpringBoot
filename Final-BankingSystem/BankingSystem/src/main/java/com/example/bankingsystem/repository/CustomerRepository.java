@@ -16,7 +16,7 @@ public interface CustomerRepository extends JpaRepository<Customer,Long> {
     void removeCustomerById(Long id);
 
    // Customer findCustomerByEMail(String EMail);
-    @Query("SELECT c FROM Customer c Where c.eMail=?1")
+    @Query("SELECT c FROM Customer c Where c.mail=?1")
     Customer findCustomerByEMailAddress(String email);
 
     @Query("SELECT c FROM Customer c WHERE c.isDeleted = ?1")

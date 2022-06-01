@@ -1,13 +1,12 @@
 package com.example.bankingsystem.service.impl;
 
 import com.example.bankingsystem.exception.SignOperationException;
+import com.example.bankingsystem.model.dto.request.UserCreateRequestByUserDTO;
 import com.example.bankingsystem.model.dto.request.UserCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.UserLoginRequest;
-import com.example.bankingsystem.model.entity.Account;
 import com.example.bankingsystem.model.entity.Customer;
 import com.example.bankingsystem.model.entity.User;
-import com.example.bankingsystem.repository.AccountRepository;
-import com.example.bankingsystem.repository.CustomerRepository;
+import com.example.bankingsystem.model.entity.enums.Role;
 import com.example.bankingsystem.security.JsonWTokenProvider;
 import com.example.bankingsystem.service.CustomerService;
 import com.example.bankingsystem.service.SigningService;
@@ -21,9 +20,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.Objects;
-import java.util.Optional;
 
 /**
  * @author Hasan DOĞAN
@@ -56,20 +53,21 @@ public class SigningServiceImpl implements SigningService {
         log.info(authenticationToken + "auth token");
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
         log.info(authentication.toString() + "auth");
+        log.info(authentication.getPrincipal().toString());
         SecurityContextHolder.getContext().setAuthentication(authentication);
         log.info(authentication.getAuthorities().toString());
         return "Bearer " + jsonWTokenProvider.generateJWToken(authentication);
     }
 
     @Override
-    public String register(UserCreateRequestDTO userCreateRequestDTO) {
+    public String register(UserCreateRequestByUserDTO userCreateRequestDTO) {
         //1000.ci register olan web userına 1000 TL bakiye eklenecek
         Customer customer = customerService.getCustomer(userCreateRequestDTO.customerId());
-        if (userCreateRequestDTO.mail().equals(customer.getEMail())) {
+        if (userCreateRequestDTO.mail().equals(customer.getMail())) {
             User user = new User();
-            user.setMail(customer.getEMail());
+            user.setMail(customer.getMail());
             user.setPassword(userCreateRequestDTO.password());
-            user.setRole(userCreateRequestDTO.role());
+            user.setRole(Role.valueOf("USER"));
             user.setCustomer(customerService.getCustomer(userCreateRequestDTO.customerId()));
             userService.addUser(new UserCreateRequestDTO(user.getMail(), user.getPassword(), user.getRole(), user.getCustomer().getId()));
           /*  if(userCounter<1000){

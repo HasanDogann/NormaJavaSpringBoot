@@ -1,5 +1,6 @@
 package com.example.bankingsystem.facade;
 
+import com.example.bankingsystem.model.dto.request.UserCreateRequestByUserDTO;
 import com.example.bankingsystem.model.dto.request.UserCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.UserLoginRequest;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ public interface AuthenticationFacade {
 
     String login(UserLoginRequest userLoginRequest);
 
-    ResponseEntity<String> register(UserCreateRequestDTO userCreateRequestDTO);
+    ResponseEntity<String> register(UserCreateRequestByUserDTO userCreateRequestDTO);
 
 
 

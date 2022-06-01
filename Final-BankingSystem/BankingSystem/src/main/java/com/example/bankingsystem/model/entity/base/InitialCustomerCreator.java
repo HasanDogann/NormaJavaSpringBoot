@@ -36,10 +36,18 @@ public class InitialCustomerCreator {
         Customer customer = new Customer();
         customer.setName("Demo");
         customer.setSurname("Customer");
-        customer.setEMail("Demo@mail");
+        customer.setMail("Demo@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR","Ankara","06000","Capital City",customer));
+        Customer customer2 = new Customer();
+        customer2.setName("Demo 2");
+        customer2.setSurname("Customer");
+        customer2.setMail("Demo@mail2");
+        customer2.setPhone("90123456");
+        customer2.setCustomerAddress(
+                new CustomerAddress("TR","Ankara","06000","Capital City",customer2));
+        //Adding account infos
         //Adding account infos
         Account account = new Account();
         account.setAccountType(AccountType.CHECKING_ACCOUNT);
@@ -74,7 +82,7 @@ public class InitialCustomerCreator {
        // account3.setIBAN(ConstantUtils.getRandomIban(account.getBankBranchCode())+""+account.getAccountNumber()+""+ConstantUtils.getRandomExtraAccountNo());
         account3.setCreationDate(ConstantUtils.getCurrentDate());
         account3.setAccountStatus(AccountStatus.ACTIVE);
-        account3.setCustomer(customer);
+        account3.setCustomer(customer2);
 
         //Adding credit card infos
         Card creditCard = new Card();

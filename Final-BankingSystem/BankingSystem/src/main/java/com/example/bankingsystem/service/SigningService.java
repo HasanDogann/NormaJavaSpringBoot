@@ -1,5 +1,6 @@
 package com.example.bankingsystem.service;
 
+import com.example.bankingsystem.model.dto.request.UserCreateRequestByUserDTO;
 import com.example.bankingsystem.model.dto.request.UserCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.UserLoginRequest;
 
@@ -11,5 +12,5 @@ import com.example.bankingsystem.model.dto.request.UserLoginRequest;
 public interface SigningService {
 
     public String login(UserLoginRequest loginRequest);
-    public String register(UserCreateRequestDTO userCreateRequestDTO);
+    public String register(UserCreateRequestByUserDTO userCreateRequestDTO);
 }

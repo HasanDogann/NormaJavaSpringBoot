@@ -8,7 +8,6 @@ import com.example.bankingsystem.model.entity.Customer;
 import com.example.bankingsystem.model.entity.User;
 import com.example.bankingsystem.service.CustomerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -28,10 +27,10 @@ public class UserConverterImpl implements UserConverter {
     public User toUser(UserCreateRequestDTO userCreateRequestDTO) {
         User user= new User();
         Customer customer = customerService.getCustomer(userCreateRequestDTO.customerId());
-        if(!userCreateRequestDTO.mail().equals(customer.getEMail())){
+        if(!userCreateRequestDTO.mail().equals(customer.getMail())){
             throw new ServiceOperationCanNotCreateException.UserCanNotCreatException("Customer email is wrong!");
         }
-        user.setMail(customer.getEMail());
+        user.setMail(customer.getMail());
         user.setPassword(userCreateRequestDTO.password());
         user.setRole(userCreateRequestDTO.role());
         user.setCustomer(customer);

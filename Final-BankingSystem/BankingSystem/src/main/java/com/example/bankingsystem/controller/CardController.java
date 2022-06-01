@@ -5,6 +5,7 @@ import com.example.bankingsystem.model.dto.request.CardCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.CardPaymentRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,12 +27,13 @@ public class CardController {
 
     private final CardFacade cardFacade;
 
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getCard(@Valid @Min(1) @PathVariable Long id) {
 
         return cardFacade.getCard(id);
     }
-
+    @PreAuthorize(value = "hasAnyAuthority('ADMIN')")
     @GetMapping
     public ResponseEntity<?> getAllCards() {
 

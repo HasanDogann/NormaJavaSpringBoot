@@ -1,26 +1,15 @@
 package com.example.bankingsystem.service.impl;
 
-import com.example.bankingsystem.model.dto.model.CustomerAddressDTO;
-import com.example.bankingsystem.model.dto.request.CustomerCreateRequestDTO;
-import com.example.bankingsystem.model.entity.Account;
 import com.example.bankingsystem.model.entity.Customer;
 import com.example.bankingsystem.model.entity.CustomerAddress;
-import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedException;
-import com.example.bankingsystem.exception.ServiceOperationCanNotDeleteException;
-import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
 import com.example.bankingsystem.repository.AccountRepository;
 import com.example.bankingsystem.repository.CustomerRepository;
 import com.example.bankingsystem.service.AccountService;
 import com.example.bankingsystem.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.math.BigDecimal;
-import java.util.Set;
 
 @SpringBootTest
 @Slf4j
@@ -43,7 +32,7 @@ class CustomerServiceImplTest {
         customer.setName("Customer Test name");
         customer.setSurname("Customer test surname");
         customer.setId(100L);
-        customer.setEMail("abc@hotmail.com");
+        customer.setMail("abc@hotmail.com");
         customer.setPhone("155155155");
         customer.setCustomerAddress(new CustomerAddress("TR", "Ankara", "06000", "Central", customer));
 

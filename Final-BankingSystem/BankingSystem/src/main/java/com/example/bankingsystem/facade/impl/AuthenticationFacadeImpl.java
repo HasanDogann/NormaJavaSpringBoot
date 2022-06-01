@@ -1,6 +1,7 @@
 package com.example.bankingsystem.facade.impl;
 
 import com.example.bankingsystem.facade.AuthenticationFacade;
+import com.example.bankingsystem.model.dto.request.UserCreateRequestByUserDTO;
 import com.example.bankingsystem.model.dto.request.UserCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.UserLoginRequest;
 import com.example.bankingsystem.model.entity.User;
@@ -31,9 +32,9 @@ public class AuthenticationFacadeImpl implements AuthenticationFacade {
     }
 
     @Override
-    public ResponseEntity<String> register(UserCreateRequestDTO userCreateRequestDTO) {
+    public ResponseEntity<String> register(UserCreateRequestByUserDTO userCreateRequestDTO) {
         User user = userService.getUserByEmail(userCreateRequestDTO.mail());
-        String mailCheck = customerService.getCustomer(userCreateRequestDTO.customerId()).getEMail();
+        String mailCheck = customerService.getCustomer(userCreateRequestDTO.customerId()).getMail();
         if (user != null) {
             return new ResponseEntity<>("Email is already in use with another Customer", HttpStatus.BAD_REQUEST);
         } else if (!userCreateRequestDTO.mail()

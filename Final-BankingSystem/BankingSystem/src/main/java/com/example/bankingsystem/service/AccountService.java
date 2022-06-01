@@ -14,6 +14,8 @@ public interface AccountService {
 
     Collection<Account> getAllAccounts();
 
+
+
     Account getAccountByIBAN(String IBAN);
 
     Collection<Account> getAllAccountOneCustomer(Long id);

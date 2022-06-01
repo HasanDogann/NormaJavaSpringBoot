@@ -15,6 +15,9 @@ import com.example.bankingsystem.service.AccountService;
 import com.example.bankingsystem.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
+import org.springframework.orm.hibernate5.SpringSessionContext;
+import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,6 +66,7 @@ public class AccountServiceImpl implements AccountService {
 
     }
 
+    //@PostFilter("filterObject.body.owner=authentication.name")
     @Override
     public Account getAccount(Long id) {
 
@@ -90,12 +94,11 @@ public class AccountServiceImpl implements AccountService {
         }
         return account;
     }
-
+   // @PostFilter("filterObject.customer.mail.equals(userRepository.findUserMailByUserId(authentication.principal.id))")
     @Override
     public Collection<Account> getAllAccountOneCustomer(Long id) {
-
         return accountRepository.
-                findAccountByCustomer(customerService.getCustomer(id))
+                findAccountsByCustomer(customerService.getCustomer(id))
                 .stream()
                 .filter(accounts -> !accounts.isDeleted())
                 .toList();

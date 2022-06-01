@@ -32,7 +32,7 @@ public class CustomerConverterImpl implements CustomerConverter {
         Customer customer = new Customer();
         customer.setName(customerCreateRequestDTO.customerName());
         customer.setSurname(customerCreateRequestDTO.customerSurname());
-        customer.setEMail(customerCreateRequestDTO.customerEmail());
+        customer.setMail(customerCreateRequestDTO.customerEmail());
         customer.setPhone(customerCreateRequestDTO.customerPhone());
 
         //Taking customer address when creating customer
@@ -66,7 +66,7 @@ public class CustomerConverterImpl implements CustomerConverter {
     @Override
     public CustomerGetResponseDTO toCustomerResponse(Customer customer) {
 
-        return new CustomerGetResponseDTO(customer.getName(), customer.getSurname(), customer.getId(), customer.getEMail(), customer.getPhone(), customer.getAccountList(), customer.getCardList());
+        return new CustomerGetResponseDTO(customer.getName(), customer.getSurname(), customer.getId(), customer.getMail(), customer.getPhone(), customer.getAccountList(), customer.getCardList());
     }
 
     @Override
@@ -74,7 +74,7 @@ public class CustomerConverterImpl implements CustomerConverter {
         Customer customer = customerRepository.getById(customerUpdateRequestDTO.id());
         customer.setName(customerUpdateRequestDTO.customerName());
         customer.setSurname(customerUpdateRequestDTO.customerSurname());
-        customer.setEMail(customerUpdateRequestDTO.customerEmail());
+        customer.setMail(customerUpdateRequestDTO.customerEmail());
         customer.setPhone(customerUpdateRequestDTO.customerPhone());
         return customer;
     }

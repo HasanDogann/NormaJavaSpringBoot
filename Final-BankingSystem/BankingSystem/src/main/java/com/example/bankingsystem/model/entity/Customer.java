@@ -25,7 +25,7 @@ public class Customer extends BaseModel {
     @NotNull
     @Email
     @Column(unique = true)
-    private String eMail;
+    private String mail;
 
     @NotNull
     private String phone;

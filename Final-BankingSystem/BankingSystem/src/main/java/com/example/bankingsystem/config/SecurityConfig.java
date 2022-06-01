@@ -55,6 +55,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-ui/**"
             // other public endpoints of your API may be appended to this array
     };
+    private static final String[] USER_PERMISSION = {
+
+    };
 
 
     @Bean

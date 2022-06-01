@@ -20,6 +20,7 @@ public interface UserService  {
 
     User getUser(Long id);
 
+
     Collection<User> getAllUsers();
 
     User getUserByEmail(String email);
