@@ -1,17 +1,13 @@
 package com.example.bankingsystem.model.entity.base;
 import com.example.bankingsystem.core.constants.ConstantUtils;
-import com.example.bankingsystem.model.entity.Account;
-import com.example.bankingsystem.model.entity.Card;
-import com.example.bankingsystem.model.entity.Customer;
-import com.example.bankingsystem.model.entity.CustomerAddress;
+import com.example.bankingsystem.model.entity.*;
 
-import com.example.bankingsystem.model.entity.enums.AccountStatus;
-import com.example.bankingsystem.model.entity.enums.AccountType;
-import com.example.bankingsystem.model.entity.enums.BalanceCurrencyType;
-import com.example.bankingsystem.model.entity.enums.CardType;
+import com.example.bankingsystem.model.entity.enums.*;
 import com.example.bankingsystem.repository.AccountRepository;
 import com.example.bankingsystem.repository.CustomerRepository;
+import com.example.bankingsystem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -28,8 +24,10 @@ import java.util.Set;
 public class InitialCustomerCreator {
 
     private final CustomerRepository customerRepository;
+    private final UserRepository userRepository;
     private final AccountRepository accountRepository;
     private final ConstantUtils constantUtils;
+    private final PasswordEncoder passwordEncoder;
 
     @PostConstruct
     public void createFirstCustomer(){
@@ -54,23 +52,23 @@ public class InitialCustomerCreator {
         account.setBalanceCurrencyType(BalanceCurrencyType.TRY);
         account.setAccountNumber(ConstantUtils.getRandomAccountNumber());
         account.setBankBranchCode(9999);
-        account.setBalance(BigDecimal.valueOf(1250));
+        account.setBalance(BigDecimal.valueOf(0));
         account.setIBAN(ConstantUtils.getRandomIban(account.getBankBranchCode())+""+account.getAccountNumber()+""+ConstantUtils.getRandomExtraAccountNo());
         account.setCreationDate(ConstantUtils.getCurrentDate());
         account.setAccountStatus(AccountStatus.ACTIVE);
         account.setCustomer(customer);
         //Adding account infos
-        Account account2 = new Account();
+       /* Account account2 = new Account();
         account2.setAccountType(AccountType.DEPOSIT_ACCOUNT);
         account2.setBalanceCurrencyType(BalanceCurrencyType.EUR);
         account2.setAccountNumber(ConstantUtils.getRandomAccountNumber());
         account2.setBankBranchCode(9998);
-        account2.setBalance(BigDecimal.valueOf(750));
+        account2.setBalance(BigDecimal.valueOf(0));
         account2.setIBAN(ConstantUtils.getRandomIban(account2.getBankBranchCode())+""+account2.getAccountNumber()+""+ConstantUtils.getRandomExtraAccountNo());
         account2.setCreationDate(ConstantUtils.getCurrentDate());
         account2.setAccountStatus(AccountStatus.ACTIVE);
         account2.setCustomer(customer);
-
+*/
         //Adding Market Account
         Account account3 = new Account();
         account3.setAccountType(AccountType.CHECKING_ACCOUNT);
@@ -89,14 +87,14 @@ public class InitialCustomerCreator {
         creditCard.setCardNo(ConstantUtils.getRandomCardNo());
         creditCard.setCardType(CardType.CREDIT_CARD);
         creditCard.setCardLimit(BigDecimal.valueOf(5000));
-        creditCard.setCardDebt(BigDecimal.valueOf(1000));
+        creditCard.setCardDebt(BigDecimal.valueOf(0));
         creditCard.setAccount(account);
         creditCard.setCustomer(customer);
         //Adding bank card infos
         Card bankCard = new Card();
         bankCard.setCardNo(ConstantUtils.getRandomCardNo());
         bankCard.setCardType(CardType.BANK_CARD);
-        bankCard.setCardLimit(BigDecimal.valueOf(2000));
+        bankCard.setCardLimit(BigDecimal.valueOf(0));
         bankCard.setAccount(account);
         bankCard.setCustomer(customer);
         //Adding bank card infos
@@ -105,24 +103,34 @@ public class InitialCustomerCreator {
         bankCard2.setCardType(CardType.BANK_CARD);
         bankCard2.setCardBalance(BigDecimal.TEN);
         bankCard2.setCardLimit(BigDecimal.valueOf(3500));
-        bankCard2.setAccount(account2);
-        bankCard2.setCustomer(customer);
+        bankCard2.setAccount(account3);
+        bankCard2.setCustomer(customer2);
 
 
         //adding account to Customer's account list
         customer.addAccountToCustomer(Set.of(account));
-        customer.addAccountToCustomer(Set.of(account2));
+       // customer.addAccountToCustomer(Set.of(account2));
         customer.addAccountToCustomer(Set.of(account3));
         //Adding card to Account's card list
         account.addCardToAccount(Set.of(creditCard));
         account.addCardToAccount(Set.of(bankCard));
-        account2.addCardToAccount(Set.of(bankCard2));
+        account3.addCardToAccount(Set.of(bankCard2));
+       // account2.addCardToAccount(Set.of(bankCard2));
 
 
         //Adding customer to DB
         customerRepository.save(customer);
 
         //Adding account to DB
+        User user = new User();
+        user.setCustomer(customer);
+        user.setMail(customer.getMail());
+        user.setPassword(passwordEncoder.encode("1234Asd."));
+        user.setRole(Role.ADMIN);
+
+        userRepository.save(user);
+
+
        // accountRepository.save(account);
        // accountRepository.save(account2);
     }

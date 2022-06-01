@@ -38,13 +38,13 @@ import javax.validation.constraints.Min;
 public class TransactionController {
 
     private final TransactionFacade transactionFacade;
-    @PreAuthorize(value = "hasAnyAuthority('USER')")
+    @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
     @PostMapping
     public ResponseEntity<?> sendMoney(@Valid @RequestBody TransactionRequestDTO transactionRequestDTO){
 
         return transactionFacade.sendMoney(transactionRequestDTO);
     }
-    @PreAuthorize(value = "hasAnyAuthority('USER')")
+    @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<?> getTransaction(@Valid @Min(1)@PathVariable Long id){
 

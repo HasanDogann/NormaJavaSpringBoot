@@ -28,7 +28,7 @@ import java.util.Collection;
 @Validated
 public class AccountController {
     private final AccountFacade accountFacade;
-    @PreAuthorize(value = "hasAnyAuthority('USER')")
+    @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
     @PostMapping
     public ResponseEntity<?> addAccount(@Valid @RequestBody AccountCreateRequestDTO accountCreateRequestDTO) {
 
@@ -40,7 +40,7 @@ public class AccountController {
 
        return accountFacade.getAccountByIBAN(IBAN);
     }
-    @PreAuthorize(value = "hasAnyAuthority('USER')")
+    @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<?> getAccount( @Valid @Min(1) @PathVariable Long id) {
 
@@ -54,13 +54,13 @@ public class AccountController {
         return accountFacade.getAllAccounts();
     }
 
-    @PreAuthorize(value = "hasAnyAuthority('USER')")
+    @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
     @GetMapping("/getAllAccountOneCustomer")
     public ResponseEntity<?> getAllAccountOneCustomer(@Valid @Min(1) @RequestParam Long id) {
 
         return accountFacade.getAllAccountOneCustomer(id);
     }
-    @PreAuthorize(value = "hasAnyAuthority('USER')")
+    @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteAccount(@Valid @Min(1) @PathVariable Long id,
                                            @Valid @RequestParam(required = false) boolean isHardDelete) {

@@ -26,7 +26,7 @@ public class CustomerController {
         return customerFacade.addCustomer(customerCreateRequestDTO);
     }
 
-    @PreAuthorize(value = "hasAnyAuthority('USER')")
+    @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<?> getCustomer(@Valid @Min(1) @PathVariable Long id) {
         return ResponseEntity.ok().body(customerFacade.getCustomer(id));
@@ -38,7 +38,7 @@ public class CustomerController {
         return customerFacade.getAllCustomers();
     }
 
-    @PreAuthorize(value = "hasAnyAuthority('USER')")
+    @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
     @PatchMapping(path = "/update")
     public ResponseEntity<?> updateCustomer(@Valid @RequestBody CustomerUpdateRequestDTO customerUpdateRequestDTO) {
         return customerFacade.updateCustomer(customerUpdateRequestDTO);

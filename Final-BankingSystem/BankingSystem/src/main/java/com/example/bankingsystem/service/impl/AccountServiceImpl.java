@@ -36,6 +36,7 @@ public class AccountServiceImpl implements AccountService {
     private final CustomerService customerService;
 
     @Override
+    @Transactional
     public Account addAccount(AccountCreateRequestDTO accountCreateRequestDTO) {
         Customer tempCustomer = customerService.getCustomer(accountCreateRequestDTO.customerId());
         AccountType accountType = accountCreateRequestDTO.accountType();
@@ -95,6 +96,7 @@ public class AccountServiceImpl implements AccountService {
         return account;
     }
    // @PostFilter("filterObject.customer.mail.equals(userRepository.findUserMailByUserId(authentication.principal.id))")
+    //@PostFilter(value = "filterObject.accountNumber==userRepository.getById(authentication.principal.id).customer.accountList[id]")
     @Override
     public Collection<Account> getAllAccountOneCustomer(Long id) {
         return accountRepository.

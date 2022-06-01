@@ -39,33 +39,33 @@ public class CardController {
 
         return cardFacade.getAllCards();
     }
-
+    @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
     @PostMapping
     public ResponseEntity<?> addCard(@Valid @RequestBody CardCreateRequestDTO cardCreateRequestDTO) {
 
         return cardFacade.addCard(cardCreateRequestDTO);
     }
-
+    @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
     @PostMapping("/payment")
     public ResponseEntity<?> payCardDebt(@Valid @RequestBody CardPaymentRequestDTO cardPaymentRequestDTO) {
 
         return cardFacade.payCardDebt(cardPaymentRequestDTO);
     }
-
+    @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
     @GetMapping("/getAllCardOneAccount")
     public ResponseEntity<?> getAllCardOneAccount(@Valid @Min(1) @RequestParam Long id) {
 
         return cardFacade.getAllCardByAccountNumber(id);
     }
 
-
+    @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCard(@Valid @Min(1) @PathVariable Long id,
                                         @RequestParam(required = false) boolean isHardDelete) {
 
         return cardFacade.deleteCard(id, isHardDelete);
     }
-
+    @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
     @GetMapping("/balance/{cardNo}")
     public ResponseEntity<?> getBalanceByCardNo(@Valid @Pattern(regexp = "[1-9]\\d{15}") @PathVariable String cardNo) {
 
