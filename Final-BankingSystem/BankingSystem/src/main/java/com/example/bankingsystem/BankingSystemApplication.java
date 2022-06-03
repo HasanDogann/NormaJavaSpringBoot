@@ -19,6 +19,10 @@ public class BankingSystemApplication {
     //DONE   // **** RestController Validation
              // Token control and authority options
 
+    //account delete test ile devam edilecek
+    //Transactional olanlara aynı anda 2 işlem yapılamaz şeklinde bir arguman konulacak
+    //GetAccount() gibi methodlara sadece belli kullanıcıların görmesi filtresi eklenecek
+
 
    // --------------------------------------------------------------------------------------------------//
           // Özgün tasarım

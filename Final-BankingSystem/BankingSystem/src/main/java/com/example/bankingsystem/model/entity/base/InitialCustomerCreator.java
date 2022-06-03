@@ -121,7 +121,7 @@ public class InitialCustomerCreator {
         //Adding customer to DB
         customerRepository.save(customer);
 
-        //Adding account to DB
+        //Adding Admin User to DB
         User user = new User();
         user.setCustomer(customer);
         user.setMail(customer.getMail());
