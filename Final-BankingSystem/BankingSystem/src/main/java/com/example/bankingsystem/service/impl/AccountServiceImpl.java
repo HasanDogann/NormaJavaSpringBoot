@@ -16,6 +16,7 @@ import com.example.bankingsystem.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -33,7 +34,7 @@ public class AccountServiceImpl implements AccountService {
     private final CustomerService customerService;
 
     @Override
-    @Transactional
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public Account addAccount(AccountCreateRequestDTO accountCreateRequestDTO) {
         Customer tempCustomer = customerService.getCustomer(accountCreateRequestDTO.customerId());
         AccountType accountType = accountCreateRequestDTO.accountType();
@@ -104,7 +105,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    @Transactional
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public String deleteAccount(Long id, boolean isHardDelete) {
         Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new ServiceOperationNotFoundException.AccountNotFoundException("Account is not found"));

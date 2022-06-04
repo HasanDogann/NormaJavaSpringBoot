@@ -14,6 +14,8 @@ import com.example.bankingsystem.service.transfer.strategies.MoneyTransferByIban
 import com.example.bankingsystem.service.transfer.strategies.MoneyTransferByPurchase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -32,6 +34,7 @@ public class TransactionServiceImpl implements TransactionService {
     private final AccountService accountService;
 
     @Override
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public void moneyTransfer(TransactionRequestDTO transactionRequestDTO) {
 
         TransferType transferType = transactionRequestDTO.transferType();

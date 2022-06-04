@@ -19,8 +19,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Objects;
@@ -85,7 +86,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    @Transactional
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public String deleteCustomer(Long id, boolean hardDelete) {
 
         Customer customer = getCustomer(id);

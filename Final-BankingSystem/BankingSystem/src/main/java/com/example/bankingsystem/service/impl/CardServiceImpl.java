@@ -20,6 +20,8 @@ import com.example.bankingsystem.service.payment.strategies.CreditCardPaymentByA
 import com.example.bankingsystem.service.payment.strategies.CreditCardPaymentByAccount;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -111,6 +113,7 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public String deleteCard(Long id, boolean isHardDelete) {
         Card card = cardRepository.findById(id)
                 .orElseThrow(() -> new ServiceOperationNotFoundException.CardNotFoundException("Card is not found!"));
@@ -135,6 +138,7 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public void payCardDebt(CardPaymentRequestDTO cardPaymentRequestDTO) {
         if (cardPaymentRequestDTO.paymentType().equals(PaymentType.BY_ACCOUNT)) {
             paymentStrategy = new CreditCardPaymentByAccount(cardRepository);
