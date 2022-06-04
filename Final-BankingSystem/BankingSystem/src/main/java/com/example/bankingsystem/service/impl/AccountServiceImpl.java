@@ -15,9 +15,6 @@ import com.example.bankingsystem.service.AccountService;
 import com.example.bankingsystem.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
-import org.springframework.orm.hibernate5.SpringSessionContext;
-import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -136,7 +133,7 @@ public class AccountServiceImpl implements AccountService {
                 accountRepository.save(account);
                 return "Account is soft deleted successfully";
             }
-            throw new ServiceOperationCanNotDeleteException.AccountCardBalanceorDebtNotZero("Account can not delete because one of card of this account has debt or balance");
+            throw new ServiceOperationCanNotDeleteException.AccountCardBalanceOrDebtNotZero("Account can not delete because one of card of this account has debt or balance");
         }
 
         log.info(account.getBalance().toString());

@@ -1,9 +1,7 @@
 package com.example.bankingsystem.controller;
 
-import com.example.bankingsystem.converter.UserConverter;
 import com.example.bankingsystem.facade.UserFacade;
 import com.example.bankingsystem.model.dto.request.UserCreateRequestDTO;
-import com.example.bankingsystem.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,6 +24,7 @@ import javax.validation.constraints.Min;
 public class UserController {
 
     private final UserFacade userFacade;
+
     @PreAuthorize(value = "hasAnyAuthority('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<?> getUser(@PathVariable @Min(1) Long id) {
@@ -39,12 +38,21 @@ public class UserController {
 
         return userFacade.getAllUsers();
     }
+
     @PreAuthorize(value = "hasAnyAuthority('ADMIN')")
-   @PostMapping
+    @PostMapping
     public ResponseEntity<?> addUser(@Valid @RequestBody UserCreateRequestDTO userCreateRequestDTO) {
 
         return userFacade.addUser(userCreateRequestDTO);
     }
+
+    @PreAuthorize(value = "hasAnyAuthority('ADMIN')")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUser(@Valid @Min(1) @PathVariable Long id,
+                                        @RequestParam(name = "hardDelete", required = false) boolean isHardDelete) {
+        return userFacade.deleteUser(id, isHardDelete);
+    }
+
 }
 
 

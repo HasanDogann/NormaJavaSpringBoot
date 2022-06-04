@@ -10,6 +10,7 @@ import com.example.bankingsystem.model.dto.response.CardGetResponseDTO;
 import com.example.bankingsystem.model.entity.Card;
 import com.example.bankingsystem.service.CardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -77,7 +78,9 @@ public class CardFacadeImpl implements CardFacade {
     public ResponseEntity<Collection<CardGetResponseDTO>> getAllCardByCustomerId(Long id) {
         Collection<CardGetResponseDTO> collection = cardService.getAllCardByCustomerId(id)
                 .stream().map(cardConverter::toCardResponseFromCard).toList();
-
+        if(collection.isEmpty()){
+            return new ResponseEntity("There is No Card!",HttpStatus.NOT_FOUND);
+        }
         return ResponseEntity.ok().body(collection);
 
     }

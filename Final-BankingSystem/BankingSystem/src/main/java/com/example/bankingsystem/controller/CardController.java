@@ -57,6 +57,12 @@ public class CardController {
 
         return cardFacade.getAllCardByAccountNumber(id);
     }
+    @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
+    @GetMapping("/getAllCardOneCustomer")
+    public ResponseEntity<?> getAllCardOneCustomer(@Valid @Min(1) @RequestParam Long id) {
+
+        return cardFacade.getAllCardByCustomerId(id);
+    }
 
     @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
     @DeleteMapping("/{id}")

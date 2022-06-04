@@ -98,7 +98,7 @@ public class InitialCustomerCreator {
         bankCard.setAccount(account);
         bankCard.setCustomer(customer);
         //Adding bank card infos
-        Card bankCard2 = new Card();
+        /*Card bankCard2 = new Card();
         bankCard2.setCardNo(ConstantUtils.getRandomCardNo());
         bankCard2.setCardType(CardType.BANK_CARD);
         bankCard2.setCardBalance(BigDecimal.TEN);
@@ -106,7 +106,7 @@ public class InitialCustomerCreator {
         bankCard2.setAccount(account3);
         bankCard2.setCustomer(customer2);
 
-
+*/
         //adding account to Customer's account list
         customer.addAccountToCustomer(Set.of(account));
        // customer.addAccountToCustomer(Set.of(account2));
@@ -114,7 +114,7 @@ public class InitialCustomerCreator {
         //Adding card to Account's card list
         account.addCardToAccount(Set.of(creditCard));
         account.addCardToAccount(Set.of(bankCard));
-        account3.addCardToAccount(Set.of(bankCard2));
+        //account3.addCardToAccount(Set.of(bankCard2));
        // account2.addCardToAccount(Set.of(bankCard2));
 
 

@@ -76,7 +76,7 @@ public class MoneyTransferByIban implements TransferStrategy {
 
         headers.add("apikey", API_KEY);
         HttpEntity<String> httpEntity = new HttpEntity<>(headers);
-        url = "https://api.apilayer.com/exchangerates_data/convert?to=TL&from=" + sender.getBalanceCurrencyType() + "&amount=" + transactionRequestDTO.amount() + "";
+        url = "https://api.apilayer.com/exchangerates_data/convert?to=TRY&from=" + sender.getBalanceCurrencyType() + "&amount=" + transactionRequestDTO.amount() + "";
 
         ResponseEntity<ExchangeModel> model = restTemplate.exchange(url, HttpMethod.GET, httpEntity, ExchangeModel.class);
 

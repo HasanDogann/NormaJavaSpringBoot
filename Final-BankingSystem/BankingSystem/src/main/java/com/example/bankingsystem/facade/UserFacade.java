@@ -18,5 +18,6 @@ public interface UserFacade {
 
     ResponseEntity<Collection<UserGetResponseDTO>> getAllUsers();
 
+    ResponseEntity<String> deleteUser(Long id,boolean isHardDelete);
 
 }

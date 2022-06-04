@@ -291,7 +291,7 @@ class AccountServiceImplTest {
         customerRepository.save(customer);
 
 
-        Assertions.assertThrows(ServiceOperationCanNotDeleteException.AccountCardBalanceorDebtNotZero.class,
+        Assertions.assertThrows(ServiceOperationCanNotDeleteException.AccountCardBalanceOrDebtNotZero.class,
                 () -> {
                     accountService.deleteAccount(account.getId(), true);
                 });

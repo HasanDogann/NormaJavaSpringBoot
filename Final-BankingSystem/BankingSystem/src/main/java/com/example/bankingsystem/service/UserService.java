@@ -24,4 +24,6 @@ public interface UserService  {
     Collection<User> getAllUsers();
 
     User getUserByEmail(String email);
+
+    String deleteUser(Long id,boolean isHardDelete);
 }

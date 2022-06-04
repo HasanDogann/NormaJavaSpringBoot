@@ -3,6 +3,7 @@ package com.example.bankingsystem.service.impl;
 import com.example.bankingsystem.converter.CardConverter;
 import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedException;
 import com.example.bankingsystem.exception.ServiceOperationBlockedException;
+import com.example.bankingsystem.exception.ServiceOperationCanNotDeleteException;
 import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
 import com.example.bankingsystem.model.dto.request.CardCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.CardPaymentRequestDTO;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
 
 /**
@@ -99,8 +101,11 @@ public class CardServiceImpl implements CardService {
     public Collection<Card> getAllCardByCustomerId(Long id) {
         Customer customer = customerService.getCustomer(id);
         Collection<Card> cardCollection = cardRepository.getAllByCustomerId(customer.getId());
-        if (Objects.isNull(cardCollection)) {
+        if (Objects.isNull(cardCollection) ) {
             throw new ServiceOperationNotFoundException.CardNotFoundException("There is no card on this customer");
+        }
+        if (cardCollection.isEmpty()) {
+            return Collections.emptyList();
         }
         return cardCollection;
     }
@@ -125,7 +130,7 @@ public class CardServiceImpl implements CardService {
             return "Card is hard deleted successfully";
         }
 
-        return "You can not delete card because balance or debt is not zero!";
+        throw new ServiceOperationCanNotDeleteException.AccountCardBalanceOrDebtNotZero( "You can not delete card because balance or debt is not zero!");
 
     }
 

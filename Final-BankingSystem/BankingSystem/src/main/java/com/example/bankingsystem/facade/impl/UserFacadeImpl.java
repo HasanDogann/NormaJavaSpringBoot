@@ -54,4 +54,9 @@ public class UserFacadeImpl implements UserFacade {
 
         return ResponseEntity.ok().body(responseDTOS);
     }
+
+    @Override
+    public ResponseEntity<String> deleteUser(Long id, boolean isHardDelete) {
+        return ResponseEntity.ok().body(userService.deleteUser(id,isHardDelete));
+    }
 }

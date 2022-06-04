@@ -19,9 +19,9 @@ public final class ServiceOperationCanNotDeleteException extends BaseException {
             super(message);
         }
     }
-    public static class AccountCardBalanceorDebtNotZero extends BaseException {
+    public static class AccountCardBalanceOrDebtNotZero extends BaseException {
 
-        public AccountCardBalanceorDebtNotZero(String message) {
+        public AccountCardBalanceOrDebtNotZero(String message) {
             super(message);
         }
     }

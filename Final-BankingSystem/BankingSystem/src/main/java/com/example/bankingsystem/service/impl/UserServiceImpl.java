@@ -66,4 +66,21 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Override
+    public String deleteUser(Long id,boolean isHardDelete) {
+        User user = getUser(id);
+
+        if(user.isDeleted()){
+            throw new ServiceOperationAlreadyDeletedException.UserAlreadyDeletedException("User was already deleted!");
+        }
+        if(isHardDelete){
+            userRepository.delete(user);
+            return "User is deleted hard and successfully";
+        }
+        user.setDeleted(true);
+        userRepository.save(user);
+        return "User is deleted soft and successfully";
+
+    }
+
 }
