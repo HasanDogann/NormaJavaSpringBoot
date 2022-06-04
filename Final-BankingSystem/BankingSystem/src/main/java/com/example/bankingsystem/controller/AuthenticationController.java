@@ -9,6 +9,8 @@ import com.example.bankingsystem.service.SigningService;
 import com.example.bankingsystem.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,18 +32,20 @@ import javax.validation.Valid;
 @Slf4j
 public class AuthenticationController {
 
+    Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
+
     private final AuthenticationFacade authenticationFacade;
 
 
     @PostMapping("/login")
     public String login(@Valid @RequestBody UserLoginRequest loginRequest) {
-
+        logger.trace("Post method used for Login User: {}",loginRequest.email());
         return authenticationFacade.login(loginRequest);
     }
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@Valid @RequestBody UserCreateRequestByUserDTO userDTO) {
-
+        logger.trace("Post method used for Register User: {}",userDTO.mail());
         return authenticationFacade.register(userDTO);
     }
 }

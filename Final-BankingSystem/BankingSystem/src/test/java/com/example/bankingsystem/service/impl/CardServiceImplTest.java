@@ -1,6 +1,5 @@
 package com.example.bankingsystem.service.impl;
 
-import com.example.bankingsystem.converter.CardConverter;
 import com.example.bankingsystem.core.constants.ConstantUtils;
 import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedException;
 import com.example.bankingsystem.exception.ServiceOperationCanNotDeleteException;
@@ -13,7 +12,6 @@ import com.example.bankingsystem.model.entity.Card;
 import com.example.bankingsystem.model.entity.Customer;
 import com.example.bankingsystem.model.entity.CustomerAddress;
 import com.example.bankingsystem.model.entity.enums.*;
-import com.example.bankingsystem.repository.CardRepository;
 import com.example.bankingsystem.repository.CustomerRepository;
 import com.example.bankingsystem.service.CardService;
 import lombok.extern.slf4j.Slf4j;
@@ -25,8 +23,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.math.BigDecimal;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 @Slf4j
 class CardServiceImplTest {
@@ -37,11 +33,9 @@ class CardServiceImplTest {
 
     @Autowired
     private CardService cardService;
-    @Autowired
-    private CardRepository cardRepository;
 
     @Test
-    public void adding_BankCard_successfully(){
+    public void adding_BankCard_successfully() {
         Customer customer = new Customer();
         customer.setName("Demo");
         customer.setSurname("Customer");
@@ -77,17 +71,17 @@ class CardServiceImplTest {
         customerRepository.save(customer);
 
 
-        Assertions.assertDoesNotThrow(()->{
+        Assertions.assertDoesNotThrow(() -> {
             cardService.addCard(
 
-                    new CardCreateRequestDTO(account.getId(), CardType.BANK_CARD,BigDecimal.valueOf(1000)));
+                    new CardCreateRequestDTO(account.getId(), CardType.BANK_CARD, BigDecimal.valueOf(1000)));
         });
 
 
-
     }
+
     @Test
-    public void adding_CreditCard_successfully(){
+    public void adding_CreditCard_successfully() {
         Customer customer = new Customer();
         customer.setName("Demo");
         customer.setSurname("Customer");
@@ -123,28 +117,29 @@ class CardServiceImplTest {
         customerRepository.save(customer);
 
 
-        Assertions.assertDoesNotThrow(()->{
+        Assertions.assertDoesNotThrow(() -> {
             cardService.addCard(
 
-                    new CardCreateRequestDTO(account.getId(), CardType.CREDIT_CARD,BigDecimal.valueOf(1000)));
+                    new CardCreateRequestDTO(account.getId(), CardType.CREDIT_CARD, BigDecimal.valueOf(1000)));
         });
 
 
-
     }
+
     @Test
-    public void throws_Getting_Card_IsNotFound_Exception(){
+    public void throws_Getting_Card_IsNotFound_Exception() {
 
 
         Assertions.assertThrows(ServiceOperationNotFoundException.CardNotFoundException.class,
-                ()->{
+                () -> {
                     cardService.getCard(01010101L);
                 });
 
 
     }
+
     @Test
-    public void throws_Getting_Card_IsDeleted_Exception(){
+    public void throws_Getting_Card_IsDeleted_Exception() {
 
         Customer customer = new Customer();
         customer.setName("Demo");
@@ -180,17 +175,16 @@ class CardServiceImplTest {
         account.addCardToAccount(Set.of(bankCard));
         customerRepository.save(customer);
 
-        cardService.deleteCard(bankCard.getId(),false);
+        cardService.deleteCard(bankCard.getId(), false);
 
         Assertions.assertThrows(ServiceOperationAlreadyDeletedException.CardAlreadyDeletedException.class,
-                ()->{
+                () -> {
                     cardService.getCard(bankCard.getId());
                 });
 
 
-
-
     }
+
     @Test
     public void when_Getting_CardBalance_Successfully() {
 
@@ -229,18 +223,16 @@ class CardServiceImplTest {
         customerRepository.save(customer);
 
 
-
         Assertions.assertDoesNotThrow(
-                ()->{
+                () -> {
                     cardService.getCardBalance(bankCard.getCardNo());
                 });
 
 
-
-
     }
+
     @Test
-    void paying_Card_Debt_WithAccount(){
+    void paying_Card_Debt_WithAccount() {
         Customer customer = new Customer();
         customer.setName("Demo");
         customer.setSurname("Customer");
@@ -276,12 +268,13 @@ class CardServiceImplTest {
         customerRepository.save(customer);
 
 
-        cardService.payCardDebt(new CardPaymentRequestDTO(BigDecimal.valueOf(750),bankCard.getCardNo(), PaymentType.BY_ACCOUNT));
-        Assertions.assertTrue(cardService.getCardBalance(bankCard.getCardNo()).getCardBalance().compareTo(BigDecimal.valueOf(750))==0);
+        cardService.payCardDebt(new CardPaymentRequestDTO(BigDecimal.valueOf(750), bankCard.getCardNo(), PaymentType.BY_ACCOUNT));
+        Assertions.assertTrue(cardService.getCardBalance(bankCard.getCardNo()).getCardBalance().compareTo(BigDecimal.valueOf(750)) == 0);
 
     }
+
     @Test
-    void throws_paying_Card_Debt_WithAccount_NotEnoughAmount_Exception(){
+    void throws_paying_Card_Debt_WithAccount_NotEnoughAmount_Exception() {
         Customer customer = new Customer();
         customer.setName("Demo");
         customer.setSurname("Customer");
@@ -318,20 +311,16 @@ class CardServiceImplTest {
         customerRepository.save(customer);
 
 
-
-
         Assertions.assertThrows(TransferOperationException.PaymentCanNotProceedException.class,
-                ()->{
-                    cardService.payCardDebt(new CardPaymentRequestDTO(BigDecimal.valueOf(1000),bankCard.getCardNo(), PaymentType.BY_ACCOUNT));
+                () -> {
+                    cardService.payCardDebt(new CardPaymentRequestDTO(BigDecimal.valueOf(1000), bankCard.getCardNo(), PaymentType.BY_ACCOUNT));
                 });
 
 
-
-
-
     }
+
     @Test
-    void paying_Card_Debt_With_ATM(){
+    void paying_Card_Debt_With_ATM() {
         Customer customer = new Customer();
         customer.setName("Demo");
         customer.setSurname("Customer");
@@ -368,13 +357,14 @@ class CardServiceImplTest {
         customerRepository.save(customer);
 
 
-        cardService.payCardDebt(new CardPaymentRequestDTO(BigDecimal.valueOf(500),bankCard.getCardNo(), PaymentType.BY_ATM));
+        cardService.payCardDebt(new CardPaymentRequestDTO(BigDecimal.valueOf(500), bankCard.getCardNo(), PaymentType.BY_ATM));
 
-        Assertions.assertTrue(cardService.getCardBalance(bankCard.getCardNo()).getCardDebt().compareTo(BigDecimal.valueOf(500))==0);
+        Assertions.assertTrue(cardService.getCardBalance(bankCard.getCardNo()).getCardDebt().compareTo(BigDecimal.valueOf(500)) == 0);
 
     }
+
     @Test
-    void adding_Card_Balance_With_ATM(){
+    void adding_Card_Balance_With_ATM() {
         Customer customer = new Customer();
         customer.setName("Demo");
         customer.setSurname("Customer");
@@ -411,13 +401,12 @@ class CardServiceImplTest {
         customerRepository.save(customer);
 
 
-
-
-        cardService.payCardDebt(new CardPaymentRequestDTO(BigDecimal.valueOf(1000),bankCard.getCardNo(), PaymentType.BY_ATM));
-        Assertions.assertTrue(cardService.getCardBalance(bankCard.getCardNo()).getCardBalance().compareTo(BigDecimal.valueOf(1000))==0);
+        cardService.payCardDebt(new CardPaymentRequestDTO(BigDecimal.valueOf(1000), bankCard.getCardNo(), PaymentType.BY_ATM));
+        Assertions.assertTrue(cardService.getCardBalance(bankCard.getCardNo()).getCardBalance().compareTo(BigDecimal.valueOf(1000)) == 0);
 
 
     }
+
     @Test
     public void throws_Getting_CardBalance_CardIsNotFound_Exception() {
 
@@ -456,16 +445,14 @@ class CardServiceImplTest {
         customerRepository.save(customer);
 
 
-
         Assertions.assertThrows(ServiceOperationNotFoundException.CardNotFoundException.class,
-                ()->{
+                () -> {
                     cardService.getCardBalance("1234123412341234");
                 });
 
 
-
-
     }
+
     @Test
     public void getting_AllCardsOfOneAccount_Successfully() {
 
@@ -504,16 +491,14 @@ class CardServiceImplTest {
         customerRepository.save(customer);
 
 
-
         Assertions.assertDoesNotThrow(
-                ()->{
+                () -> {
                     cardService.getAllCardByAccountNumber(account.getId());
                 });
 
 
-
-
     }
+
     @Test
     public void throws_AllCardsOfOneAccount_NoCardOnAccount_Exception() {
 
@@ -541,16 +526,14 @@ class CardServiceImplTest {
         customerRepository.save(customer);
 
 
-
         Assertions.assertThrows(ServiceOperationNotFoundException.CardNotFoundException.class,
-                ()->{
+                () -> {
                     cardService.getAllCardByAccountNumber(account.getId());
                 });
 
 
-
-
     }
+
     @Test
     public void getting_AllCardsOfOneCustomer_Successfully() {
 
@@ -589,16 +572,14 @@ class CardServiceImplTest {
         customerRepository.save(customer);
 
 
-
         Assertions.assertDoesNotThrow(
-                ()->{
+                () -> {
                     cardService.getAllCardByCustomerId(customer.getId());
                 });
 
 
-
-
     }
+
     @Test
     public void throws_AllCardsOfOneCustomer_NoCardOnCustomer_Exception() {
 
@@ -626,14 +607,13 @@ class CardServiceImplTest {
         customerRepository.save(customer);
 
 
-
-        Assertions.assertDoesNotThrow(()->{
-                    cardService.getAllCardByCustomerId(customer.getId());});
-
-
+        Assertions.assertDoesNotThrow(() -> {
+            cardService.getAllCardByCustomerId(customer.getId());
+        });
 
 
     }
+
     @Test
     public void deleting_Card_Soft_And_Successfully() {
 
@@ -672,16 +652,14 @@ class CardServiceImplTest {
         customerRepository.save(customer);
 
 
-
         Assertions.assertDoesNotThrow(
-                ()->{
-                    cardService.deleteCard(bankCard.getId(),false);
+                () -> {
+                    cardService.deleteCard(bankCard.getId(), false);
                 });
 
 
-
-
     }
+
     @Test
     public void deleting_Card_Hard_And_Successfully() {
 
@@ -720,16 +698,14 @@ class CardServiceImplTest {
         customerRepository.save(customer);
 
 
-
         Assertions.assertDoesNotThrow(
-                ()->{
-                    cardService.deleteCard(bankCard.getId(),true);
+                () -> {
+                    cardService.deleteCard(bankCard.getId(), true);
                 });
 
 
-
-
     }
+
     @Test
     public void throws_deleting_Card_IsDeleted_Exception() {
 
@@ -767,17 +743,16 @@ class CardServiceImplTest {
         account.addCardToAccount(Set.of(bankCard));
         customerRepository.save(customer);
 
-        cardService.deleteCard(bankCard.getId(),false);
+        cardService.deleteCard(bankCard.getId(), false);
 
         Assertions.assertThrows(ServiceOperationAlreadyDeletedException.CardAlreadyDeletedException.class,
-                ()->{
-                    cardService.deleteCard(bankCard.getId(),false);
+                () -> {
+                    cardService.deleteCard(bankCard.getId(), false);
                 });
 
 
-
-
     }
+
     @Test
     public void throws_deleting_Card_IsNotFound_Exception() {
 
@@ -815,17 +790,16 @@ class CardServiceImplTest {
         account.addCardToAccount(Set.of(bankCard));
         customerRepository.save(customer);
 
-        cardService.deleteCard(bankCard.getId(),true);
+        cardService.deleteCard(bankCard.getId(), true);
 
         Assertions.assertThrows(ServiceOperationNotFoundException.CardNotFoundException.class,
-                ()->{
-                    cardService.deleteCard(bankCard.getId(),false);
+                () -> {
+                    cardService.deleteCard(bankCard.getId(), false);
                 });
 
 
-
-
     }
+
     @Test
     public void throws_deleting_Card_BalanceNotZero_Exception() {
 
@@ -865,11 +839,9 @@ class CardServiceImplTest {
 
 
         Assertions.assertThrows(ServiceOperationCanNotDeleteException.AccountCardBalanceOrDebtNotZero.class,
-                ()->{
-                    cardService.deleteCard(bankCard.getId(),false);
+                () -> {
+                    cardService.deleteCard(bankCard.getId(), false);
                 });
-
-
 
 
     }

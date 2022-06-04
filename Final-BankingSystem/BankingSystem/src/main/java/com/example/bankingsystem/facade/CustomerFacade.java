@@ -13,11 +13,11 @@ public interface CustomerFacade {
 
     ResponseEntity<CustomerGetResponseDTO> getCustomer(Long id);
 
-    ResponseEntity<CustomerGetResponseDTO> getCustomerByEmail(String email);
-
     ResponseEntity<Collection<CustomerGetResponseDTO>> getAllCustomers();
 
     ResponseEntity<String> deleteCustomer(Long id, boolean isHardDelete);
 
     ResponseEntity<String> updateCustomer(CustomerUpdateRequestDTO customerUpdateRequestDTO);
+
+    ResponseEntity<CustomerGetResponseDTO> getCustomerByEmail(String email);
 }

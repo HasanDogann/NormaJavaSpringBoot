@@ -35,9 +35,6 @@ public class CreditCardPaymentByATM implements PaymentStrategy {
 
 
             //Check if sending amount bigger than debt
-            log.info(card.getCardDebt().toString()+" card debt");
-            log.info(cardPaymentRequestDTO.amount().toString()+" amount price");
-
             if (cardPaymentRequestDTO.amount().compareTo(card.getCardDebt()) > 0) {
                 throw new TransferOperationException.PaymentCanNotProceedException("Your sending amount has to be equal or less than your debt ");
             }

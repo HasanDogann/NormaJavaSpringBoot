@@ -136,7 +136,6 @@ public class AccountServiceImpl implements AccountService {
             throw new ServiceOperationCanNotDeleteException.AccountCardBalanceOrDebtNotZero("Account can not delete because one of card of this account has debt or balance");
         }
 
-        log.info(account.getBalance().toString());
         throw new ServiceOperationCanNotDeleteException.AccountBalanceNotZero("Account balance is not 0 so you can not delete this account");
 
     }
