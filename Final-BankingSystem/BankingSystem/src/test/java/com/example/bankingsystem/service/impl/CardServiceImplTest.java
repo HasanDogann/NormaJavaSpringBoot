@@ -5,17 +5,18 @@ import com.example.bankingsystem.core.constants.ConstantUtils;
 import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedException;
 import com.example.bankingsystem.exception.ServiceOperationCanNotDeleteException;
 import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
+import com.example.bankingsystem.exception.TransferOperationException;
 import com.example.bankingsystem.model.dto.request.CardCreateRequestDTO;
+import com.example.bankingsystem.model.dto.request.CardPaymentRequestDTO;
 import com.example.bankingsystem.model.entity.Account;
 import com.example.bankingsystem.model.entity.Card;
 import com.example.bankingsystem.model.entity.Customer;
 import com.example.bankingsystem.model.entity.CustomerAddress;
-import com.example.bankingsystem.model.entity.enums.AccountStatus;
-import com.example.bankingsystem.model.entity.enums.AccountType;
-import com.example.bankingsystem.model.entity.enums.BalanceCurrencyType;
-import com.example.bankingsystem.model.entity.enums.CardType;
+import com.example.bankingsystem.model.entity.enums.*;
+import com.example.bankingsystem.repository.CardRepository;
 import com.example.bankingsystem.repository.CustomerRepository;
 import com.example.bankingsystem.service.CardService;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@Slf4j
 class CardServiceImplTest {
 
 
@@ -35,6 +37,8 @@ class CardServiceImplTest {
 
     @Autowired
     private CardService cardService;
+    @Autowired
+    private CardRepository cardRepository;
 
     @Test
     public void adding_BankCard_successfully(){
@@ -232,6 +236,185 @@ class CardServiceImplTest {
                 });
 
 
+
+
+    }
+    @Test
+    void paying_Card_Debt_WithAccount(){
+        Customer customer = new Customer();
+        customer.setName("Demo");
+        customer.setSurname("Customer");
+        customer.setMail("Demo019@mail");
+        customer.setPhone("90123456");
+        customer.setCustomerAddress(
+                new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
+
+        //Adding account infos
+        Account account = new Account();
+        account.setAccountType(AccountType.CHECKING_ACCOUNT);
+        account.setBalanceCurrencyType(BalanceCurrencyType.TRY);
+        account.setAccountNumber(ConstantUtils.getRandomAccountNumber());
+        account.setBankBranchCode(9999);
+        account.setBalance(BigDecimal.valueOf(1000));
+        account.setIBAN(ConstantUtils.getRandomIban(account.getBankBranchCode()) + "" + account.getAccountNumber() + "" + ConstantUtils.getRandomExtraAccountNo());
+        account.setCreationDate(ConstantUtils.getCurrentDate());
+        account.setAccountStatus(AccountStatus.ACTIVE);
+        account.setCustomer(customer);
+
+        //Adding bank card infos
+        Card bankCard = new Card();
+        bankCard.setCardNo(ConstantUtils.getRandomCardNo());
+        bankCard.setCardType(CardType.BANK_CARD);
+        bankCard.setCardLimit(BigDecimal.valueOf(1000));
+        bankCard.setCardBalance(BigDecimal.valueOf(0));
+        bankCard.setCardDebt(BigDecimal.valueOf(0));
+        bankCard.setAccount(account);
+        bankCard.setCustomer(customer);
+
+        customer.addAccountToCustomer(Set.of(account));
+        account.addCardToAccount(Set.of(bankCard));
+        customerRepository.save(customer);
+
+
+        cardService.payCardDebt(new CardPaymentRequestDTO(BigDecimal.valueOf(750),bankCard.getCardNo(), PaymentType.BY_ACCOUNT));
+        Assertions.assertTrue(cardService.getCardBalance(bankCard.getCardNo()).getCardBalance().compareTo(BigDecimal.valueOf(750))==0);
+
+    }
+    @Test
+    void throws_paying_Card_Debt_WithAccount_NotEnoughAmount_Exception(){
+        Customer customer = new Customer();
+        customer.setName("Demo");
+        customer.setSurname("Customer");
+        customer.setMail("Demo020@mail");
+        customer.setPhone("90123456");
+        customer.setCustomerAddress(
+                new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
+
+        //Adding account infos
+        Account account = new Account();
+        account.setAccountType(AccountType.CHECKING_ACCOUNT);
+        account.setBalanceCurrencyType(BalanceCurrencyType.TRY);
+        account.setAccountNumber(ConstantUtils.getRandomAccountNumber());
+        account.setBankBranchCode(9999);
+        account.setBalance(BigDecimal.valueOf(0));
+        account.setIBAN(ConstantUtils.getRandomIban(account.getBankBranchCode()) + "" + account.getAccountNumber() + "" + ConstantUtils.getRandomExtraAccountNo());
+        account.setCreationDate(ConstantUtils.getCurrentDate());
+        account.setAccountStatus(AccountStatus.ACTIVE);
+        account.setCustomer(customer);
+
+        //Adding bank card infos
+        Card bankCard = new Card();
+        bankCard.setCardNo(ConstantUtils.getRandomCardNo());
+        bankCard.setCardType(CardType.BANK_CARD);
+        bankCard.setCardLimit(BigDecimal.valueOf(100));
+        bankCard.setCardBalance(BigDecimal.valueOf(0));
+        bankCard.setCardDebt(BigDecimal.valueOf(1000));
+        bankCard.setAccount(account);
+        bankCard.setCustomer(customer);
+
+
+        customer.addAccountToCustomer(Set.of(account));
+        account.addCardToAccount(Set.of(bankCard));
+        customerRepository.save(customer);
+
+
+
+
+        Assertions.assertThrows(TransferOperationException.PaymentCanNotProceedException.class,
+                ()->{
+                    cardService.payCardDebt(new CardPaymentRequestDTO(BigDecimal.valueOf(1000),bankCard.getCardNo(), PaymentType.BY_ACCOUNT));
+                });
+
+
+
+
+
+    }
+    @Test
+    void paying_Card_Debt_With_ATM(){
+        Customer customer = new Customer();
+        customer.setName("Demo");
+        customer.setSurname("Customer");
+        customer.setMail("Demo021@mail");
+        customer.setPhone("90123456");
+        customer.setCustomerAddress(
+                new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
+
+        //Adding account infos
+        Account account = new Account();
+        account.setAccountType(AccountType.CHECKING_ACCOUNT);
+        account.setBalanceCurrencyType(BalanceCurrencyType.TRY);
+        account.setAccountNumber(ConstantUtils.getRandomAccountNumber());
+        account.setBankBranchCode(9999);
+        account.setBalance(BigDecimal.valueOf(1000));
+        account.setIBAN(ConstantUtils.getRandomIban(account.getBankBranchCode()) + "" + account.getAccountNumber() + "" + ConstantUtils.getRandomExtraAccountNo());
+        account.setCreationDate(ConstantUtils.getCurrentDate());
+        account.setAccountStatus(AccountStatus.ACTIVE);
+        account.setCustomer(customer);
+
+        //Adding bank card infos
+        Card bankCard = new Card();
+        bankCard.setCardNo(ConstantUtils.getRandomCardNo());
+        bankCard.setCardType(CardType.CREDIT_CARD);
+        bankCard.setCardLimit(BigDecimal.valueOf(1000));
+        bankCard.setCardBalance(BigDecimal.valueOf(0));
+        bankCard.setCardDebt(BigDecimal.valueOf(1000));
+        bankCard.setAccount(account);
+        bankCard.setCustomer(customer);
+
+
+        customer.addAccountToCustomer(Set.of(account));
+        account.addCardToAccount(Set.of(bankCard));
+        customerRepository.save(customer);
+
+
+        cardService.payCardDebt(new CardPaymentRequestDTO(BigDecimal.valueOf(500),bankCard.getCardNo(), PaymentType.BY_ATM));
+
+        Assertions.assertTrue(cardService.getCardBalance(bankCard.getCardNo()).getCardDebt().compareTo(BigDecimal.valueOf(500))==0);
+
+    }
+    @Test
+    void adding_Card_Balance_With_ATM(){
+        Customer customer = new Customer();
+        customer.setName("Demo");
+        customer.setSurname("Customer");
+        customer.setMail("Demo022@mail");
+        customer.setPhone("90123456");
+        customer.setCustomerAddress(
+                new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
+
+        //Adding account infos
+        Account account = new Account();
+        account.setAccountType(AccountType.CHECKING_ACCOUNT);
+        account.setBalanceCurrencyType(BalanceCurrencyType.TRY);
+        account.setAccountNumber(ConstantUtils.getRandomAccountNumber());
+        account.setBankBranchCode(9999);
+        account.setBalance(BigDecimal.valueOf(1000));
+        account.setIBAN(ConstantUtils.getRandomIban(account.getBankBranchCode()) + "" + account.getAccountNumber() + "" + ConstantUtils.getRandomExtraAccountNo());
+        account.setCreationDate(ConstantUtils.getCurrentDate());
+        account.setAccountStatus(AccountStatus.ACTIVE);
+        account.setCustomer(customer);
+
+        //Adding bank card infos
+        Card bankCard = new Card();
+        bankCard.setCardNo(ConstantUtils.getRandomCardNo());
+        bankCard.setCardType(CardType.BANK_CARD);
+        bankCard.setCardLimit(BigDecimal.valueOf(0));
+        bankCard.setCardBalance(BigDecimal.valueOf(0));
+        bankCard.setCardDebt(BigDecimal.valueOf(0));
+        bankCard.setAccount(account);
+        bankCard.setCustomer(customer);
+
+
+        customer.addAccountToCustomer(Set.of(account));
+        account.addCardToAccount(Set.of(bankCard));
+        customerRepository.save(customer);
+
+
+
+
+        cardService.payCardDebt(new CardPaymentRequestDTO(BigDecimal.valueOf(1000),bankCard.getCardNo(), PaymentType.BY_ATM));
+        Assertions.assertTrue(cardService.getCardBalance(bankCard.getCardNo()).getCardBalance().compareTo(BigDecimal.valueOf(1000))==0);
 
 
     }

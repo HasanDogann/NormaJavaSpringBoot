@@ -15,6 +15,8 @@ public final class ConstantUtils {
 
     private static Random random = new Random();
 
+    public static final BigDecimal DAILY_MAX_LIMIT_OF_ATM=BigDecimal.valueOf(5000L);
+
     public static String getRandomIban(Integer branchCode) {
         return "TR" + new BigDecimal(random.nextLong(10_000_000, 99_999_999)) + branchCode.toString();
     }

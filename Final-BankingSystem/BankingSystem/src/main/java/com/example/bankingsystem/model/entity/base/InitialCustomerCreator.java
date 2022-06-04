@@ -87,7 +87,7 @@ public class InitialCustomerCreator {
         creditCard.setCardNo(ConstantUtils.getRandomCardNo());
         creditCard.setCardType(CardType.CREDIT_CARD);
         creditCard.setCardLimit(BigDecimal.valueOf(5000));
-        creditCard.setCardDebt(BigDecimal.valueOf(0));
+        creditCard.setCardDebt(BigDecimal.valueOf(500));
         creditCard.setAccount(account);
         creditCard.setCustomer(customer);
         //Adding bank card infos

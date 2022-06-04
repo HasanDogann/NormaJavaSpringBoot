@@ -28,8 +28,8 @@ public class CreditCardPaymentByAccount implements PaymentStrategy {
         Card card = cardRepository.getCardByCardNo(cardPaymentRequestDTO.cardNo());
         Account account = card.getAccount();
 
-        log.info(account.getBalance().toString() + " " + cardPaymentRequestDTO.amount().toString());
-        log.info(String.valueOf((account.getBalance().compareTo(cardPaymentRequestDTO.amount()) > -1)));
+      //  log.info(account.getBalance().toString() + " " + cardPaymentRequestDTO.amount().toString());
+      //  log.info(String.valueOf((account.getBalance().compareTo(cardPaymentRequestDTO.amount()) > -1)));
 
         if (account.getBalance().compareTo(cardPaymentRequestDTO.amount()) > -1) {
 

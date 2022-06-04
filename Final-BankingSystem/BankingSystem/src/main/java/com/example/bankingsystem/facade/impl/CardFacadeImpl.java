@@ -96,6 +96,6 @@ public class CardFacadeImpl implements CardFacade {
     public ResponseEntity<String> payCardDebt(CardPaymentRequestDTO cardPaymentRequestDTO) {
 
         cardService.payCardDebt(cardPaymentRequestDTO);
-        return ResponseEntity.ok().body("Car payment is successful.");
+        return ResponseEntity.ok().body("Card payment is successful.");
     }
 }
