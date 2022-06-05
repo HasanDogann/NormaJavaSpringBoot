@@ -36,6 +36,7 @@ In addition, some special checks have been carried out.
 
 - Is there a balance on any of the customer's accounts?
 - Is there a balance or debt on any of the customer's cards?
+![image](https://user-images.githubusercontent.com/72404480/172072075-3a77a153-d12b-4f1c-aba9-cf93d013687d.png)
 
 ## 💰	AccountManagement
 
