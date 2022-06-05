@@ -14,10 +14,10 @@ public class BankingSystemApplication {
 
 
     //GetAccount() gibi methodlara sadece belli kullanıcıların görmesi filtresi eklenecek
-    // 2. Ilk 1000 sıralamada register olan müşretimizin hesabına 50 tl hediye
-
+    //Kredi kartı ekstresi düşünülebilir
 
     // Özgün tasarım
+    // 2. Ilk 1000 sıralamada register olan müşretimizin hesabına 50 tl hediye
     // User şifresi eğer unutmuşsa yeni şifre için bir key kullanarak şifre yenileyebilir
 
 

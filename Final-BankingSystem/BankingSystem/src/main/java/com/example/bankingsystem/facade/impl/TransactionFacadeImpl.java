@@ -3,13 +3,16 @@ package com.example.bankingsystem.facade.impl;
 
 import com.example.bankingsystem.converter.TransactionConverter;
 import com.example.bankingsystem.facade.TransactionFacade;
+import com.example.bankingsystem.model.dto.request.PurchaseReceiptCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.TransactionRequestDTO;
+import com.example.bankingsystem.model.dto.response.PurchaseReceiptGetResponseDTO;
 import com.example.bankingsystem.model.dto.response.TransactionGetResponseDTO;
 import com.example.bankingsystem.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.Objects;
 
 /**
@@ -46,6 +49,14 @@ public class TransactionFacadeImpl implements TransactionFacade {
         }
         return ResponseEntity.ok().body(responseDTO);
 
+    }
+
+    @Override
+    public ResponseEntity<Collection<PurchaseReceiptGetResponseDTO>> getPaymentReceipts(PurchaseReceiptCreateRequestDTO receiptCreateDTO) {
+        Collection<PurchaseReceiptGetResponseDTO> responseDTO = transactionService.getPurchaseReceipts(receiptCreateDTO)
+                .stream().map(transactionConverter::toPurchaseResponse).toList();
+
+        return ResponseEntity.ok().body(responseDTO);
     }
 
 }

@@ -20,6 +20,12 @@ public final class TransferOperationException extends BaseException {
             super(message);
         }
     }
+    public static class PaymentBillsCanNotProceedException extends BaseException {
+        public PaymentBillsCanNotProceedException(String message) {
+            super(message);
+        }
+    }
+
 }
 
 

@@ -2,6 +2,8 @@ package com.example.bankingsystem.service.impl;
 
 import com.example.bankingsystem.exception.ServiceOperationAlreadyDeletedException;
 import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
+import com.example.bankingsystem.exception.TransferOperationException;
+import com.example.bankingsystem.model.dto.request.PurchaseReceiptCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.TransactionRequestDTO;
 import com.example.bankingsystem.model.entity.Transaction;
 import com.example.bankingsystem.model.entity.enums.TransferType;
@@ -17,6 +19,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Collection;
+import java.util.Objects;
 
 /**
  * @author Hasan DOĞAN
@@ -63,6 +68,18 @@ public class TransactionServiceImpl implements TransactionService {
                     .TransferAlreadyDeletedException("Transaction was deleted!");
         }
         return transaction;
+    }
+
+    @Override
+    public Collection<Transaction> getPurchaseReceipts(PurchaseReceiptCreateRequestDTO purchaseDTO) {
+
+        Collection<Transaction> transactions = transactionRepository
+                .getTransactionsByTransferTypeIsAndSenderIBANIsAndTransferDateIsGreaterThan(purchaseDTO.transferType(),
+                        purchaseDTO.senderCardNo(),purchaseDTO.purchaseDate());
+        if(Objects.isNull(transactions)){
+            throw new TransferOperationException.PaymentBillsCanNotProceedException("There is no receipts");
+        }
+        return transactions;
     }
 
 

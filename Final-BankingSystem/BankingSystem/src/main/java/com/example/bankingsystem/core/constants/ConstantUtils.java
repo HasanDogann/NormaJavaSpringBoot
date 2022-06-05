@@ -1,10 +1,13 @@
 package com.example.bankingsystem.core.constants;
 
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Random;
 
@@ -14,6 +17,8 @@ public final class ConstantUtils {
     }
 
     private static Random random = new Random();
+
+    public static long currentTimestamp=new Timestamp(System.currentTimeMillis()).getTime();
 
     public static final BigDecimal DAILY_MAX_LIMIT_OF_ATM=BigDecimal.valueOf(5000L);
 
