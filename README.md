@@ -36,6 +36,7 @@ In addition, some special checks have been carried out.
 
 - Is there a balance on any of the customer's accounts?
 - Is there a balance or debt on any of the customer's cards?
+
 ![image](https://user-images.githubusercontent.com/72404480/172072075-3a77a153-d12b-4f1c-aba9-cf93d013687d.png)
 
 ## 💰	AccountManagement
@@ -48,6 +49,10 @@ Accounts service for bank customers to use to control their investments,vieving 
  - ✅ Money can only be transferred via IBAN through a checking account. 
  Deposit accounts can't be used to send money.
  - ✅ Accounts can be opened in TL, Euro or Dollar currencies.
+ 
+ 
+![image](https://user-images.githubusercontent.com/72404480/172072158-18b1489d-eb7f-416e-ad0b-3c1d07b9bde0.png)
+
 
 ## 💳	Card Management
 
@@ -62,6 +67,10 @@ Requirements:
 Extras:
 - ✅ Viewing (in JSON format) operations can still be done via API.
 
+
+![image](https://user-images.githubusercontent.com/72404480/172072150-f7aa4b46-a2ce-44d6-b118-a9a9b5548ca0.png)
+
+
 ## 💸	Transaction Management
 
 Transaction endpoints are provided for managing customers' money transfers. Transaction 
@@ -71,6 +80,10 @@ can be between the accounts opened in the different currencies. I prefered that 
  Transfer transactions are carried out only through IBAN.
 
  ⭐ I have used Strategy Pattern for paying credit card debt or adding balance to bank card.
+ ---
+ 
+ ![image](https://user-images.githubusercontent.com/72404480/172072181-3d3e300b-f2d8-4ce7-bcd0-0cf1e655cbfe.png)
+
 
 ## 👩	 User Management
 
@@ -79,10 +92,16 @@ from adding customer. After a customer is added by Admin on bank branch , custom
 customer will be a user.
 In additionaly a ADMIN user can add a user with customer infos directly.
 
+![image](https://user-images.githubusercontent.com/72404480/172072203-4ba58fc1-0e57-4a49-9178-e4683e547b46.png)
+
+
 ## 🔐	Authentication Management
 
 I have used Spring security here, it is not possible to send requests to any API without having a JWT token.
  Therefore, with the /auth endpoint, which is open to everyone, customers can obtain tokens first registering and after logging in.
+ 
+ ![image](https://user-images.githubusercontent.com/72404480/172072216-2ea64f61-780c-4162-8b1b-57252f744c8a.png)
+
 
 ## ✅Validation
 
@@ -185,13 +204,18 @@ Now App is up and next about JWT usage.
 
 ---
 
-First you must register , for this purpose I have created 1 Customer and you can use
+First you must register , for this purpose I have created 1 User Customer and 1 Admin Customer you can use
 this customer infos to register.
+ 
+ ![image](https://user-images.githubusercontent.com/72404480/172072323-24f487a8-018a-4a8e-817c-14ced1e4abc9.png)
+
 
 ```bash
  localhost:8090/auth/register
-
 ```
+
+![image](https://user-images.githubusercontent.com/72404480/172072361-bd4d3aca-0859-4cbd-a2b9-8ba22a68b471.png)
+
 ---
 
 When you see User creation successful response now you can log in with your new user.
@@ -200,6 +224,8 @@ If you want to log in with Admin authority you can use Admin user that I created
 ```bash
  localhost:8090/auth/login
 ```
+![image](https://user-images.githubusercontent.com/72404480/172072377-eceecb49-7402-4f13-ada6-4997411d9548.png)
+
 
 Finally, after this POST request you will get a Bearer token response and now you can send request with 
 this token and try all API's.
@@ -210,6 +236,7 @@ Have a nice try.
 ## Thanks and Coder
 
 - 💻	 [@Hasan DOGAN](https://github.com/HasanDogann) GitHub Link
+--- 
 I would like to thank 🙏	 **BARAN BÜYÜK** who supported me to accomplish
  this project and prepared me for the sector at the 
  Java Spring Bootcamp for about 2 months. I would also
