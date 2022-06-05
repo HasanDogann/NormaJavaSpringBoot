@@ -116,7 +116,7 @@ Also I used, @Pattern annotations to get correct request.
 In project, I coded my own Exception Hangling classes.Also all of the exceptions have handled with specific class and method.
 I have used and extended BaseException  and coded a Singleton custom exception class.
 
-⭐I have used Singleton Pattern for creating and using custom Exception Handling classes.
+⭐ I have used Singleton Pattern for creating and using custom Exception Handling classes.
 
 ---
 ## 🩺 Unit Tests
