@@ -210,7 +210,8 @@ Now App is up and next about JWT usage.
 First you must register , for this purpose I have created 1 User Customer and 1 Admin Customer you can use
 this customer infos to register.
  ❗	User id and Admin id are depend on saving query so if you get warning try User with id 2 and Admin with id 1
- ![image](https://user-images.githubusercontent.com/72404480/172072323-24f487a8-018a-4a8e-817c-14ced1e4abc9.png)
+ 
+ - ![image](https://user-images.githubusercontent.com/72404480/172072323-24f487a8-018a-4a8e-817c-14ced1e4abc9.png)
 
 
 ```bash
