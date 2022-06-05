@@ -4,7 +4,6 @@ import com.example.bankingsystem.facade.AuthenticationFacade;
 import com.example.bankingsystem.model.dto.request.UserCreateRequestByUserDTO;
 import com.example.bankingsystem.model.dto.request.UserLoginRequest;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 /**
- * @author Hasan DOĞAN
- * IntelliJ IDEA
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
  * 20.05.2022
  */
 @RestController
@@ -28,7 +27,6 @@ import javax.validation.Valid;
 public class AuthenticationController {
 
     Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
-
     private final AuthenticationFacade authenticationFacade;
 
 

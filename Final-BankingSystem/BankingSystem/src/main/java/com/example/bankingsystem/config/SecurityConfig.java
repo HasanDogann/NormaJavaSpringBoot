@@ -3,37 +3,34 @@ package com.example.bankingsystem.config;
 import com.example.bankingsystem.security.JwtAuthenticationEntryPoint;
 import com.example.bankingsystem.security.JwtAuthenticationFilter;
 import com.example.bankingsystem.service.impl.UserDetailsServiceImpl;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.filter.CorsFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import java.util.List;
 
 /**
- * @author Hasan DOĞAN
- * @Project IntelliJ IDEA
- * @Date 20.05.2022
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
+ * 20.05.2022
  */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     private final UserDetailsServiceImpl userDetailsService;
-
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     public SecurityConfig(UserDetailsServiceImpl userDetailsService, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint) {
@@ -54,9 +51,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/v3/api-docs/**",
             "/swagger-ui/**"
             // other public endpoints of your API may be appended to this array
-    };
-    private static final String[] USER_PERMISSION = {
-
     };
 
 
@@ -103,7 +97,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(HttpSecurity httpSecurity) throws Exception{
+    public void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors()
                 .and()
                 .csrf().disable()
@@ -115,18 +109,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/auth/**")
                 .permitAll()
-                .anyRequest().permitAll();
-
-                //serviceler hazır olunca burada requestlerden auth. iste
-                //.antMatchers("/api/v2/users")
-                //.hasAnyAuthority("ADMIN")
-               // .anyRequest().authenticated();
+                .anyRequest().authenticated();
 
         httpSecurity.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
 
     }
-
 
 
 }

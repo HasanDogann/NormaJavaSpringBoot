@@ -23,11 +23,11 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.Objects;
 
 /**
- * @author Hasan DOĞAN
- * IntelliJ IDEA
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
  * 25.05.2022
  */
 @Component
@@ -94,7 +94,7 @@ public class MoneyTransferByPurchase implements TransferStrategy {
             receiverAccount.setBalance(receiverAccount.getBalance().add(BigDecimal.valueOf(exchangeAmount)));
             return transaction;
         }
-        boolean isLimitEnough = (senderCard.getCardLimit().compareTo(transactionRequestDTO.amount().add(senderCard.getCardDebt()).subtract(senderCard.getCardBalance())))>-1;
+        boolean isLimitEnough = (senderCard.getCardLimit().compareTo(transactionRequestDTO.amount().add(senderCard.getCardDebt()).subtract(senderCard.getCardBalance()))) > -1;
         if (!isLimitEnough) {
             throw new TransferOperationException.TransferCanNotProceedException("You do not have enough limit for this purchase.");
         }
@@ -134,7 +134,7 @@ public class MoneyTransferByPurchase implements TransferStrategy {
             receiverAccount.setBalance(receiverAccount.getBalance().add(transactionRequestDTO.amount()));
             return transaction;
         }
-        boolean isLimitEnough = (senderCard.getCardLimit().compareTo(transactionRequestDTO.amount().add(senderCard.getCardDebt()).subtract(senderCard.getCardBalance())))>-1;
+        boolean isLimitEnough = (senderCard.getCardLimit().compareTo(transactionRequestDTO.amount().add(senderCard.getCardDebt()).subtract(senderCard.getCardBalance()))) > -1;
         if (!isLimitEnough) {
             throw new TransferOperationException.TransferCanNotProceedException("You do not have enough limit for this purchase");
         }

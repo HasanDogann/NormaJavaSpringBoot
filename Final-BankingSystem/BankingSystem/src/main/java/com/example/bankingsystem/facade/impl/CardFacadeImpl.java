@@ -18,7 +18,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 /**
- * Author Hasan DOĞAN
+ * Author Hasan DOGAN
  * BankingSystemApplication.java
  * 28.05.2022
  */
@@ -78,8 +78,8 @@ public class CardFacadeImpl implements CardFacade {
     public ResponseEntity<Collection<CardGetResponseDTO>> getAllCardByCustomerId(Long id) {
         Collection<CardGetResponseDTO> collection = cardService.getAllCardByCustomerId(id)
                 .stream().map(cardConverter::toCardResponseFromCard).toList();
-        if(collection.isEmpty()){
-            return new ResponseEntity("There is No Card!",HttpStatus.NOT_FOUND);
+        if (collection.isEmpty()) {
+            return new ResponseEntity("There is No Card!", HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok().body(collection);
 
@@ -87,7 +87,7 @@ public class CardFacadeImpl implements CardFacade {
 
     @Override
     public ResponseEntity<String> deleteCard(Long id, boolean isHardDelete) {
-        String response = cardService.deleteCard(id,isHardDelete);
+        String response = cardService.deleteCard(id, isHardDelete);
 
         return ResponseEntity.ok().body(response);
     }

@@ -7,11 +7,12 @@ import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 
 /**
- * @author Hasan DOĞAN
- * @Project IntelliJ IDEA
- * @Date 23.05.2022
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
+ * 23.05.2022
  */
-public record CardCreateRequestDTO( @Column(nullable = false)  @Min(value = 1,message = "Account ID must be bigger than 0") Long accountId,
-                                   CardType cardType,
-                                    @Column(nullable = false)  @Min(value = 1,message = "Limit must be bigger than 0") BigDecimal limit) {
+public record CardCreateRequestDTO(
+        @Column(nullable = false) @Min(value = 1, message = "Account ID must be bigger than 0") Long accountId,
+        CardType cardType,
+        @Column(nullable = false) @Min(value = 1, message = "Limit must be bigger than 0") BigDecimal limit) {
 }

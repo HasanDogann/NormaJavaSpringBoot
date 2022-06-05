@@ -1,8 +1,6 @@
 package com.example.bankingsystem.service.impl;
 
-import com.example.bankingsystem.model.entity.Customer;
 import com.example.bankingsystem.model.entity.User;
-import com.example.bankingsystem.repository.CustomerRepository;
 import com.example.bankingsystem.repository.UserRepository;
 import com.example.bankingsystem.security.JsonWTUserDetails;
 import lombok.RequiredArgsConstructor;
@@ -12,9 +10,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
- * @author Hasan DOĞAN
- * @Project IntelliJ IDEA
- * @Date 20.05.2022
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
+ * 20.05.2022
  */
 @RequiredArgsConstructor
 @Service
@@ -28,7 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return JsonWTUserDetails.create(user);
     }
 
-    public UserDetails loadUserById(Long id) throws UsernameNotFoundException{
+    public UserDetails loadUserById(Long id) throws UsernameNotFoundException {
         User user = userRepository.getById(id);
         return JsonWTUserDetails.create(user);
     }

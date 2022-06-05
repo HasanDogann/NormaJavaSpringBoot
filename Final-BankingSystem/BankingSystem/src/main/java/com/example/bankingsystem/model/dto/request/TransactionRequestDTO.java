@@ -8,14 +8,15 @@ import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
 
 /**
- * @author Hasan DOĞAN
- * @Project IntelliJ IDEA
- * @Date 24.05.2022
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
+ * 24.05.2022
  */
-public record TransactionRequestDTO( @Min(value = 1,message = "Amount must be bigger than 0") @NotNull BigDecimal amount,
-                                    @Pattern(regexp = "TR\\d{24}|[1-9]\\d{15}")
-                                    String senderIban,
-                                    @Pattern(regexp = "TR\\d{24}")
-                                    String receiverIban,
-                                    TransferType transferType) {
+public record TransactionRequestDTO(
+        @Min(value = 1, message = "Amount must be bigger than 0") @NotNull BigDecimal amount,
+        @Pattern(regexp = "TR\\d{24}|[1-9]\\d{15}")
+        String senderIban,
+        @Pattern(regexp = "TR\\d{24}")
+        String receiverIban,
+        TransferType transferType) {
 }

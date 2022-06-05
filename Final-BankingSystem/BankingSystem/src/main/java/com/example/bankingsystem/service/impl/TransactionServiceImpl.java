@@ -24,8 +24,8 @@ import java.util.Collection;
 import java.util.Objects;
 
 /**
- * @author Hasan DOĞAN
- * IntelliJ IDEA
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
  * 24.05.2022
  */
 @Service
@@ -75,8 +75,8 @@ public class TransactionServiceImpl implements TransactionService {
 
         Collection<Transaction> transactions = transactionRepository
                 .getTransactionsByTransferTypeIsAndSenderIBANIsAndTransferDateIsGreaterThan(purchaseDTO.transferType(),
-                        purchaseDTO.senderCardNo(),purchaseDTO.purchaseDate());
-        if(Objects.isNull(transactions)){
+                        purchaseDTO.senderCardNo(), purchaseDTO.purchaseDate());
+        if (Objects.isNull(transactions)) {
             throw new TransferOperationException.PaymentBillsCanNotProceedException("There is no receipts");
         }
         return transactions;

@@ -1,13 +1,10 @@
 package com.example.bankingsystem.core.constants;
 
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Random;
 
@@ -18,9 +15,7 @@ public final class ConstantUtils {
 
     private static Random random = new Random();
 
-    public static long currentTimestamp=new Timestamp(System.currentTimeMillis()).getTime();
-
-    public static final BigDecimal DAILY_MAX_LIMIT_OF_ATM=BigDecimal.valueOf(5000L);
+    public static final BigDecimal DAILY_MAX_LIMIT_OF_ATM = BigDecimal.valueOf(5000L);
 
     public static String getRandomIban(Integer branchCode) {
         return "TR" + new BigDecimal(random.nextLong(10_000_000, 99_999_999)) + branchCode.toString();
@@ -40,12 +35,12 @@ public final class ConstantUtils {
         return random.nextInt(1000, 9999);
     }
 
-    public static String getRandomCardNo(){
+    public static String getRandomCardNo() {
         return
-                new BigDecimal(new BigDecimal(random.nextLong(1000,9999))+""+
-                        new BigDecimal(random.nextLong(1000,9999))+""+
-                        new BigDecimal(random.nextLong(1000,9999))+""+
-                        new BigDecimal(random.nextLong(1000,9999)).toBigInteger()).setScale(0, RoundingMode.DOWN).toString();
+                new BigDecimal(new BigDecimal(random.nextLong(1000, 9999)) + "" +
+                        new BigDecimal(random.nextLong(1000, 9999)) + "" +
+                        new BigDecimal(random.nextLong(1000, 9999)) + "" +
+                        new BigDecimal(random.nextLong(1000, 9999)).toBigInteger()).setScale(0, RoundingMode.DOWN).toString();
     }
 
 }

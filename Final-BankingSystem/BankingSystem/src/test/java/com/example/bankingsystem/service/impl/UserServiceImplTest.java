@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
- * Author Hasan DOĞAN
+ * Author Hasan DOGAN
  * BankingSystemApplication.java
  * 4.06.2022
  */
@@ -32,11 +32,11 @@ class UserServiceImplTest {
 
 
     @Test
-    void adding_User_Successfully() {
+    void should_Add_User_Successfully() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 51");
         customer.setSurname("Customer");
-        customer.setMail("Demo62@mail");
+        customer.setMail("Test51@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -51,11 +51,11 @@ class UserServiceImplTest {
     }
 
     @Test
-    void throws_adding_User_Mail_AlreadyTaken_Exception() {
+    void throws_adding_User_Mail_AlreadyCreated_Exception() {
 
         Assertions.assertThrows(ServiceOperationCanNotCreateException.UserIsAlreadyCreatedException.class, () -> {
             userService.addUser(new UserCreateRequestDTO(
-                    "Demo@mail", "1234Asd.", Role.USER, 1L
+                    "Admin@mail", "1234Asd.", Role.USER, 1L
             ));
         });
     }
@@ -70,9 +70,9 @@ class UserServiceImplTest {
     @Test
     void throws_User_IsDeleted_Exception() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 52");
         customer.setSurname("Customer");
-        customer.setMail("Demo63@mail");
+        customer.setMail("Test52@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -82,7 +82,7 @@ class UserServiceImplTest {
                 customer.getMail(), "1234Asd.", Role.USER, customer.getId()
         ));
 
-        Long id = userService.getUserByEmail("Demo63@mail").getId();
+        Long id = userService.getUserByEmail("Test52@mail").getId();
         userService.deleteUser(id, false);
         Assertions.assertThrows(ServiceOperationAlreadyDeletedException.UserAlreadyDeletedException.class, () -> {
             userService.getUser(id);
@@ -90,11 +90,11 @@ class UserServiceImplTest {
     }
 
     @Test
-    void deleting_User_Successfully() {
+    void should_Delete_User_Successfully() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 53");
         customer.setSurname("Customer");
-        customer.setMail("Demo64@mail");
+        customer.setMail("Test53@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -103,7 +103,7 @@ class UserServiceImplTest {
         userService.addUser(new UserCreateRequestDTO(
                 customer.getMail(), "1234Asd.", Role.USER, customer.getId()
         ));
-        Long id = userService.getUserByEmail("Demo64@mail").getId();
+        Long id = userService.getUserByEmail("Test53@mail").getId();
 
         Assertions.assertDoesNotThrow(() ->
                 userService.deleteUser(id, false));
@@ -112,9 +112,9 @@ class UserServiceImplTest {
     @Test
     void throws_deleting_User_AlreadyDeleted_Exception() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 84");
         customer.setSurname("Customer");
-        customer.setMail("Demo65@mail");
+        customer.setMail("Test84@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -124,7 +124,7 @@ class UserServiceImplTest {
                 customer.getMail(), "1234Asd.", Role.USER, customer.getId()
         ));
 
-        Long id = userService.getUserByEmail("Demo65@mail").getId();
+        Long id = userService.getUserByEmail("Test84@mail").getId();
         userService.deleteUser(id, false);
         Assertions.assertThrows(ServiceOperationAlreadyDeletedException.UserAlreadyDeletedException.class, () -> {
             userService.deleteUser(id, false);

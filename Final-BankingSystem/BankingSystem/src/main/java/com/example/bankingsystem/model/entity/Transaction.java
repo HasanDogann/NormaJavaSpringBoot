@@ -7,7 +7,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
@@ -36,8 +40,6 @@ public class Transaction extends BaseModel {
 
     @Column(nullable = false)
     private String transferDate;
-
-
 
 
 }

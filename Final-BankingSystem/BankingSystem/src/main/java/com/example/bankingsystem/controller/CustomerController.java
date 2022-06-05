@@ -17,7 +17,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import java.util.Collection;
 
-
+/**
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
+ * 25.05.2022
+ */
 @RestController
 @RequestMapping(value = "api/v2/customers")
 @RequiredArgsConstructor
@@ -25,8 +29,8 @@ import java.util.Collection;
 public class CustomerController {
 
     Logger logger = LoggerFactory.getLogger(CustomerController.class);
-
     private final CustomerFacade customerFacade;
+
     @PreAuthorize(value = "hasAnyAuthority('ADMIN')")
     @PostMapping
     public ResponseEntity<String> addCustomer(@Valid @RequestBody CustomerCreateRequestDTO customerCreateRequestDTO) {
@@ -37,13 +41,14 @@ public class CustomerController {
     @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<CustomerGetResponseDTO> getCustomer(@Valid @Min(1) @PathVariable Long id) {
-        logger.trace("Get method used for getting Customer : {}",id);
+        logger.trace("Get method used for getting Customer : {}", id);
         return customerFacade.getCustomer(id);
     }
+
     @PreAuthorize(value = "hasAnyAuthority('ADMIN')")
     @GetMapping("/getCustomerByMail/{mail}")
     public ResponseEntity<CustomerGetResponseDTO> getCustomerByMail(@Valid @Email(message = "Email doesn't have a valid format") @PathVariable String mail) {
-        logger.trace("Get method used for getting Customer with Mail: {}",mail);
+        logger.trace("Get method used for getting Customer with Mail: {}", mail);
         return customerFacade.getCustomerByEmail(mail);
     }
 
@@ -61,11 +66,12 @@ public class CustomerController {
         return customerFacade.updateCustomer(customerUpdateRequestDTO);
 
     }
-   @PreAuthorize(value = "hasAnyAuthority('ADMIN')")
+
+    @PreAuthorize(value = "hasAnyAuthority('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCustomer(@Valid @Min(1) @PathVariable Long id,
-                                            @RequestParam(name = "hardDelete", required = false) boolean isHardDelete) {
-       logger.trace("Delete method used for deleting Customer : {}",id);
+                                                 @RequestParam(name = "hardDelete", required = false) boolean isHardDelete) {
+        logger.trace("Delete method used for deleting Customer : {}", id);
         return customerFacade.deleteCustomer(id, isHardDelete);
     }
 

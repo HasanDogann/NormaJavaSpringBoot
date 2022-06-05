@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
 
-public interface TransactionRepository extends JpaRepository<Transaction,Long> {
+public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
     @Override
     Transaction getById(Long id);
 
 
-    Collection<Transaction> getTransactionsByTransferTypeIsAndSenderIBANIsAndTransferDateIsGreaterThan(TransferType transferType,String senderIban,String Date);
+    Collection<Transaction> getTransactionsByTransferTypeIsAndSenderIBANIsAndTransferDateIsGreaterThan(TransferType transferType, String senderIban, String Date);
 }

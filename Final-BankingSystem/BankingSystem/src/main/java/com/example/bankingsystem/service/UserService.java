@@ -7,23 +7,21 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 /**
- * @author Hasan DOĞAN
- * @Project IntelliJ IDEA
- * @Date 21.05.2022
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
+ * 21.05.2022
  */
 
 @Service
-public interface UserService  {
-
+public interface UserService {
 
     void addUser(UserCreateRequestDTO userCreateRequestDTO);
 
     User getUser(Long id);
 
-
     Collection<User> getAllUsers();
 
     User getUserByEmail(String email);
 
-    String deleteUser(Long id,boolean isHardDelete);
+    String deleteUser(Long id, boolean isHardDelete);
 }

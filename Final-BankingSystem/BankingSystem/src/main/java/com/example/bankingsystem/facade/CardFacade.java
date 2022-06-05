@@ -4,13 +4,12 @@ import com.example.bankingsystem.model.dto.request.CardCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.CardPaymentRequestDTO;
 import com.example.bankingsystem.model.dto.response.CardBalanceResponseDTO;
 import com.example.bankingsystem.model.dto.response.CardGetResponseDTO;
-import com.example.bankingsystem.model.entity.Card;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Collection;
 
 /**
- * Author Hasan DOĞAN
+ * Author Hasan DOGAN
  * BankingSystemApplication.java
  * 28.05.2022
  */

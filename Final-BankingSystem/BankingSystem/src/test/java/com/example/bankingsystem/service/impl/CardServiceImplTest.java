@@ -35,11 +35,11 @@ class CardServiceImplTest {
     private CardService cardService;
 
     @Test
-    public void adding_BankCard_successfully() {
+     void should_Add_BankCard_successfully() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 17");
         customer.setSurname("Customer");
-        customer.setMail("Demo16@mail");
+        customer.setMail("Test17@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -81,11 +81,11 @@ class CardServiceImplTest {
     }
 
     @Test
-    public void adding_CreditCard_successfully() {
+     void should_Add_CreditCard_successfully() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 18");
         customer.setSurname("Customer");
-        customer.setMail("Demo17@mail");
+        customer.setMail("Test18@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -127,7 +127,7 @@ class CardServiceImplTest {
     }
 
     @Test
-    public void throws_Getting_Card_IsNotFound_Exception() {
+     void throws_Getting_Card_IsNotFound_Exception() {
 
 
         Assertions.assertThrows(ServiceOperationNotFoundException.CardNotFoundException.class,
@@ -139,12 +139,12 @@ class CardServiceImplTest {
     }
 
     @Test
-    public void throws_Getting_Card_IsDeleted_Exception() {
+     void throws_Getting_Card_IsDeleted_Exception() {
 
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 19");
         customer.setSurname("Customer");
-        customer.setMail("Demo18@mail");
+        customer.setMail("Test19@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -186,12 +186,12 @@ class CardServiceImplTest {
     }
 
     @Test
-    public void when_Getting_CardBalance_Successfully() {
+     void should_Get_CardBalance_Successfully() {
 
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 20");
         customer.setSurname("Customer");
-        customer.setMail("Demo19@mail");
+        customer.setMail("Test20@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -232,11 +232,11 @@ class CardServiceImplTest {
     }
 
     @Test
-    void paying_Card_Debt_WithAccount() {
+    void should_Pay_Card_Debt_With_Account_Successfully() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 21");
         customer.setSurname("Customer");
-        customer.setMail("Demo019@mail");
+        customer.setMail("Test21@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -274,11 +274,11 @@ class CardServiceImplTest {
     }
 
     @Test
-    void throws_paying_Card_Debt_WithAccount_NotEnoughAmount_Exception() {
+    void throws_Paying_Card_Debt_WithAccount_NotEnoughAmount_Exception() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 22");
         customer.setSurname("Customer");
-        customer.setMail("Demo020@mail");
+        customer.setMail("Test22@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -320,11 +320,11 @@ class CardServiceImplTest {
     }
 
     @Test
-    void paying_Card_Debt_With_ATM() {
+    void Should_Pay_Card_Debt_With_ATM_Successfully() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 23");
         customer.setSurname("Customer");
-        customer.setMail("Demo021@mail");
+        customer.setMail("Test23@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -364,11 +364,11 @@ class CardServiceImplTest {
     }
 
     @Test
-    void adding_Card_Balance_With_ATM() {
+    void should_Add_Card_Balance_With_ATM() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 24");
         customer.setSurname("Customer");
-        customer.setMail("Demo022@mail");
+        customer.setMail("Test24@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -408,12 +408,12 @@ class CardServiceImplTest {
     }
 
     @Test
-    public void throws_Getting_CardBalance_CardIsNotFound_Exception() {
+     void throws_Getting_CardBalance_CardIsNotFound_Exception() {
 
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 25");
         customer.setSurname("Customer");
-        customer.setMail("Demo20@mail");
+        customer.setMail("Test25@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -454,12 +454,12 @@ class CardServiceImplTest {
     }
 
     @Test
-    public void getting_AllCardsOfOneAccount_Successfully() {
+     void should_Get_AllCardsOfOneAccount_Successfully() {
 
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 26");
         customer.setSurname("Customer");
-        customer.setMail("Demo21@mail");
+        customer.setMail("Test26@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -500,12 +500,12 @@ class CardServiceImplTest {
     }
 
     @Test
-    public void throws_AllCardsOfOneAccount_NoCardOnAccount_Exception() {
+     void throws_AllCardsOfOneAccount_NoCardOnAccount_Exception() {
 
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 27");
         customer.setSurname("Customer");
-        customer.setMail("Demo22@mail");
+        customer.setMail("Test27@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -535,12 +535,12 @@ class CardServiceImplTest {
     }
 
     @Test
-    public void getting_AllCardsOfOneCustomer_Successfully() {
+     void should_Get_AllCardsOfOneCustomer_Successfully() {
 
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 28");
         customer.setSurname("Customer");
-        customer.setMail("Demo23@mail");
+        customer.setMail("Test28@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -581,12 +581,12 @@ class CardServiceImplTest {
     }
 
     @Test
-    public void throws_AllCardsOfOneCustomer_NoCardOnCustomer_Exception() {
+     void throws_AllCardsOfOneCustomer_NoCardOnCustomer_Exception() {
 
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 29");
         customer.setSurname("Customer");
-        customer.setMail("Demo24@mail");
+        customer.setMail("Test29@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -615,12 +615,12 @@ class CardServiceImplTest {
     }
 
     @Test
-    public void deleting_Card_Soft_And_Successfully() {
+     void should_Delete_Card_Soft_And_Successfully() {
 
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 30");
         customer.setSurname("Customer");
-        customer.setMail("Demo25@mail");
+        customer.setMail("Test30@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -661,12 +661,12 @@ class CardServiceImplTest {
     }
 
     @Test
-    public void deleting_Card_Hard_And_Successfully() {
+     void should_Delete_Card_Hard_And_Successfully() {
 
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 31");
         customer.setSurname("Customer");
-        customer.setMail("Demo26@mail");
+        customer.setMail("Test31@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -707,12 +707,12 @@ class CardServiceImplTest {
     }
 
     @Test
-    public void throws_deleting_Card_IsDeleted_Exception() {
+     void throws_Deleting_Card_IsDeleted_Exception() {
 
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 32");
         customer.setSurname("Customer");
-        customer.setMail("Demo27@mail");
+        customer.setMail("Test32@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -754,12 +754,12 @@ class CardServiceImplTest {
     }
 
     @Test
-    public void throws_deleting_Card_IsNotFound_Exception() {
+     void throws_Deleting_Card_IsNotFound_Exception() {
 
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 33");
         customer.setSurname("Customer");
-        customer.setMail("Demo28@mail");
+        customer.setMail("Test33@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -801,12 +801,12 @@ class CardServiceImplTest {
     }
 
     @Test
-    public void throws_deleting_Card_BalanceNotZero_Exception() {
+     void throws_Deleting_Card_BalanceNotZero_Exception() {
 
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 34");
         customer.setSurname("Customer");
-        customer.setMail("Demo29@mail");
+        customer.setMail("Test34@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));

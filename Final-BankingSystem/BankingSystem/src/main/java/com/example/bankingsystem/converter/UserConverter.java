@@ -5,9 +5,9 @@ import com.example.bankingsystem.model.dto.response.UserGetResponseDTO;
 import com.example.bankingsystem.model.entity.User;
 
 /**
- * @author Hasan DOĞAN
- * @Project IntelliJ IDEA
- * @Date 21.05.2022
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
+ * 21.05.2022
  */
 public interface UserConverter {
 

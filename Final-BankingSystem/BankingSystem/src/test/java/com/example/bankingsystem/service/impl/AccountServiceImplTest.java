@@ -35,7 +35,7 @@ class AccountServiceImplTest {
 
 
     @Test
-    public void account_Is_Not_Found_Exception8() {
+     void throws_Account_IsNotFound_Exception() {
         Assertions.assertThrows(ServiceOperationNotFoundException.AccountNotFoundException.class,
                 () -> {
                     accountService.getAccount(1000L);
@@ -43,11 +43,11 @@ class AccountServiceImplTest {
     }
 
     @Test
-    public void accountType_IsChecking_Already_Exist_At_Same_Branch() {
+     void throws_AccountType_IsChecking_Already_Exist_At_Same_Branch() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 10");
         customer.setSurname("Customer");
-        customer.setMail("Demo9@mail");
+        customer.setMail("Test10@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -98,11 +98,11 @@ class AccountServiceImplTest {
     }
 
     @Test
-    public void accountType_IsDeposit_Already_Exist_At_Same_Branch() {
+     void throws_AccountType_IsDeposit_Already_Exist_At_Same_Branch() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 11");
         customer.setSurname("Customer");
-        customer.setMail("Demo10@mail");
+        customer.setMail("Test11@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -153,7 +153,7 @@ class AccountServiceImplTest {
     }
 
     @Test
-    public void should_throw_When_Proceed_Wrong_IBAN_AccountNotFound_Exception() {
+     void throws_When_Proceed_Wrong_IBAN_AccountNotFound_Exception() {
 
         Assertions.assertThrows(ServiceOperationNotFoundException.AccountNotFoundException.class,
                 () -> {
@@ -163,12 +163,12 @@ class AccountServiceImplTest {
     }
 
     @Test
-    public void should_throw_Account_Was_Deleted_Exception() {
+     void throws_Account_Was_Deleted_Exception() {
 
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 12");
         customer.setSurname("Customer");
-        customer.setMail("Demo11@mail");
+        customer.setMail("Test12@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -209,12 +209,12 @@ class AccountServiceImplTest {
     }
 
     @Test
-    public void should_throw_Account_Balance_NotZero_Exception() {
+     void throws_Account_Balance_NotZero_Exception() {
 
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 13");
         customer.setSurname("Customer");
-        customer.setMail("Demo12@mail");
+        customer.setMail("Test13@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -254,12 +254,12 @@ class AccountServiceImplTest {
     }
 
     @Test
-    public void should_throw_Card_Balance_or_Debt_NotZero_Exception() {
+     void throws_Card_Balance_or_Debt_NotZero_Exception() {
 
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 14");
         customer.setSurname("Customer");
-        customer.setMail("Demo13@mail");
+        customer.setMail("Test14@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -299,12 +299,12 @@ class AccountServiceImplTest {
     }
 
     @Test
-    public void should_Account_Was_Deleted_Successfully() {
+     void should_Account_Was_Deleted_Successfully() {
 
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 15");
         customer.setSurname("Customer");
-        customer.setMail("Demo14@mail");
+        customer.setMail("Test15@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -342,11 +342,11 @@ class AccountServiceImplTest {
 
     }
     @Test
-    public void adding_Account_successfully(){
+     void should_Adding_Account_successfully(){
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 16");
         customer.setSurname("Customer");
-        customer.setMail("Demo15@mail");
+        customer.setMail("Test16@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));

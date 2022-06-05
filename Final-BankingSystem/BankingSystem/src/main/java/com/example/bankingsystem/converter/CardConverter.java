@@ -6,9 +6,9 @@ import com.example.bankingsystem.model.dto.response.CardGetResponseDTO;
 import com.example.bankingsystem.model.entity.Card;
 
 /**
- * @author Hasan DOĞAN
- * @Project IntelliJ IDEA
- * @Date 23.05.2022
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
+ *  23.05.2022
  */
 public interface CardConverter {
 

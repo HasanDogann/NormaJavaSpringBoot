@@ -1,7 +1,6 @@
 package com.example.bankingsystem.service.transfer.strategies;
 
 import com.example.bankingsystem.core.constants.ConstantUtils;
-import com.example.bankingsystem.service.transfer.TransferStrategy;
 import com.example.bankingsystem.exception.TransferOperationException;
 import com.example.bankingsystem.model.dto.request.TransactionRequestDTO;
 import com.example.bankingsystem.model.entity.Account;
@@ -11,6 +10,7 @@ import com.example.bankingsystem.model.entity.enums.BalanceCurrencyType;
 import com.example.bankingsystem.model.entity.enums.TransferType;
 import com.example.bankingsystem.model.entity.exchange.ExchangeModel;
 import com.example.bankingsystem.service.AccountService;
+import com.example.bankingsystem.service.transfer.TransferStrategy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
@@ -25,9 +25,9 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
- * @author Hasan DOĞAN
- *  IntelliJ IDEA
- *  24.05.2022
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
+ * 24.05.2022
  */
 @Component
 @RequiredArgsConstructor
@@ -49,8 +49,7 @@ public class MoneyTransferByIban implements TransferStrategy {
 
         if (sender.getBalance().compareTo(transactionRequestDTO.amount()) < 0) {
             throw new TransferOperationException.TransferCanNotProceedException("Sender account doesn't have enough money to send this amount!");
-        }
-        else if (sender.getAccountType().equals(AccountType.DEPOSIT_ACCOUNT) ) {
+        } else if (sender.getAccountType().equals(AccountType.DEPOSIT_ACCOUNT)) {
             throw new TransferOperationException.TransferCanNotProceedException("Sender account type can not be Deposit Account");
         }
 
@@ -118,7 +117,7 @@ public class MoneyTransferByIban implements TransferStrategy {
         return transaction;
     }
 
-    private Transaction sendingMoneyBothTRYAccount(TransactionRequestDTO transactionRequestDTO){
+    private Transaction sendingMoneyBothTRYAccount(TransactionRequestDTO transactionRequestDTO) {
 
 
         Transaction transaction = new Transaction();

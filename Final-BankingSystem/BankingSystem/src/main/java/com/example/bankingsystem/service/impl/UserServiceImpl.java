@@ -18,9 +18,9 @@ import java.util.Collection;
 import java.util.Objects;
 
 /**
- * @author Hasan DOĞAN
- * @Project IntelliJ IDEA
- * @Date 21.05.2022
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
+ * 21.05.2022
  */
 @Service
 @RequiredArgsConstructor
@@ -70,13 +70,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(isolation = Isolation.REPEATABLE_READ)
-    public String deleteUser(Long id,boolean isHardDelete) {
+    public String deleteUser(Long id, boolean isHardDelete) {
         User user = getUser(id);
 
-        if(user.isDeleted()){
+        if (user.isDeleted()) {
             throw new ServiceOperationAlreadyDeletedException.UserAlreadyDeletedException("User was already deleted!");
         }
-        if(isHardDelete){
+        if (isHardDelete) {
             userRepository.delete(user);
             return "User is deleted hard and successfully";
         }

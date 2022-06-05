@@ -22,7 +22,7 @@ import java.math.BigDecimal;
 import java.util.Set;
 
 /**
- * Author Hasan DOĞAN
+ * Author Hasan DOGAN
  * BankingSystemApplication.java
  * 4.06.2022
  */
@@ -37,11 +37,11 @@ class TransactionServiceImplTest {
     private AccountService accountService;
 
     @Test
-    void success_MoneyTransfer_With_IBAN_TRYtoTRY() {
+    void should_Success_MoneyTransfer_With_IBAN_TRYtoTRY() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 35");
         customer.setSurname("Customer");
-        customer.setMail("Demo30@mail");
+        customer.setMail("Test35@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -59,9 +59,9 @@ class TransactionServiceImplTest {
         account.setCustomer(customer);
 
         Customer customer2 = new Customer();
-        customer2.setName("Demo");
-        customer2.setSurname("Customer");
-        customer2.setMail("Demo31@mail");
+        customer.setName("Test 57");
+        customer.setSurname("Customer");
+        customer.setMail("Test57@mail");
         customer2.setPhone("90123456");
         customer2.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer2));
@@ -91,11 +91,11 @@ class TransactionServiceImplTest {
     }
 
     @Test
-    void success_MoneyTransfer_With_IBAN_EURtoTRY() {
+    void should_Success_MoneyTransfer_With_IBAN_EURtoTRY() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 36");
         customer.setSurname("Customer");
-        customer.setMail("Demo32@mail");
+        customer.setMail("Test36@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -145,11 +145,11 @@ class TransactionServiceImplTest {
     }
 
     @Test
-    void success_MoneyTransfer_With_IBAN_USDtoTRY() {
+    void should_Success_MoneyTransfer_With_IBAN_USDtoTRY() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 37");
         customer.setSurname("Customer");
-        customer.setMail("Demo34@mail");
+        customer.setMail("Test37@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -199,11 +199,11 @@ class TransactionServiceImplTest {
     }
 
     @Test
-    void success_MoneyTransfer_With_IBAN_TRYtoEUR() {
+    void should_Success_MoneyTransfer_With_IBAN_TRYtoEUR() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 38");
         customer.setSurname("Customer");
-        customer.setMail("Demo36@mail");
+        customer.setMail("Test38@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -221,9 +221,9 @@ class TransactionServiceImplTest {
         account.setCustomer(customer);
 
         Customer customer2 = new Customer();
-        customer2.setName("Demo");
-        customer2.setSurname("Customer");
-        customer2.setMail("Demo37@mail");
+        customer.setName("Test 56");
+        customer.setSurname("Customer");
+        customer.setMail("Test56@mail");
         customer2.setPhone("90123456");
         customer2.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer2));
@@ -253,11 +253,11 @@ class TransactionServiceImplTest {
     }
 
     @Test
-    void success_MoneyTransfer_With_IBAN_TRYtoUSD() {
+    void should_Success_MoneyTransfer_With_IBAN_TRYtoUSD() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 39");
         customer.setSurname("Customer");
-        customer.setMail("Demo38@mail");
+        customer.setMail("Test39@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -275,9 +275,9 @@ class TransactionServiceImplTest {
         account.setCustomer(customer);
 
         Customer customer2 = new Customer();
-        customer2.setName("Demo");
-        customer2.setSurname("Customer");
-        customer2.setMail("Demo39@mail");
+        customer.setName("Test 58");
+        customer.setSurname("Customer");
+        customer.setMail("Test58@mail");
         customer2.setPhone("90123456");
         customer2.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer2));
@@ -309,9 +309,9 @@ class TransactionServiceImplTest {
     @Test
     void throws_MoneyTransfer_With_IBAN_NotEnoughMoneyOnSender_Exception() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 40");
         customer.setSurname("Customer");
-        customer.setMail("Demo40@mail");
+        customer.setMail("Test40@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -329,9 +329,9 @@ class TransactionServiceImplTest {
         account.setCustomer(customer);
 
         Customer customer2 = new Customer();
-        customer2.setName("Demo");
-        customer2.setSurname("Customer");
-        customer2.setMail("Demo41@mail");
+        customer.setName("Test 62");
+        customer.setSurname("Customer");
+        customer.setMail("Test62@mail");
         customer2.setPhone("90123456");
         customer2.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer2));
@@ -362,9 +362,9 @@ class TransactionServiceImplTest {
     @Test
     void throws_MoneyTransfer_With_IBAN_SenderAccountCanNotBe_DepositAccount_Exception() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 41");
         customer.setSurname("Customer");
-        customer.setMail("Demo42@mail");
+        customer.setMail("Test41@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -415,9 +415,9 @@ class TransactionServiceImplTest {
     @Test
     void throws_MoneyTransfer_With_Wrong_IBAN_Exception() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 42");
         customer.setSurname("Customer");
-        customer.setMail("Demo44@mail");
+        customer.setMail("Test42@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -468,9 +468,9 @@ class TransactionServiceImplTest {
     @Test
     void throws_MoneyTransfer_With_Deleted_Account_Exception() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 43");
         customer.setSurname("Customer");
-        customer.setMail("Demo46@mail");
+        customer.setMail("Test43@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -523,9 +523,9 @@ class TransactionServiceImplTest {
     @Test
     void throws_MoneyTransfer_Account_NotFound_Exception() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 44");
         customer.setSurname("Customer");
-        customer.setMail("Demo48@mail");
+        customer.setMail("Test44@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -576,11 +576,11 @@ class TransactionServiceImplTest {
     }
 
     @Test
-    void success_Purchase_With_CreditCard() {
+    void should_Success_Purchase_With_CreditCard() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 45");
         customer.setSurname("Customer");
-        customer.setMail("Demo50@mail");
+        customer.setMail("Test45@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -641,11 +641,11 @@ class TransactionServiceImplTest {
     }
 
     @Test
-    void success_Purchase_With_BankCard() {
+    void should_Success_Purchase_With_BankCard() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 46");
         customer.setSurname("Customer");
-        customer.setMail("Demo52@mail");
+        customer.setMail("Test46@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -663,9 +663,9 @@ class TransactionServiceImplTest {
         account.setCustomer(customer);
 
         Customer customer2 = new Customer();
-        customer2.setName("Demo");
-        customer2.setSurname("Customer");
-        customer2.setMail("Demo53@mail");
+        customer.setName("Test 61");
+        customer.setSurname("Customer");
+        customer.setMail("Test61@mail");
         customer2.setPhone("90123456");
         customer2.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer2));
@@ -708,9 +708,9 @@ class TransactionServiceImplTest {
     @Test
     void Throws_Purchase_With_CreditCard_NotEnoughLimit_Exception() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 47");
         customer.setSurname("Customer");
-        customer.setMail("Demo54@mail");
+        customer.setMail("Test47@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -728,9 +728,9 @@ class TransactionServiceImplTest {
         account.setCustomer(customer);
 
         Customer customer2 = new Customer();
-        customer2.setName("Demo");
-        customer2.setSurname("Customer");
-        customer2.setMail("Demo55@mail");
+        customer.setName("Test 60");
+        customer.setSurname("Customer");
+        customer.setMail("Test60@mail");
         customer2.setPhone("90123456");
         customer2.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer2));
@@ -773,9 +773,9 @@ class TransactionServiceImplTest {
     @Test
     void Throws_Purchase_With_BankCard_NotEnoughLimit_Exception() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 48");
         customer.setSurname("Customer");
-        customer.setMail("Demo56@mail");
+        customer.setMail("Test48@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -793,9 +793,9 @@ class TransactionServiceImplTest {
         account.setCustomer(customer);
 
         Customer customer2 = new Customer();
-        customer2.setName("Demo");
-        customer2.setSurname("Customer");
-        customer2.setMail("Demo57@mail");
+        customer.setName("Test 59");
+        customer.setSurname("Customer");
+        customer.setMail("Test59@mail");
         customer2.setPhone("90123456");
         customer2.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer2));
@@ -836,11 +836,11 @@ class TransactionServiceImplTest {
     }
 
     @Test
-    void success_Purchase_With_Foreign_CreditCard() {
+    void should_Success_Purchase_With_Foreign_CreditCard() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 49");
         customer.setSurname("Customer");
-        customer.setMail("Demo58@mail");
+        customer.setMail("Test49@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -858,9 +858,9 @@ class TransactionServiceImplTest {
         account.setCustomer(customer);
 
         Customer customer2 = new Customer();
-        customer2.setName("Demo");
-        customer2.setSurname("Customer");
-        customer2.setMail("Demo59@mail");
+        customer.setName("Test 54");
+        customer.setSurname("Customer");
+        customer.setMail("Test54@mail");
         customer2.setPhone("90123456");
         customer2.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer2));
@@ -901,11 +901,11 @@ class TransactionServiceImplTest {
     }
 
     @Test
-    void success_Purchase_With_Foreign_BankCard() {
+    void should_Success_Purchase_With_Foreign_BankCard() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 50");
         customer.setSurname("Customer");
-        customer.setMail("Demo60@mail");
+        customer.setMail("Test50@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer));
@@ -923,9 +923,9 @@ class TransactionServiceImplTest {
         account.setCustomer(customer);
 
         Customer customer2 = new Customer();
-        customer2.setName("Demo");
-        customer2.setSurname("Customer");
-        customer2.setMail("Demo61@mail");
+        customer.setName("Test 55");
+        customer.setSurname("Customer");
+        customer.setMail("Test55@mail");
         customer2.setPhone("90123456");
         customer2.setCustomerAddress(
                 new CustomerAddress("TR", "Ankara", "06000", "Capital City", customer2));

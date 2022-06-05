@@ -1,13 +1,9 @@
 package com.example.bankingsystem.security;
 
 import com.example.bankingsystem.service.impl.UserDetailsServiceImpl;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
-import org.springframework.lang.NonNullApi;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,25 +31,25 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private UserDetailsServiceImpl userDetailsService;
 
 
-
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
         try {
             String jwtToken = extractJwtFromRequest(request);
-            if(StringUtils.hasText(jwtToken) && jsonWTokenProvider.validateToken(jwtToken) ){
-            Long id = jsonWTokenProvider.getUserIdFromJWToken(jwtToken);
-            UserDetails userDetails = userDetailsService.loadUserById(id);
+            if (StringUtils.hasText(jwtToken) && jsonWTokenProvider.validateToken(jwtToken)) {
+                Long id = jsonWTokenProvider.getUserIdFromJWToken(jwtToken);
+                UserDetails userDetails = userDetailsService.loadUserById(id);
 
-            if(userDetails != null ){
-               UsernamePasswordAuthenticationToken authenticationToken =
-                       new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
-               authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-            }}
-        }catch (Exception e){
-            return ;
+                if (userDetails != null) {
+                    UsernamePasswordAuthenticationToken authenticationToken =
+                            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                    authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                }
+            }
+        } catch (Exception e) {
+            return;
         }
-        filterChain.doFilter(request,response);
+        filterChain.doFilter(request, response);
     }
 
     private String extractJwtFromRequest(HttpServletRequest request) {

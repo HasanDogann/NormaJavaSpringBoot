@@ -15,7 +15,6 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 
     Account findAccountByIBAN(String IbanNo);
 
-
     Collection<Account> findAccountsByCustomer(Customer customer);
 
     void removeAccountById(Long id);

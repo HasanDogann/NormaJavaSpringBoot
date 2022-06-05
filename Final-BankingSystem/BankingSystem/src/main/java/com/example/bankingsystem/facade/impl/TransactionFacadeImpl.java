@@ -16,7 +16,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 /**
- * Author Hasan DOĞAN
+ * Author Hasan DOGAN
  * BankingSystemApplication.java
  * 28.05.2022
  */
@@ -28,19 +28,13 @@ public class TransactionFacadeImpl implements TransactionFacade {
     private final TransactionService transactionService;
     private final TransactionConverter transactionConverter;
 
-
     @Override
-
     public ResponseEntity<String> sendMoney(TransactionRequestDTO transactionRequestDTO) {
         transactionService.moneyTransfer(transactionRequestDTO);
-
         return ResponseEntity.ok().body("Transaction is completed successfully");
-
     }
 
-
     @Override
-
     public ResponseEntity<TransactionGetResponseDTO> getTransaction(Long id) {
         TransactionGetResponseDTO responseDTO = transactionConverter
                 .toTransactionResponse(transactionService.getTransaction(id));
@@ -48,14 +42,12 @@ public class TransactionFacadeImpl implements TransactionFacade {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok().body(responseDTO);
-
     }
 
     @Override
     public ResponseEntity<Collection<PurchaseReceiptGetResponseDTO>> getPaymentReceipts(PurchaseReceiptCreateRequestDTO receiptCreateDTO) {
         Collection<PurchaseReceiptGetResponseDTO> responseDTO = transactionService.getPurchaseReceipts(receiptCreateDTO)
                 .stream().map(transactionConverter::toPurchaseResponse).toList();
-
         return ResponseEntity.ok().body(responseDTO);
     }
 

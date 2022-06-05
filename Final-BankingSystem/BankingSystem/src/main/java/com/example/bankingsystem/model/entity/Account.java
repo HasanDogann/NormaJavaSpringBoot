@@ -26,30 +26,27 @@ import java.util.Set;
 public class Account extends BaseModel {
 
 
-
     @Column(unique = true)
     @Pattern(regexp = "TR\\d{24}")
     private String IBAN;
+
     @Min(value = 10_000_000)
     @Column(length = 10)
     private Long accountNumber;
 
     private BigDecimal balance = BigDecimal.ZERO;
-
-  //  private BigDecimal lockedBalance = BigDecimal.ZERO;
-
     private String creationDate;
-
     @Max(9999)
     private int bankBranchCode;
-
     private boolean isDeficitAccount = false;
 
 
     @Enumerated(value = EnumType.STRING)
     private AccountType accountType;
+
     @Enumerated(value = EnumType.STRING)
     private BalanceCurrencyType balanceCurrencyType;
+
     @Enumerated(value = EnumType.STRING)
     private AccountStatus accountStatus;
 
@@ -70,9 +67,5 @@ public class Account extends BaseModel {
 
     }
 
-    public void removeCardFromAccount(Set<Card> cardList2) {
-        cardList.removeAll(cardList2);
-
-    }
 
 }

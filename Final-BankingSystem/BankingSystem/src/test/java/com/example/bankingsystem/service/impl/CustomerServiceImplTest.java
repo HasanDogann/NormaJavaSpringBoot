@@ -46,9 +46,9 @@ class CustomerServiceImplTest {
    @Test
     void should_Add_Customer_Successfully()  {
        Customer customer = new Customer();
-       customer.setName("Demo");
+       customer.setName("Test");
        customer.setSurname("Customer");
-       customer.setMail("Demo3@mail");
+       customer.setMail("Test1@mail");
        customer.setPhone("90123456");
        customer.setCustomerAddress(
                new CustomerAddress("TR","Ankara","06000","Capital City",customer));
@@ -63,9 +63,9 @@ class CustomerServiceImplTest {
     @Test
     void throws_Adding_Customer_Already_Created_Exception()  {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 2");
         customer.setSurname("Customer");
-        customer.setMail("Demo@mail");
+        customer.setMail("User@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR","Ankara","06000","Capital City",customer));
@@ -79,11 +79,11 @@ class CustomerServiceImplTest {
                 new CustomerAddressDTO("TR","Ankara","06000","Capital City"))));
     }
     @Test
-    void deleting_Customer_Soft_And_Successfully() {
+    void should_Delete_Customer_Soft_And_Successfully() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 3");
         customer.setSurname("Customer");
-        customer.setMail("Demo03@mail");
+        customer.setMail("Test3@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR","Ankara","06000","Capital City",customer));
@@ -97,11 +97,11 @@ class CustomerServiceImplTest {
 
     }
     @Test
-    void deleting_Customer_Hard_And_Successfully() {
+    void should_Delete_Customer_Hard_And_Successfully() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 4");
         customer.setSurname("Customer");
-        customer.setMail("Demo04@mail");
+        customer.setMail("Test4@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR","Ankara","06000","Capital City",customer));
@@ -117,9 +117,9 @@ class CustomerServiceImplTest {
     @Test
     void throws_CustomerNotFound_Exception() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 5");
         customer.setSurname("Customer");
-        customer.setMail("Demo4@mail");
+        customer.setMail("Test5@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR","Ankara","06000","Capital City",customer));
@@ -157,9 +157,9 @@ class CustomerServiceImplTest {
     @Test
     void throws_AlreadyDeleted_Exception() {
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 6");
         customer.setSurname("Customer");
-        customer.setMail("Demo5@mail");
+        customer.setMail("Test6@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR","Ankara","06000","Capital City",customer));
@@ -197,9 +197,9 @@ class CustomerServiceImplTest {
     void should_Not_Delete_Customer_When_AccountBalance_Is_NotZero(){
 
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 7");
         customer.setSurname("Customer");
-        customer.setMail("Demo6@mail");
+        customer.setMail("Test7@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR","Ankara","06000","Capital City",customer));
@@ -237,9 +237,9 @@ class CustomerServiceImplTest {
     void should_Not_Delete_Customer_When_CardBalance_Is_NotZero(){
 
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 8");
         customer.setSurname("Customer");
-        customer.setMail("Demo7@mail");
+        customer.setMail("Test8@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR","Ankara","06000","Capital City",customer));
@@ -277,9 +277,9 @@ class CustomerServiceImplTest {
     @Test
     void should_Update_Customer_Successfully(){
         Customer customer = new Customer();
-        customer.setName("Demo");
+        customer.setName("Test 9");
         customer.setSurname("Customer");
-        customer.setMail("Demo05@mail");
+        customer.setMail("Test9@mail");
         customer.setPhone("90123456");
         customer.setCustomerAddress(
                 new CustomerAddress("TR","Ankara","06000","Capital City",customer));

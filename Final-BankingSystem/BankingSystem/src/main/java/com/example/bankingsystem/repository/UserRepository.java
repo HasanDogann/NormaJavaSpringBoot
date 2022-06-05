@@ -1,6 +1,5 @@
 package com.example.bankingsystem.repository;
 
-import com.example.bankingsystem.model.entity.Customer;
 import com.example.bankingsystem.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -8,11 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Collection;
 
 /**
- * @author Hasan DOĞAN
- * @Project IntelliJ IDEA
- * @Date 21.05.2022
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
+ * 21.05.2022
  */
-public interface UserRepository extends JpaRepository<User,Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
     User getUserById(Long id);
 

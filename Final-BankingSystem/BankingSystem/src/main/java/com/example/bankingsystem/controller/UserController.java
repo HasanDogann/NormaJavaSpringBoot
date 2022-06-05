@@ -16,9 +16,9 @@ import javax.validation.constraints.Min;
 import java.util.Collection;
 
 /**
- * @author Hasan DOĞAN
- *  IntelliJ IDEA
- *  21.05.2022
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
+ * 21.05.2022
  */
 
 @RestController
@@ -28,13 +28,12 @@ import java.util.Collection;
 public class UserController {
 
     Logger logger = LoggerFactory.getLogger(UserController.class);
-
     private final UserFacade userFacade;
 
     @PreAuthorize(value = "hasAnyAuthority('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<UserGetResponseDTO> getUser(@PathVariable @Min(1) Long id) {
-        logger.trace("Get method used for getting User: {}",id);
+        logger.trace("Get method used for getting User: {}", id);
         return userFacade.getUser(id);
     }
 
@@ -55,8 +54,8 @@ public class UserController {
     @PreAuthorize(value = "hasAnyAuthority('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@Valid @Min(1) @PathVariable Long id,
-                                        @RequestParam(name = "hardDelete", required = false) boolean isHardDelete) {
-        logger.trace("Delete method used for deleting  User: {}",id);
+                                             @RequestParam(name = "hardDelete", required = false) boolean isHardDelete) {
+        logger.trace("Delete method used for deleting  User: {}", id);
         return userFacade.deleteUser(id, isHardDelete);
     }
 

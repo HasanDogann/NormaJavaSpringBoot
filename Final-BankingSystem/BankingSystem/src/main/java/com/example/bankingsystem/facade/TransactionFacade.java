@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.Collection;
 
 /**
- * Author Hasan DOĞAN
+ * Author Hasan DOGAN
  * BankingSystemApplication.java
  * 28.05.2022
  */
@@ -20,5 +20,5 @@ public interface TransactionFacade {
     ResponseEntity<TransactionGetResponseDTO> getTransaction(Long id);
 
     ResponseEntity<
-    Collection<PurchaseReceiptGetResponseDTO>> getPaymentReceipts(PurchaseReceiptCreateRequestDTO receiptCreateDTO);
+            Collection<PurchaseReceiptGetResponseDTO>> getPaymentReceipts(PurchaseReceiptCreateRequestDTO receiptCreateDTO);
 }

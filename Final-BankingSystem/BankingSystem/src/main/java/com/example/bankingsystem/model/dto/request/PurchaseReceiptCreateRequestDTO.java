@@ -3,10 +3,9 @@ package com.example.bankingsystem.model.dto.request;
 import com.example.bankingsystem.model.entity.enums.TransferType;
 
 import javax.validation.constraints.Pattern;
-import java.util.Date;
 
 /**
- * Author Hasan DOĞAN
+ * Author Hasan DOGAN
  * BankingSystemApplication.java
  * 5.06.2022
  */

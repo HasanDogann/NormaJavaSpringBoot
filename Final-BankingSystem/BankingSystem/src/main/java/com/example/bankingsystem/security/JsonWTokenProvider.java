@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.Email;
-import java.net.Authenticator;
 import java.util.Date;
 
 /**
@@ -40,7 +38,6 @@ public class JsonWTokenProvider {
                 .getBody();
         return Long.parseLong(claims.getSubject());
     }
-
 
 
     boolean validateToken(String token) {

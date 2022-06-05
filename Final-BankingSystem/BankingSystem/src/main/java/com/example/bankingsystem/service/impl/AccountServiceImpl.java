@@ -58,14 +58,13 @@ public class AccountServiceImpl implements AccountService {
             accountRepository.save(account);
             return account;
         }
-            Account account = accountConverter.convertToAccount(accountCreateRequestDTO);
-            accountRepository.save(account);
-            return account;
+        Account account = accountConverter.convertToAccount(accountCreateRequestDTO);
+        accountRepository.save(account);
+        return account;
 
 
     }
 
-    //@PostFilter("filterObject.body.owner=authentication.name")
     @Override
     public Account getAccount(Long id) {
 
@@ -85,7 +84,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Account getAccountByIBAN(String iban) {
         Account account = accountRepository.findAccountByIBAN(iban);
-        if(Objects.isNull(account)){
+        if (Objects.isNull(account)) {
             throw new ServiceOperationNotFoundException.AccountNotFoundException("There is no account with this IBAN");
         }
         if (account.isDeleted()) {
@@ -93,8 +92,7 @@ public class AccountServiceImpl implements AccountService {
         }
         return account;
     }
-   // @PostFilter("filterObject.customer.mail.equals(userRepository.findUserMailByUserId(authentication.principal.id))")
-    //@PostFilter(value = "filterObject.accountNumber==userRepository.getById(authentication.principal.id).customer.accountList[id]")
+
     @Override
     public Collection<Account> getAllAccountOneCustomer(Long id) {
         return accountRepository.

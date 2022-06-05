@@ -16,6 +16,11 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import java.util.Collection;
 
+/**
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
+ * 21.05.2022
+ */
 @RestController
 @RequestMapping("/api/v2/accounts")
 @RequiredArgsConstructor
@@ -56,14 +61,14 @@ public class AccountController {
     @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
     @GetMapping("/getAllAccountOneCustomer")
     public ResponseEntity<Collection<AccountGetResponseDTO>> getAllAccountOneCustomer(@Valid @Min(1) @RequestParam Long id) {
-        logger.trace("Get method used for getting accounts of Customer: {}",id);
+        logger.trace("Get method used for getting accounts of Customer: {}", id);
         return accountFacade.getAllAccountOneCustomer(id);
     }
 
     @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAccount(@Valid @Min(1) @PathVariable Long id,
-                                           @Valid @RequestParam(required = false) boolean isHardDelete) {
+                                                @Valid @RequestParam(required = false) boolean isHardDelete) {
         logger.trace("Delete method used for deleting Account: {}", id);
         return accountFacade.deleteAccount(id, isHardDelete);
     }

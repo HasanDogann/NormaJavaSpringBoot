@@ -14,10 +14,15 @@ import com.example.bankingsystem.model.entity.enums.BalanceCurrencyType;
 import com.example.bankingsystem.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
+
+/**
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
+ * 23.05.2022
+ */
 
 @Component
 @RequiredArgsConstructor
@@ -25,7 +30,6 @@ import java.util.Set;
 public class CustomerConverterImpl implements CustomerConverter {
 
     private final CustomerRepository customerRepository;
-    private final PasswordEncoder passwordEncoder;
 
     @Override
     public Customer toCustomer(CustomerCreateRequestDTO customerCreateRequestDTO) {
@@ -50,7 +54,7 @@ public class CustomerConverterImpl implements CustomerConverter {
         account.setBalanceCurrencyType(BalanceCurrencyType.TRY);
         account.setAccountNumber(ConstantUtils.getRandomAccountNumber());
         account.setBankBranchCode(customerCreateRequestDTO.branchCode());
-        account.setIBAN(ConstantUtils.getRandomIban(account.getBankBranchCode())+""+account.getAccountNumber()+""+ConstantUtils.getRandomExtraAccountNo());
+        account.setIBAN(ConstantUtils.getRandomIban(account.getBankBranchCode()) + "" + account.getAccountNumber() + "" + ConstantUtils.getRandomExtraAccountNo());
         account.setCreationDate(ConstantUtils.getCurrentDate());
         account.setAccountStatus(AccountStatus.ACTIVE);
         account.setCustomer(customer);

@@ -7,7 +7,6 @@ import com.example.bankingsystem.exception.ServiceOperationCanNotDeleteException
 import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
 import com.example.bankingsystem.model.dto.request.CardCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.CardPaymentRequestDTO;
-import com.example.bankingsystem.model.entity.Account;
 import com.example.bankingsystem.model.entity.Card;
 import com.example.bankingsystem.model.entity.Customer;
 import com.example.bankingsystem.model.entity.enums.PaymentType;
@@ -29,8 +28,8 @@ import java.util.Collections;
 import java.util.Objects;
 
 /**
- * @author Hasan DOĞAN
- * IntelliJ IDEA
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
  * 23.05.2022
  */
 @Service
@@ -88,7 +87,8 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public Collection<Card> getAllCardByAccountNumber(Long id) {
-        Account account = accountService.getAccount(id);
+        //Check if account is exists
+        accountService.getAccount(id);
         Collection<Card> cardCollection = cardRepository.findAll()
                 .stream()
                 .filter(a -> a.getAccount().getId().equals(id))
@@ -103,7 +103,7 @@ public class CardServiceImpl implements CardService {
     public Collection<Card> getAllCardByCustomerId(Long id) {
         Customer customer = customerService.getCustomer(id);
         Collection<Card> cardCollection = cardRepository.getAllByCustomerId(customer.getId());
-        if (Objects.isNull(cardCollection) ) {
+        if (Objects.isNull(cardCollection)) {
             throw new ServiceOperationNotFoundException.CardNotFoundException("There is no card on this customer");
         }
         if (cardCollection.isEmpty()) {
@@ -133,7 +133,7 @@ public class CardServiceImpl implements CardService {
             return "Card is hard deleted successfully";
         }
 
-        throw new ServiceOperationCanNotDeleteException.AccountCardBalanceOrDebtNotZero( "You can not delete card because balance or debt is not zero!");
+        throw new ServiceOperationCanNotDeleteException.AccountCardBalanceOrDebtNotZero("You can not delete card because balance or debt is not zero!");
 
     }
 

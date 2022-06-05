@@ -19,7 +19,7 @@ import javax.validation.constraints.Pattern;
 import java.util.Collection;
 
 /**
- * @author Hasan DOĞAN
+ * Author Hasan DOGAN
  * BankingSystemApplication.java
  * 23.05.2022
  */

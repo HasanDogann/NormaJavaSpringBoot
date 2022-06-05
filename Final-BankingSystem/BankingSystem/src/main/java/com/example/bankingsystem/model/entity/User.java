@@ -26,7 +26,7 @@ public class User extends BaseModel {
     @Email
     private String mail;
     @NotNull
-    @Pattern(regexp = "^(?=.*?[A-Z])(?=(.*[a-z])+)(?=(.*[\\d])+)(?=(.*[\\W])+)(?!.*\\s).{8,}$",message = "Password must be 8 char 1 Capital")
+    @Pattern(regexp = "^(?=.*?[A-Z])(?=(.*[a-z])+)(?=(.*[\\d])+)(?=(.*[\\W])+)(?!.*\\s).{8,}$", message = "Password must be 8 char 1 Capital")
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;

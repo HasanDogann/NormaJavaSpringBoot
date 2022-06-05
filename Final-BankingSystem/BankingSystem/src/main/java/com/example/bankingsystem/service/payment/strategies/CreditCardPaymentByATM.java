@@ -11,12 +11,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import static com.example.bankingsystem.core.constants.ConstantUtils.DAILY_MAX_LIMIT_OF_ATM;
-
 /**
- * @author Hasan DOĞAN
- *  IntelliJ IDEA
- * @Date 24.05.2022
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
+ * 24.05.2022
  */
 @Component
 @RequiredArgsConstructor
@@ -34,7 +32,7 @@ public class CreditCardPaymentByATM implements PaymentStrategy {
         if (card.getCardType().equals(CardType.CREDIT_CARD)) {
 
 
-            //Check if sending amount bigger than debt
+            //Check if sending amount is bigger than card debt
             if (cardPaymentRequestDTO.amount().compareTo(card.getCardDebt()) > 0) {
                 throw new TransferOperationException.PaymentCanNotProceedException("Your sending amount has to be equal or less than your debt ");
             }
@@ -42,8 +40,8 @@ public class CreditCardPaymentByATM implements PaymentStrategy {
             cardRepository.save(card);
         }
         if (card.getCardType().equals(CardType.BANK_CARD)) {
-            if(cardPaymentRequestDTO.amount().compareTo(ConstantUtils.DAILY_MAX_LIMIT_OF_ATM)>0){
-                throw new  TransferOperationException.PaymentCanNotProceedException("You can send to Card max 5000 in a day!");
+            if (cardPaymentRequestDTO.amount().compareTo(ConstantUtils.DAILY_MAX_LIMIT_OF_ATM) > 0) {
+                throw new TransferOperationException.PaymentCanNotProceedException("You can send to Card max 5000 in a day!");
             }
             card.setCardBalance(card.getCardBalance().add(cardPaymentRequestDTO.amount()));
             cardRepository.save(card);

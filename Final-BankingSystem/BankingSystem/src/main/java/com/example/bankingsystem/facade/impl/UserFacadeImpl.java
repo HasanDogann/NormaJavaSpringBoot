@@ -9,10 +9,11 @@ import com.example.bankingsystem.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 import java.util.Collection;
 
 /**
- * Author Hasan DOĞAN
+ * Author Hasan DOGAN
  * BankingSystemApplication.java
  * 28.05.2022
  */
@@ -26,19 +27,14 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public ResponseEntity<String> addUser(UserCreateRequestDTO userCreateRequestDTO) {
         userService.addUser(userCreateRequestDTO);
-
         return ResponseEntity.ok().body("User is created successfully");
-
     }
-
 
     @Override
     public ResponseEntity<UserGetResponseDTO> getUser(Long id) {
         UserGetResponseDTO responseDTO = userConverter.toUserResponseFromUser(
                 userService.getUser(id));
-
         return ResponseEntity.ok().body(responseDTO);
-
     }
 
 
@@ -51,12 +47,11 @@ public class UserFacadeImpl implements UserFacade {
         if (responseDTOS.isEmpty()) {
             throw new ServiceOperationNotFoundException.UserNotFoundException("There is no user");
         }
-
         return ResponseEntity.ok().body(responseDTOS);
     }
 
     @Override
     public ResponseEntity<String> deleteUser(Long id, boolean isHardDelete) {
-        return ResponseEntity.ok().body(userService.deleteUser(id,isHardDelete));
+        return ResponseEntity.ok().body(userService.deleteUser(id, isHardDelete));
     }
 }

@@ -39,10 +39,10 @@ public class CustomerFacadeImpl implements CustomerFacade {
 
         CustomerGetResponseDTO customerGetResponseDTO = customerConverter
                 .toCustomerResponse(customerService.getCustomerByEmail(email));
-        if(Objects.isNull(customerGetResponseDTO)){
+        if (Objects.isNull(customerGetResponseDTO)) {
             ResponseEntity.notFound().build();
         }
-        return  ResponseEntity.ok().body(customerGetResponseDTO);
+        return ResponseEntity.ok().body(customerGetResponseDTO);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class CustomerFacadeImpl implements CustomerFacade {
 
     @Override
     public ResponseEntity<String> deleteCustomer(Long id, boolean isHardDelete) {
-        return ResponseEntity.ok().body(customerService.deleteCustomer(id,isHardDelete));
+        return ResponseEntity.ok().body(customerService.deleteCustomer(id, isHardDelete));
 
     }
 

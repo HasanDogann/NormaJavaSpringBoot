@@ -1,5 +1,10 @@
 package com.example.bankingsystem.exception;
 
+/**
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
+ * 23.05.2022
+ */
 public final class ServiceOperationCanNotDeleteException extends BaseException {
 
     private ServiceOperationCanNotDeleteException(String message) {
@@ -19,6 +24,7 @@ public final class ServiceOperationCanNotDeleteException extends BaseException {
             super(message);
         }
     }
+
     public static class AccountCardBalanceOrDebtNotZero extends BaseException {
 
         public AccountCardBalanceOrDebtNotZero(String message) {

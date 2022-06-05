@@ -6,16 +6,11 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.Collection;
 
-public interface CustomerRepository extends JpaRepository<Customer,Long> {
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
-
-  // Customer getCustomerByName(String name);
-
-  //Customer getCustomerByEMail(String name);
 
     void removeCustomerById(Long id);
 
-   // Customer findCustomerByEMail(String EMail);
     @Query("SELECT c FROM Customer c Where c.mail=?1")
     Customer findCustomerByEMailAddress(String email);
 

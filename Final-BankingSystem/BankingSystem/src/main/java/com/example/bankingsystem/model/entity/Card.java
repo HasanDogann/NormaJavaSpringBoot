@@ -8,10 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
 
@@ -27,14 +25,13 @@ public class Card extends BaseModel {
     private String cardNo;
 
     @Column(nullable = false)
-    private BigDecimal cardBalance=BigDecimal.ZERO;
-
+    private BigDecimal cardBalance = BigDecimal.ZERO;
     @Column(nullable = false)
-    private BigDecimal cardLimit=BigDecimal.ZERO;
+    private BigDecimal cardLimit = BigDecimal.ZERO;
     @Column(nullable = false)
-    private BigDecimal cardDebt=BigDecimal.ZERO;
+    private BigDecimal cardDebt = BigDecimal.ZERO;
 
-    private boolean isBlocked=false;
+    private boolean isBlocked = false;
 
     @Enumerated(value = EnumType.STRING)
     private CardType cardType;

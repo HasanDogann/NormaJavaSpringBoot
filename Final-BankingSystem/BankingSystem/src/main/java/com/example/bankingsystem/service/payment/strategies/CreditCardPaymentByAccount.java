@@ -12,8 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 /**
- * @author Hasan DOĞAN
- * IntelliJ IDEA
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
  * 24.05.2022
  */
 @Component
@@ -28,8 +28,6 @@ public class CreditCardPaymentByAccount implements PaymentStrategy {
         Card card = cardRepository.getCardByCardNo(cardPaymentRequestDTO.cardNo());
         Account account = card.getAccount();
 
-      //  log.info(account.getBalance().toString() + " " + cardPaymentRequestDTO.amount().toString());
-      //  log.info(String.valueOf((account.getBalance().compareTo(cardPaymentRequestDTO.amount()) > -1)));
 
         if (account.getBalance().compareTo(cardPaymentRequestDTO.amount()) > -1) {
 

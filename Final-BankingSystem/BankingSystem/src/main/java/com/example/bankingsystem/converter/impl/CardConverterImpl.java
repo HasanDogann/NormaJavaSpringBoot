@@ -16,9 +16,9 @@ import org.springframework.stereotype.Component;
 import java.util.Set;
 
 /**
- * @author Hasan DOĞAN
- * @Project IntelliJ IDEA
- * @Date 23.05.2022
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
+ * 23.05.2022
  */
 @Component
 @RequiredArgsConstructor

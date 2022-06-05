@@ -19,7 +19,6 @@ import javax.persistence.OneToOne;
 public class CustomerAddress extends BaseModel {
 
 
-
     @Column(nullable = false)
     private String country;
     @Column(nullable = false)

@@ -1,9 +1,9 @@
 package com.example.bankingsystem.exception;
 
 /**
- * @author Hasan DOĞAN
- * @Project IntelliJ IDEA
- * @Date 19.05.2022
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
+ * 19.05.2022
  */
 public final class ServiceOperationCanNotCreateException extends BaseException {
 
@@ -31,14 +31,13 @@ public final class ServiceOperationCanNotCreateException extends BaseException {
         }
 
     }
+
     public static class UserCanNotCreatException extends BaseException {
         public UserCanNotCreatException(String message) {
             super(message);
         }
 
     }
-
-
 
 
 }

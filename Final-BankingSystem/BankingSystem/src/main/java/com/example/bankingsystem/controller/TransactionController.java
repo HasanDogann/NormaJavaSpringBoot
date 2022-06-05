@@ -21,9 +21,9 @@ import java.util.Collection;
 
 
 /**
- * @author Hasan DOĞAN
- *  IntelliJ IDEA
- *  25.05.2022
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
+ * 25.05.2022
  */
 
 @RestController
@@ -31,8 +31,8 @@ import java.util.Collection;
 @Validated
 @RequiredArgsConstructor
 public class TransactionController {
-    Logger logger = LoggerFactory.getLogger(TransactionController.class);
 
+    Logger logger = LoggerFactory.getLogger(TransactionController.class);
     private final TransactionFacade transactionFacade;
 
     @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
@@ -45,7 +45,7 @@ public class TransactionController {
     @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<TransactionGetResponseDTO> getTransaction(@Valid @Min(1) @PathVariable Long id) {
-        logger.trace("Get method used for getting Transaction: {}",id);
+        logger.trace("Get method used for getting Transaction: {}", id);
         return transactionFacade.getTransaction(id);
     }
 

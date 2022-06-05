@@ -2,7 +2,6 @@ package com.example.bankingsystem.facade.impl;
 
 import com.example.bankingsystem.facade.AuthenticationFacade;
 import com.example.bankingsystem.model.dto.request.UserCreateRequestByUserDTO;
-import com.example.bankingsystem.model.dto.request.UserCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.UserLoginRequest;
 import com.example.bankingsystem.model.entity.User;
 import com.example.bankingsystem.service.CustomerService;
@@ -14,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
- * Author Hasan DOĞAN
+ * Author Hasan DOGAN
  * BankingSystemApplication.java
  * 29.05.2022
  */

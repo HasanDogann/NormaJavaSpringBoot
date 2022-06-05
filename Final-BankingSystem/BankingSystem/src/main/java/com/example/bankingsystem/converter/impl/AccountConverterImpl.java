@@ -11,6 +11,12 @@ import com.example.bankingsystem.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+/**
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
+ * 23.05.2022
+ */
+
 @Component
 @RequiredArgsConstructor
 public class AccountConverterImpl implements AccountConverter {

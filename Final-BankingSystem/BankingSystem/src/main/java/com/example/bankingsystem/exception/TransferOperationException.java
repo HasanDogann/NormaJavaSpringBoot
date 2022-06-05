@@ -1,9 +1,9 @@
 package com.example.bankingsystem.exception;
 
 /**
- * @author Hasan DOĞAN
- * @Project IntelliJ IDEA
- * @Date 25.05.2022
+ * Author Hasan DOGAN
+ * BankingSystemApplication.java
+ * 25.05.2022
  */
 public final class TransferOperationException extends BaseException {
     private TransferOperationException(String message) {
@@ -15,11 +15,13 @@ public final class TransferOperationException extends BaseException {
             super(message);
         }
     }
+
     public static class TransferCanNotProceedException extends BaseException {
         public TransferCanNotProceedException(String message) {
             super(message);
         }
     }
+
     public static class PaymentBillsCanNotProceedException extends BaseException {
         public PaymentBillsCanNotProceedException(String message) {
             super(message);

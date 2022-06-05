@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 /**
- * Author Hasan DOĞAN
+ * Author Hasan DOGAN
  * BankingSystemApplication.java
  * 26.05.2022
  */
@@ -77,7 +77,7 @@ public class AccountFacadeImpl implements AccountFacade {
 
     @Override
     public ResponseEntity<String> deleteAccount(Long id, boolean isHardDelete) {
-        String result = accountService.deleteAccount(id,isHardDelete);
+        String result = accountService.deleteAccount(id, isHardDelete);
         return ResponseEntity.ok().body(result);
     }
 }

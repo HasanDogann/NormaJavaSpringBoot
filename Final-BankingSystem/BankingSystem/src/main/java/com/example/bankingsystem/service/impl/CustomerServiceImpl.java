@@ -7,7 +7,6 @@ import com.example.bankingsystem.exception.ServiceOperationCanNotDeleteException
 import com.example.bankingsystem.exception.ServiceOperationNotFoundException;
 import com.example.bankingsystem.model.dto.request.CustomerCreateRequestDTO;
 import com.example.bankingsystem.model.dto.request.CustomerUpdateRequestDTO;
-import com.example.bankingsystem.model.dto.response.CustomerGetResponseDTO;
 import com.example.bankingsystem.model.entity.Account;
 import com.example.bankingsystem.model.entity.Card;
 import com.example.bankingsystem.model.entity.Customer;
@@ -27,7 +26,6 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Service
-
 @Slf4j
 public class CustomerServiceImpl implements CustomerService {
 
@@ -117,18 +115,18 @@ public class CustomerServiceImpl implements CustomerService {
 
     }
 
-        private boolean hasBalanceOrDebtOnCard(Long id){
-            Collection<Card> cardDebtCollection = cardService.getAllCardByCustomerId(id)
-                    .stream().filter(i -> i.getCardDebt().compareTo(BigDecimal.ZERO) > 0).toList();
-            Collection<Card> cardBalanceCollection = cardService.getAllCardByCustomerId(id)
-                    .stream().filter(i -> i.getCardBalance().compareTo(BigDecimal.ZERO) > 0).toList();
-            return !(cardBalanceCollection.isEmpty() && cardDebtCollection.isEmpty());
-        }
+    private boolean hasBalanceOrDebtOnCard(Long id) {
+        Collection<Card> cardDebtCollection = cardService.getAllCardByCustomerId(id)
+                .stream().filter(i -> i.getCardDebt().compareTo(BigDecimal.ZERO) > 0).toList();
+        Collection<Card> cardBalanceCollection = cardService.getAllCardByCustomerId(id)
+                .stream().filter(i -> i.getCardBalance().compareTo(BigDecimal.ZERO) > 0).toList();
+        return !(cardBalanceCollection.isEmpty() && cardDebtCollection.isEmpty());
+    }
 
-        private boolean hasBalanceOnAccount(Long id){
-            Collection<Account> accountCollection = accountService.getAllAccountOneCustomer(id).stream().filter(i -> (i.getBalance().compareTo(BigDecimal.ZERO) > 0)).toList();
-            return !accountCollection.isEmpty();
-        }
+    private boolean hasBalanceOnAccount(Long id) {
+        Collection<Account> accountCollection = accountService.getAllAccountOneCustomer(id).stream().filter(i -> (i.getBalance().compareTo(BigDecimal.ZERO) > 0)).toList();
+        return !accountCollection.isEmpty();
+    }
 
 
 }
