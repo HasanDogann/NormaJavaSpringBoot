@@ -11,7 +11,5 @@ public class BankingSystemApplication {
     }
 
 
-    //GetAccount() gibi methodlara sadece belli kullanıcıların görmesi filtresi eklenecek
-
 
 }
