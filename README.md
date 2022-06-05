@@ -60,8 +60,8 @@ In card management for customers prepaid bank card and credit cards are offered.
 these 2 card types. Creation of these cards, associating them with the customer and the account,
 Money transfer (shopping) functions using cards will be provided through APIs.
 
-⭐	 I have used Strategy Pattern for paying credit card debt or adding balance to bank card.
-
+  ⭐ I have used Strategy Pattern for paying credit card debt or adding balance to bank card.
+  
 Requirements:
 - ✅ Debt inquiry, debt payment from account, debt payment from ATM
 Extras:
@@ -79,7 +79,8 @@ can be between the accounts opened in the different currencies. I prefered that 
  converted into the currency of the account to be transferred.And transfer proceed with this exchanged amount.
  Transfer transactions are carried out only through IBAN.
 
- ⭐ I have used Strategy Pattern for paying credit card debt or adding balance to bank card.
+ ⭐  I have used Strategy Pattern for money transfer or purchase money with Card.
+ 
  ---
  
  ![image](https://user-images.githubusercontent.com/72404480/172072181-3d3e300b-f2d8-4ce7-bcd0-0cf1e655cbfe.png)
