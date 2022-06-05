@@ -64,8 +64,7 @@ Money transfer (shopping) functions using cards will be provided through APIs.
   
 Requirements:
 - ✅ Debt inquiry, debt payment from account, debt payment from ATM
-Extras:
-- ✅ Viewing (in JSON format) operations can still be done via API.
+
 
 
 ![image](https://user-images.githubusercontent.com/72404480/172072150-f7aa4b46-a2ce-44d6-b118-a9a9b5548ca0.png)
@@ -81,6 +80,8 @@ can be between the accounts opened in the different currencies. I prefered that 
 
  ⭐  I have used Strategy Pattern for money transfer or purchase money with Card.
  
+ Extras:
+- ✅ Viewing (in JSON format) operations can still be done via API.
  ---
  
  ![image](https://user-images.githubusercontent.com/72404480/172072181-3d3e300b-f2d8-4ce7-bcd0-0cf1e655cbfe.png)
