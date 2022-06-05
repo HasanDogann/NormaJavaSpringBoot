@@ -110,7 +110,7 @@ Also I used, @Pattern annotations to get correct request.
  In additionaly BaseControllerAdvice helped me with custom methods to handle
   Response Entity.
 
-
+---
 ## ⁉️ Exception Handling
 
 In project, I coded my own Exception Hangling classes.Also all of the exceptions have handled with specific class and method.
@@ -118,7 +118,7 @@ I have used and extended BaseException  and coded a Singleton custom exception c
 
 ⭐I have used Singleton Pattern for creating and using custom Exception Handling classes.
 
-
+---
 ## 🩺 Unit Tests
 
 #### Customer Unit Tests
@@ -160,7 +160,7 @@ Total 16 Test and some Exception tests are :
 
 
 
-
+---
 ## Run With Your Computer
 
 Clone the project with terminal in a folder that you want to download this project
@@ -188,7 +188,7 @@ In IDE's terminal go to and up the docker compose
   cd ....\BankingSystem\src\main\resources>
   docker compose up -d
 ```
-
+---
 
 After that you need to instal project with macen
 ```bash
@@ -206,7 +206,7 @@ Now App is up and next about JWT usage.
 
 First you must register , for this purpose I have created 1 User Customer and 1 Admin Customer you can use
 this customer infos to register.
- 
+ ❗	User id and Admin id are depend on saving query so if you get warning try User with id 2 and Admin with id 1
  ![image](https://user-images.githubusercontent.com/72404480/172072323-24f487a8-018a-4a8e-817c-14ced1e4abc9.png)
 
 
@@ -226,7 +226,7 @@ If you want to log in with Admin authority you can use Admin user that I created
 ```
 ![image](https://user-images.githubusercontent.com/72404480/172072377-eceecb49-7402-4f13-ada6-4997411d9548.png)
 
-
+---
 Finally, after this POST request you will get a Bearer token response and now you can send request with 
 this token and try all API's.
 
