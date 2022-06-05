@@ -70,7 +70,7 @@ public class CustomerController {
     @PreAuthorize(value = "hasAnyAuthority('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCustomer(@Valid @Min(1) @PathVariable Long id,
-                                                 @RequestParam(name = "hardDelete", required = false) boolean isHardDelete) {
+                                                 @RequestParam(name = "isHardDelete", required = false) boolean isHardDelete) {
         logger.trace("Delete method used for deleting Customer : {}", id);
         return customerFacade.deleteCustomer(id, isHardDelete);
     }

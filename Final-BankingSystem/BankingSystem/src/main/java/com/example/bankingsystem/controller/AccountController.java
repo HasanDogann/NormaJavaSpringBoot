@@ -68,7 +68,7 @@ public class AccountController {
     @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAccount(@Valid @Min(1) @PathVariable Long id,
-                                                @Valid @RequestParam(required = false) boolean isHardDelete) {
+                                                @Valid @RequestParam(name = "isHardDelete", required = false) boolean isHardDelete) {
         logger.trace("Delete method used for deleting Account: {}", id);
         return accountFacade.deleteAccount(id, isHardDelete);
     }

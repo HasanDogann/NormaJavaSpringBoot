@@ -54,7 +54,7 @@ public class UserController {
     @PreAuthorize(value = "hasAnyAuthority('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@Valid @Min(1) @PathVariable Long id,
-                                             @RequestParam(name = "hardDelete", required = false) boolean isHardDelete) {
+                                             @RequestParam(name = "isHardDelete", required = false) boolean isHardDelete) {
         logger.trace("Delete method used for deleting  User: {}", id);
         return userFacade.deleteUser(id, isHardDelete);
     }

@@ -85,7 +85,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional(isolation = Isolation.REPEATABLE_READ)
-    public String deleteCustomer(Long id, boolean hardDelete) {
+    public String deleteCustomer(Long id, boolean isHardDelete) {
 
         Customer customer = getCustomer(id);
 
@@ -94,7 +94,7 @@ public class CustomerServiceImpl implements CustomerService {
                 if (customer.isDeleted()) {
                     throw new ServiceOperationAlreadyDeletedException.CustomerAlreadyDeletedException("Customer is already deleted");
                 }
-                if (hardDelete) {
+                if (isHardDelete) {
                     customerRepository.removeCustomerById(id);
                     return "Customer is deleted hard and successfully.";
                 }

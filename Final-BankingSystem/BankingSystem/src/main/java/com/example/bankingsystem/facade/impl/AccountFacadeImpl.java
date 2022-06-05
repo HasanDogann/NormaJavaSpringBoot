@@ -9,6 +9,7 @@ import com.example.bankingsystem.model.entity.Account;
 import com.example.bankingsystem.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -42,6 +43,7 @@ public class AccountFacadeImpl implements AccountFacade {
 
         return ResponseEntity.ok().body(accountGetResponseDTO);
     }
+
 
     @Override
     public ResponseEntity<Collection<AccountGetResponseDTO>> getAllAccounts() {

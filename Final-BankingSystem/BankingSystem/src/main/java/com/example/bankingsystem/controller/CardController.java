@@ -77,7 +77,7 @@ public class CardController {
     @PreAuthorize(value = "hasAnyAuthority('USER','ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCard(@Valid @Min(1) @PathVariable Long id,
-                                             @RequestParam(required = false) boolean isHardDelete) {
+                                             @RequestParam(name = "isHardDelete", required = false) boolean isHardDelete) {
         logger.trace("Delete method used for deleting Card: {}", id);
         return cardFacade.deleteCard(id, isHardDelete);
     }

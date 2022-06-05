@@ -58,7 +58,7 @@ public class CardConverterImpl implements CardConverter {
                 card.getCardNo(), card.getCustomer().getName(),
                 card.getCustomer().getSurname(), card.getCardType(),
                 card.getCardDebt(),
-                card.getCardBalance()
+                card.getCardBalance(),card.getCardLimit()
         );
     }
 }

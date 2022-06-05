@@ -14,5 +14,6 @@ public record CardBalanceResponseDTO(String cardNo,
                                      String customerSurname,
                                      CardType cardType,
                                      BigDecimal cardDebt,
-                                     BigDecimal cardBalance) {
+                                     BigDecimal cardBalance,
+                                     BigDecimal cardLimit) {
 }
